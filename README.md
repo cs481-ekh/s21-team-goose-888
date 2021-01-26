@@ -1,2 +1,3 @@
 # capstone-template
-BSU CS481 Capstone project template
+
+The Idaho Transportation Department (ITD) routinely tests materials of asphalt pavements and records data collected by manually filling out the ITD-888 form on paper. This data on the hardcopy is then tediously copied over to the ITD’s web-based application in the QASP Portal where the data can be stored in a database. In order to eliminate possible transcription errors, and poor record keeping practices, we will create an application that utilizes a tablet or phone to simplify this process. The application will record the digital readout from a scale or equipment readout (i.e. nuclear density gauge), store, and upload the data to the ITD QASP portal to effectively capture the data in real time while utilizing spatial, chronological, and other metadata to assess the validity of the data.  
