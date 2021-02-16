@@ -1,64 +1,28 @@
+
 import 'package:flutter/material.dart';
-import 'UserInfo.dart';
+import 'Registration.dart';
 
 
 void main() {
 
-  //runApp(MyApp());
-  runApp(MaterialApp(
+  runApp(
+      MaterialApp(
+
+        debugShowCheckedModeBanner: false,
     initialRoute: '/',
+
     routes: {
-     // '/': (context) => Rout2(),
-      '/': (context) => HomePage(),
-      '/second': (context) => Rout2(),
-
-
+      '/': (context) => HomeRoute(),
+      '/register': (context)  => Registration(),
+      '/third': (context) => ThirdRoute(),
     },
   ));
 }
 
-// class MyApp extends StatelessWidget {
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Flutter Demo',
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(
-//         // This is the theme of your application.
-//         //
-//         // Try running your application with "flutter run". You'll see the
-//         // application has a blue toolbar. Then, without quitting the app, try
-//         // changing the primarySwatch below to Colors.green and then invoke
-//         // "hot reload" (press "r" in the console where you ran "flutter run",
-//         // or simply save your changes to "hot reload" in a Flutter IDE).
-//         // Notice that the counter didn't reset back to zero; the application
-//         // is not restarted.
-//         primarySwatch: Colors.blue,
-//         // This makes the visual density adapt to the platform that you run
-//         // the app on. For desktop platforms, the controls will be smaller and
-//         // closer together (more dense) than on mobile platforms.
-//         visualDensity: VisualDensity.adaptivePlatformDensity,
-//       ),
-//      // home: MyHomePage(title: 'Flutter Demo Home Page'),
-//       home: HomePage(),
-//
-//     );
-//   }
-//}
-
-
-
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-  //SecondRoute createState() => SecondRoute();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomeRoute extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
+
 
   void _submit() {
     final isValid = _formKey.currentState.validate();
@@ -70,8 +34,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+
       appBar: AppBar(
+
         title: Text("ITD-888 Login"),
         //leading: Icon(Icons.filter_vintage),
       ),
@@ -137,29 +104,31 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onPressed: () => _submit(),
               ),
-             Row (
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               children: <Widget>[
+              Row (
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
 
-                TextButton(
-                child: Align(
-                  alignment: Alignment.bottomRight,
+                  TextButton(
+                    child: Align(
+                      alignment: Alignment.bottomRight,
 
-                child: Text('Register for Account'),
-                ),
-                onPressed: () => _submit(),
-              ),
-              TextButton(
-                child: Align(
-                  alignment: Alignment.bottomLeft,
+                      child: Text('Register for Account'),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/register');
+                    },
+                  ),
+                  TextButton(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
 
-                  child: Text('Forgot Password?'),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/second');
-                },
-              ),
-               ],
+                      child: Text('Forgot Password?'),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/third');
+                    },
+                  ),
+                ],
               ),
 
             ],
@@ -171,26 +140,15 @@ class _HomePageState extends State<HomePage> {
   }
 
 }
-class Rout2 extends StatefulWidget {
-  @override
-  //_HomePageState createState() => _HomePageState();
-  SecondRoute createState() => SecondRoute();
-}
-class SecondRoute extends State<Rout2> {
+
+
+class ThirdRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Click Me Page"),
-        backgroundColor: Colors.green,
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Back!'),
-        ),
+        title: Text("Forgot Password"),
+        backgroundColor: Colors.blue,
       ),
     );
   }
