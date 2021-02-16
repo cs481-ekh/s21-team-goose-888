@@ -30,8 +30,9 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
-  flutter_test:
   test: ^1.15.7
+  flutter_test:
+  
     sdk: flutter
 
 # For information on the generic Dart part of this file, see the
