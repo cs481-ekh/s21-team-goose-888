@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'Registration.dart';
 import 'AccountInfo.dart';
+import 'FormSections.dart';
 
 String textEmail = "";
 void main() {
@@ -16,6 +17,7 @@ void main() {
       '/register': (context)  => Registration(),
       '/third': (context) => ThirdRoute(),
       '/account': (context) => AccountInfo(text: textEmail,),
+      '/form': (context) => FormSections(),
 
     },
   ));
@@ -115,7 +117,7 @@ class HomeLogin extends StatelessWidget {
                   if(_submit()){
 
 
-                    Navigator.pushNamed(context, '/account');
+                    Navigator.pushNamed(context, '/form');
                   }
 
                 },
