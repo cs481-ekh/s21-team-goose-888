@@ -1,35 +1,42 @@
 
 import 'package:flutter/material.dart';
 import 'Registration.dart';
+import 'AccountInfo.dart';
 
-
+String textEmail = "";
 void main() {
 
   runApp(
       MaterialApp(
-
         debugShowCheckedModeBanner: false,
-    initialRoute: '/',
+        initialRoute: '/',
 
     routes: {
-      '/': (context) => HomeRoute(),
+      '/': (context) => HomeLogin(),
       '/register': (context)  => Registration(),
       '/third': (context) => ThirdRoute(),
+      '/account': (context) => AccountInfo(text: textEmail,),
+
     },
   ));
 }
 
-class HomeRoute extends StatelessWidget {
+class HomeLogin extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
+  //String textEmail = "";
 
-
-  void _submit() {
+  bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
-      return;
+      return false;
+    }else{
+      _formKey.currentState.save();
+      return true;
     }
-    _formKey.currentState.save();
+
+
+
   }
 
   @override
@@ -67,6 +74,7 @@ class HomeRoute extends StatelessWidget {
                           .hasMatch(value)) {
                     return 'Enter a valid email!';
                   }
+                  textEmail=value;
                   return null;
                 },
               ),
@@ -102,7 +110,15 @@ class HomeRoute extends StatelessWidget {
                     fontSize: 16.0,
                   ),
                 ),
-                onPressed: () => _submit(),
+                onPressed: () {
+                  //bool check = ;
+                  if(_submit()){
+
+
+                    Navigator.pushNamed(context, '/account');
+                  }
+
+                },
               ),
               Row (
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
