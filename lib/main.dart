@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'Registration.dart';
 import 'AccountInfo.dart';
 import 'FormSections.dart';
+import 'Password.dart';
+
 
 String textEmail = "";
 void main() {
@@ -15,7 +17,7 @@ void main() {
     routes: {
       '/': (context) => HomeLogin(),
       '/register': (context)  => Registration(),
-      '/third': (context) => ThirdRoute(),
+      '/password': (context) => PasswordPage(),
       '/account': (context) => AccountInfo(text: textEmail,),
       '/form': (context) => FormSections(),
 
@@ -143,7 +145,7 @@ class HomeLogin extends StatelessWidget {
                       child: Text('Forgot Password?'),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/third');
+                      Navigator.pushNamed(context, '/password');
                     },
                   ),
                 ],
@@ -157,17 +159,7 @@ class HomeLogin extends StatelessWidget {
 
   }
 
+
 }
 
 
-class ThirdRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Forgot Password"),
-        backgroundColor: Colors.blue,
-      ),
-    );
-  }
-}
