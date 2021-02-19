@@ -1,26 +1,22 @@
-
 import 'package:flutter/material.dart';
 import 'Registration.dart';
 import 'AccountInfo.dart';
 import 'FormSections.dart';
 import 'Password.dart';
 
-
 String textEmail = "";
 void main() {
-
-  runApp(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    initialRoute: '/',
     routes: {
       '/': (context) => HomeLogin(),
-      '/register': (context)  => Registration(),
+      '/register': (context) => Registration(),
       '/password': (context) => PasswordPage(),
-      '/account': (context) => AccountInfo(text: textEmail,),
+      '/account': (context) => AccountInfo(
+            text: textEmail,
+          ),
       '/form': (context) => FormSections(),
-
     },
   ));
 }
@@ -34,22 +30,16 @@ class HomeLogin extends StatelessWidget {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
       return false;
-    }else{
+    } else {
       _formKey.currentState.save();
       return true;
     }
-
-
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       appBar: AppBar(
-
         title: Text("ITD-888 Login"),
         //leading: Icon(Icons.filter_vintage),
       ),
@@ -63,7 +53,6 @@ class HomeLogin extends StatelessWidget {
           key: _formKey,
           child: Column(
             children: <Widget>[
-
               //styling
 
               TextFormField(
@@ -78,7 +67,7 @@ class HomeLogin extends StatelessWidget {
                           .hasMatch(value)) {
                     return 'Enter a valid email!';
                   }
-                  textEmail=value;
+                  textEmail = value;
                   return null;
                 },
               ),
@@ -88,7 +77,6 @@ class HomeLogin extends StatelessWidget {
               ),
               //text input
               TextFormField(
-
                 decoration: InputDecoration(labelText: 'Password'),
                 keyboardType: TextInputType.emailAddress,
                 onFieldSubmitted: (value) {},
@@ -116,22 +104,17 @@ class HomeLogin extends StatelessWidget {
                 ),
                 onPressed: () {
                   //bool check = ;
-                  if(_submit()){
-
-
+                  if (_submit()) {
                     Navigator.pushNamed(context, '/form');
                   }
-
                 },
               ),
-              Row (
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-
                   TextButton(
                     child: Align(
                       alignment: Alignment.bottomRight,
-
                       child: Text('Register for Account'),
                     ),
                     onPressed: () {
@@ -141,7 +124,6 @@ class HomeLogin extends StatelessWidget {
                   TextButton(
                     child: Align(
                       alignment: Alignment.bottomLeft,
-
                       child: Text('Forgot Password?'),
                     ),
                     onPressed: () {
@@ -150,16 +132,10 @@ class HomeLogin extends StatelessWidget {
                   ),
                 ],
               ),
-
             ],
           ),
         ),
       ),
     );
-
   }
-
-
 }
-
-

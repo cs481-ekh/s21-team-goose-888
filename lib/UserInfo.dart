@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class UserInfo {
   String _username;
   String _password;
@@ -6,7 +8,11 @@ class UserInfo {
   //currently working on. Not quite sure yet how we will have it setup.)
   List<int> _forms;
 
-  UserInfo({String username, String password, String email, List<int> forms}) {
+  UserInfo(
+      {@required String username,
+      @required String password,
+      @required String email,
+      @required List<int> forms}) {
     this._username = username;
     this._password = password;
     this._email = email;
