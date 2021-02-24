@@ -3,9 +3,15 @@ import 'Registration.dart';
 import 'AccountInfo.dart';
 import 'FormSections.dart';
 import 'Password.dart';
+import 'PostgresDb.dart';
 
 String textEmail = "";
-void main() {
+Future<void> main() async {
+  try {
+    final PostgresDb _db = await PostgresDb.connect();
+  } on Exception catch(e){
+    print(e);
+  }
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: '/',

@@ -1,20 +1,16 @@
+import 'dart:async';
+
 import 'package:postgres/postgres.dart';
 // class used to connect to postgres database
 
 class PostgresDb{
   PostgreSQLConnection _connection;
 
-  static Future<PostgresDb> connect(Map<String, dynamic> env) async {
-
-    int _port = 32884;
-    String _host = env['DB_HOST'];
-    String _user = env['DB_USER'];
-    String _pass = env['DB_PASS'];
-    String _name = env['DB_NAME'];
+  static Future<PostgresDb> connect() async {
 
     PostgresDb db = PostgresDb();
-    db._connection = PostgreSQLConnection(_host, _port, _name, username: _user, password: _pass);
-    await db._connection.open();
+    db._connection = PostgreSQLConnection('localhost', 54321, 'itd-888-database', username: 'user', password: 'password');
+      await db._connection.open();
     return db;
   }
 
