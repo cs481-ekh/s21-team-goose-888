@@ -48,7 +48,7 @@ class FormSections extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      //Navigator.pushNamed(context, '/third');
+                      Navigator.pushNamed(context, '/LooseMixR97');
                     }),
                 TextButton(
                     child: Align(
@@ -61,7 +61,7 @@ class FormSections extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      //Navigator.pushNamed(context, '/third');
+                      Navigator.pushNamed(context, '/Custody');
                     }),
                 TextButton(
                     child: Align(
@@ -74,7 +74,7 @@ class FormSections extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      //Navigator.pushNamed(context, '/third');
+                      Navigator.pushNamed(context, '/R47');
                     }),
                 TextButton(
                     child: Align(
@@ -87,7 +87,7 @@ class FormSections extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      //Navigator.pushNamed(context, '/third');
+                      Navigator.pushNamed(context, '/T329');
                     }),
                 TextButton(
                     child: Align(
@@ -100,7 +100,7 @@ class FormSections extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      //Navigator.pushNamed(context, '/third');
+                      Navigator.pushNamed(context, '/T308');
                     }),
                 TextButton(
                     child: Align(
@@ -113,7 +113,7 @@ class FormSections extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      //Navigator.pushNamed(context, '/third');
+                      Navigator.pushNamed(context, '/T209');
                     }),
                 TextButton(
                     child: Align(
@@ -126,7 +126,7 @@ class FormSections extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      //Navigator.pushNamed(context, '/third');
+                      Navigator.pushNamed(context, '/T166');
                     }),
                 TextButton(
                     child: Align(
@@ -139,7 +139,7 @@ class FormSections extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      //Navigator.pushNamed(context, '/third');
+                      Navigator.pushNamed(context, '/T312');
                     }),
                 TextButton(
                     child: Align(
@@ -152,7 +152,7 @@ class FormSections extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      //Navigator.pushNamed(context, '/third');
+                      Navigator.pushNamed(context, '/T30');
                     }),
                 ButtonTheme(
                     minWidth: double.infinity,

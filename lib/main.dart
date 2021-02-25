@@ -3,6 +3,15 @@ import 'Registration.dart';
 import 'AccountInfo.dart';
 import 'FormSections.dart';
 import 'Password.dart';
+import 'LooseMixR97.dart';
+import 'Custody.dart';
+import 'R47.dart';
+import 'T329.dart';
+import 'T308.dart';
+import 'T209.dart';
+import 'T166.dart';
+import 'T30.dart';
+
 
 String textEmail = "";
 void main() {
@@ -17,6 +26,15 @@ void main() {
             text: textEmail,
           ),
       '/form': (context) => FormSections(),
+      '/LooseMixR97': (context) => LooseMixR97(),
+      '/Custody': (context) => Custody(), 
+      '/R47': (context) => R47(),
+      '/T166': (context) => T166(),
+      '/T30': (context) => T30(),
+      '/T329': (context) => T329(),
+      '/T308': (context) => T308(),
+      '/T209': (context) => T209(),
+      '/T166': (context) => T166(),
     },
   ));
 }
