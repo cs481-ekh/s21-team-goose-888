@@ -90,9 +90,12 @@ class PasswordPage extends StatelessWidget {
             ),
           ),
         ),
-        Form(
+    Padding(
+    padding: const EdgeInsets.all(10.0),
+       child: Form(
           key: formKey2,
           child: Column(
+
             children: <Widget>[
               Text(
                 " Input the code in your email",
@@ -136,7 +139,9 @@ class PasswordPage extends StatelessWidget {
             ],
           ),
         ),
-      ]),
+    ),
+      ]
+          ),
     );
   }
 
