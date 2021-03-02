@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:aqueduct/aqueduct.dart';
+import 'package:itd_888/model/user.dart';
 
 class UsersController extends ResourceController {
   UsersController(this.context);

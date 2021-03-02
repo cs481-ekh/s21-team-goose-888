@@ -1,4 +1,4 @@
-import 'package:'
+import 'package:itd_888/aqueductAPI.dart';
 
 class User extends ManagedObject<_User> implements _User {}
 
@@ -23,3 +23,4 @@ class _User {
 
   @Column(unique: false)
   String pd;
+}
