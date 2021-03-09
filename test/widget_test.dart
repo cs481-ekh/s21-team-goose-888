@@ -9,8 +9,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:itd_888/main.dart';
 
 void main() {
-  // test("Title", () {
+  test("Title", () {
   //   var result = PostgresDb.query("");
   //   expect(result, "Some Result");
-  // });
+   });
 }
