@@ -11,10 +11,11 @@ import 'T308.dart';
 import 'T209.dart';
 import 'T166.dart';
 import 'T30.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 String textEmail = "";
 void main() {
+  FirebaseAuth auth = FirebaseAuth.instance;
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
