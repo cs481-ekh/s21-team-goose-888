@@ -196,6 +196,4 @@ class HomeLogin extends StatelessWidget {
       ),
     );
   }
-
-
 }
