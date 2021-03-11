@@ -21,6 +21,17 @@ class _T209 extends State<T209> {
       return true;
     }
   }
+  bool rememberMe = false;
+
+  void _onRememberMeChanged(bool newValue) => setState(() {
+    rememberMe = newValue;
+
+    if (rememberMe) {
+      // TODO: Here goes your functionality that remembers the user.
+    } else {
+      // TODO: Forget the user
+    }
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -413,8 +424,8 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid ";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid remark";
                     return null;
                   },
                 ),
@@ -432,8 +443,8 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z]").hasMatch(value))
+                      return "Enter a valid name";
                     return null;
                   },
                 ),
@@ -444,7 +455,7 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -475,8 +486,8 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid name";
                     return null;
                   },
                 ),
@@ -487,8 +498,8 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid ";
                     return null;
                   },
                 ),
@@ -499,12 +510,12 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid comment";
                     return null;
                   },
                 ),
-
+           
 
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
