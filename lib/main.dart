@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Registration.dart';
 import 'AccountInfo.dart';
@@ -43,6 +44,8 @@ class HomeLogin extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   //String textEmail = "";
 
   bool _submit() {
@@ -52,6 +55,24 @@ class HomeLogin extends StatelessWidget {
     } else {
       _formKey.currentState.save();
       return true;
+    }
+  }
+
+  void firebaseAuthLogin(String email, String password) async{
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+          email: email,
+          password: password
+      );
+
+      print("login successful");
+    } on FirebaseAuthException catch (e){
+      if(e.code == 'user-not-found'){
+        print ('No user with any such email');
+      }else{
+        print ('Incorrect credentials entered');
+      }
     }
   }
 
@@ -90,6 +111,7 @@ class HomeLogin extends StatelessWidget {
               //styling
 
               TextFormField(
+                controller: emailController,
                 decoration: InputDecoration(labelText: 'E-Mail'),
                 keyboardType: TextInputType.emailAddress,
                 onFieldSubmitted: (value) {
@@ -111,6 +133,7 @@ class HomeLogin extends StatelessWidget {
               ),
               //text input
               TextFormField(
+                controller: passwordController,
                 decoration: InputDecoration(labelText: 'Password'),
                 keyboardType: TextInputType.emailAddress,
                 onFieldSubmitted: (value) {},
@@ -137,6 +160,7 @@ class HomeLogin extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
+                  firebaseAuthLogin(emailController.text, passwordController.text);
                   //bool check = ;
                   if (_submit()) {
                     Navigator.pushNamed(context, '/form');
