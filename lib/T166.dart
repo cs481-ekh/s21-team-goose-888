@@ -262,8 +262,8 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid ";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid remark";
                     return null;
                   },
                 ),
@@ -281,20 +281,8 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      labelText: "Tested by WAQTC",
-                      labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (value) {},
-                  validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z]").hasMatch(value))
+                      return "Enter a valid Name";
                     return null;
                   },
                 ),
@@ -305,7 +293,7 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[0-9]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -330,13 +318,13 @@ class _T166 extends State<T166> {
                 //Row 6 Begining
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "ReTest Flagged by",
+                      labelText: "Retest Flagged by",
                       labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z]").hasMatch(value))
+                      return "Enter a valid Name";
                     return null;
                   },
                 ),
@@ -356,11 +344,11 @@ class _T166 extends State<T166> {
                   decoration: InputDecoration(
                       labelText: "Retest Comments ",
                       labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid comment";
                     return null;
                   },
                 ),
