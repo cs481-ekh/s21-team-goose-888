@@ -11,8 +11,9 @@ import 'T308.dart';
 import 'T209.dart';
 import 'T166.dart';
 import 'T30.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'T312.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 
 String textEmail = "";
