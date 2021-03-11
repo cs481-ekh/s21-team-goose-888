@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'dart:io';
+class LooseMixR97 extends StatefulWidget {
+  @override
+  _LooseMixR97 createState() => _LooseMixR97();
+}
 
-class LooseMixR97 extends StatelessWidget {
+class _LooseMixR97 extends State<LooseMixR97> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-
+File sampleTemp, sampleLoc;
+  bool _submit() {
+    final isValid = _formKey.currentState.validate();
+    if (!isValid) {
+      return false;
+    } else {
+      _formKey.currentState.save();
+      return true;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,13 +164,25 @@ class LooseMixR97 extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  child: RaisedButton(
-                      child: Text('Choose Photo'),
-                      onPressed: () async {
-                        var imgFile = await ImagePicker.pickImage(
-                            source: ImageSource.gallery);
-                      }),
-                ),
+                  child : Column(children: [
+                    sampleTemp == null
+                        ? Text('No image selected.')
+                        : Image.file(sampleTemp),
+                    RaisedButton(
+                        child: Text('Choose Photo'),
+                        onPressed: ()async {
+                          var imgFile = await ImagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {
+                            if (imgFile != null) {
+                              sampleTemp = File(imgFile.path);
+                            } else {
+                              print('No image selected.');
+                            }
+                          });
+                        }
+                    ),
+                  ] ),),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.02,
                 ),
@@ -166,13 +192,25 @@ class LooseMixR97 extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  child: RaisedButton(
-                      child: Text('Choose Photo'),
-                      onPressed: () async {
-                        var imgFile = await ImagePicker.pickImage(
-                            source: ImageSource.gallery);
-                      }),
-                ),
+                  child : Column(children: [
+                    sampleLoc == null
+                        ? Text('No image selected.')
+                        : Image.file(sampleLoc),
+                    RaisedButton(
+                        child: Text('Choose Photo'),
+                        onPressed: ()async {
+                          var imgFile = await ImagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {
+                            if (imgFile != null) {
+                              sampleLoc = File(imgFile.path);
+                            } else {
+                              print('No image selected.');
+                            }
+                          });
+                        }
+                    ),
+                  ] ),),
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Quantity Represented (Tons) *",
@@ -299,7 +337,11 @@ class LooseMixR97 extends StatelessWidget {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    if (_submit()) {
+                      //Navigator.pushNamed(context, '/form');
+                      Navigator.pop(context);
+                    }
+
                   },
                   child: Text('Save'),
                 ),
