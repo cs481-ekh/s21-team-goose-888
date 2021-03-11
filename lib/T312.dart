@@ -1,22 +1,24 @@
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 
-class T209 extends StatefulWidget {
-  @override
-  _T209 createState() => _T209();
+
+class T312 extends StatefulWidget {
+@override
+_T312 createState() => _T312();
 }
 
-class _T209 extends State<T209> {
+class _T312 extends State<T312> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-  File massbandsample1, massofb1, massofdinair1, massbandsamplesub1,massofbsub1,massofsamplesub1,massbandsample2, massofb2, massofdinair2, massbandsamplesub2,massofbsub2,massofsamplesub2 ;
+  File samp1,samp2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("T209 Max Specific Gravity"),
+        title: Text("T312 Gyratory Compactor"),
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
@@ -84,81 +86,54 @@ class _T209 extends State<T209> {
                 //Row 1 ENDING
 
                 //Row 2 BEGINNING
-                Text(
-                  "Mass of Bowl and Sample 1 (g)",
-                  style: TextStyle(color: Colors.red),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "Gyratory Brand",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.text,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid number";
+                    return null;
+                  },
                 ),
-                Container(
-                  width: double.infinity,
-                  child : Column(children: [
-                    massbandsample1 == null
-                        ? Text('No image selected.')
-                        : Image.file(massbandsample1 ),
-                    RaisedButton(
-                        child: Text('Choose Photo'),
-                        onPressed: ()async {
-                          var imgFile = await ImagePicker.pickImage(
-                              source: ImageSource.gallery);
-                          setState(() {
-                            if (imgFile != null) {
-                              massbandsample1 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
-                          });
-                        }
-                    ),
-                  ] ),),
-                Text(
-                  "Mass of Bowl 1 (g)",
-                  style: TextStyle(color: Colors.red),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "Gyratory Model",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.text,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid number";
+                    return null;
+                  },
                 ),
-                Container(
-                  width: double.infinity,
-                  child : Column(children: [
-                    massofb1 == null
-                        ? Text('No image selected.')
-                        : Image.file(massofb1 ),
-                    RaisedButton(
-                        child: Text('Choose Photo'),
-                        onPressed: ()async {
-                          var imgFile = await ImagePicker.pickImage(
-                              source: ImageSource.gallery);
-                          setState(() {
-                            if (imgFile != null) {
-                              massofb1  = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
-                          });
-                        }
-                    ),
-                  ] ),),
-                Text(
-                  "Weight of Puck SSD 1 ",
-                  style: TextStyle(color: Colors.red),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "Gyratory Serial Number",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.number,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid number";
+                    return null;
+                  },
                 ),
-                Container(
-                  width: double.infinity,
-                  child : Column(children: [
-                    wpuckSSD1 == null
-                        ? Text('No image selected.')
-                        : Image.file(wpuckSSD1 ),
-                    RaisedButton(
-                        child: Text('Choose Photo'),
-                        onPressed: ()async {
-                          var imgFile = await ImagePicker.pickImage(
-                              source: ImageSource.gallery);
-                          setState(() {
-                            if (imgFile != null) {
-                              wpuckSSD1 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
-                          });
-                        }
-                    ),
-                  ] ),),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "Puck Mass Volumetric",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.number,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid number";
+                    return null;
+                  },
+                ),
                 //Row 2 Ending
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
@@ -166,15 +141,15 @@ class _T209 extends State<T209> {
 
                 /////////////////////////Row 3 BEGINNING
                 Text(
-                  "Weight of Puck Dry 2 ",
+                  "Mass of Sample 1 (g)",
                   style: TextStyle(color: Colors.red),
                 ),
                 Container(
                   width: double.infinity,
                   child : Column(children: [
-                    puckd2== null
+                    samp1 == null
                         ? Text('No image selected.')
-                        : Image.file(puckd2 ),
+                        : Image.file(samp1),
                     RaisedButton(
                         child: Text('Choose Photo'),
                         onPressed: ()async {
@@ -182,7 +157,7 @@ class _T209 extends State<T209> {
                               source: ImageSource.gallery);
                           setState(() {
                             if (imgFile != null) {
-                              puckd2  = File(imgFile.path);
+                              samp1 = File(imgFile.path);
                             } else {
                               print('No image selected.');
                             }
@@ -190,62 +165,65 @@ class _T209 extends State<T209> {
                         }
                     ),
                   ] ),),
-                Text(
-                  "Weight of Puck in Water 2 ",
-                  style: TextStyle(color: Colors.red),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "Puck Height 1 (mm)",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid number";
+                    return null;
+                  },
                 ),
-                Container(
-                  width: double.infinity,
-                  child : Column(children: [
-                    gpuckh2o2 == null
-                        ? Text('No image selected.')
-                        : Image.file(gpuckh2o2),
-                    RaisedButton(
-                        child: Text('Choose Photo'),
-                        onPressed: ()async {
-                          var imgFile = await ImagePicker.pickImage(
-                              source: ImageSource.gallery);
-                          setState(() {
-                            if (imgFile != null) {
-                              gpuckh2o2  = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
-                          });
-                        }
-                    ),
-                  ] ),),
-                Text(
-                  "Weight of Puck SSD 2 ",
-                  style: TextStyle(color: Colors.red),
-                ),
-                Container(
-                  width: double.infinity,
-                  child : Column(children: [
-                    wpuckSSD2== null
-                        ? Text('No image selected.')
-                        : Image.file(wpuckSSD2 ),
-                    RaisedButton(
-                        child: Text('Choose Photo'),
-                        onPressed: ()async {
-                          var imgFile = await ImagePicker.pickImage(
-                              source: ImageSource.gallery);
-                          setState(() {
-                            if (imgFile != null) {
-                              wpuckSSD2  = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
-                          });
-                        }
-                    ),
-                  ] ),),
 
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
                 ),
                 //Row 3 ENDING
+                Text(
+                  "Mass of Sample 2 (g)",
+                  style: TextStyle(color: Colors.red),
+                ),
+                Container(
+                  width: double.infinity,
+                  child : Column(children: [
+                    samp2 == null
+                        ? Text('No image selected.')
+                        : Image.file(samp2),
+                    RaisedButton(
+                        child: Text('Choose Photo'),
+                        onPressed: ()async {
+                          var imgFile = await ImagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {
+                            if (imgFile != null) {
+                              samp2 = File(imgFile.path);
+                            } else {
+                              print('No image selected.');
+                            }
+                          });
+                        }
+                    ),
+                  ] ),),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "Puck Height 2 (mm)",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid number";
+                    return null;
+                  },
+                ),
 
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.2,
+                ),
+                //Row 3 ENDING
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Remarks",
@@ -258,11 +236,12 @@ class _T209 extends State<T209> {
                     return null;
                   },
                 ),
+                //Row 4 BEGINNING
 
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
                 ),
-                //Row 3 ENDING
+                // Row 4 Ending
 
                 //Row 5 Begining
                 TextFormField(
@@ -321,7 +300,7 @@ class _T209 extends State<T209> {
                 //Row 6 Begining
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "ReTest Flagged by",
+                      labelText: "Test Flagged by",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -375,6 +354,3 @@ class _T209 extends State<T209> {
     );
   }
 }
-
-
-
