@@ -129,7 +129,7 @@ class Registration extends StatelessWidget {
                       },
                     ),
                     TextFormField(
-                      controller: emailController,
+                      controller: passwordController,
                       decoration: InputDecoration(
                           labelText: 'Password *',
                           labelStyle: TextStyle(color: Colors.red)),
@@ -185,7 +185,7 @@ class Registration extends StatelessWidget {
                 ))));
   }
 
-  _register(String email, String password) async{
+  void _register(String email, String password) async{
     try{
       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch(e){
