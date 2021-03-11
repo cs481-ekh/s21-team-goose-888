@@ -11,11 +11,10 @@ import 'T308.dart';
 import 'T209.dart';
 import 'T166.dart';
 import 'T30.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 String textEmail = "";
 void main() {
-  FirebaseAuth auth = FirebaseAuth.instance;
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
@@ -43,6 +42,7 @@ void main() {
 class HomeLogin extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   //String textEmail = "";
 
   bool _submit() {
@@ -56,7 +56,22 @@ class HomeLogin extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+    return FutureBuilder(
+      future: _initialization,
+      builder: (context, snapshot) {
+        if (snapshot.hasError){
+          return appBuild(context); //TODO: Create a error page
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return appBuild(context);
+        }
+        return appBuild(context); //TODO: create loading page
+      }
+    );
+  }
+
+  Widget appBuild(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("ITD-888 Login"),
@@ -157,4 +172,6 @@ class HomeLogin extends StatelessWidget {
       ),
     );
   }
+
+
 }
