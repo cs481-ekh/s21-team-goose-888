@@ -12,6 +12,15 @@ class _T166 extends State<T166> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File puckd1,gpuckh2o1,wpuckSSD1,puckd2,gpuckh2o2,wpuckSSD2 ;
+  bool _submit() {
+    final isValid = _formKey.currentState.validate();
+    if (!isValid) {
+      return false;
+    } else {
+      _formKey.currentState.save();
+      return true;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -363,7 +372,9 @@ class _T166 extends State<T166> {
                 //Ending Row 7
                 RaisedButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    if (_submit()) {
+                      Navigator.pop(context);
+                    }
                   },
                   child: Text('Save'),
                 ),
