@@ -15,6 +15,21 @@ class _T30 extends State<T30> {
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File pandsbwash, pbwash, sbwash, pandsawash, pawash, sawash, CMR2In, CMR1halfIn, CMR1In, CMR3fourthsIn, CMR3eightthsIn;
   File No4, No8, No16, No30, No50, No100, No200, Pan;
+
+
+  bool _submit() {
+    final isValid = _formKey.currentState.validate();
+    if (!isValid) {
+      return false;
+    } else {
+      _formKey.currentState.save();
+      return true;
+    }
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +55,7 @@ class _T30 extends State<T30> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Number";
                     return null;
                   },
                 ),
@@ -49,11 +64,11 @@ class _T30 extends State<T30> {
                       labelText: "Organization *",
                       hintText: "Department",
                       labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                      return "Enter a valid  Organization name!";
                     return null;
                   },
                 ),
@@ -61,7 +76,7 @@ class _T30 extends State<T30> {
                   decoration: InputDecoration(
                       labelText: "Sample Date *",
                       labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
@@ -76,8 +91,8 @@ class _T30 extends State<T30> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                      return "Enter a valid Status!";
                     return null;
                   },
                 ),
@@ -800,7 +815,11 @@ class _T30 extends State<T30> {
                 //Ending Row 7
                 RaisedButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    if (_submit()) {
+                      //Navigator.pushNamed(context, '/form');
+                      Navigator.pop(context);
+                    }
+
                   },
                   child: Text('Save'),
                 ),

@@ -14,6 +14,15 @@ class _T312 extends State<T312> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File samp1,samp2;
+  bool _submit() {
+    final isValid = _formKey.currentState.validate();
+    if (!isValid) {
+      return false;
+    } else {
+      _formKey.currentState.save();
+      return true;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,8 +102,8 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z]").hasMatch(value))
+                      return "Enter a valid brand";
                     return null;
                   },
                 ),
@@ -105,8 +114,8 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z]+0-9").hasMatch(value))
+                      return "Enter a valid model";
                     return null;
                   },
                 ),
@@ -117,7 +126,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z]").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -129,7 +138,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[0-9+.]").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -169,10 +178,10 @@ class _T312 extends State<T312> {
                   decoration: InputDecoration(
                       labelText: "Puck Height 1 (mm)",
                       labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[0-9+.]").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -211,10 +220,10 @@ class _T312 extends State<T312> {
                   decoration: InputDecoration(
                       labelText: "Puck Height 2 (mm)",
                       labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[0-9+.]").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -231,8 +240,8 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid ";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid remark";
                     return null;
                   },
                 ),
@@ -251,20 +260,8 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      labelText: "Tested by WAQTC",
-                      labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (value) {},
-                  validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z]").hasMatch(value))
+                      return "Enter a valid name";
                     return null;
                   },
                 ),
@@ -275,7 +272,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[0-9]").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -305,8 +302,8 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid name";
                     return null;
                   },
                 ),
@@ -317,8 +314,8 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid ";
                     return null;
                   },
                 ),
@@ -329,8 +326,8 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid comment";
                     return null;
                   },
                 ),
@@ -342,7 +339,9 @@ class _T312 extends State<T312> {
                 //Ending Row 7
                 RaisedButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    if (_submit()) {
+                      Navigator.pop(context);
+                    }
                   },
                   child: Text('Save'),
                 ),
