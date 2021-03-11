@@ -135,15 +135,15 @@ class _T209 extends State<T209> {
                     ),
                   ] ),),
                 Text(
-                  "Weight of Puck SSD 1 ",
+                  "Mass of Dry Sample in Air 1 (g)",
                   style: TextStyle(color: Colors.red),
                 ),
                 Container(
                   width: double.infinity,
                   child : Column(children: [
-                    wpuckSSD1 == null
+                   massofdinair1== null
                         ? Text('No image selected.')
-                        : Image.file(wpuckSSD1 ),
+                        : Image.file(massofdinair1 ),
                     RaisedButton(
                         child: Text('Choose Photo'),
                         onPressed: ()async {
@@ -151,7 +151,7 @@ class _T209 extends State<T209> {
                               source: ImageSource.gallery);
                           setState(() {
                             if (imgFile != null) {
-                              wpuckSSD1 = File(imgFile.path);
+                              massofdinair1 = File(imgFile.path);
                             } else {
                               print('No image selected.');
                             }
@@ -159,6 +159,82 @@ class _T209 extends State<T209> {
                         }
                     ),
                   ] ),),
+                Text(
+                  "Submerged Weight of Bowl and Sample 1 (g)",
+                  style: TextStyle(color: Colors.red),
+                ),
+                Container(
+                  width: double.infinity,
+                  child : Column(children: [
+                    massbandsamplesub1== null
+                        ? Text('No image selected.')
+                        : Image.file(massbandsamplesub1 ),
+                    RaisedButton(
+                        child: Text('Choose Photo'),
+                        onPressed: ()async {
+                          var imgFile = await ImagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {
+                            if (imgFile != null) {
+                              massbandsamplesub1= File(imgFile.path);
+                            } else {
+                              print('No image selected.');
+                            }
+                          });
+                        }
+                    ),
+                  ] ),),
+                Text(
+                  "Submerged Weight of Bowl 1 (g)",
+                  style: TextStyle(color: Colors.red),
+                ),
+                Container(
+                  width: double.infinity,
+                  child : Column(children: [
+                    massofbsub1== null
+                        ? Text('No image selected.')
+                        : Image.file(massofbsub1 ),
+                    RaisedButton(
+                        child: Text('Choose Photo'),
+                        onPressed: ()async {
+                          var imgFile = await ImagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {
+                            if (imgFile != null) {
+                              massofbsub1 = File(imgFile.path);
+                            } else {
+                              print('No image selected.');
+                            }
+                          });
+                        }
+                    ),
+                  ] ),),
+                Text(
+                  "Submerged Weight of Sample 1 (g)",
+                  style: TextStyle(color: Colors.red),
+                ),
+                Container(
+                  width: double.infinity,
+                  child : Column(children: [
+                    massofsamplesub1== null
+                        ? Text('No image selected.')
+                        : Image.file(massofsamplesub1 ),
+                    RaisedButton(
+                        child: Text('Choose Photo'),
+                        onPressed: ()async {
+                          var imgFile = await ImagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {
+                            if (imgFile != null) {
+                              massofsamplesub1 = File(imgFile.path);
+                            } else {
+                              print('No image selected.');
+                            }
+                          });
+                        }
+                    ),
+                  ] ),),
+
                 //Row 2 Ending
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
@@ -166,15 +242,15 @@ class _T209 extends State<T209> {
 
                 /////////////////////////Row 3 BEGINNING
                 Text(
-                  "Weight of Puck Dry 2 ",
+                  "Mass of Bowl and Sample 2 (g)",
                   style: TextStyle(color: Colors.red),
                 ),
                 Container(
                   width: double.infinity,
                   child : Column(children: [
-                    puckd2== null
+                    massbandsample2== null
                         ? Text('No image selected.')
-                        : Image.file(puckd2 ),
+                        : Image.file(massbandsample2 ),
                     RaisedButton(
                         child: Text('Choose Photo'),
                         onPressed: ()async {
@@ -182,7 +258,7 @@ class _T209 extends State<T209> {
                               source: ImageSource.gallery);
                           setState(() {
                             if (imgFile != null) {
-                              puckd2  = File(imgFile.path);
+                              massbandsample2 = File(imgFile.path);
                             } else {
                               print('No image selected.');
                             }
@@ -191,15 +267,15 @@ class _T209 extends State<T209> {
                     ),
                   ] ),),
                 Text(
-                  "Weight of Puck in Water 2 ",
+                  "Mass of Bowl 2 (g)",
                   style: TextStyle(color: Colors.red),
                 ),
                 Container(
                   width: double.infinity,
                   child : Column(children: [
-                    gpuckh2o2 == null
+                    massofb2 == null
                         ? Text('No image selected.')
-                        : Image.file(gpuckh2o2),
+                        : Image.file(massofb2 ),
                     RaisedButton(
                         child: Text('Choose Photo'),
                         onPressed: ()async {
@@ -207,7 +283,7 @@ class _T209 extends State<T209> {
                               source: ImageSource.gallery);
                           setState(() {
                             if (imgFile != null) {
-                              gpuckh2o2  = File(imgFile.path);
+                              massofb2 = File(imgFile.path);
                             } else {
                               print('No image selected.');
                             }
@@ -216,15 +292,15 @@ class _T209 extends State<T209> {
                     ),
                   ] ),),
                 Text(
-                  "Weight of Puck SSD 2 ",
+                  "Mass of Dry Sample in Air 2 (g)",
                   style: TextStyle(color: Colors.red),
                 ),
                 Container(
                   width: double.infinity,
                   child : Column(children: [
-                    wpuckSSD2== null
+                    massofdinair2== null
                         ? Text('No image selected.')
-                        : Image.file(wpuckSSD2 ),
+                        : Image.file(massofdinair2 ),
                     RaisedButton(
                         child: Text('Choose Photo'),
                         onPressed: ()async {
@@ -232,7 +308,82 @@ class _T209 extends State<T209> {
                               source: ImageSource.gallery);
                           setState(() {
                             if (imgFile != null) {
-                              wpuckSSD2  = File(imgFile.path);
+                              massofdinair2 = File(imgFile.path);
+                            } else {
+                              print('No image selected.');
+                            }
+                          });
+                        }
+                    ),
+                  ] ),),
+                Text(
+                  "Submerged Weight of Bowl and Sample 2 (g)",
+                  style: TextStyle(color: Colors.red),
+                ),
+                Container(
+                  width: double.infinity,
+                  child : Column(children: [
+                    massbandsamplesub2== null
+                        ? Text('No image selected.')
+                        : Image.file(massbandsamplesub2 ),
+                    RaisedButton(
+                        child: Text('Choose Photo'),
+                        onPressed: ()async {
+                          var imgFile = await ImagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {
+                            if (imgFile != null) {
+                              massbandsamplesub2= File(imgFile.path);
+                            } else {
+                              print('No image selected.');
+                            }
+                          });
+                        }
+                    ),
+                  ] ),),
+                Text(
+                  "Submerged Weight of Bowl 2 (g)",
+                  style: TextStyle(color: Colors.red),
+                ),
+                Container(
+                  width: double.infinity,
+                  child : Column(children: [
+                    massofbsub2== null
+                        ? Text('No image selected.')
+                        : Image.file(massofbsub2 ),
+                    RaisedButton(
+                        child: Text('Choose Photo'),
+                        onPressed: ()async {
+                          var imgFile = await ImagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {
+                            if (imgFile != null) {
+                              massofbsub2 = File(imgFile.path);
+                            } else {
+                              print('No image selected.');
+                            }
+                          });
+                        }
+                    ),
+                  ] ),),
+                Text(
+                  "Submerged Weight of Sample 2 (g)",
+                  style: TextStyle(color: Colors.red),
+                ),
+                Container(
+                  width: double.infinity,
+                  child : Column(children: [
+                    massofsamplesub2== null
+                        ? Text('No image selected.')
+                        : Image.file(massofsamplesub2 ),
+                    RaisedButton(
+                        child: Text('Choose Photo'),
+                        onPressed: ()async {
+                          var imgFile = await ImagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {
+                            if (imgFile != null) {
+                              massofsamplesub2 = File(imgFile.path);
                             } else {
                               print('No image selected.');
                             }
@@ -289,18 +440,7 @@ class _T209 extends State<T209> {
                     return null;
                   },
                 ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      labelText: "Tested by WAQTC",
-                      labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.number,
-                  onFieldSubmitted: (value) {},
-                  validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
-                    return null;
-                  },
-                ),
+
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Tested Date *",
@@ -321,7 +461,7 @@ class _T209 extends State<T209> {
                 //Row 6 Begining
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "ReTest Flagged by",
+                      labelText: "Retest Flagged by",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
