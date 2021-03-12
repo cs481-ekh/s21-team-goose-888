@@ -42,8 +42,12 @@ void main() {
     },
   ));
 }
+class HomeLogin extends StatefulWidget {
+  @override
+  _HomeLogin createState() => _HomeLogin();
+}
 
-class HomeLogin extends StatelessWidget {
+class _HomeLogin extends State<HomeLogin> {
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
