@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
+
 class LooseMixR97 extends StatefulWidget {
   @override
   _LooseMixR97 createState() => _LooseMixR97();
 }
 
 class _LooseMixR97 extends State<LooseMixR97> {
+  String dropdownValue = "Select";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-File sampleTemp, sampleLoc;
+  File sampleTemp, sampleLoc;
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -20,6 +22,7 @@ File sampleTemp, sampleLoc;
       return true;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,13 +167,13 @@ File sampleTemp, sampleLoc;
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
+                  child: Column(children: [
                     sampleTemp == null
                         ? Text('No image selected.')
                         : Image.file(sampleTemp),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
                           setState(() {
@@ -180,9 +183,9 @@ File sampleTemp, sampleLoc;
                               print('No image selected.');
                             }
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                  ]),
+                ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.02,
                 ),
@@ -192,13 +195,13 @@ File sampleTemp, sampleLoc;
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
+                  child: Column(children: [
                     sampleLoc == null
                         ? Text('No image selected.')
                         : Image.file(sampleLoc),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
                           setState(() {
@@ -208,9 +211,9 @@ File sampleTemp, sampleLoc;
                               print('No image selected.');
                             }
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                  ]),
+                ),
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Quantity Represented (Tons) *",
@@ -234,18 +237,33 @@ File sampleTemp, sampleLoc;
                       return "Enter a valid first name!";
                     return null;
                   },
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("Sample Location",
+                      style: TextStyle(color: Colors.red)),
                 ),
                 Container(
                   width: double.infinity,
+                  alignment: Alignment.centerLeft,
                   child: DropdownButton<String>(
-                    items: <String>['Acceptance', 'B', 'C', 'D']
+                    isExpanded: true,
+                    value: dropdownValue,
+                    items: <String>['Select', 'Acceptance', 'B', 'C', 'D']
                         .map((String value) {
                       return new DropdownMenuItem<String>(
                         value: value,
                         child: new Text(value),
                       );
                     }).toList(),
-                    onChanged: (_) {},
+                    onChanged: (String newValue) {
+                      setState(() {
+                        dropdownValue = newValue;
+                      });
+                    },
                     hint: Text(
                       "Requested Tests / Reason for Sample",
                       style: TextStyle(color: Colors.red),
@@ -341,7 +359,6 @@ File sampleTemp, sampleLoc;
                       //Navigator.pushNamed(context, '/form');
                       Navigator.pop(context);
                     }
-
                   },
                   child: Text('Save'),
                 ),
