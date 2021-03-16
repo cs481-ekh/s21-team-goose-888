@@ -11,12 +11,12 @@ class Custody extends StatefulWidget {
 class _Custody extends State<Custody> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-  File _image;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Loose Mix (R97) Details"),
+        title: Text("Chain of Custody"),
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
@@ -150,52 +150,6 @@ class _Custody extends State<Custody> {
                 //Row 2 ENDING
 
                 //Row 3 BEGINNING
-                Text(
-                  "Sample Temperature",
-                  style: TextStyle(color: Colors.red),
-                ),
-                Container(
-                  width: double.infinity,
-                   child : Column(children: [
-                     _image == null
-                         ? Text('No image selected.')
-                         : Image.file(_image),
-                      RaisedButton(
-                        child: Text('Choose Photo'),
-                        onPressed: ()async {
-                          var imgFile = await ImagePicker.pickImage(
-                              source: ImageSource.gallery);
-                          setState(() {
-                            if (imgFile != null) {
-                              _image = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
-
-                          });
-
-
-
-                          }
-
-                        ),
-                     ] ),),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.02,
-                ),
-                Text(
-                  "Sample Location",
-                  style: TextStyle(color: Colors.red),
-                ),
-                Container(
-                  width: double.infinity,
-                  child: RaisedButton(
-                      child: Text('Choose Photo'),
-                      onPressed: () async {
-                        var imgFile = await ImagePicker.pickImage(
-                            source: ImageSource.gallery);
-                      }),
-                ),
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Quantity Represented (Tons) *",
@@ -353,4 +307,3 @@ class _Custody extends State<Custody> {
 //     );
 //   }
 // }
-
