@@ -9,7 +9,7 @@ class LooseMixR97 extends StatefulWidget {
 }
 
 class _LooseMixR97 extends State<LooseMixR97> {
-  String dropdownValue = "Acceptance";
+  String dropdownValue = "Select";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampleTemp, sampleLoc;
@@ -252,7 +252,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   child: DropdownButton<String>(
                     isExpanded: true,
                     value: dropdownValue,
-                    items: <String>['Acceptance', 'B', 'C', 'D']
+                    items: <String>['Select', 'Acceptance', 'B', 'C', 'D']
                         .map((String value) {
                       return new DropdownMenuItem<String>(
                         value: value,
