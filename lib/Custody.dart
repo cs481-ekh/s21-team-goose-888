@@ -86,7 +86,7 @@ class _Custody extends State<Custody> {
                 //Row 2 BEGINNING
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Bid Item / Key Number *",
+                      labelText: "Sample Custodian *",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -98,7 +98,7 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Project Number *",
+                      labelText: "WAQTC Number *",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -110,7 +110,7 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Project Name *",
+                      labelText: "Received by *",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -122,7 +122,7 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "District *",
+                      labelText: "WAQTC Number *",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -134,7 +134,7 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Random Number *",
+                      labelText: "Details / Location / Condition of Sample*",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -152,7 +152,7 @@ class _Custody extends State<Custody> {
                 //Row 3 BEGINNING
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Quantity Represented (Tons) *",
+                      labelText: "Sample Custodian *",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -164,7 +164,7 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Quantity Represented (Tons) *",
+                      labelText: "WAQTC Number *",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -174,26 +174,33 @@ class _Custody extends State<Custody> {
                     return null;
                   },
                 ),
-                Container(
-                  width: double.infinity,
-                  child: DropdownButton<String>(
-                    items: <String>['Acceptance', 'B', 'C', 'D']
-                        .map((String value) {
-                      return new DropdownMenuItem<String>(
-                        value: value,
-                        child: new Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (_) {},
-                    hint: Text(
-                      "Requested Tests / Reason for Sample",
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "Received by *",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Send Reports To: *",
+                      labelText: "WAQTC Number *",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "Details / Location / Condition of Sample*",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -211,7 +218,7 @@ class _Custody extends State<Custody> {
                 //Row 4 BEGINNING
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Sampled by (Electronic Signature) *",
+                      labelText: "Sample Custodian *",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -235,7 +242,7 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Witnessed by (Electronic Signature) *",
+                      labelText: "Received by *",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -259,7 +266,7 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Sample ID Number *",
+                      labelText: "Details / Location / Condition of Sample*",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -268,8 +275,74 @@ class _Custody extends State<Custody> {
                       return "Enter a valid first name!";
                     return null;
                   },
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.2,
                 ),
                 //Row 4 ENDING
+
+                //Row 5 BEGINNING
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "Sample Custodian *",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "WAQTC Number *",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "Received by *",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "WAQTC Number *",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      labelText: "Details / Location / Condition of Sample*",
+                      labelStyle: TextStyle(color: Colors.red)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
+                ),
+                //Row 5 ENDING
 
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
