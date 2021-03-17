@@ -49,21 +49,21 @@ class _T30 extends State<T30> {
                 //Row 1 BEGINNING
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Serial # *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Serial # ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("/^\\S*\$/").hasMatch(value))
                       return "Enter a valid Number";
                     return null;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Organization *",
+                      labelText: "Organization",
                       hintText: "Department",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -74,8 +74,8 @@ class _T30 extends State<T30> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Sample Date *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sample Date ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
@@ -86,8 +86,8 @@ class _T30 extends State<T30> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Status *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Status",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -104,7 +104,7 @@ class _T30 extends State<T30> {
                 //Row 2 BEGINNING
                 Text(
                   "Pan and Sample Before Wash Mass (g)",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -129,7 +129,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "Pan Before Wash Mass (g)",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -154,7 +154,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "Sample Before Wash Mass (g)",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -185,7 +185,7 @@ class _T30 extends State<T30> {
                 /////////////////////////Row 3 BEGINNING
                 Text(
                   "Pan and Sample After Wash Mass (g)",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -210,7 +210,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "Pan After Wash Mass (g)",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -235,7 +235,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "Sample After Wash Mass (g)",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -264,7 +264,7 @@ class _T30 extends State<T30> {
                 //Row 3 ENDING
                 Text(
                   "CMR Gradation 2 in. (50 mm) ",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -289,7 +289,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "CMR Gradation 1 1/2 in. (37.5 mm) ",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -314,7 +314,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "CMR Gradation 3/4 in. (12.5 mm) ",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -339,7 +339,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "CMR Gradation 3/8 in. (9.5 mm) ",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -372,7 +372,7 @@ class _T30 extends State<T30> {
                 //Row 4 BEGINNING
                 Text(
                   "CMR No. 4 (4.75 mm) ",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -397,7 +397,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "CMR No. 8 (2.36 mm) ",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -422,7 +422,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "CMR No. 16 (1.18 mm) ",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -447,7 +447,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "CMR No. 30 (0.600 mm) ",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -472,7 +472,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "CMR No. 100 (0.150 mm) ",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -503,7 +503,7 @@ class _T30 extends State<T30> {
                 //Row 5 Begining
                 Text(
                   "CMR No. 200 (0.075 mm) ",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -528,7 +528,7 @@ class _T30 extends State<T30> {
                   ] ),),
                 Text(
                   "CMR Pan (-0.075 mm) ",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -560,11 +560,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor  2 in. (50mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -572,11 +572,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor  1 1/2 in. (37.5 mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -584,11 +584,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor  1 in. (25mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -596,11 +596,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor  3/4 in. (19mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -608,11 +608,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor  3/8 in. (9.5mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -626,11 +626,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 4 (4.75 mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -638,11 +638,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 8 (2.36 mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -650,11 +650,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 16 (1.18 mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -662,11 +662,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 30 (0.600 mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -674,11 +674,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 50 (0.300 mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -686,11 +686,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 100 (0.150 mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -698,11 +698,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 200 (0.075 mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -716,11 +716,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Remarks ",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -728,11 +728,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Tested by *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -740,11 +740,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Tested By WAQTC *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -752,23 +752,23 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Tested Date *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Retest Flagged by *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -776,11 +776,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Retest Flagged ",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -788,11 +788,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Retest Comments ",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -800,11 +800,11 @@ class _T30 extends State<T30> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Independent Assessor ",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
