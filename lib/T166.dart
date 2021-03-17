@@ -300,7 +300,7 @@ class _T166 extends State<T166> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Tested Date *",
+                      labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
