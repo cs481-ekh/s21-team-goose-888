@@ -727,7 +727,7 @@ class _T30 extends State<T30> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Tested by *",
+                      labelText: "Tested by ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -739,7 +739,7 @@ class _T30 extends State<T30> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Tested By WAQTC *",
+                      labelText: "Tested By WAQTC ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
@@ -751,7 +751,7 @@ class _T30 extends State<T30> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Tested Date *",
+                      labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -763,7 +763,7 @@ class _T30 extends State<T30> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Retest Flagged by *",
+                      labelText: "Retest Flagged by ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
