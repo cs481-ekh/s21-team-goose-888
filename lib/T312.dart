@@ -42,49 +42,49 @@ class _T312 extends State<T312> {
                 //Row 1 BEGINNING
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Serial # *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Serial # ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Organization *",
+                      labelText: "Organization ",
                       hintText: "Department",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Sample Date *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sample Date ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Status *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Status ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -98,11 +98,11 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Gyratory Brand",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z]").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid brand";
                     return null;
                   },
@@ -110,11 +110,11 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Gyratory Model",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z]+0-9").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid model";
                     return null;
                   },
@@ -122,11 +122,11 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Gyratory Serial Number",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z]").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -134,11 +134,11 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Puck Mass Volumetric",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[0-9+.]").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -151,7 +151,7 @@ class _T312 extends State<T312> {
                 /////////////////////////Row 3 BEGINNING
                 Text(
                   "Mass of Sample 1 (g)",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -177,11 +177,11 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Puck Height 1 (mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[0-9+.]").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -193,7 +193,7 @@ class _T312 extends State<T312> {
                 //Row 3 ENDING
                 Text(
                   "Mass of Sample 2 (g)",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -219,11 +219,11 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Puck Height 2 (mm)",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[0-9+.]").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -236,7 +236,7 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Remarks",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -256,11 +256,11 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Tested by",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z]").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid name";
                     return null;
                   },
@@ -268,24 +268,24 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Tested by WAQTC",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[0-9]").hasMatch(value))
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Tested Date *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Tested Date ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -298,7 +298,7 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Test Flagged by",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -310,7 +310,7 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Retest Flagged",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -322,7 +322,7 @@ class _T312 extends State<T312> {
                 TextFormField(
                   decoration: InputDecoration(
                       labelText: "Retest Comments ",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
