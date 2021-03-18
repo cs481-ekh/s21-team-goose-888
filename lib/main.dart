@@ -12,6 +12,7 @@ import 'T209.dart';
 import 'T166.dart';
 import 'T30.dart';
 import 'T312.dart';
+import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -43,17 +44,21 @@ void main() {
   ));
 }
 class HomeLogin extends StatefulWidget {
+  HomeLogin({Key key, this.title, this.auth, this.onSignIn}) : super (key: key);
+  final String title;
+  final BaseAuth auth;
+  final VoidCallback onSignIn;
   @override
   _HomeLogin createState() => _HomeLogin();
 }
 
 class _HomeLogin extends State<HomeLogin> {
-  var _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
+
   var isLoading = false;
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  //String textEmail = "";
 
   bool _submit() {
     final isValid = _formKey.currentState.validate();
@@ -65,14 +70,14 @@ class _HomeLogin extends State<HomeLogin> {
     }
   }
 
-  void firebaseAuthLogin(String email, String password) async{
+  Future<UserCredential> firebaseAuthLogin(String email, String password) async{
+    UserCredential userCredential;
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
           email: email,
           password: password
       );
-
       print("login successful");
     } on FirebaseAuthException catch (e){
       if(e.code == 'user-not-found'){
@@ -81,6 +86,7 @@ class _HomeLogin extends State<HomeLogin> {
         print ('Incorrect credentials entered');
       }
     }
+    return userCredential;
   }
 
   @override
