@@ -7,47 +7,69 @@ abstract class FireStoreDb {
   //this id will be used to reference all other parts of the form.
   var currentProject;
 
+  //each map will reference the subsections and their data
+  Map<String, dynamic> r97;
+  Map<String, dynamic> custody;
+  Map<String, dynamic> r47;
+  Map<String, dynamic> t329;
+  Map<String, dynamic> t30;
+  Map<String, dynamic> t308;
+  Map<String, dynamic> t209;
+  Map<String, dynamic> t166;
+  Map<String, dynamic> t312;
+
   // First set of methods are methods to get info from the ITD-888 collection
   String getSerialNumber();
-  String getStatus();
-  String getBidItem();
-  String getProjectName();
+  Future<String> getStatus();
+  Future<String> getBidItem();
+  Future<String> getProjectName();
   void selectProject(String serialNumber);
   CollectionReference getProjects();
+  Future<List> listProjects();
 
   // this method creates a new document in the ITD-888 collection with an
   //auto generated id
-  DocumentReference createNewProject(String bidItem, String projectName, String remarks);
-
+  void createNewProject(String bidItem, String projectName);
 }
 
 class StoreDb implements FireStoreDb {
   final FirebaseFirestore _firebaseFirestore =  FirebaseFirestore.instance;
   var currentProject = 0;
+  @override
+  Map<String, dynamic> custody;
+  Map<String, dynamic> r47;
+  Map<String, dynamic> r97;
+  Map<String, dynamic> t166;
+  Map<String, dynamic> t209;
+  Map<String, dynamic> t30;
+  Map<String, dynamic> t308;
+  Map<String, dynamic> t312;
+  Map<String, dynamic> t329;
+
+  StoreDb();
 
   @override
-  String getBidItem() {
+  Future<String> getBidItem() async {
     if(currentProject == 0){
       return "No Project Selected";
     }else {
-      DocumentSnapshot snapshot = getProjects()
+      DocumentSnapshot snapshot = await getProjects()
           .doc(currentProject)
-          .get() as DocumentSnapshot;
-      Map<String, dynamic> data = snapshot.data();
-      return data['bidItem'];
+          .get() ;
+      return snapshot.data()['bidItem'];
+
     }
   }
 
   @override
-  String getProjectName() {
+  Future<String> getProjectName() async {
       if(currentProject == 0){
         return "No Project Selected";
       }else {
-        DocumentSnapshot snapshot = getProjects()
+        DocumentSnapshot snapshot = await getProjects()
             .doc(currentProject)
-            .get() as DocumentSnapshot;
-        Map<String, dynamic> data = snapshot.data();
-        return data['projectName'];
+            .get() ;
+        return snapshot.data()['projectName'];
       }
   }
 
@@ -57,45 +79,63 @@ class StoreDb implements FireStoreDb {
   }
 
   @override
-  String getStatus() {
+  Future<String> getStatus() async {
     if(currentProject == 0){
       return "No Project Selected";
     }else {
-      DocumentSnapshot snapshot = getProjects()
+      DocumentSnapshot snapshot = await getProjects()
           .doc(currentProject)
-          .get() as DocumentSnapshot;
-      Map<String, dynamic> data = snapshot.data();
-      return data['status'];
+          .get();
+      return snapshot.data()['status'];
+
     }
   }
 
   @override
-  CollectionReference getProjects()  {
+  CollectionReference getProjects() {
     return _firebaseFirestore.collection('ITD-888');
   }
 
   @override
-  DocumentReference createNewProject(String bidItem, String projectName, String remarks) {
+  void createNewProject(String bidItem, String projectName) async{
 
     CollectionReference projects = getProjects();
 
     // add the new project to the db
-    DocumentReference newProject = projects.add({
+   DocumentReference newProject = await projects.add({
       'bidItem': bidItem,
       'projectName': projectName,
-      'remarks': remarks,
-      'sampleDate': DateTime.now().microsecondsSinceEpoch
-    }) as DocumentReference;
+      'remarks': "",
+      'sampleDate': DateTime.now().microsecondsSinceEpoch,
+      'Custody': custody,
+      'R47': r47,
+      'R97': r97,
+      'T166': t166,
+      'T209': t209,
+      'T30': t30,
+      'T308': t308,
+      'T312': t312,
+      'T329': t329
+    });
 
     // set current project to the project that we just added.
     currentProject = newProject.id;
 
-    return newProject;
   }
 
   @override
   void selectProject(String serialNumber) {
     currentProject = serialNumber;
+  }
+
+  @override
+  Future<List<String>> listProjects() async {
+    List<String> projectSerialNumbers;
+    CollectionReference projects = getProjects();
+    QuerySnapshot querySnapshot = await projects.get();
+    List<QueryDocumentSnapshot> docList = querySnapshot.docs;
+    docList.forEach((element) => projectSerialNumbers.add(element.id));
+    return projectSerialNumbers;
   }
 
 }
