@@ -46,7 +46,6 @@ class StoreDb implements FireStoreDb {
   Map<String, dynamic> t312;
   Map<String, dynamic> t329;
 
-  StoreDb();
 
   @override
   Future<String> getBidItem() async {
@@ -123,6 +122,50 @@ class StoreDb implements FireStoreDb {
 
   }
 
+  Future<void> setR47(Map map) async{
+   await getProjects().doc(currentProject).update({'R47': map});
+  }
+
+  Map getR47(){
+    return r47;
+  }
+
+  Future<void> setR97(Map map) async{
+    await getProjects().doc(currentProject).update({'R97': map});
+  }
+
+  Map getR97(){
+    return r97;
+  }
+
+  Future<void> setT166(Map map) async{
+    await getProjects().doc(currentProject).update({'T166': map});
+  }
+
+  Map getT166(){
+    return t166;
+  }
+
+  Future<void> setT209(Map map) async{
+    await getProjects().doc(currentProject).update({'T209': map});
+  }
+
+  Future<void> setT30(Map map) async{
+    await getProjects().doc(currentProject).update({'T30': map});
+  }
+
+  Future<void> setT308(Map map) async{
+    await getProjects().doc(currentProject).update({'T308': map});
+  }
+
+  Future<void> setT312(Map map) async{
+    await getProjects().doc(currentProject).update({'T312': map});
+  }
+
+  Future<void> setT329(Map map) async{
+    await getProjects().doc(currentProject).update({'T329': map});
+  }
+
   @override
   void selectProject(String serialNumber) {
     currentProject = serialNumber;
@@ -137,5 +180,7 @@ class StoreDb implements FireStoreDb {
     docList.forEach((element) => projectSerialNumbers.add(element.id));
     return projectSerialNumbers;
   }
+
+
 
 }
