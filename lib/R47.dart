@@ -59,7 +59,7 @@ class _R47 extends State<R47> {
   Widget build(BuildContext context) {
    Scaffold(
       appBar: AppBar(
-        title: Text("T30 Sieve Analysis Details"),
+        title: Text("R47 Reducing Samples of Hot Mix Asphalt"),
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
