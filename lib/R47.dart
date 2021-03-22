@@ -3,6 +3,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 
+import 'package:itd_888/FireBaseFireStoreDB.dart';
+
 class R47 extends StatefulWidget {
   @override
   _R47 createState() => _R47();
@@ -13,6 +15,17 @@ class _R47 extends State<R47> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampTemp, tapeNum;
+  StoreDb db;
+  TextEditingController labNumberController = TextEditingController();
+  TextEditingController initReductionLocationController = TextEditingController();
+  TextEditingController performedByController = TextEditingController();
+  TextEditingController wAQTCNumberController = TextEditingController();
+  TextEditingController dataReducedController = TextEditingController();
+  TextEditingController timeReducedController = TextEditingController();
+  TextEditingController sampleTempController = TextEditingController();
+  TextEditingController witnessController = TextEditingController();
+  TextEditingController wWAQTCNumberController = TextEditingController();
+
 
   bool _submit() {
     final isValid = _formKey.currentState.validate();
@@ -24,9 +37,27 @@ class _R47 extends State<R47> {
     }
   }
 
+  void createAddDbMap(){
+    Map<String, dynamic> dbMap = {
+      "labNumber" :  labNumberController.text,
+      "initReductionLocation" : initReductionLocationController.text,
+      "performedBy" : performedByController.text,
+      "WAQTCNumber" : wAQTCNumberController.text,
+      "dataReduced" : dataReducedController.text,
+      "timeReduced" : timeReducedController.text,
+      "sampleTemp" : sampleTempController.text,
+      "witness" : witnessController.text,
+      "witnessWAQTCNumber": wWAQTCNumberController.text
+    };
+
+    db.setR47(dbMap);
+
+}
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   Scaffold(
       appBar: AppBar(
         title: Text("T30 Sieve Analysis Details"),
         backgroundColor: Colors.blue,
