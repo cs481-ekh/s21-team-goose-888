@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
+import 'package:tesseract_ocr/tesseract_ocr.dart';
 
 class T329 extends StatefulWidget {
   @override
