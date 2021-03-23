@@ -3,6 +3,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 
+import 'FireBaseFireStoreDB.dart';
+
 
 
 class T30 extends StatefulWidget {
@@ -16,7 +18,81 @@ class _T30 extends State<T30> {
   File pandsbwash, pbwash, sbwash, pandsawash, pawash, sawash, CMR2In, CMR1halfIn, CMR1In, CMR3fourthsIn, CMR3eightthsIn;
   File No4, No8, No16, No30, No50, No100, No200, Pan;
 
+  StoreDb db;
+  TextEditingController aggregateCorrectFact50Controller = TextEditingController();
+  TextEditingController aggregateCorrectFact37Controller = TextEditingController();
+  TextEditingController aggregateCorrectFact25Controller = TextEditingController();
+  TextEditingController aggregateCorrectFact19Controller = TextEditingController();
+  TextEditingController aggregateCorrectFact9Controller = TextEditingController();
+  TextEditingController aggregateCorrectNo4Controller = TextEditingController();
+  TextEditingController aggregateCorrectNo8Controller = TextEditingController();
+  TextEditingController aggregateCorrectNo16Controller = TextEditingController();
+  TextEditingController aggregateCorrectNo30Controller = TextEditingController();
+  TextEditingController aggregateCorrectNo50Controller = TextEditingController();
+  TextEditingController aggregateCorrectNo100Controller = TextEditingController();
+  TextEditingController aggregateCorrectNo200Controller = TextEditingController();
+  TextEditingController remarksController = TextEditingController();
+  TextEditingController testedByController = TextEditingController();
+  TextEditingController testedByWAQTCController = TextEditingController();
+  //zTextEditingController testedDateController = TextEditingController();
+  TextEditingController retestFlaggedbyController = TextEditingController();
+  TextEditingController retestFlaggedController = TextEditingController();
+  TextEditingController retestCommentsController = TextEditingController();
 
+  void dispose() {
+    aggregateCorrectFact50Controller.dispose();
+    aggregateCorrectFact37Controller.dispose();
+    aggregateCorrectFact25Controller.dispose();
+    aggregateCorrectFact19Controller.dispose();
+    aggregateCorrectFact9Controller.dispose();
+    aggregateCorrectFact50Controller.dispose();
+    aggregateCorrectFact50Controller.dispose();
+    aggregateCorrectFact50Controller.dispose();
+    aggregateCorrectFact50Controller.dispose();
+    aggregateCorrectFact50Controller.dispose();
+    aggregateCorrectNo4Controller.dispose();
+    aggregateCorrectNo8Controller.dispose();
+    aggregateCorrectNo16Controller.dispose();
+    aggregateCorrectNo30Controller.dispose();
+    aggregateCorrectNo50Controller.dispose();
+    aggregateCorrectNo100Controller.dispose();
+    aggregateCorrectNo200Controller.dispose();
+    remarksController.dispose();
+    testedByController.dispose();
+    testedByWAQTCController.dispose();
+    retestFlaggedbyController.dispose();
+    retestFlaggedController.dispose();
+    retestCommentsController.dispose();
+
+    super.dispose();
+  }
+
+  void createAddDbMap(){
+    Map<String, dynamic> dbMap = {
+      "aggregateCorrectFact50": aggregateCorrectFact50Controller.text,
+      "aggregateCorrectFact37": aggregateCorrectFact37Controller.text,
+      "aggregateCorrectFact25": aggregateCorrectFact25Controller.text,
+      "aggregateCorrectFact19": aggregateCorrectFact19Controller.text,
+      "aggregateCorrectFact9": aggregateCorrectFact9Controller.text,
+      "aggregateCorrectNo4": aggregateCorrectNo4Controller.text,
+      "aggregateCorrectNo8": aggregateCorrectNo8Controller.text,
+      "aggregateCorrectNo16": aggregateCorrectNo16Controller.text,
+      "aggregateCorrectNo30": aggregateCorrectNo30Controller.text,
+      "aggregateCorrectNo50": aggregateCorrectNo50Controller.text,
+      "aggregateCorrectNo100": aggregateCorrectNo100Controller.text,
+      "aggregateCorrectNo200": aggregateCorrectNo200Controller.text,
+      "remarks": remarksController.text,
+      "testedBy": testedByController.text,
+      "testedByWAQTC" : testedByWAQTCController.text,
+      "retestFlaggedBy": retestFlaggedbyController.text,
+      "retestFlagged": retestFlaggedController.text,
+      "retestComments": retestCommentsController.text,
+
+    };
+
+    db.setT312(dbMap);
+
+  }
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -558,6 +634,7 @@ class _T30 extends State<T30> {
 
                 //Row 6 Begining
                 TextFormField(
+                  controller: aggregateCorrectFact50Controller,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor  2 in. (50mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -570,6 +647,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: aggregateCorrectFact37Controller,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor  1 1/2 in. (37.5 mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -582,6 +660,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: aggregateCorrectFact25Controller,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor  1 in. (25mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -594,6 +673,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller:aggregateCorrectFact19Controller ,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor  3/4 in. (19mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -606,6 +686,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: aggregateCorrectFact9Controller ,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor  3/8 in. (9.5mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -624,6 +705,7 @@ class _T30 extends State<T30> {
 
                 //Begining Row 7
                 TextFormField(
+                  controller: aggregateCorrectNo4Controller,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 4 (4.75 mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -636,6 +718,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: aggregateCorrectNo8Controller,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 8 (2.36 mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -648,6 +731,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: aggregateCorrectNo16Controller,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 16 (1.18 mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -660,6 +744,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: aggregateCorrectNo30Controller,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 30 (0.600 mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -672,6 +757,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: aggregateCorrectNo50Controller,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 50 (0.300 mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -684,6 +770,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: aggregateCorrectNo100Controller,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 100 (0.150 mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -696,6 +783,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: aggregateCorrectNo200Controller,
                   decoration: InputDecoration(
                       labelText: "Aggregate Correction Factor No. 200 (0.075 mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -714,6 +802,7 @@ class _T30 extends State<T30> {
 
                 // Beginning Row 8
                 TextFormField(
+                  controller: remarksController,
                   decoration: InputDecoration(
                       labelText: "Remarks ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -721,11 +810,12 @@ class _T30 extends State<T30> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid number";
+                      return "Enter a valid remarks";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: testedByController,
                   decoration: InputDecoration(
                       labelText: "Tested by ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -738,6 +828,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: testedByWAQTCController,
                   decoration: InputDecoration(
                       labelText: "Tested By WAQTC ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -750,6 +841,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  //controller: testedDateController,
                   decoration: InputDecoration(
                       labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -762,6 +854,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: retestFlaggedbyController,
                   decoration: InputDecoration(
                       labelText: "Retest Flagged by ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -774,6 +867,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: retestFlaggedController ,
                   decoration: InputDecoration(
                       labelText: "Retest Flagged ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -786,6 +880,7 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: retestCommentsController,
                   decoration: InputDecoration(
                       labelText: "Retest Comments ",
                       labelStyle: TextStyle(color: Colors.black)),

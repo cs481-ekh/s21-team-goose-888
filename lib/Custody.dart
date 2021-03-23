@@ -11,7 +11,19 @@ class Custody extends StatefulWidget {
 class _Custody extends State<Custody> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
+  TextEditingController sampleCustodianController = TextEditingController();
+  TextEditingController WAQTCNumberController = TextEditingController();
+  TextEditingController receivedByController = TextEditingController();
+  TextEditingController Controller = TextEditingController();
+  TextEditingController districtController = TextEditingController();
+  TextEditingController randomNumberController = TextEditingController();
+  TextEditingController quantityRepresentedController = TextEditingController();
+  TextEditingController sendReportsToController = TextEditingController();
+  TextEditingController sampledByController = TextEditingController();
 
+  TextEditingController witnessedByController = TextEditingController();
+  TextEditingController wWAQTCNumberController = TextEditingController();
+  TextEditingController sampleIDNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

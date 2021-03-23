@@ -3,6 +3,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 
+import 'FireBaseFireStoreDB.dart';
+
 class T209 extends StatefulWidget {
   @override
   _T209 createState() => _T209();
@@ -12,6 +14,39 @@ class _T209 extends State<T209> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File massbandsample1, massofb1, massofdinair1, massbandsamplesub1,massofbsub1,massofsamplesub1,massbandsample2, massofb2, massofdinair2, massbandsamplesub2,massofbsub2,massofsamplesub2 ;
+  StoreDb db;
+  TextEditingController remarksController = TextEditingController();
+  TextEditingController testedByController = TextEditingController();
+  TextEditingController testedByWAQTCController = TextEditingController();
+  TextEditingController testedDateController = TextEditingController();
+  TextEditingController retestFlaggedbyController = TextEditingController();
+  TextEditingController retestFlaggedController = TextEditingController();
+  TextEditingController retestCommentsController = TextEditingController();
+
+  void dispose() {
+    remarksController.dispose();
+    testedByController.dispose();
+    testedByWAQTCController.dispose();
+    retestFlaggedbyController.dispose();
+    retestFlaggedController.dispose();
+    retestCommentsController.dispose();
+    super.dispose();
+  }
+
+  void createAddDbMap(){
+    Map<String, dynamic> dbMap = {
+      "remarks": remarksController.text,
+      "testedBy": testedByController.text,
+      "testedByWAQTC" : testedByWAQTCController.text,
+      "retestFlaggedBy": retestFlaggedbyController.text,
+      "retestFlagged": retestFlaggedController.text,
+      "retestComments": retestCommentsController.text,
+
+    };
+
+    db.setT209(dbMap);
+
+  }
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -418,6 +453,7 @@ class _T209 extends State<T209> {
                 //Row 3 ENDING
 
                 TextFormField(
+                  controller: remarksController,
                   decoration: InputDecoration(
                       labelText: "Remarks",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -437,6 +473,7 @@ class _T209 extends State<T209> {
 
                 //Row 5 Begining
                 TextFormField(
+                  controller: testedByController,
                   decoration: InputDecoration(
                       labelText: "Tested by",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -449,6 +486,7 @@ class _T209 extends State<T209> {
                   },
                 ),
                 TextFormField(
+                  controller: testedByWAQTCController,
                   decoration: InputDecoration(
                       labelText: "Tested by WAQTC",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -480,6 +518,7 @@ class _T209 extends State<T209> {
 
                 //Row 6 Begining
                 TextFormField(
+                  controller: retestFlaggedbyController,
                   decoration: InputDecoration(
                       labelText: "Retest Flagged by",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -492,6 +531,7 @@ class _T209 extends State<T209> {
                   },
                 ),
                 TextFormField(
+                  controller: retestFlaggedController,
                   decoration: InputDecoration(
                       labelText: "Retest Flagged",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -504,6 +544,7 @@ class _T209 extends State<T209> {
                   },
                 ),
                 TextFormField(
+                  controller: retestCommentsController,
                   decoration: InputDecoration(
                       labelText: "Retest Comments ",
                       labelStyle: TextStyle(color: Colors.black)),
