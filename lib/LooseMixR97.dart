@@ -3,6 +3,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 
+import 'FireBaseFireStoreDB.dart';
+
 class LooseMixR97 extends StatefulWidget {
   @override
   _LooseMixR97 createState() => _LooseMixR97();
@@ -13,6 +15,54 @@ class _LooseMixR97 extends State<LooseMixR97> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampleTemp, sampleLoc;
+  StoreDb db;
+  TextEditingController bidItemController = TextEditingController();
+  TextEditingController projectNumberController = TextEditingController();
+  TextEditingController projectNameController = TextEditingController();
+  TextEditingController districtController = TextEditingController();
+  TextEditingController randomNumberController = TextEditingController();
+  TextEditingController quantityRepresentedController = TextEditingController();
+  TextEditingController sendReportsToController = TextEditingController();
+  TextEditingController sampledByController = TextEditingController();
+  TextEditingController WAQTCNumberController = TextEditingController();
+  TextEditingController witnessedByController = TextEditingController();
+  TextEditingController wWAQTCNumberController = TextEditingController();
+  TextEditingController sampleIDNumberController = TextEditingController();
+  void dispose() {
+     bidItemController.dispose();
+     projectNumberController.dispose();
+     projectNameController.dispose();
+    districtController.dispose();
+     randomNumberController.dispose();
+     quantityRepresentedController.dispose();
+     sendReportsToController.dispose();
+     sampledByController.dispose();
+     WAQTCNumberController.dispose();
+     witnessedByController.dispose();
+     wWAQTCNumberController.dispose();
+     sampleIDNumberController.dispose();
+    super.dispose();
+  }
+
+  void createAddDbMap(){
+    Map<String, dynamic> dbMap = {
+    "bidItem": bidItemController.text,
+    "projectNumber": projectNumberController.text,
+    "projectName" :projectNameController.text,
+    "district": districtController.text,
+    "reandomNumber": randomNumberController.text,
+    "quantityRepresented": quantityRepresentedController.text,
+    "sendReportsTo": sendReportsToController.text,
+    "sampledBy": sampledByController,
+    "WAQTCNumber":WAQTCNumberController.text,
+    "witnessedBy":witnessedByController.text,
+    "sampleIDNumber": sampleIDNumberController.text,
+    "witnessWAQTCNumber": wWAQTCNumberController.text,
+    };
+
+    db.setR97(dbMap);
+
+  }
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -41,6 +91,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
+
                   decoration: InputDecoration(
                       labelText: "Serial # *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -96,6 +147,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
 
                 //Row 2 BEGINNING
                 TextFormField(
+                  controller:bidItemController ,
                   decoration: InputDecoration(
                       labelText: "Bid Item / Key Number *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -108,6 +160,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   },
                 ),
                 TextFormField(
+                  controller: projectNumberController,
                   decoration: InputDecoration(
                       labelText: "Project Number *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -120,6 +173,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   },
                 ),
                 TextFormField(
+                  controller: projectNameController,
                   decoration: InputDecoration(
                       labelText: "Project Name *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -132,6 +186,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   },
                 ),
                 TextFormField(
+                  controller: districtController,
                   decoration: InputDecoration(
                       labelText: "District *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -144,6 +199,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   },
                 ),
                 TextFormField(
+                  controller: randomNumberController,
                   decoration: InputDecoration(
                       labelText: "Random Number *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -215,6 +271,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   ]),
                 ),
                 TextFormField(
+                  controller: quantityRepresentedController,
                   decoration: InputDecoration(
                       labelText: "Quantity Represented (Tons) *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -226,18 +283,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                     return null;
                   },
                 ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      labelText: "Quantity Represented (Tons) *",
-                      labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.name,
-                  onFieldSubmitted: (value) {},
-                  validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
-                    return null;
-                  },
-                ),
+
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.05,
                 ),
@@ -271,6 +317,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   ),
                 ),
                 TextFormField(
+                  controller: sendReportsToController ,
                   decoration: InputDecoration(
                       labelText: "Send Reports To: *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -289,6 +336,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
 
                 //Row 4 BEGINNING
                 TextFormField(
+                  controller: sampledByController,
                   decoration: InputDecoration(
                       labelText: "Sampled by (Electronic Signature) *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -301,6 +349,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   },
                 ),
                 TextFormField(
+                  controller: WAQTCNumberController,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -313,6 +362,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   },
                 ),
                 TextFormField(
+                  controller: witnessedByController,
                   decoration: InputDecoration(
                       labelText: "Witnessed by (Electronic Signature) *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -325,6 +375,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   },
                 ),
                 TextFormField(
+                  controller: wWAQTCNumberController,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -337,6 +388,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   },
                 ),
                 TextFormField(
+                  controller: sampleIDNumberController,
                   decoration: InputDecoration(
                       labelText: "Sample ID Number *",
                       labelStyle: TextStyle(color: Colors.red)),

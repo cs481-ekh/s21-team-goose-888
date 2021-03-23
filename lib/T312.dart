@@ -4,6 +4,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 
+import 'FireBaseFireStoreDB.dart';
+
 
 class T312 extends StatefulWidget {
 @override
@@ -14,6 +16,56 @@ class _T312 extends State<T312> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File samp1,samp2;
+  StoreDb db;
+  TextEditingController gyratoryBrandController = TextEditingController();
+  TextEditingController gyratoryModelController = TextEditingController();
+  TextEditingController gyratorySerialNumberController = TextEditingController();
+  TextEditingController puckMassVolumetricController = TextEditingController();
+  TextEditingController puckHeight1Controller = TextEditingController();
+  TextEditingController  puckHeight2Controller = TextEditingController();
+  TextEditingController remarksController = TextEditingController();
+  TextEditingController testedByController = TextEditingController();
+  TextEditingController testedByWAQTCController = TextEditingController();
+  TextEditingController testedDateController = TextEditingController();
+  TextEditingController retestFlaggedByController = TextEditingController();
+  TextEditingController retestFlaggedController = TextEditingController();
+  TextEditingController retestCommentsController = TextEditingController();
+  void dispose() {
+    gyratoryBrandController.dispose();
+    gyratoryModelController.dispose();
+    gyratorySerialNumberController.dispose();
+    puckMassVolumetricController.dispose();
+    puckHeight1Controller.dispose();
+    puckHeight2Controller.dispose();
+    remarksController.dispose();
+    testedByController.dispose();
+    testedByWAQTCController.dispose();
+    retestFlaggedByController.dispose();
+    retestFlaggedController.dispose();
+    retestCommentsController.dispose();
+
+    super.dispose();
+  }
+
+  void createAddDbMap(){
+    Map<String, dynamic> dbMap = {
+      "gyratoryBrand": gyratoryBrandController.text,
+      "gyratoryModel": gyratoryModelController.text,
+      "gyratorySerialNumber" : gyratorySerialNumberController.text,
+      "puckMassVolumetric": puckMassVolumetricController.text,
+      "puckHeight1":  puckHeight1Controller.text,
+      "puckHeight2":  puckHeight2Controller.text,
+      "remarks": remarksController.text,
+      "testedBy": testedByController.text,
+      "testedByWAQTC" : testedByWAQTCController.text,
+      "retestFlaggedBy": retestFlaggedByController.text,
+      "retestFlagged": retestFlaggedController.text,
+      "retestComments": retestCommentsController.text,
+    };
+
+    db.setT312(dbMap);
+
+  }
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -96,6 +148,7 @@ class _T312 extends State<T312> {
 
                 //Row 2 BEGINNING
                 TextFormField(
+                  controller: gyratoryBrandController,
                   decoration: InputDecoration(
                       labelText: "Gyratory Brand",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -108,6 +161,7 @@ class _T312 extends State<T312> {
                   },
                 ),
                 TextFormField(
+                  controller: gyratoryModelController,
                   decoration: InputDecoration(
                       labelText: "Gyratory Model",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -120,6 +174,7 @@ class _T312 extends State<T312> {
                   },
                 ),
                 TextFormField(
+                  controller: gyratorySerialNumberController,
                   decoration: InputDecoration(
                       labelText: "Gyratory Serial Number",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -132,6 +187,7 @@ class _T312 extends State<T312> {
                   },
                 ),
                 TextFormField(
+                  controller: puckMassVolumetricController,
                   decoration: InputDecoration(
                       labelText: "Puck Mass Volumetric",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -175,6 +231,7 @@ class _T312 extends State<T312> {
                     ),
                   ] ),),
                 TextFormField(
+                  controller: puckHeight1Controller,
                   decoration: InputDecoration(
                       labelText: "Puck Height 1 (mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -217,6 +274,7 @@ class _T312 extends State<T312> {
                     ),
                   ] ),),
                 TextFormField(
+                  controller: puckHeight2Controller,
                   decoration: InputDecoration(
                       labelText: "Puck Height 2 (mm)",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -234,6 +292,7 @@ class _T312 extends State<T312> {
                 ),
                 //Row 3 ENDING
                 TextFormField(
+                  controller: remarksController,
                   decoration: InputDecoration(
                       labelText: "Remarks",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -254,6 +313,7 @@ class _T312 extends State<T312> {
 
                 //Row 5 Begining
                 TextFormField(
+                  controller: testedByController,
                   decoration: InputDecoration(
                       labelText: "Tested by",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -266,6 +326,7 @@ class _T312 extends State<T312> {
                   },
                 ),
                 TextFormField(
+                  controller: testedByWAQTCController,
                   decoration: InputDecoration(
                       labelText: "Tested by WAQTC",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -278,6 +339,7 @@ class _T312 extends State<T312> {
                   },
                 ),
                 TextFormField(
+
                   decoration: InputDecoration(
                       labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -296,8 +358,9 @@ class _T312 extends State<T312> {
 
                 //Row 6 Begining
                 TextFormField(
+                  controller: retestFlaggedByController,
                   decoration: InputDecoration(
-                      labelText: "Test Flagged by",
+                      labelText: "Retest Flagged by",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -308,6 +371,7 @@ class _T312 extends State<T312> {
                   },
                 ),
                 TextFormField(
+                  controller: retestFlaggedController,
                   decoration: InputDecoration(
                       labelText: "Retest Flagged",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -320,6 +384,7 @@ class _T312 extends State<T312> {
                   },
                 ),
                 TextFormField(
+                  controller: retestCommentsController,
                   decoration: InputDecoration(
                       labelText: "Retest Comments ",
                       labelStyle: TextStyle(color: Colors.black)),

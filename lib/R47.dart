@@ -36,6 +36,19 @@ class _R47 extends State<R47> {
       return true;
     }
   }
+  @override
+  void dispose() {
+    labNumberController.dispose();
+     initReductionLocationController.dispose();
+   performedByController.dispose();
+     wAQTCNumberController.dispose();
+   dataReducedController.dispose();
+     timeReducedController.dispose();
+   sampleTempController.dispose();
+    witnessController.dispose();
+    wWAQTCNumberController.dispose();
+    super.dispose();
+  }
 
   void createAddDbMap(){
     Map<String, dynamic> dbMap = {
@@ -73,6 +86,7 @@ class _R47 extends State<R47> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
+
                   decoration: InputDecoration(
                       labelText: "Serial # *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -128,6 +142,7 @@ class _R47 extends State<R47> {
 
                 //Row 2 Begining
                 TextFormField(
+                  controller: labNumberController,
                   decoration: InputDecoration(
                       labelText: "Qualified Lab Number",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -140,6 +155,7 @@ class _R47 extends State<R47> {
                   },
                 ),
                 TextFormField(
+                  controller: initReductionLocationController,
                   decoration: InputDecoration(
                       labelText: "Initial Reduction Location",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -152,6 +168,7 @@ class _R47 extends State<R47> {
                   },
                 ),
                 TextFormField(
+                  controller: performedByController,
                   decoration: InputDecoration(
                       labelText: "Performed by (Electronic Signature) *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -164,6 +181,7 @@ class _R47 extends State<R47> {
                   },
                 ),
                 TextFormField(
+                  controller:  wAQTCNumberController ,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -176,6 +194,7 @@ class _R47 extends State<R47> {
                   },
                 ),
                 TextFormField(
+                  controller: dataReducedController,
                   decoration: InputDecoration(
                       labelText: "Data Reduced",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -188,6 +207,7 @@ class _R47 extends State<R47> {
                   },
                 ),
                 TextFormField(
+                  controller: timeReducedController ,
                   decoration: InputDecoration(
                       labelText: "Time Reduced",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -231,6 +251,7 @@ class _R47 extends State<R47> {
                   ]),
                 ),
                 TextFormField(
+                  controller: witnessController,
                   decoration: InputDecoration(
                       labelText: "Witnessed by (Electronic Signature) *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -243,6 +264,7 @@ class _R47 extends State<R47> {
                   },
                 ),
                 TextFormField(
+                  controller: wWAQTCNumberController,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number",
                       labelStyle: TextStyle(color: Colors.red)),

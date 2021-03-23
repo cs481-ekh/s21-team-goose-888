@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:tesseract_ocr/tesseract_ocr.dart';
 
+import 'FireBaseFireStoreDB.dart';
+
 class T329 extends StatefulWidget {
   @override
   _T329 createState() => _T329();
@@ -21,7 +23,30 @@ class _T329 extends State<T329> {
       drySample30,
       panDrySamp,
       panDrySamp30;
+  StoreDb db;
+  TextEditingController ovenTempController = TextEditingController();
+  TextEditingController testedByController = TextEditingController();
+  TextEditingController WAQTCNumberController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
 
+  void dispose() {
+    ovenTempController.dispose();
+    testedByController.dispose();
+    WAQTCNumberController.dispose();
+    dateController.dispose();
+    super.dispose();
+  }
+  void createAddDbMap(){
+    Map<String, dynamic> dbMap = {
+      "ovenTemp": ovenTempController.text,
+      "testedBy": testedByController.text,
+      "WAQTCNumber":WAQTCNumberController.text,
+      "date":dateController.text,
+    };
+
+    db.setT329(dbMap);
+
+  }
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -105,6 +130,7 @@ class _T329 extends State<T329> {
 
                 //Row 2 BEGINNING
                 TextFormField(
+                  controller: ovenTempController,
                   decoration: InputDecoration(
                       labelText: "Oven Temp *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -361,8 +387,9 @@ class _T329 extends State<T329> {
 
                 //Row 4 BEGINNING
                 TextFormField(
+                  controller: testedByController,
                   decoration: InputDecoration(
-                      labelText: "T308 Testedd by *",
+                      labelText: "T308 Tested by *",
                       labelStyle: TextStyle(color: Colors.red)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
@@ -372,6 +399,7 @@ class _T329 extends State<T329> {
                   },
                 ),
                 TextFormField(
+                  controller: WAQTCNumberController,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -383,10 +411,11 @@ class _T329 extends State<T329> {
                   },
                 ),
                 TextFormField(
+                  //controller: dateController,
                   decoration: InputDecoration(
                       labelText: "Date *",
                       labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
