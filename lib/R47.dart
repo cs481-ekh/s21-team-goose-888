@@ -57,7 +57,7 @@ class _R47 extends State<R47> {
 
   @override
   Widget build(BuildContext context) {
-   Scaffold(
+   return Scaffold(
       appBar: AppBar(
         title: Text("R47 Reducing Samples of Hot Mix Asphalt"),
         backgroundColor: Colors.blue,
