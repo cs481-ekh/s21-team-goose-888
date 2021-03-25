@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:tesseract_ocr/tesseract_ocr.dart';
 import 'dart:io';
 
 import 'FireBaseFireStoreDB.dart';
@@ -11,6 +12,8 @@ class LooseMixR97 extends StatefulWidget {
 }
 
 class _LooseMixR97 extends State<LooseMixR97> {
+  bool _scanning = false;
+  String _extractText = "";
   String dropdownValue = "Select";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
@@ -29,40 +32,40 @@ class _LooseMixR97 extends State<LooseMixR97> {
   TextEditingController wWAQTCNumberController = TextEditingController();
   TextEditingController sampleIDNumberController = TextEditingController();
   void dispose() {
-     bidItemController.dispose();
-     projectNumberController.dispose();
-     projectNameController.dispose();
+    bidItemController.dispose();
+    projectNumberController.dispose();
+    projectNameController.dispose();
     districtController.dispose();
-     randomNumberController.dispose();
-     quantityRepresentedController.dispose();
-     sendReportsToController.dispose();
-     sampledByController.dispose();
-     WAQTCNumberController.dispose();
-     witnessedByController.dispose();
-     wWAQTCNumberController.dispose();
-     sampleIDNumberController.dispose();
+    randomNumberController.dispose();
+    quantityRepresentedController.dispose();
+    sendReportsToController.dispose();
+    sampledByController.dispose();
+    WAQTCNumberController.dispose();
+    witnessedByController.dispose();
+    wWAQTCNumberController.dispose();
+    sampleIDNumberController.dispose();
     super.dispose();
   }
 
-  void createAddDbMap(){
+  void createAddDbMap() {
     Map<String, dynamic> dbMap = {
-    "bidItem": bidItemController.text,
-    "projectNumber": projectNumberController.text,
-    "projectName" :projectNameController.text,
-    "district": districtController.text,
-    "reandomNumber": randomNumberController.text,
-    "quantityRepresented": quantityRepresentedController.text,
-    "sendReportsTo": sendReportsToController.text,
-    "sampledBy": sampledByController,
-    "WAQTCNumber":WAQTCNumberController.text,
-    "witnessedBy":witnessedByController.text,
-    "sampleIDNumber": sampleIDNumberController.text,
-    "witnessWAQTCNumber": wWAQTCNumberController.text,
+      "bidItem": bidItemController.text,
+      "projectNumber": projectNumberController.text,
+      "projectName": projectNameController.text,
+      "district": districtController.text,
+      "reandomNumber": randomNumberController.text,
+      "quantityRepresented": quantityRepresentedController.text,
+      "sendReportsTo": sendReportsToController.text,
+      "sampledBy": sampledByController,
+      "WAQTCNumber": WAQTCNumberController.text,
+      "witnessedBy": witnessedByController.text,
+      "sampleIDNumber": sampleIDNumberController.text,
+      "witnessWAQTCNumber": wWAQTCNumberController.text,
     };
 
     db.setR97(dbMap);
-
   }
+
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -91,7 +94,6 @@ class _LooseMixR97 extends State<LooseMixR97> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
-
                   decoration: InputDecoration(
                       labelText: "Serial # *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -147,7 +149,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
 
                 //Row 2 BEGINNING
                 TextFormField(
-                  controller:bidItemController ,
+                  controller: bidItemController,
                   decoration: InputDecoration(
                       labelText: "Bid Item / Key Number *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -230,8 +232,13 @@ class _LooseMixR97 extends State<LooseMixR97> {
                     RaisedButton(
                         child: Text('Choose Photo'),
                         onPressed: () async {
+                          setState(() {
+                            _scanning = true;
+                          });
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          _extractText =
+                              await TesseractOcr.extractText(imgFile.path);
                           setState(() {
                             if (imgFile != null) {
                               sampleTemp = File(imgFile.path);
@@ -239,9 +246,25 @@ class _LooseMixR97 extends State<LooseMixR97> {
                               print('No image selected.');
                             }
                           });
+                          setState(() {
+                            _scanning = false;
+                          });
                         }),
                   ]),
                 ),
+                _scanning
+                    ? Center(child: CircularProgressIndicator())
+                    : Icon(
+                        Icons.done,
+                        size: 40,
+                        color: Colors.green,
+                      ),
+                Center(
+                    child: Text(
+                  _extractText,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                )),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.02,
                 ),
@@ -317,7 +340,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   ),
                 ),
                 TextFormField(
-                  controller: sendReportsToController ,
+                  controller: sendReportsToController,
                   decoration: InputDecoration(
                       labelText: "Send Reports To: *",
                       labelStyle: TextStyle(color: Colors.red)),
