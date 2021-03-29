@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:tesseract_ocr/tesseract_ocr.dart';
 import 'dart:io';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
 import 'FireBaseFireStoreDB.dart';
 
@@ -12,8 +13,9 @@ class LooseMixR97 extends StatefulWidget {
 }
 
 class _LooseMixR97 extends State<LooseMixR97> {
-  bool _scanning = false;
-  String _extractText = "";
+  var result = "Result In Here";
+  bool _isLoading = false;
+  dynamic _extractText = "";
   String dropdownValue = "Select";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
@@ -232,33 +234,42 @@ class _LooseMixR97 extends State<LooseMixR97> {
                     RaisedButton(
                         child: Text('Choose Photo'),
                         onPressed: () async {
-                          setState(() {
-                            _scanning = true;
-                          });
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
-                          _extractText =
-                              await TesseractOcr.extractText(imgFile.path);
+
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          sampleTemp = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = 'Result: ${_extractText.text}';
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              sampleTemp = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
-                          });
-                          setState(() {
-                            _scanning = false;
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading ? _buildWidgetLoading() : Text(result),
+                    )
                   ]),
                 ),
-                _scanning
-                    ? Center(child: CircularProgressIndicator())
-                    : Icon(
-                        Icons.done,
-                        size: 40,
-                        color: Colors.green,
-                      ),
+                // _isLoading
+                //     ? Center(child: CircularProgressIndicator())
+                //     : Icon(
+                //         Icons.done,
+                //         size: 40,
+                //         color: Colors.green,
+                //       ),
                 Center(
                     child: Text(
                   _extractText,
@@ -443,5 +454,11 @@ class _LooseMixR97 extends State<LooseMixR97> {
         ),
       ),
     );
+  }
+
+  Widget _buildWidgetLoading() {
+    return Platform.isIOS
+        ? CupertinoActivityIndicator()
+        : CircularProgressIndicator();
   }
 }

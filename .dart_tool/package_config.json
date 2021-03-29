@@ -158,6 +158,12 @@
       "languageVersion": "2.1"
     },
     {
+      "name": "firebase_ml_vision",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_ml_vision-0.10.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///C:/src/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -518,7 +524,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-03-25T17:35:59.478850Z",
+  "generated": "2021-03-29T21:35:23.559222Z",
   "generator": "pub",
   "generatorVersion": "2.10.5"
 }
