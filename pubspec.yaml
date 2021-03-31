@@ -35,6 +35,7 @@ dependencies:
 
 dev_dependencies:
   test: ^1.0.0
+  flutter_launcher_icons: ^0.7.4
   flutter_test:
     sdk: flutter
 
@@ -42,6 +43,10 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/IdahoIcon.png"
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -53,6 +58,7 @@ flutter:
   assets:
     - assets/
     - assets/tessdata/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
