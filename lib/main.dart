@@ -16,7 +16,6 @@ import 'auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-
 String textEmail = "";
 void main() {
   runApp(MaterialApp(
@@ -31,7 +30,7 @@ void main() {
           ),
       '/form': (context) => FormSections(),
       '/LooseMixR97': (context) => LooseMixR97(),
-      '/Custody': (context) => Custody(), 
+      '/Custody': (context) => Custody(),
       '/R47': (context) => R47(),
       '/T166': (context) => T166(),
       '/T30': (context) => T30(),
@@ -43,8 +42,9 @@ void main() {
     },
   ));
 }
+
 class HomeLogin extends StatefulWidget {
-  HomeLogin({Key key, this.title, this.auth, this.onSignIn}) : super (key: key);
+  HomeLogin({Key key, this.title, this.auth, this.onSignIn}) : super(key: key);
   final String title;
   final BaseAuth auth;
   final VoidCallback onSignIn;
@@ -70,39 +70,36 @@ class _HomeLogin extends State<HomeLogin> {
     }
   }
 
-  Future<UserCredential> firebaseAuthLogin(String email, String password) async{
+  Future<UserCredential> firebaseAuthLogin(
+      String email, String password) async {
     UserCredential userCredential;
     try {
       userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
+          .signInWithEmailAndPassword(email: email, password: password);
       print("login successful");
-    } on FirebaseAuthException catch (e){
-      if(e.code == 'user-not-found'){
-        print ('No user with any such email');
-      }else{
-        print ('Incorrect credentials entered');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user with any such email');
+      } else {
+        print('Incorrect credentials entered');
       }
     }
     return userCredential;
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _initialization,
-      builder: (context, snapshot) {
-        if (snapshot.hasError){
-          return appBuild(context); //TODO: Create a error page
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
-          return appBuild(context);
-        }
-        return appBuild(context); //TODO: create loading page
-      }
-    );
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return appBuild(context); //TODO: Create a error page
+          }
+          if (snapshot.connectionState == ConnectionState.done) {
+            return appBuild(context);
+          }
+          return appBuild(context); //TODO: create loading page
+        });
   }
 
   Widget appBuild(BuildContext context) {
@@ -173,7 +170,8 @@ class _HomeLogin extends State<HomeLogin> {
                   ),
                 ),
                 onPressed: () {
-                  firebaseAuthLogin(emailController.text, passwordController.text);
+                  firebaseAuthLogin(
+                      emailController.text, passwordController.text);
                   //bool check = ;
                   if (_submit()) {
                     Navigator.pushNamed(context, '/form');

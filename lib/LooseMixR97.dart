@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
@@ -26,6 +27,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
   TextEditingController projectNameController = TextEditingController();
   TextEditingController districtController = TextEditingController();
   TextEditingController randomNumberController = TextEditingController();
+  TextEditingController sampleTemperatureController = TextEditingController();
   TextEditingController quantityRepresentedController = TextEditingController();
   TextEditingController sendReportsToController = TextEditingController();
   TextEditingController sampledByController = TextEditingController();
@@ -39,6 +41,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
     projectNameController.dispose();
     districtController.dispose();
     randomNumberController.dispose();
+    sampleTemperatureController.dispose();
     quantityRepresentedController.dispose();
     sendReportsToController.dispose();
     sampledByController.dispose();
@@ -55,7 +58,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
       "projectNumber": projectNumberController.text,
       "projectName": projectNameController.text,
       "district": districtController.text,
-      "reandomNumber": randomNumberController.text,
+      "randomNumber": randomNumberController.text,
+      "sampleTemperature": sampleTemperatureController.text,
       "quantityRepresented": quantityRepresentedController.text,
       "sendReportsTo": sendReportsToController.text,
       "sampledBy": sampledByController,
@@ -103,7 +107,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Serial Number!";
                     return null;
                   },
                 ),
@@ -115,8 +119,9 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                    if (value.isEmpty ||
+                        !RegExp("/^[a-z ,.'-]+\$/i").hasMatch(value))
+                      return "Enter a valid Organization!";
                     return null;
                   },
                 ),
@@ -124,7 +129,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   decoration: InputDecoration(
                       labelText: "Sample Date *",
                       labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
@@ -140,7 +145,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid first Status!";
                     return null;
                   },
                 ),
@@ -159,7 +164,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Bid Item / Key Number!";
                     return null;
                   },
                 ),
@@ -172,7 +177,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Project Number!";
                     return null;
                   },
                 ),
@@ -184,8 +189,9 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                    if (value.isEmpty ||
+                        !RegExp("/^[a-z ,.'-]+\$/i").hasMatch(value))
+                      return "Enter a valid Project Name!";
                     return null;
                   },
                 ),
@@ -198,7 +204,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid District!";
                     return null;
                   },
                 ),
@@ -210,8 +216,9 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                    if (value.isEmpty ||
+                        !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                      return "Enter a valid Random Number!";
                     return null;
                   },
                 ),
@@ -252,24 +259,33 @@ class _LooseMixR97 extends State<LooseMixR97> {
                               FirebaseVision.instance.textRecognizer();
                           var _extractText =
                               await _recognizer.processImage(visionImage);
-                          result = 'Result: ${_extractText.text}';
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          sampleTemperatureController.text = result;
                           _recognizer.close();
                           setState(() {
                             _isLoading = false;
                           });
                         }),
                     Center(
-                      child: _isLoading ? _buildWidgetLoading() : Text(result),
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: sampleTemperatureController,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a Sample Temperature!";
+                                return null;
+                              },
+                            ),
                     )
                   ]),
                 ),
-                // _isLoading
-                //     ? Center(child: CircularProgressIndicator())
-                //     : Icon(
-                //         Icons.done,
-                //         size: 40,
-                //         color: Colors.green,
-                //       ),
                 Center(
                     child: Text(
                   _extractText,
@@ -304,26 +320,26 @@ class _LooseMixR97 extends State<LooseMixR97> {
                         }),
                   ]),
                 ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 TextFormField(
                   controller: quantityRepresentedController,
                   decoration: InputDecoration(
                       labelText: "Quantity Represented (Tons) *",
                       labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (value.isEmpty ||
+                        !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
                 ),
-
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.05,
-                ),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text("Sample Location",
+                  child: Text("Requested Tests / Reasons for Sample",
                       style: TextStyle(color: Colors.red)),
                 ),
                 Container(
@@ -359,7 +375,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a Recipient for Reports!";
                     return null;
                   },
                 ),
@@ -378,7 +394,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Electronic Signature!";
                     return null;
                   },
                 ),
@@ -391,7 +407,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid WAQTC Number!";
                     return null;
                   },
                 ),
@@ -404,7 +420,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Electronic Signature for Witness!";
                     return null;
                   },
                 ),
@@ -417,7 +433,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid WAQTC Number for Witness!";
                     return null;
                   },
                 ),
@@ -430,7 +446,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Sample ID Number!";
                     return null;
                   },
                 ),

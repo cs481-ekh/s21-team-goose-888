@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.itd_888">
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
          In most cases you can leave this as-is, but you if you want to provide
@@ -10,8 +11,8 @@
         android:label="itd_888"
         android:icon="@mipmap/ic_launcher">
         <meta-data 
-            android:name =" com.google.firebase.ml.vision.DEPENDENCIES " 
-            android:value =" ocr "/>
+            android:name ="com.google.firebase.ml.vision.DEPENDENCIES" 
+            android:value ="ocr"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
