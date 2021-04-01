@@ -24,6 +24,7 @@ class _T308 extends State<T308> {
     }
   }
   StoreDb db;
+  TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
   TextEditingController sampleDateController = TextEditingController();
@@ -37,6 +38,7 @@ class _T308 extends State<T308> {
   TextEditingController retestCommentsController = TextEditingController();
 
   void dispose() {
+    independentAssessorController.dispose();
     serialNumController.dispose();
     organizationController.dispose();
     sampleDateController.dispose();
@@ -53,6 +55,7 @@ class _T308 extends State<T308> {
 
   void createAddDbMap(){
     Map<String, dynamic> dbMap = {
+      "independentAssessorController": independentAssessorController.text,
       "serialNumController":  serialNumController.text,
       "organizationController":  organizationController.text,
       "sampleDateController": sampleDateController.text,
@@ -327,6 +330,19 @@ class _T308 extends State<T308> {
                   initialValue: now,
                   validator: (value) {
                     if (value.isEmpty) return "Enter a valid date!";
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: independentAssessorController,
+                  decoration: InputDecoration(
+                      labelText: "Independent Assessor Comments",
+                      labelStyle: TextStyle(color: Colors.black)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid first name!";
                     return null;
                   },
                 ),

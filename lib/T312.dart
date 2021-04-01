@@ -17,6 +17,7 @@ class _T312 extends State<T312> {
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File samp1,samp2;
   StoreDb db;
+  TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
   TextEditingController sampleDateController = TextEditingController();
@@ -35,6 +36,7 @@ class _T312 extends State<T312> {
   TextEditingController retestFlaggedController = TextEditingController();
   TextEditingController retestCommentsController = TextEditingController();
   void dispose() {
+    independentAssessorController.dispose();
     serialNumController.dispose();
     organizationController.dispose();
     sampleDateController.dispose();
@@ -57,6 +59,7 @@ class _T312 extends State<T312> {
 
   void createAddDbMap(){
     Map<String, dynamic> dbMap = {
+      "independentAssessorController": independentAssessorController.text,
       "serialNumController":  serialNumController.text,
       "organizationController":  organizationController.text,
       "sampleDateController": sampleDateController.text,
@@ -413,7 +416,19 @@ class _T312 extends State<T312> {
                   },
                 ),
 
-
+                TextFormField(
+                  controller: independentAssessorController,
+                  decoration: InputDecoration(
+                      labelText: "Independent Assessor Comments",
+                      labelStyle: TextStyle(color: Colors.black)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
+                ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
                 ),

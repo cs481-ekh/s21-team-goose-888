@@ -19,6 +19,7 @@ class _T30 extends State<T30> {
   File No4, No8, No16, No30, No50, No100, No200, Pan;
 
   StoreDb db;
+  TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
   TextEditingController sampleDateController = TextEditingController();
@@ -44,6 +45,7 @@ class _T30 extends State<T30> {
   TextEditingController retestCommentsController = TextEditingController();
 
   void dispose() {
+    independentAssessorController.dispose();
     serialNumController.dispose();
     organizationController.dispose();
     sampleDateController.dispose();
@@ -77,6 +79,7 @@ class _T30 extends State<T30> {
 
   void createAddDbMap(){
     Map<String, dynamic> dbMap = {
+      "independentAssessorController": independentAssessorController.text,
       "serialNumController":  serialNumController.text,
       "organizationController":  organizationController.text,
       "sampleDateController": sampleDateController.text,
@@ -909,8 +912,9 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: independentAssessorController,
                   decoration: InputDecoration(
-                      labelText: "Independent Assessor ",
+                      labelText: "Independent Assessor Comments",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},

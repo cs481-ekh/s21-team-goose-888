@@ -26,6 +26,8 @@ class _T166 extends State<T166> {
   TextEditingController retestFlaggedbyController = TextEditingController();
   TextEditingController retestFlaggedController = TextEditingController();
   TextEditingController retestCommentsController = TextEditingController();
+  TextEditingController independentAssessorController = TextEditingController();
+
 
   void dispose() {
     serialNumController.dispose();
@@ -38,11 +40,13 @@ class _T166 extends State<T166> {
     retestFlaggedbyController.dispose();
     retestFlaggedController.dispose();
     retestCommentsController.dispose();
+    independentAssessorController.dispose();
     super.dispose();
   }
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
+
       "serialNumController":  serialNumController.text,
       "organizationController":  organizationController.text,
       "sampleDateController": sampleDateController.text,
@@ -53,6 +57,8 @@ class _T166 extends State<T166> {
       "retestFlaggedBy": retestFlaggedbyController.text,
       "retestFlagged": retestFlaggedController.text,
       "retestComments": retestCommentsController.text,
+      "independentAssessorController": independentAssessorController.text,
+
 
     };
   }
@@ -408,7 +414,19 @@ class _T166 extends State<T166> {
                     return null;
                   },
                 ),
-
+                TextFormField(
+                  controller: independentAssessorController,
+                  decoration: InputDecoration(
+                      labelText: "Independent Assessor Comments",
+                      labelStyle: TextStyle(color: Colors.black)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
+                ),
 
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
