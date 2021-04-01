@@ -177,9 +177,9 @@
     },
     {
       "name": "flutter_launcher_icons",
-      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.7.5",
+      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.8.1",
       "packageUri": "lib/",
-      "languageVersion": "2.2"
+      "languageVersion": "2.3"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
@@ -554,7 +554,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-03-31T23:11:29.682299Z",
+  "generated": "2021-04-01T17:41:24.499341Z",
   "generator": "pub",
   "generatorVersion": "2.10.5"
 }
