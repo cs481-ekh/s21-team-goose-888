@@ -22,6 +22,10 @@ class _LooseMixR97 extends State<LooseMixR97> {
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampleTemp, sampleLoc;
   StoreDb db;
+  TextEditingController serialNumController = TextEditingController();
+  TextEditingController organizationController = TextEditingController();
+  TextEditingController sampleDateController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
   TextEditingController bidItemController = TextEditingController();
   TextEditingController projectNumberController = TextEditingController();
   TextEditingController projectNameController = TextEditingController();
@@ -36,6 +40,10 @@ class _LooseMixR97 extends State<LooseMixR97> {
   TextEditingController wWAQTCNumberController = TextEditingController();
   TextEditingController sampleIDNumberController = TextEditingController();
   void dispose() {
+    serialNumController.dispose();
+    organizationController.dispose();
+    sampleDateController.dispose();
+    statusController.dispose();
     bidItemController.dispose();
     projectNumberController.dispose();
     projectNameController.dispose();
@@ -54,6 +62,10 @@ class _LooseMixR97 extends State<LooseMixR97> {
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
+      "serialNumController":  serialNumController.text,
+      "organizationController":  organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
       "bidItem": bidItemController.text,
       "projectNumber": projectNumberController.text,
       "projectName": projectNameController.text,
@@ -100,52 +112,55 @@ class _LooseMixR97 extends State<LooseMixR97> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
+                  controller: serialNumController,
                   decoration: InputDecoration(
-                      labelText: "Serial # *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Serial # ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid Serial Number!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid Number";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: organizationController,
                   decoration: InputDecoration(
-                      labelText: "Organization *",
+                      labelText: "Organization",
                       hintText: "Department",
-                      labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.name,
+                      labelStyle: TextStyle(color: Colors.black)),
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty ||
-                        !RegExp("/^[a-z ,.'-]+\$/i").hasMatch(value))
-                      return "Enter a valid Organization!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid  Organization name!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  //controller: sampleDateController,
                   decoration: InputDecoration(
-                      labelText: "Sample Date *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sample Date ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: statusController,
                   decoration: InputDecoration(
-                      labelText: "Status *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Status",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first Status!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid Status!";
                     return null;
                   },
                 ),

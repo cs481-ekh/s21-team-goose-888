@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
+import 'FireBaseFireStoreDB.dart';
 
 class T308 extends StatefulWidget {
   @override
@@ -22,7 +23,52 @@ class _T308 extends State<T308> {
       return true;
     }
   }
+  StoreDb db;
+  TextEditingController serialNumController = TextEditingController();
+  TextEditingController organizationController = TextEditingController();
+  TextEditingController sampleDateController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
+  TextEditingController remarksController = TextEditingController();
+  TextEditingController testedByController = TextEditingController();
+  TextEditingController testedByWAQTCController = TextEditingController();
+  //zTextEditingController testedDateController = TextEditingController();
+  TextEditingController retestFlaggedbyController = TextEditingController();
+  TextEditingController retestFlaggedController = TextEditingController();
+  TextEditingController retestCommentsController = TextEditingController();
 
+  void dispose() {
+    serialNumController.dispose();
+    organizationController.dispose();
+    sampleDateController.dispose();
+    statusController.dispose();
+    remarksController.dispose();
+    testedByController.dispose();
+    testedByWAQTCController.dispose();
+    retestFlaggedbyController.dispose();
+    retestFlaggedController.dispose();
+    retestCommentsController.dispose();
+
+    super.dispose();
+  }
+
+  void createAddDbMap(){
+    Map<String, dynamic> dbMap = {
+      "serialNumController":  serialNumController.text,
+      "organizationController":  organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
+      "remarks": remarksController.text,
+      "testedBy": testedByController.text,
+      "testedByWAQTC" : testedByWAQTCController.text,
+      "retestFlaggedBy": retestFlaggedbyController.text,
+      "retestFlagged": retestFlaggedController.text,
+      "retestComments": retestCommentsController.text,
+
+    };
+
+    db.setT312(dbMap);
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,50 +87,54 @@ class _T308 extends State<T308> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
+                  controller: serialNumController,
                   decoration: InputDecoration(
-                      labelText: "Serial # *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Serial # ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Number";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: organizationController,
                   decoration: InputDecoration(
-                      labelText: "Organization *",
+                      labelText: "Organization",
                       hintText: "Department",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid  Organization name!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  //controller: sampleDateController,
                   decoration: InputDecoration(
-                      labelText: "Sample Date *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sample Date ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: statusController,
                   decoration: InputDecoration(
-                      labelText: "Status *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Status",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Status!";
                     return null;
                   },
@@ -244,6 +294,7 @@ class _T308 extends State<T308> {
 
                 //Row 4 BEGINNING
                 TextFormField(
+                  controller: testedByController,
                   decoration: InputDecoration(
                       labelText: "T308 Testedd by *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -255,6 +306,7 @@ class _T308 extends State<T308> {
                   },
                 ),
                 TextFormField(
+                  controller:  testedByWAQTCController,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -266,6 +318,7 @@ class _T308 extends State<T308> {
                   },
                 ),
                 TextFormField(
+
                   decoration: InputDecoration(
                       labelText: "Date *",
                       labelStyle: TextStyle(color: Colors.red)),
