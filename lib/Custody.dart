@@ -49,7 +49,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Serial Number!";
                     return null;
                   },
                 ),
@@ -61,8 +61,9 @@ class _Custody extends State<Custody> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                    if (value.isEmpty ||
+                        !RegExp("/^[a-z ,.'-]+\$/i").hasMatch(value))
+                      return "Enter a valid Organization!";
                     return null;
                   },
                 ),
@@ -86,7 +87,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Status!";
                     return null;
                   },
                 ),
@@ -104,7 +105,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Sample Custodian!";
                     return null;
                   },
                 ),
@@ -116,7 +117,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid WAQTC Number!";
                     return null;
                   },
                 ),
@@ -128,7 +129,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Recipient Signature!";
                     return null;
                   },
                 ),
@@ -140,7 +141,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Recipient WAQTC Number!";
                     return null;
                   },
                 ),
@@ -152,7 +153,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter valid Details!";
                     return null;
                   },
                 ),
@@ -170,7 +171,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Sample Custodian!";
                     return null;
                   },
                 ),
@@ -182,7 +183,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid WAQTC Number!";
                     return null;
                   },
                 ),
@@ -194,7 +195,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Recipient Signature!";
                     return null;
                   },
                 ),
@@ -206,7 +207,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Recipient WAQTC Number!";
                     return null;
                   },
                 ),
@@ -218,7 +219,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter valid Details!";
                     return null;
                   },
                 ),
@@ -236,7 +237,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Sample Custodian!";
                     return null;
                   },
                 ),
@@ -248,7 +249,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid WAQTC Number!";
                     return null;
                   },
                 ),
@@ -260,7 +261,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Recipient Signature!";
                     return null;
                   },
                 ),
@@ -272,7 +273,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Recipient WAQTC Number!";
                     return null;
                   },
                 ),
@@ -284,7 +285,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter valid Details!";
                     return null;
                   },
                 ),
@@ -302,7 +303,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Sample Custodian!";
                     return null;
                   },
                 ),
@@ -314,7 +315,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid WAQTC Number!";
                     return null;
                   },
                 ),
@@ -326,7 +327,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Recipient Signature!";
                     return null;
                   },
                 ),
@@ -338,7 +339,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Recipient WAQTC Number!";
                     return null;
                   },
                 ),
@@ -350,7 +351,7 @@ class _Custody extends State<Custody> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter valid Details!";
                     return null;
                   },
                 ),
@@ -373,22 +374,3 @@ class _Custody extends State<Custody> {
     );
   }
 }
-//   class Custody extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("Registration"),
-//         backgroundColor: Colors.blue,
-//       ),
-//       body: Center(
-//         child: RaisedButton(
-//           onPressed: () {
-//             Navigator.pop(context);
-//           },
-//           child: Text('Back!'),
-//         ),
-//       ),
-//     );
-//   }
-// }

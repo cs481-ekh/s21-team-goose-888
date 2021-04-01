@@ -129,7 +129,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   decoration: InputDecoration(
                       labelText: "Sample Date *",
                       labelStyle: TextStyle(color: Colors.red)),
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
@@ -336,6 +336,9 @@ class _LooseMixR97 extends State<LooseMixR97> {
                       return "Enter a valid first name!";
                     return null;
                   },
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
                 ),
                 Align(
                   alignment: Alignment.centerLeft,

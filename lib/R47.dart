@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
 import 'package:itd_888/FireBaseFireStoreDB.dart';
+import 'package:itd_888/main.dart';
 
 class R47 extends StatefulWidget {
   @override
@@ -11,13 +14,17 @@ class R47 extends StatefulWidget {
 }
 
 class _R47 extends State<R47> {
+  var result = "Result In Here";
+  bool _isLoading = false;
+  dynamic _extractText = "";
   String dropdownValue = "Select";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampTemp, tapeNum;
   StoreDb db;
   TextEditingController labNumberController = TextEditingController();
-  TextEditingController initReductionLocationController = TextEditingController();
+  TextEditingController initReductionLocationController =
+      TextEditingController();
   TextEditingController performedByController = TextEditingController();
   TextEditingController wAQTCNumberController = TextEditingController();
   TextEditingController dataReducedController = TextEditingController();
@@ -25,7 +32,7 @@ class _R47 extends State<R47> {
   TextEditingController sampleTempController = TextEditingController();
   TextEditingController witnessController = TextEditingController();
   TextEditingController wWAQTCNumberController = TextEditingController();
-
+  TextEditingController boxSecurityTapeController = TextEditingController();
 
   bool _submit() {
     final isValid = _formKey.currentState.validate();
@@ -36,41 +43,42 @@ class _R47 extends State<R47> {
       return true;
     }
   }
+
   @override
   void dispose() {
     labNumberController.dispose();
-     initReductionLocationController.dispose();
-   performedByController.dispose();
-     wAQTCNumberController.dispose();
-   dataReducedController.dispose();
-     timeReducedController.dispose();
-   sampleTempController.dispose();
+    initReductionLocationController.dispose();
+    performedByController.dispose();
+    wAQTCNumberController.dispose();
+    dataReducedController.dispose();
+    timeReducedController.dispose();
+    sampleTempController.dispose();
     witnessController.dispose();
     wWAQTCNumberController.dispose();
+    boxSecurityTapeController.dispose();
     super.dispose();
   }
 
-  void createAddDbMap(){
+  void createAddDbMap() {
     Map<String, dynamic> dbMap = {
-      "labNumber" :  labNumberController.text,
-      "initReductionLocation" : initReductionLocationController.text,
-      "performedBy" : performedByController.text,
-      "WAQTCNumber" : wAQTCNumberController.text,
-      "dataReduced" : dataReducedController.text,
-      "timeReduced" : timeReducedController.text,
-      "sampleTemp" : sampleTempController.text,
-      "witness" : witnessController.text,
-      "witnessWAQTCNumber": wWAQTCNumberController.text
+      "labNumber": labNumberController.text,
+      "initReductionLocation": initReductionLocationController.text,
+      "performedBy": performedByController.text,
+      "WAQTCNumber": wAQTCNumberController.text,
+      "dataReduced": dataReducedController.text,
+      "timeReduced": timeReducedController.text,
+      "sampleTemp": sampleTempController.text,
+      "witness": witnessController.text,
+      "witnessWAQTCNumber": wWAQTCNumberController.text,
+      "boxSecurityTape": boxSecurityTapeController.text
     };
 
     db.setR47(dbMap);
-
-}
-
+  }
 
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text("R47 Reducing Samples of Hot Mix Asphalt"),
         backgroundColor: Colors.blue,
@@ -86,7 +94,6 @@ class _R47 extends State<R47> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
-
                   decoration: InputDecoration(
                       labelText: "Serial # *",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -94,7 +101,7 @@ class _R47 extends State<R47> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid Number";
+                      return "Enter a valid Serial Number!";
                     return null;
                   },
                 ),
@@ -106,8 +113,9 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
-                      return "Enter a valid  Organization name!";
+                    if (value.isEmpty ||
+                        !RegExp("/^[a-z ,.'-]+\$/i").hasMatch(value))
+                      return "Enter a valid Organization!";
                     return null;
                   },
                 ),
@@ -130,7 +138,7 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
                       return "Enter a valid Status!";
                     return null;
                   },
@@ -150,7 +158,7 @@ class _R47 extends State<R47> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                      return "Enter a valid Qualified Lab Number";
                     return null;
                   },
                 ),
@@ -163,7 +171,7 @@ class _R47 extends State<R47> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                      return "Enter a valid Initial Reduction Location";
                     return null;
                   },
                 ),
@@ -176,12 +184,12 @@ class _R47 extends State<R47> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                      return "Enter a valid Electronic Signature";
                     return null;
                   },
                 ),
                 TextFormField(
-                  controller:  wAQTCNumberController ,
+                  controller: wAQTCNumberController,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -189,7 +197,7 @@ class _R47 extends State<R47> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                      return "Enter a valid WAQTC Number";
                     return null;
                   },
                 ),
@@ -202,12 +210,12 @@ class _R47 extends State<R47> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                      return "Enter a valid Data Reduced Entry";
                     return null;
                   },
                 ),
                 TextFormField(
-                  controller: timeReducedController ,
+                  controller: timeReducedController,
                   decoration: InputDecoration(
                       labelText: "Time Reduced",
                       labelStyle: TextStyle(color: Colors.red)),
@@ -215,7 +223,7 @@ class _R47 extends State<R47> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid number";
+                      return "Enter a valid Time Reduced Entry";
                     return null;
                   },
                 ),
@@ -240,14 +248,46 @@ class _R47 extends State<R47> {
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          sampTemp = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          sampleTempController.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              sampTemp = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: sampleTempController,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a Sample Temperature!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
                 ),
                 TextFormField(
@@ -326,14 +366,46 @@ class _R47 extends State<R47> {
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          tapeNum = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          boxSecurityTapeController.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              tapeNum = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: boxSecurityTapeController,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a Sample Temperature!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
                 ),
                 SizedBox(
@@ -355,5 +427,11 @@ class _R47 extends State<R47> {
         ),
       ),
     );
+  }
+
+  Widget _buildWidgetLoading() {
+    return Platform.isIOS
+        ? CupertinoActivityIndicator()
+        : CircularProgressIndicator();
   }
 }
