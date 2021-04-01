@@ -19,6 +19,11 @@ class _T30 extends State<T30> {
   File No4, No8, No16, No30, No50, No100, No200, Pan;
 
   StoreDb db;
+  TextEditingController independentAssessorController = TextEditingController();
+  TextEditingController serialNumController = TextEditingController();
+  TextEditingController organizationController = TextEditingController();
+  TextEditingController sampleDateController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
   TextEditingController aggregateCorrectFact50Controller = TextEditingController();
   TextEditingController aggregateCorrectFact37Controller = TextEditingController();
   TextEditingController aggregateCorrectFact25Controller = TextEditingController();
@@ -40,6 +45,11 @@ class _T30 extends State<T30> {
   TextEditingController retestCommentsController = TextEditingController();
 
   void dispose() {
+    independentAssessorController.dispose();
+    serialNumController.dispose();
+    organizationController.dispose();
+    sampleDateController.dispose();
+    statusController.dispose();
     aggregateCorrectFact50Controller.dispose();
     aggregateCorrectFact37Controller.dispose();
     aggregateCorrectFact25Controller.dispose();
@@ -69,6 +79,11 @@ class _T30 extends State<T30> {
 
   void createAddDbMap(){
     Map<String, dynamic> dbMap = {
+      "independentAssessorController": independentAssessorController.text,
+      "serialNumController":  serialNumController.text,
+      "organizationController":  organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
       "aggregateCorrectFact50": aggregateCorrectFact50Controller.text,
       "aggregateCorrectFact37": aggregateCorrectFact37Controller.text,
       "aggregateCorrectFact25": aggregateCorrectFact25Controller.text,
@@ -124,18 +139,20 @@ class _T30 extends State<T30> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
+                  controller: serialNumController,
                   decoration: InputDecoration(
                       labelText: "Serial # ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Number";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: organizationController,
                   decoration: InputDecoration(
                       labelText: "Organization",
                       hintText: "Department",
@@ -143,12 +160,13 @@ class _T30 extends State<T30> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid  Organization name!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  //controller: sampleDateController,
                   decoration: InputDecoration(
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -156,18 +174,19 @@ class _T30 extends State<T30> {
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: statusController,
                   decoration: InputDecoration(
                       labelText: "Status",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Status!";
                     return null;
                   },
@@ -893,8 +912,9 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
+                  controller: independentAssessorController,
                   decoration: InputDecoration(
-                      labelText: "Independent Assessor ",
+                      labelText: "Independent Assessor Comments",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},

@@ -24,12 +24,24 @@ class _T329 extends State<T329> {
       panDrySamp,
       panDrySamp30;
   StoreDb db;
+
+  TextEditingController serialNumController = TextEditingController();
+  TextEditingController organizationController = TextEditingController();
+  TextEditingController sampleDateController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
   TextEditingController ovenTempController = TextEditingController();
   TextEditingController testedByController = TextEditingController();
   TextEditingController WAQTCNumberController = TextEditingController();
   TextEditingController dateController = TextEditingController();
+  TextEditingController independentAssessorController = TextEditingController();
+
 
   void dispose() {
+    independentAssessorController.dispose();
+    serialNumController.dispose();
+    organizationController.dispose();
+    sampleDateController.dispose();
+    statusController.dispose();
     ovenTempController.dispose();
     testedByController.dispose();
     WAQTCNumberController.dispose();
@@ -38,10 +50,16 @@ class _T329 extends State<T329> {
   }
   void createAddDbMap(){
     Map<String, dynamic> dbMap = {
+      "serialNumController":  serialNumController.text,
+      "organizationController":  organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
       "ovenTemp": ovenTempController.text,
       "testedBy": testedByController.text,
       "WAQTCNumber":WAQTCNumberController.text,
       "date":dateController.text,
+      "independentAssessorController": independentAssessorController.text,
+
     };
 
     db.setT329(dbMap);
@@ -75,50 +93,54 @@ class _T329 extends State<T329> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
+                  controller: serialNumController,
                   decoration: InputDecoration(
-                      labelText: "Serial # *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Serial # ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Number";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: organizationController,
                   decoration: InputDecoration(
-                      labelText: "Organization *",
+                      labelText: "Organization",
                       hintText: "Department",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid  Organization name!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  //controller: sampleDateController,
                   decoration: InputDecoration(
-                      labelText: "Sample Date *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sample Date ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: statusController,
                   decoration: InputDecoration(
-                      labelText: "Status *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Status",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Status!";
                     return null;
                   },
@@ -132,8 +154,8 @@ class _T329 extends State<T329> {
                 TextFormField(
                   controller: ovenTempController,
                   decoration: InputDecoration(
-                      labelText: "Oven Temp *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Oven Temp ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -143,7 +165,7 @@ class _T329 extends State<T329> {
                 ),
                 Text(
                   "Pan Mass",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -174,7 +196,7 @@ class _T329 extends State<T329> {
                 //Row 3 BEGINNING
                 Text(
                   "Initial Sample Temp",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -199,7 +221,7 @@ class _T329 extends State<T329> {
                 ),
                 Text(
                   "90 Minute",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -227,7 +249,7 @@ class _T329 extends State<T329> {
                 ),
                 Text(
                   "Pan & Initial Sample",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -252,7 +274,7 @@ class _T329 extends State<T329> {
                 ),
                 Text(
                   "30 minute",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -281,7 +303,7 @@ class _T329 extends State<T329> {
 
                 Text(
                   "Dry Sample Temp",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -306,7 +328,7 @@ class _T329 extends State<T329> {
                 ),
                 Text(
                   "30 minute",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -335,7 +357,7 @@ class _T329 extends State<T329> {
 
                 Text(
                   "Pan & Dry Sample",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -360,7 +382,7 @@ class _T329 extends State<T329> {
                 ),
                 Text(
                   "30 minute",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -389,8 +411,8 @@ class _T329 extends State<T329> {
                 TextFormField(
                   controller: testedByController,
                   decoration: InputDecoration(
-                      labelText: "T308 Tested by *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "T308 Tested by",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -401,8 +423,8 @@ class _T329 extends State<T329> {
                 TextFormField(
                   controller: WAQTCNumberController,
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -414,12 +436,25 @@ class _T329 extends State<T329> {
                   //controller: dateController,
                   decoration: InputDecoration(
                       labelText: "Date *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
                     if (value.isEmpty) return "Enter a valid date!";
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: independentAssessorController,
+                  decoration: InputDecoration(
+                      labelText: "Independent Assessor Comments",
+                      labelStyle: TextStyle(color: Colors.black)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid first name!";
                     return null;
                   },
                 ),

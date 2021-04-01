@@ -16,6 +16,11 @@ class _R47 extends State<R47> {
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampTemp, tapeNum;
   StoreDb db;
+  TextEditingController independentAssessorController = TextEditingController();
+  TextEditingController serialNumController = TextEditingController();
+  TextEditingController organizationController = TextEditingController();
+  TextEditingController sampleDateController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
   TextEditingController labNumberController = TextEditingController();
   TextEditingController initReductionLocationController = TextEditingController();
   TextEditingController performedByController = TextEditingController();
@@ -38,6 +43,11 @@ class _R47 extends State<R47> {
   }
   @override
   void dispose() {
+    independentAssessorController.dispose();
+    serialNumController.dispose();
+    organizationController.dispose();
+    sampleDateController.dispose();
+    statusController.dispose();
     labNumberController.dispose();
      initReductionLocationController.dispose();
    performedByController.dispose();
@@ -52,6 +62,11 @@ class _R47 extends State<R47> {
 
   void createAddDbMap(){
     Map<String, dynamic> dbMap = {
+      "independentAssessorController": independentAssessorController.text,
+      "serialNumController":  serialNumController.text,
+      "organizationController":  organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
       "labNumber" :  labNumberController.text,
       "initReductionLocation" : initReductionLocationController.text,
       "performedBy" : performedByController.text,
@@ -86,51 +101,54 @@ class _R47 extends State<R47> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
-
+                  controller: serialNumController,
                   decoration: InputDecoration(
-                      labelText: "Serial # *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Serial # ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Number";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: organizationController,
                   decoration: InputDecoration(
-                      labelText: "Organization *",
+                      labelText: "Organization",
                       hintText: "Department",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid  Organization name!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  //controller: sampleDateController,
                   decoration: InputDecoration(
-                      labelText: "Sample Date *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sample Date ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: statusController,
                   decoration: InputDecoration(
-                      labelText: "Status *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Status",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Status!";
                     return null;
                   },
@@ -145,7 +163,7 @@ class _R47 extends State<R47> {
                   controller: labNumberController,
                   decoration: InputDecoration(
                       labelText: "Qualified Lab Number",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -158,7 +176,7 @@ class _R47 extends State<R47> {
                   controller: initReductionLocationController,
                   decoration: InputDecoration(
                       labelText: "Initial Reduction Location",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -171,7 +189,7 @@ class _R47 extends State<R47> {
                   controller: performedByController,
                   decoration: InputDecoration(
                       labelText: "Performed by (Electronic Signature) *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -184,7 +202,7 @@ class _R47 extends State<R47> {
                   controller:  wAQTCNumberController ,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -197,7 +215,7 @@ class _R47 extends State<R47> {
                   controller: dataReducedController,
                   decoration: InputDecoration(
                       labelText: "Data Reduced",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -210,7 +228,7 @@ class _R47 extends State<R47> {
                   controller: timeReducedController ,
                   decoration: InputDecoration(
                       labelText: "Time Reduced",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -227,7 +245,7 @@ class _R47 extends State<R47> {
                 //Row 3 Begining
                 Text(
                   "Sample Temperature",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -254,7 +272,7 @@ class _R47 extends State<R47> {
                   controller: witnessController,
                   decoration: InputDecoration(
                       labelText: "Witnessed by (Electronic Signature) *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -267,7 +285,7 @@ class _R47 extends State<R47> {
                   controller: wWAQTCNumberController,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -282,7 +300,7 @@ class _R47 extends State<R47> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text("Sample Location",
-                      style: TextStyle(color: Colors.red)),
+                      style: TextStyle(color: Colors.black)),
                 ),
                 Container(
                   width: double.infinity,
@@ -304,7 +322,7 @@ class _R47 extends State<R47> {
                     },
                     hint: Text(
                       "Requested Tests / Reason for Sample",
-                      style: TextStyle(color: Colors.red),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                 ),
@@ -313,7 +331,7 @@ class _R47 extends State<R47> {
                 ),
                 Text(
                   "Box Security Tape Number",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -335,6 +353,19 @@ class _R47 extends State<R47> {
                           });
                         }),
                   ]),
+                ),
+                TextFormField(
+                  controller: independentAssessorController,
+                  decoration: InputDecoration(
+                      labelText: "Independent Assessor Comments",
+                      labelStyle: TextStyle(color: Colors.black)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,

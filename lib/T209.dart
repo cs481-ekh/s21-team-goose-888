@@ -15,6 +15,10 @@ class _T209 extends State<T209> {
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File massbandsample1, massofb1, massofdinair1, massbandsamplesub1,massofbsub1,massofsamplesub1,massbandsample2, massofb2, massofdinair2, massbandsamplesub2,massofbsub2,massofsamplesub2 ;
   StoreDb db;
+  TextEditingController serialNumController = TextEditingController();
+  TextEditingController organizationController = TextEditingController();
+  TextEditingController sampleDateController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
   TextEditingController remarksController = TextEditingController();
   TextEditingController testedByController = TextEditingController();
   TextEditingController testedByWAQTCController = TextEditingController();
@@ -24,6 +28,10 @@ class _T209 extends State<T209> {
   TextEditingController retestCommentsController = TextEditingController();
 
   void dispose() {
+    serialNumController.dispose();
+    organizationController.dispose();
+    sampleDateController.dispose();
+    statusController.dispose();
     remarksController.dispose();
     testedByController.dispose();
     testedByWAQTCController.dispose();
@@ -35,6 +43,10 @@ class _T209 extends State<T209> {
 
   void createAddDbMap(){
     Map<String, dynamic> dbMap = {
+      "serialNumController":  serialNumController.text,
+      "organizationController":  organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
       "remarks": remarksController.text,
       "testedBy": testedByController.text,
       "testedByWAQTC" : testedByWAQTCController.text,
@@ -85,51 +97,55 @@ class _T209 extends State<T209> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
+                  controller: serialNumController,
                   decoration: InputDecoration(
                       labelText: "Serial # ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid first name!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid Number";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: organizationController,
                   decoration: InputDecoration(
-                      labelText: "Organization ",
+                      labelText: "Organization",
                       hintText: "Department",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid first name!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid  Organization name!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  //controller: sampleDateController,
                   decoration: InputDecoration(
-                      labelText: "Sample Date ",
+                     // labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: statusController,
                   decoration: InputDecoration(
-                      labelText: "Status ",
+                      labelText: "Status",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid first name!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid Status!";
                     return null;
                   },
                 ),
