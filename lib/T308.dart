@@ -147,8 +147,8 @@ class _T308 extends State<T308> {
                 //Row 2 BEGINNING
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Furnace ID *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Furnace ID ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -159,8 +159,8 @@ class _T308 extends State<T308> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Date on Ticket *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Date on Ticket",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -171,8 +171,8 @@ class _T308 extends State<T308> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Ticket AC % *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Ticket AC % ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -182,8 +182,8 @@ class _T308 extends State<T308> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Time on Ticket *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Time on Ticket ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -200,7 +200,7 @@ class _T308 extends State<T308> {
                 //Row 3 BEGINNING
                 Text(
                   "Basket & Initial Sample",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -225,7 +225,7 @@ class _T308 extends State<T308> {
                 ),
                 Text(
                   "Basket Assembly",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -250,8 +250,8 @@ class _T308 extends State<T308> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Calculated Initial Sample *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Calculated Initial Sample ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -264,7 +264,7 @@ class _T308 extends State<T308> {
                 ),
                 Text(
                   "Basket & Final Aggregate",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -296,8 +296,8 @@ class _T308 extends State<T308> {
                 TextFormField(
                   controller: testedByController,
                   decoration: InputDecoration(
-                      labelText: "T308 Testedd by *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "T308 Tested by ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -308,8 +308,8 @@ class _T308 extends State<T308> {
                 TextFormField(
                   controller:  testedByWAQTCController,
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -320,8 +320,8 @@ class _T308 extends State<T308> {
                 TextFormField(
 
                   decoration: InputDecoration(
-                      labelText: "Date *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Date ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   initialValue: now,

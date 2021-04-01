@@ -148,8 +148,8 @@ class _T329 extends State<T329> {
                 TextFormField(
                   controller: ovenTempController,
                   decoration: InputDecoration(
-                      labelText: "Oven Temp *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Oven Temp ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -190,7 +190,7 @@ class _T329 extends State<T329> {
                 //Row 3 BEGINNING
                 Text(
                   "Initial Sample Temp",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -215,7 +215,7 @@ class _T329 extends State<T329> {
                 ),
                 Text(
                   "90 Minute",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -243,7 +243,7 @@ class _T329 extends State<T329> {
                 ),
                 Text(
                   "Pan & Initial Sample",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -268,7 +268,7 @@ class _T329 extends State<T329> {
                 ),
                 Text(
                   "30 minute",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -297,7 +297,7 @@ class _T329 extends State<T329> {
 
                 Text(
                   "Dry Sample Temp",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -322,7 +322,7 @@ class _T329 extends State<T329> {
                 ),
                 Text(
                   "30 minute",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -351,7 +351,7 @@ class _T329 extends State<T329> {
 
                 Text(
                   "Pan & Dry Sample",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -376,7 +376,7 @@ class _T329 extends State<T329> {
                 ),
                 Text(
                   "30 minute",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -405,8 +405,8 @@ class _T329 extends State<T329> {
                 TextFormField(
                   controller: testedByController,
                   decoration: InputDecoration(
-                      labelText: "T308 Tested by *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "T308 Tested by",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -417,8 +417,8 @@ class _T329 extends State<T329> {
                 TextFormField(
                   controller: WAQTCNumberController,
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -430,7 +430,7 @@ class _T329 extends State<T329> {
                   //controller: dateController,
                   decoration: InputDecoration(
                       labelText: "Date *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   initialValue: now,

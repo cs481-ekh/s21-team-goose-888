@@ -173,8 +173,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: bidItemController,
                   decoration: InputDecoration(
-                      labelText: "Bid Item / Key Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Bid Item / Key Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -186,8 +186,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: projectNumberController,
                   decoration: InputDecoration(
-                      labelText: "Project Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Project Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -199,8 +199,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: projectNameController,
                   decoration: InputDecoration(
-                      labelText: "Project Name *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Project Name ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -213,8 +213,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: districtController,
                   decoration: InputDecoration(
-                      labelText: "District *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "District ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -226,8 +226,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: randomNumberController,
                   decoration: InputDecoration(
-                      labelText: "Random Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Random Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -245,7 +245,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 //Row 3 BEGINNING
                 Text(
                   "Sample Temperature",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -312,7 +312,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 ),
                 Text(
                   "Sample Location",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
@@ -341,8 +341,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: quantityRepresentedController,
                   decoration: InputDecoration(
-                      labelText: "Quantity Represented (Tons) *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Quantity Represented (Tons)",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -355,7 +355,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text("Requested Tests / Reasons for Sample",
-                      style: TextStyle(color: Colors.red)),
+                      style: TextStyle(color: Colors.black)),
                 ),
                 Container(
                   width: double.infinity,
@@ -377,15 +377,15 @@ class _LooseMixR97 extends State<LooseMixR97> {
                     },
                     hint: Text(
                       "Requested Tests / Reason for Sample",
-                      style: TextStyle(color: Colors.red),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                 ),
                 TextFormField(
                   controller: sendReportsToController,
                   decoration: InputDecoration(
-                      labelText: "Send Reports To: *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Send Reports To: ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -403,8 +403,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: sampledByController,
                   decoration: InputDecoration(
-                      labelText: "Sampled by (Electronic Signature) *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sampled by (Electronic Signature)",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -416,8 +416,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: WAQTCNumberController,
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -429,8 +429,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: witnessedByController,
                   decoration: InputDecoration(
-                      labelText: "Witnessed by (Electronic Signature) *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Witnessed by (Electronic Signature) ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -442,8 +442,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: wWAQTCNumberController,
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -455,8 +455,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: sampleIDNumberController,
                   decoration: InputDecoration(
-                      labelText: "Sample ID Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sample ID Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {

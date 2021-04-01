@@ -129,8 +129,8 @@ class _Custody extends State<Custody> {
                 //Row 2 BEGINNING
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Sample Custodian *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sample Custodian",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -141,8 +141,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -153,8 +153,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Received by *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Received by",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -165,8 +165,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -177,8 +177,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Details / Location / Condition of Sample*",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Details / Location / Condition of Sample",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -195,8 +195,8 @@ class _Custody extends State<Custody> {
                 //Row 3 BEGINNING
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Sample Custodian *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sample Custodian ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -207,8 +207,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -219,8 +219,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Received by *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Received by ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -231,8 +231,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -243,8 +243,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Details / Location / Condition of Sample*",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Details / Location / Condition of Sample",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -261,8 +261,8 @@ class _Custody extends State<Custody> {
                 //Row 4 BEGINNING
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Sample Custodian *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sample Custodian ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -273,8 +273,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -285,8 +285,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Received by *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Received by",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -297,8 +297,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -309,8 +309,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Details / Location / Condition of Sample*",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Details / Location / Condition of Sample",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -327,8 +327,8 @@ class _Custody extends State<Custody> {
                 //Row 5 BEGINNING
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Sample Custodian *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Sample Custodian",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -339,8 +339,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -351,8 +351,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Received by *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Received by ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -363,8 +363,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number *",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "WAQTC Number ",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
@@ -375,8 +375,8 @@ class _Custody extends State<Custody> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                      labelText: "Details / Location / Condition of Sample*",
-                      labelStyle: TextStyle(color: Colors.red)),
+                      labelText: "Details / Location / Condition of Sample",
+                      labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
