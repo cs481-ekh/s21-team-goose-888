@@ -144,9 +144,11 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   //controller: sampleDateController,
                   decoration: InputDecoration(
+
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
+
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
@@ -162,6 +164,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
+
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Status!";
                     return null;
@@ -354,6 +357,9 @@ class _LooseMixR97 extends State<LooseMixR97> {
                       return "Enter a valid first name!";
                     return null;
                   },
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
                 ),
                 Align(
                   alignment: Alignment.centerLeft,

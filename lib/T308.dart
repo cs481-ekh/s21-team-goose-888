@@ -1,8 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
+
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+
 import 'FireBaseFireStoreDB.dart';
+
 
 class T308 extends StatefulWidget {
   @override
@@ -10,9 +15,34 @@ class T308 extends StatefulWidget {
 }
 
 class _T308 extends State<T308> {
+  var result = "Result In Here";
+  bool _isLoading = false;
+  dynamic _extractText = "";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-  File Initial, Assembly, Final;
+  File initial, assembly, fin;
+  StoreDb db;
+
+  TextEditingController initialController = TextEditingController();
+  TextEditingController assemblyController = TextEditingController();
+  TextEditingController basketFinalController = TextEditingController();
+
+  void dispose() {
+    initialController.dispose();
+    assemblyController.dispose();
+    basketFinalController.dispose();
+    super.dispose();
+  }
+
+  void createAddDbMap() {
+    Map<String, dynamic> dbMap = {
+      "basksetInitialSamp": initialController.text,
+      "assemblyController ": assemblyController.text,
+      "basketFinalAggregate": basketFinalController,
+    };
+
+    db.setT329(dbMap);
+  }
 
   bool _submit() {
     final isValid = _formKey.currentState.validate();
@@ -97,6 +127,7 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
+
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Number";
                     return null;
@@ -168,7 +199,7 @@ class _T308 extends State<T308> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
-                      return "Enter a valid  Organization name!";
+                      return "Enter a valid Date!";
                     return null;
                   },
                 ),
@@ -179,7 +210,7 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (value.isEmpty) return "Enter a Number";
                     return null;
                   },
                 ),
@@ -191,7 +222,7 @@ class _T308 extends State<T308> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
-                      return "Enter a valid Status!";
+                      return "Enter a valid Time!";
                     return null;
                   },
                 ),
@@ -208,23 +239,58 @@ class _T308 extends State<T308> {
                 Container(
                   width: double.infinity,
                   child: Column(children: [
-                    Initial == null
+                    initial == null
                         ? Text('No image selected.')
-                        : Image.file(Initial),
+                        : Image.file(initial),
                     RaisedButton(
                         child: Text('Choose Photo'),
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          initial = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          initialController.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              Initial = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: initialController,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid Basket and Initial Sample!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
                 ),
                 Text(
                   "Basket Assembly",
@@ -233,22 +299,54 @@ class _T308 extends State<T308> {
                 Container(
                   width: double.infinity,
                   child: Column(children: [
-                    Assembly == null
+                    assembly == null
                         ? Text('No image selected.')
-                        : Image.file(Assembly),
+                        : Image.file(assembly),
                     RaisedButton(
                         child: Text('Choose Photo'),
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          assembly = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          assemblyController.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              Assembly = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: assemblyController,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid Number!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
                 ),
                 TextFormField(
@@ -258,7 +356,7 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (value.isEmpty) return "Enter a valid Number!";
                     return null;
                   },
                 ),
@@ -272,22 +370,52 @@ class _T308 extends State<T308> {
                 Container(
                   width: double.infinity,
                   child: Column(children: [
-                    Final == null
-                        ? Text('No image selected.')
-                        : Image.file(Final),
+                    fin == null ? Text('No image selected.') : Image.file(fin),
                     RaisedButton(
                         child: Text('Choose Photo'),
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          fin = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          basketFinalController.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              Final = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: basketFinalController,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid Number!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
                 ),
                 SizedBox(
@@ -304,7 +432,7 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (value.isEmpty) return "Enter a valid entry!";
                     return null;
                   },
                 ),
@@ -316,7 +444,7 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (value.isEmpty) return "Enter a valid WAQTC Number!";
                     return null;
                   },
                 ),
@@ -366,5 +494,11 @@ class _T308 extends State<T308> {
         ),
       ),
     );
+  }
+
+  Widget _buildWidgetLoading() {
+    return Platform.isIOS
+        ? CupertinoActivityIndicator()
+        : CircularProgressIndicator();
   }
 }

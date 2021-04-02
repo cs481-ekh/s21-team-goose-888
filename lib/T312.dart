@@ -1,21 +1,24 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
-import 'FireBaseFireStoreDB.dart';
-
+import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class T312 extends StatefulWidget {
-@override
-_T312 createState() => _T312();
+  @override
+  _T312 createState() => _T312();
 }
 
 class _T312 extends State<T312> {
+  var result = "Result In Here";
+  bool _isLoading = false;
+  dynamic _extractText = "";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-  File samp1,samp2;
+  File samp1, samp2;
   StoreDb db;
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
@@ -24,10 +27,13 @@ class _T312 extends State<T312> {
   TextEditingController statusController = TextEditingController();
   TextEditingController gyratoryBrandController = TextEditingController();
   TextEditingController gyratoryModelController = TextEditingController();
-  TextEditingController gyratorySerialNumberController = TextEditingController();
+  TextEditingController gyratorySerialNumberController =
+      TextEditingController();
   TextEditingController puckMassVolumetricController = TextEditingController();
+  TextEditingController mass1Controller = TextEditingController();
+  TextEditingController mass2Controller = TextEditingController();
   TextEditingController puckHeight1Controller = TextEditingController();
-  TextEditingController  puckHeight2Controller = TextEditingController();
+  TextEditingController puckHeight2Controller = TextEditingController();
   TextEditingController remarksController = TextEditingController();
   TextEditingController testedByController = TextEditingController();
   TextEditingController testedByWAQTCController = TextEditingController();
@@ -45,6 +51,8 @@ class _T312 extends State<T312> {
     gyratoryModelController.dispose();
     gyratorySerialNumberController.dispose();
     puckMassVolumetricController.dispose();
+    mass1Controller.dispose();
+    mass2Controller.dispose();
     puckHeight1Controller.dispose();
     puckHeight2Controller.dispose();
     remarksController.dispose();
@@ -57,7 +65,7 @@ class _T312 extends State<T312> {
     super.dispose();
   }
 
-  void createAddDbMap(){
+  void createAddDbMap() {
     Map<String, dynamic> dbMap = {
       "independentAssessorController": independentAssessorController.text,
       "serialNumController":  serialNumController.text,
@@ -66,21 +74,23 @@ class _T312 extends State<T312> {
       "statusController": statusController.text,
       "gyratoryBrand": gyratoryBrandController.text,
       "gyratoryModel": gyratoryModelController.text,
-      "gyratorySerialNumber" : gyratorySerialNumberController.text,
+      "gyratorySerialNumber": gyratorySerialNumberController.text,
       "puckMassVolumetric": puckMassVolumetricController.text,
-      "puckHeight1":  puckHeight1Controller.text,
-      "puckHeight2":  puckHeight2Controller.text,
+      "mass1": mass1Controller.text,
+      "mass2": mass1Controller.text,
+      "puckHeight1": puckHeight1Controller.text,
+      "puckHeight2": puckHeight2Controller.text,
       "remarks": remarksController.text,
       "testedBy": testedByController.text,
-      "testedByWAQTC" : testedByWAQTCController.text,
+      "testedByWAQTC": testedByWAQTCController.text,
       "retestFlaggedBy": retestFlaggedByController.text,
       "retestFlagged": retestFlaggedController.text,
       "retestComments": retestCommentsController.text,
     };
 
     db.setT312(dbMap);
-
   }
+
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -90,6 +100,7 @@ class _T312 extends State<T312> {
       return true;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,7 +185,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid brand";
                     return null;
                   },
@@ -187,7 +198,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid model";
                     return null;
                   },
@@ -200,7 +211,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -213,7 +224,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -230,25 +241,57 @@ class _T312 extends State<T312> {
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
+                  child: Column(children: [
                     samp1 == null
                         ? Text('No image selected.')
                         : Image.file(samp1),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          samp1 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          mass1Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              samp1 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: mass1Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
                 TextFormField(
                   controller: puckHeight1Controller,
                   decoration: InputDecoration(
@@ -257,7 +300,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -273,25 +316,57 @@ class _T312 extends State<T312> {
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
+                  child: Column(children: [
                     samp2 == null
                         ? Text('No image selected.')
                         : Image.file(samp2),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          samp2 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          mass2Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              samp2 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: mass2Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
                 TextFormField(
                   controller: puckHeight2Controller,
                   decoration: InputDecoration(
@@ -300,7 +375,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -318,7 +393,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid remark";
                     return null;
                   },
@@ -339,7 +414,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid name";
                     return null;
                   },
@@ -352,13 +427,12 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
                 ),
                 TextFormField(
-
                   decoration: InputDecoration(
                       labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -366,7 +440,8 @@ class _T312 extends State<T312> {
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -384,7 +459,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid name";
                     return null;
                   },
@@ -397,7 +472,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid ";
                     return null;
                   },
@@ -410,11 +485,12 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid comment";
                     return null;
                   },
                 ),
+
 
                 TextFormField(
                   controller: independentAssessorController,
@@ -429,6 +505,7 @@ class _T312 extends State<T312> {
                     return null;
                   },
                 ),
+
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
                 ),
@@ -447,5 +524,11 @@ class _T312 extends State<T312> {
         ),
       ),
     );
+  }
+
+  Widget _buildWidgetLoading() {
+    return Platform.isIOS
+        ? CupertinoActivityIndicator()
+        : CircularProgressIndicator();
   }
 }

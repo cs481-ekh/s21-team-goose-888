@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
-import 'FireBaseFireStoreDB.dart';
+import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class T209 extends StatefulWidget {
   @override
@@ -11,14 +13,46 @@ class T209 extends StatefulWidget {
 }
 
 class _T209 extends State<T209> {
+  var result = "Result In Here";
+  bool _isLoading = false;
+  dynamic _extractText = "";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-  File massbandsample1, massofb1, massofdinair1, massbandsamplesub1,massofbsub1,massofsamplesub1,massbandsample2, massofb2, massofdinair2, massbandsamplesub2,massofbsub2,massofsamplesub2 ;
+  File massbandsample1,
+      massofb1,
+      massofdinair1,
+      massbandsamplesub1,
+      massofbsub1,
+      massofsamplesub1,
+      massbandsample2,
+      massofb2,
+      massofdinair2,
+      massbandsamplesub2,
+      massofbsub2,
+      massofsamplesub2;
   StoreDb db;
+
+
+  TextEditingController mBS1Controller = TextEditingController();
+  TextEditingController mB1Controller = TextEditingController();
+  TextEditingController mDSA1Controller = TextEditingController();
+  TextEditingController sWBS1Controller = TextEditingController();
+  TextEditingController sWB1Controller = TextEditingController();
+  TextEditingController sWS1Controller = TextEditingController();
+
+  TextEditingController mBS2Controller = TextEditingController();
+  TextEditingController mB2Controller = TextEditingController();
+  TextEditingController mDSA2Controller = TextEditingController();
+  TextEditingController sWBS2Controller = TextEditingController();
+  TextEditingController sWB2Controller = TextEditingController();
+  TextEditingController sWS2Controller = TextEditingController();
+
+
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
   TextEditingController sampleDateController = TextEditingController();
   TextEditingController statusController = TextEditingController();
+
   TextEditingController remarksController = TextEditingController();
   TextEditingController testedByController = TextEditingController();
   TextEditingController testedByWAQTCController = TextEditingController();
@@ -28,10 +62,27 @@ class _T209 extends State<T209> {
   TextEditingController retestCommentsController = TextEditingController();
 
   void dispose() {
+
+    mBS1Controller.dispose();
+    mB1Controller.dispose();
+    mDSA1Controller.dispose();
+    sWBS1Controller.dispose();
+    sWB1Controller.dispose();
+    sWS1Controller.dispose();
+
+    mBS2Controller.dispose();
+    mB2Controller.dispose();
+    mDSA2Controller.dispose();
+    sWBS2Controller.dispose();
+    sWB2Controller.dispose();
+    sWS2Controller.dispose();
+
+
     serialNumController.dispose();
     organizationController.dispose();
     sampleDateController.dispose();
     statusController.dispose();
+
     remarksController.dispose();
     testedByController.dispose();
     testedByWAQTCController.dispose();
@@ -41,24 +92,38 @@ class _T209 extends State<T209> {
     super.dispose();
   }
 
-  void createAddDbMap(){
+  void createAddDbMap() {
     Map<String, dynamic> dbMap = {
+
+      "mBs1": mBS1Controller.text,
+      "mB1": mB1Controller.text,
+      "mDSA1": mDSA1Controller.text,
+      "sWBS1": sWBS1Controller.text,
+      "sWB1": sWB1Controller.text,
+      "sWS1": sWS1Controller.text,
+      "mBS2": mBS2Controller.text,
+      "mB2": mB2Controller.text,
+      "mDSA2": mDSA2Controller.text,
+      "sWBS2": sWBS2Controller.text,
+      "sWB2": sWB2Controller.text,
+      "sWS2": sWS2Controller.text,
+
       "serialNumController":  serialNumController.text,
       "organizationController":  organizationController.text,
       "sampleDateController": sampleDateController.text,
       "statusController": statusController.text,
+
       "remarks": remarksController.text,
       "testedBy": testedByController.text,
-      "testedByWAQTC" : testedByWAQTCController.text,
+      "testedByWAQTC": testedByWAQTCController.text,
       "retestFlaggedBy": retestFlaggedbyController.text,
       "retestFlagged": retestFlaggedController.text,
       "retestComments": retestCommentsController.text,
-
     };
 
     db.setT209(dbMap);
-
   }
+
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -68,17 +133,18 @@ class _T209 extends State<T209> {
       return true;
     }
   }
+
   bool rememberMe = false;
 
   void _onRememberMeChanged(bool newValue) => setState(() {
-    rememberMe = newValue;
+        rememberMe = newValue;
 
-    if (rememberMe) {
-      // TODO: Here goes your functionality that remembers the user.
-    } else {
-      // TODO: Forget the user
-    }
-  });
+        if (rememberMe) {
+          // TODO: Here goes your functionality that remembers the user.
+        } else {
+          // TODO: Forget the user
+        }
+      });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,150 +227,357 @@ class _T209 extends State<T209> {
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
+                  child: Column(children: [
                     massbandsample1 == null
                         ? Text('No image selected.')
-                        : Image.file(massbandsample1 ),
+                        : Image.file(massbandsample1),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massbandsample1 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          mBS1Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massbandsample1 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: mBS1Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Mass of Bowl 1 (g)",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
+                  child: Column(children: [
                     massofb1 == null
                         ? Text('No image selected.')
-                        : Image.file(massofb1 ),
+                        : Image.file(massofb1),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massofb1 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          mB1Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massofb1  = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: mB1Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Mass of Dry Sample in Air 1 (g)",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
-                   massofdinair1== null
+                  child: Column(children: [
+                    massofdinair1 == null
                         ? Text('No image selected.')
-                        : Image.file(massofdinair1 ),
+                        : Image.file(massofdinair1),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massofdinair1 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          mDSA1Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massofdinair1 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: mDSA1Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Submerged Weight of Bowl and Sample 1 (g)",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
-                    massbandsamplesub1== null
+                  child: Column(children: [
+                    massbandsamplesub1 == null
                         ? Text('No image selected.')
-                        : Image.file(massbandsamplesub1 ),
+                        : Image.file(massbandsamplesub1),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massbandsamplesub1 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          sWBS1Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massbandsamplesub1= File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: sWBS1Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Submerged Weight of Bowl 1 (g)",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
-                    massofbsub1== null
+                  child: Column(children: [
+                    massofbsub1 == null
                         ? Text('No image selected.')
-                        : Image.file(massofbsub1 ),
+                        : Image.file(massofbsub1),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massofbsub1 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          sWB1Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massofbsub1 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: sWB1Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Submerged Weight of Sample 1 (g)",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
-                    massofsamplesub1== null
+                  child: Column(children: [
+                    massofsamplesub1 == null
                         ? Text('No image selected.')
-                        : Image.file(massofsamplesub1 ),
+                        : Image.file(massofsamplesub1),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massofsamplesub1 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          sWS1Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massofsamplesub1 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: sWS1Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
 
                 //Row 2 Ending
                 SizedBox(
@@ -318,150 +591,357 @@ class _T209 extends State<T209> {
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
-                    massbandsample2== null
+                  child: Column(children: [
+                    massbandsample2 == null
                         ? Text('No image selected.')
-                        : Image.file(massbandsample2 ),
+                        : Image.file(massbandsample2),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massbandsample2 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          mBS2Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massbandsample2 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: mBS2Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Mass of Bowl 2 (g)",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
+                  child: Column(children: [
                     massofb2 == null
                         ? Text('No image selected.')
-                        : Image.file(massofb2 ),
+                        : Image.file(massofb2),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massofb2 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          mB2Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massofb2 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: mB2Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Mass of Dry Sample in Air 2 (g)",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
-                    massofdinair2== null
+                  child: Column(children: [
+                    massofdinair2 == null
                         ? Text('No image selected.')
-                        : Image.file(massofdinair2 ),
+                        : Image.file(massofdinair2),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massofdinair2 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          mDSA2Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massofdinair2 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: mDSA2Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Submerged Weight of Bowl and Sample 2 (g)",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
-                    massbandsamplesub2== null
+                  child: Column(children: [
+                    massbandsamplesub2 == null
                         ? Text('No image selected.')
-                        : Image.file(massbandsamplesub2 ),
+                        : Image.file(massbandsamplesub2),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massbandsamplesub2 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          sWBS2Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massbandsamplesub2= File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: sWBS2Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Submerged Weight of Bowl 2 (g)",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
-                    massofbsub2== null
+                  child: Column(children: [
+                    massofbsub2 == null
                         ? Text('No image selected.')
-                        : Image.file(massofbsub2 ),
+                        : Image.file(massofbsub2),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massofbsub2 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          sWB2Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massofbsub2 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: sWB2Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Submerged Weight of Sample 2 (g)",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
-                    massofsamplesub2== null
+                  child: Column(children: [
+                    massofsamplesub2 == null
                         ? Text('No image selected.')
-                        : Image.file(massofsamplesub2 ),
+                        : Image.file(massofsamplesub2),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          massofsamplesub2 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          sWS2Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              massofsamplesub2 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: sWS2Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
 
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
@@ -476,7 +956,7 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid remark";
                     return null;
                   },
@@ -496,7 +976,7 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid name";
                     return null;
                   },
@@ -509,7 +989,7 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -523,7 +1003,8 @@ class _T209 extends State<T209> {
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -541,7 +1022,7 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid name";
                     return null;
                   },
@@ -554,7 +1035,7 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid ";
                     return null;
                   },
@@ -567,12 +1048,11 @@ class _T209 extends State<T209> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid comment";
                     return null;
                   },
                 ),
-           
 
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
@@ -593,7 +1073,10 @@ class _T209 extends State<T209> {
       ),
     );
   }
+
+  Widget _buildWidgetLoading() {
+    return Platform.isIOS
+        ? CupertinoActivityIndicator()
+        : CircularProgressIndicator();
+  }
 }
-
-
-

@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
-import 'package:tesseract_ocr/tesseract_ocr.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
-import 'FireBaseFireStoreDB.dart';
+import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class T329 extends StatefulWidget {
   @override
@@ -12,6 +13,9 @@ class T329 extends StatefulWidget {
 }
 
 class _T329 extends State<T329> {
+  var result = "Result In Here";
+  bool _isLoading = false;
+  dynamic _extractText = "";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File panMass,
@@ -25,11 +29,23 @@ class _T329 extends State<T329> {
       panDrySamp30;
   StoreDb db;
 
+
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
   TextEditingController sampleDateController = TextEditingController();
   TextEditingController statusController = TextEditingController();
+
   TextEditingController ovenTempController = TextEditingController();
+  TextEditingController panMassController = TextEditingController();
+  TextEditingController initialSampController = TextEditingController();
+  TextEditingController initialSamp90Controller = TextEditingController();
+  TextEditingController panInitialSampController = TextEditingController();
+  TextEditingController panInitialSamp30Controller = TextEditingController();
+  TextEditingController drySampleController = TextEditingController();
+  TextEditingController drySample30Controller = TextEditingController();
+  TextEditingController panDrySampController = TextEditingController();
+  TextEditingController panDrySamp30Controller = TextEditingController();
+
   TextEditingController testedByController = TextEditingController();
   TextEditingController WAQTCNumberController = TextEditingController();
   TextEditingController dateController = TextEditingController();
@@ -43,28 +59,49 @@ class _T329 extends State<T329> {
     sampleDateController.dispose();
     statusController.dispose();
     ovenTempController.dispose();
+    panMassController.dispose();
+    initialSampController.dispose();
+    initialSamp90Controller.dispose();
+    panInitialSampController.dispose();
+    panInitialSamp30Controller.dispose();
+    drySampleController.dispose();
+    drySample30Controller.dispose();
+    panDrySampController.dispose();
+    panDrySamp30Controller.dispose();
+
     testedByController.dispose();
     WAQTCNumberController.dispose();
     dateController.dispose();
     super.dispose();
   }
-  void createAddDbMap(){
+
+  void createAddDbMap() {
     Map<String, dynamic> dbMap = {
       "serialNumController":  serialNumController.text,
       "organizationController":  organizationController.text,
       "sampleDateController": sampleDateController.text,
       "statusController": statusController.text,
       "ovenTemp": ovenTempController.text,
+      "panMass": panMassController.text,
+      "initialSamp": initialSampController.text,
+      "initialSamp90": initialSamp90Controller.text,
+      "panInitialSamp": panInitialSampController.text,
+      "panInitialSamp30": panInitialSamp30Controller.text,
+      "drySamp": drySampleController.text,
+      "drySamp30": drySample30Controller.text,
+      "panDrySamp": panDrySampController.text,
+      "panDrySamp30": panDrySamp30Controller.text,
       "testedBy": testedByController.text,
       "WAQTCNumber":WAQTCNumberController.text,
       "date":dateController.text,
       "independentAssessorController": independentAssessorController.text,
 
+
     };
 
     db.setT329(dbMap);
-
   }
+
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -163,6 +200,9 @@ class _T329 extends State<T329> {
                     return null;
                   },
                 ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Pan Mass",
                   style: TextStyle(color: Colors.black),
@@ -178,14 +218,46 @@ class _T329 extends State<T329> {
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          panMass = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          panMassController.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              panMass = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: panMassController,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\\d*\.?\\d*\$/").hasMatch(value))
+                                  return "Enter a valid Pan Mass!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
                 ),
                 SizedBox(
@@ -209,15 +281,50 @@ class _T329 extends State<T329> {
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          initialSampTemp = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          initialSampController.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              initialSampTemp = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: initialSampController,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\\d*\.?\\d*\$/").hasMatch(value))
+                                  return "Enter a valid Initial Sample Temperature!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
                 ),
                 Text(
                   "90 Minute",
@@ -234,14 +341,46 @@ class _T329 extends State<T329> {
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          initialSampTemp90 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          initialSamp90Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              initialSampTemp90 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: initialSamp90Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\\d*\.?\\d*\$/").hasMatch(value))
+                                  return "Enter a valid constant mass for the Initial Sample Temp 90 Minute!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
                 ),
                 SizedBox(
@@ -262,15 +401,50 @@ class _T329 extends State<T329> {
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          panInitialSamp = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          panInitialSampController.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              panInitialSamp = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: panInitialSampController,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid Pan & Initial Sample!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
                 ),
                 Text(
                   "30 minute",
@@ -287,14 +461,46 @@ class _T329 extends State<T329> {
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          panInitialSamp30 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          panInitialSamp30Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              panInitialSamp30 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: panInitialSamp30Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid constant mass for the Pan & Initial Sample 30 Minute!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
                 ),
                 SizedBox(
@@ -316,15 +522,50 @@ class _T329 extends State<T329> {
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          drySample = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          drySampleController.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              drySample = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: drySampleController,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid Dry Sample Temp!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
                 ),
                 Text(
                   "30 minute",
@@ -341,14 +582,46 @@ class _T329 extends State<T329> {
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          drySample30 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          drySample30Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              drySample30 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: drySample30Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid constant mass for the Dry Sample Temp 30 Minute!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
                 ),
                 SizedBox(
@@ -370,15 +643,50 @@ class _T329 extends State<T329> {
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          panDrySamp = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          panDrySampController.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              panDrySamp = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: panDrySampController,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid Pan & Dry Sample";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
                 ),
                 Text(
                   "30 minute",
@@ -395,15 +703,50 @@ class _T329 extends State<T329> {
                         onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          panDrySamp30 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          panDrySamp30Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              panDrySamp30 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
                         }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: panDrySamp30Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid constant mass for the Pan & Dry Sample 30 Minute!";
+                                return null;
+                              },
+                            ),
+                    )
                   ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.2,
                 ),
                 //Row 3 ENDING
 
@@ -413,7 +756,8 @@ class _T329 extends State<T329> {
                   decoration: InputDecoration(
                       labelText: "T308 Tested by",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.text,
+                  
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty) return "Enter a valid date!";
@@ -423,9 +767,10 @@ class _T329 extends State<T329> {
                 TextFormField(
                   controller: WAQTCNumberController,
                   decoration: InputDecoration(
+
                       labelText: "WAQTC Number",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty) return "Enter a valid date!";
@@ -478,5 +823,11 @@ class _T329 extends State<T329> {
         ),
       ),
     );
+  }
+
+  Widget _buildWidgetLoading() {
+    return Platform.isIOS
+        ? CupertinoActivityIndicator()
+        : CircularProgressIndicator();
   }
 }
