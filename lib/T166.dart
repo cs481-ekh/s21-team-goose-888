@@ -236,8 +236,7 @@ class _T166 extends State<T166> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -296,8 +295,7 @@ class _T166 extends State<T166> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -356,8 +354,7 @@ class _T166 extends State<T166> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -422,8 +419,7 @@ class _T166 extends State<T166> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -482,8 +478,7 @@ class _T166 extends State<T166> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -542,8 +537,7 @@ class _T166 extends State<T166> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },

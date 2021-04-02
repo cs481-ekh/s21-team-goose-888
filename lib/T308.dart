@@ -173,7 +173,7 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Number";
                     return null;
                   },
@@ -185,7 +185,7 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Date!";
                     return null;
                   },
@@ -197,7 +197,7 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a Number";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a Number";
                     return null;
                   },
                 ),
@@ -208,7 +208,7 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("[a-zA-Z]").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Time!";
                     return null;
                   },
@@ -267,8 +267,7 @@ class _T308 extends State<T308> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid Basket and Initial Sample!";
                                 return null;
                               },
@@ -327,8 +326,7 @@ class _T308 extends State<T308> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid Number!";
                                 return null;
                               },
@@ -343,7 +341,7 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid Number!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid Number!";
                     return null;
                   },
                 ),
@@ -396,8 +394,7 @@ class _T308 extends State<T308> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid Number!";
                                 return null;
                               },
@@ -416,10 +413,10 @@ class _T308 extends State<T308> {
                   decoration: InputDecoration(
                       labelText: "T308 Tested by ",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid entry!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid entry!";
                     return null;
                   },
                 ),
@@ -428,10 +425,10 @@ class _T308 extends State<T308> {
                   decoration: InputDecoration(
                       labelText: "WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid WAQTC Number!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid WAQTC Number!";
                     return null;
                   },
                 ),
@@ -439,11 +436,11 @@ class _T308 extends State<T308> {
                   decoration: InputDecoration(
                       labelText: "Date ",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),

@@ -175,7 +175,7 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Qualified Lab Number";
                     return null;
                   },
@@ -188,7 +188,7 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Initial Reduction Location";
                     return null;
                   },
@@ -196,12 +196,12 @@ class _R47 extends State<R47> {
                 TextFormField(
                   controller: performedByController,
                   decoration: InputDecoration(
-                      labelText: "Performed by (Electronic Signature) *",
+                      labelText: "Performed by (Electronic Signature) ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Electronic Signature";
                     return null;
                   },
@@ -214,7 +214,7 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid WAQTC Number";
                     return null;
                   },
@@ -227,7 +227,7 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Data Reduced Entry";
                     return null;
                   },
@@ -240,7 +240,7 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Time Reduced Entry";
                     return null;
                   },
@@ -299,8 +299,7 @@ class _R47 extends State<R47> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a Sample Temperature!";
                                 return null;
                               },
@@ -311,12 +310,12 @@ class _R47 extends State<R47> {
                 TextFormField(
                   controller: witnessController,
                   decoration: InputDecoration(
-                      labelText: "Witnessed by (Electronic Signature) *",
+                      labelText: "Witnessed by (Electronic Signature) ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -329,7 +328,7 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -417,8 +416,7 @@ class _R47 extends State<R47> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a Sample Temperature!";
                                 return null;
                               },

@@ -184,7 +184,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Bid Item / Key Number!";
                     return null;
                   },
@@ -197,7 +197,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Project Number!";
                     return null;
                   },
@@ -210,8 +210,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty ||
-                        !RegExp("/^[a-z ,.'-]+\$/i").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Project Name!";
                     return null;
                   },
@@ -224,7 +223,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid District!";
                     return null;
                   },
@@ -237,8 +236,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty ||
-                        !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Random Number!";
                     return null;
                   },
@@ -298,8 +296,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a Sample Temperature!";
                                 return null;
                               },
@@ -352,8 +349,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty ||
-                        !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -398,7 +394,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a Recipient for Reports!";
                     return null;
                   },
@@ -417,7 +413,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Electronic Signature!";
                     return null;
                   },
@@ -430,7 +426,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid WAQTC Number!";
                     return null;
                   },
@@ -443,7 +439,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Electronic Signature for Witness!";
                     return null;
                   },
@@ -456,7 +452,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid WAQTC Number for Witness!";
                     return null;
                   },
@@ -469,7 +465,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Sample ID Number!";
                     return null;
                   },

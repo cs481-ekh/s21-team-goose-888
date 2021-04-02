@@ -196,7 +196,7 @@ class _T329 extends State<T329> {
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid temperature!";
                     return null;
                   },
                 ),
@@ -251,8 +251,7 @@ class _T329 extends State<T329> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\\d*\.?\\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid Pan Mass!";
                                 return null;
                               },
@@ -314,8 +313,7 @@ class _T329 extends State<T329> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\\d*\.?\\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid Initial Sample Temperature!";
                                 return null;
                               },
@@ -374,8 +372,7 @@ class _T329 extends State<T329> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\\d*\.?\\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid constant mass for the Initial Sample Temp 90 Minute!";
                                 return null;
                               },
@@ -434,8 +431,7 @@ class _T329 extends State<T329> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid Pan & Initial Sample!";
                                 return null;
                               },
@@ -494,8 +490,7 @@ class _T329 extends State<T329> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid constant mass for the Pan & Initial Sample 30 Minute!";
                                 return null;
                               },
@@ -555,8 +550,7 @@ class _T329 extends State<T329> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid Dry Sample Temp!";
                                 return null;
                               },
@@ -615,8 +609,7 @@ class _T329 extends State<T329> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid constant mass for the Dry Sample Temp 30 Minute!";
                                 return null;
                               },
@@ -676,8 +669,7 @@ class _T329 extends State<T329> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid Pan & Dry Sample";
                                 return null;
                               },
@@ -736,8 +728,7 @@ class _T329 extends State<T329> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid constant mass for the Pan & Dry Sample 30 Minute!";
                                 return null;
                               },
@@ -760,7 +751,7 @@ class _T329 extends State<T329> {
                   
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid name!";
                     return null;
                   },
                 ),
@@ -773,20 +764,20 @@ class _T329 extends State<T329> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid number!";
                     return null;
                   },
                 ),
                 TextFormField(
                   //controller: dateController,
                   decoration: InputDecoration(
-                      labelText: "Date *",
+                      labelText: "Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (value.isEmpty) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
