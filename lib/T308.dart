@@ -8,7 +8,6 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
 import 'FireBaseFireStoreDB.dart';
 
-
 class T308 extends StatefulWidget {
   @override
   _T308 createState() => _T308();
@@ -27,18 +26,22 @@ class _T308 extends State<T308> {
   TextEditingController assemblyController = TextEditingController();
   TextEditingController basketFinalController = TextEditingController();
 
-  void dispose() {
-    initialController.dispose();
-    assemblyController.dispose();
-    basketFinalController.dispose();
-    super.dispose();
-  }
-
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
       "basksetInitialSamp": initialController.text,
       "assemblyController ": assemblyController.text,
       "basketFinalAggregate": basketFinalController,
+      "independentAssessorController": independentAssessorController.text,
+      "serialNumController": serialNumController.text,
+      "organizationController": organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
+      "remarks": remarksController.text,
+      "testedBy": testedByController.text,
+      "testedByWAQTC": testedByWAQTCController.text,
+      "retestFlaggedBy": retestFlaggedbyController.text,
+      "retestFlagged": retestFlaggedController.text,
+      "retestComments": retestCommentsController.text,
     };
 
     db.setT329(dbMap);
@@ -53,7 +56,7 @@ class _T308 extends State<T308> {
       return true;
     }
   }
-  StoreDb db;
+
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
@@ -68,6 +71,9 @@ class _T308 extends State<T308> {
   TextEditingController retestCommentsController = TextEditingController();
 
   void dispose() {
+    initialController.dispose();
+    assemblyController.dispose();
+    basketFinalController.dispose();
     independentAssessorController.dispose();
     serialNumController.dispose();
     organizationController.dispose();
@@ -83,25 +89,6 @@ class _T308 extends State<T308> {
     super.dispose();
   }
 
-  void createAddDbMap(){
-    Map<String, dynamic> dbMap = {
-      "independentAssessorController": independentAssessorController.text,
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
-      "sampleDateController": sampleDateController.text,
-      "statusController": statusController.text,
-      "remarks": remarksController.text,
-      "testedBy": testedByController.text,
-      "testedByWAQTC" : testedByWAQTCController.text,
-      "retestFlaggedBy": retestFlaggedbyController.text,
-      "retestFlagged": retestFlaggedController.text,
-      "retestComments": retestCommentsController.text,
-
-    };
-
-    db.setT312(dbMap);
-
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,7 +114,6 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Number";
                     return null;
@@ -156,7 +142,8 @@ class _T308 extends State<T308> {
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -437,7 +424,7 @@ class _T308 extends State<T308> {
                   },
                 ),
                 TextFormField(
-                  controller:  testedByWAQTCController,
+                  controller: testedByWAQTCController,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -449,7 +436,6 @@ class _T308 extends State<T308> {
                   },
                 ),
                 TextFormField(
-
                   decoration: InputDecoration(
                       labelText: "Date ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -469,7 +455,7 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
