@@ -2,7 +2,9 @@
 class Assets {
   Assets._();
 
-  static const String assetsTestdataConfig = 'assets/testdata_config.json';
-  static const String testdataEng = 'assets/testdata/eng.traineddata';
+  static const String IconIdahoIcon = 'assets/Icon/IdahoIcon.png';
+  static const String assetsTessdataConfig = 'assets/tessdata_config.json';
+  static const String tessdataConfigs = 'assets/tessdata/configs';
+  static const String tessdataEng = 'assets/tessdata/eng.traineddata';
 
 }

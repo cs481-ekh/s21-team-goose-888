@@ -20,6 +20,11 @@ class _T312 extends State<T312> {
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File samp1, samp2;
   StoreDb db;
+  TextEditingController independentAssessorController = TextEditingController();
+  TextEditingController serialNumController = TextEditingController();
+  TextEditingController organizationController = TextEditingController();
+  TextEditingController sampleDateController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
   TextEditingController gyratoryBrandController = TextEditingController();
   TextEditingController gyratoryModelController = TextEditingController();
   TextEditingController gyratorySerialNumberController =
@@ -37,6 +42,11 @@ class _T312 extends State<T312> {
   TextEditingController retestFlaggedController = TextEditingController();
   TextEditingController retestCommentsController = TextEditingController();
   void dispose() {
+    independentAssessorController.dispose();
+    serialNumController.dispose();
+    organizationController.dispose();
+    sampleDateController.dispose();
+    statusController.dispose();
     gyratoryBrandController.dispose();
     gyratoryModelController.dispose();
     gyratorySerialNumberController.dispose();
@@ -57,6 +67,11 @@ class _T312 extends State<T312> {
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
+      "independentAssessorController": independentAssessorController.text,
+      "serialNumController":  serialNumController.text,
+      "organizationController":  organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
       "gyratoryBrand": gyratoryBrandController.text,
       "gyratoryModel": gyratoryModelController.text,
       "gyratorySerialNumber": gyratorySerialNumberController.text,
@@ -104,6 +119,7 @@ class _T312 extends State<T312> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
+                  controller: serialNumController,
                   decoration: InputDecoration(
                       labelText: "Serial # ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -111,45 +127,47 @@ class _T312 extends State<T312> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Number";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: organizationController,
                   decoration: InputDecoration(
-                      labelText: "Organization ",
+                      labelText: "Organization",
                       hintText: "Department",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid  Organization name!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  //controller: sampleDateController,
                   decoration: InputDecoration(
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: statusController,
                   decoration: InputDecoration(
-                      labelText: "Status ",
+                      labelText: "Status",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Status!";
                     return null;
                   },
                 ),
@@ -469,6 +487,21 @@ class _T312 extends State<T312> {
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid comment";
+                    return null;
+                  },
+                ),
+
+
+                TextFormField(
+                  controller: independentAssessorController,
+                  decoration: InputDecoration(
+                      labelText: "Independent Assessor Comments",
+                      labelStyle: TextStyle(color: Colors.black)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid first name!";
                     return null;
                   },
                 ),

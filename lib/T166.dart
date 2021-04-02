@@ -21,12 +21,19 @@ class _T166 extends State<T166> {
   File puckd1, gpuckh2o1, wpuckSSD1, puckd2, gpuckh2o2, wpuckSSD2;
   StoreDb db;
 
+
   TextEditingController puckd1Controller = TextEditingController();
   TextEditingController gpuckh2o1Controller = TextEditingController();
   TextEditingController wpuckSSD1Controller = TextEditingController();
   TextEditingController puckd2Controller = TextEditingController();
   TextEditingController gpuckh2o2Controller = TextEditingController();
   TextEditingController wpuckSSD2Controller = TextEditingController();
+
+
+  TextEditingController serialNumController = TextEditingController();
+  TextEditingController organizationController = TextEditingController();
+  TextEditingController sampleDateController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
 
   TextEditingController remarksController = TextEditingController();
   TextEditingController testedByController = TextEditingController();
@@ -35,8 +42,11 @@ class _T166 extends State<T166> {
   TextEditingController retestFlaggedbyController = TextEditingController();
   TextEditingController retestFlaggedController = TextEditingController();
   TextEditingController retestCommentsController = TextEditingController();
+  TextEditingController independentAssessorController = TextEditingController();
+
 
   void dispose() {
+
     puckd1Controller.dispose();
     gpuckh2o1Controller.dispose();
     wpuckSSD1Controller.dispose();
@@ -44,29 +54,47 @@ class _T166 extends State<T166> {
     gpuckh2o2Controller.dispose();
     wpuckSSD2Controller.dispose();
 
+
+    serialNumController.dispose();
+    organizationController.dispose();
+    sampleDateController.dispose();
+    statusController.dispose();
+
     remarksController.dispose();
     testedByController.dispose();
     testedByWAQTCController.dispose();
     retestFlaggedbyController.dispose();
     retestFlaggedController.dispose();
     retestCommentsController.dispose();
+    independentAssessorController.dispose();
     super.dispose();
   }
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
+
       "puckd1": puckd1Controller.text,
       "gpuck2o1": gpuckh2o1Controller.text,
       "wpuckSSD1": wpuckSSD1Controller.text,
       "puckd2": puckd2Controller.text,
       "gpuckh2o2": gpuckh2o2Controller.text,
       "wpuckSSD2": wpuckSSD2Controller.text,
+
+
+      "serialNumController":  serialNumController.text,
+      "organizationController":  organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
+
       "remarks": remarksController.text,
       "testedBy": testedByController.text,
       "testedByWAQTC": testedByWAQTCController.text,
       "retestFlaggedBy": retestFlaggedbyController.text,
       "retestFlagged": retestFlaggedController.text,
       "retestComments": retestCommentsController.text,
+
+      "independentAssessorController": independentAssessorController.text,
+
     };
   }
 
@@ -98,6 +126,7 @@ class _T166 extends State<T166> {
               child: Column(children: [
                 //Row 1 BEGINNING
                 TextFormField(
+                  controller: serialNumController,
                   decoration: InputDecoration(
                       labelText: "Serial # ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -105,45 +134,51 @@ class _T166 extends State<T166> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a valid Number";
+
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: organizationController,
                   decoration: InputDecoration(
-                      labelText: "Organization ",
+                      labelText: "Organization",
                       hintText: "Department",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid first name!";
+
+                      return "Enter a valid  Organization name!";
                     return null;
                   },
                 ),
                 TextFormField(
+                 // controller: sampleDateController,
                   decoration: InputDecoration(
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid date!";
+
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
                 ),
                 TextFormField(
+                  controller: statusController,
                   decoration: InputDecoration(
-                      labelText: "Status ",
+                      labelText: "Status",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid first name!";
+
+                      return "Enter a valid Status!";
                     return null;
                   },
                 ),
@@ -629,6 +664,21 @@ class _T166 extends State<T166> {
                     return null;
                   },
                 ),
+
+                TextFormField(
+                  controller: independentAssessorController,
+                  decoration: InputDecoration(
+                      labelText: "Independent Assessor Comments",
+                      labelStyle: TextStyle(color: Colors.black)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
+                ),
+
 
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
