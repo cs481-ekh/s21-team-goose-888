@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
-import 'FireBaseFireStoreDB.dart';
+import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class T166 extends StatefulWidget {
   @override
@@ -11,10 +13,21 @@ class T166 extends StatefulWidget {
 }
 
 class _T166 extends State<T166> {
+  var result = "Result In Here";
+  bool _isLoading = false;
+  dynamic _extractText = "";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-  File puckd1,gpuckh2o1,wpuckSSD1,puckd2,gpuckh2o2,wpuckSSD2 ;
+  File puckd1, gpuckh2o1, wpuckSSD1, puckd2, gpuckh2o2, wpuckSSD2;
   StoreDb db;
+
+  TextEditingController puckd1Controller = TextEditingController();
+  TextEditingController gpuckh2o1Controller = TextEditingController();
+  TextEditingController wpuckSSD1Controller = TextEditingController();
+  TextEditingController puckd2Controller = TextEditingController();
+  TextEditingController gpuckh2o2Controller = TextEditingController();
+  TextEditingController wpuckSSD2Controller = TextEditingController();
+
   TextEditingController remarksController = TextEditingController();
   TextEditingController testedByController = TextEditingController();
   TextEditingController testedByWAQTCController = TextEditingController();
@@ -24,6 +37,13 @@ class _T166 extends State<T166> {
   TextEditingController retestCommentsController = TextEditingController();
 
   void dispose() {
+    puckd1Controller.dispose();
+    gpuckh2o1Controller.dispose();
+    wpuckSSD1Controller.dispose();
+    puckd2Controller.dispose();
+    gpuckh2o2Controller.dispose();
+    wpuckSSD2Controller.dispose();
+
     remarksController.dispose();
     testedByController.dispose();
     testedByWAQTCController.dispose();
@@ -35,17 +55,22 @@ class _T166 extends State<T166> {
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
+      "puckd1": puckd1Controller.text,
+      "gpuck2o1": gpuckh2o1Controller.text,
+      "wpuckSSD1": wpuckSSD1Controller.text,
+      "puckd2": puckd2Controller.text,
+      "gpuckh2o2": gpuckh2o2Controller.text,
+      "wpuckSSD2": wpuckSSD2Controller.text,
       "remarks": remarksController.text,
       "testedBy": testedByController.text,
       "testedByWAQTC": testedByWAQTCController.text,
       "retestFlaggedBy": retestFlaggedbyController.text,
       "retestFlagged": retestFlaggedController.text,
       "retestComments": retestCommentsController.text,
-
     };
   }
 
-    bool _submit() {
+  bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
       return false;
@@ -54,6 +79,7 @@ class _T166 extends State<T166> {
       return true;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +104,7 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -91,7 +117,7 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -104,7 +130,8 @@ class _T166 extends State<T166> {
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -115,7 +142,7 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -132,75 +159,180 @@ class _T166 extends State<T166> {
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
+                  child: Column(children: [
                     puckd1 == null
                         ? Text('No image selected.')
-                        : Image.file(puckd1 ),
+                        : Image.file(puckd1),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          puckd1 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          puckd1Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              puckd1  = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: puckd1Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Weight of Puck in Water 1 ",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
+                  child: Column(children: [
                     gpuckh2o1 == null
                         ? Text('No image selected.')
-                        : Image.file(gpuckh2o1 ),
+                        : Image.file(gpuckh2o1),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          gpuckh2o1 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          gpuckh2o1Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              gpuckh2o1  = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: gpuckh2o1Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Weight of Puck SSD 1 ",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
+                  child: Column(children: [
                     wpuckSSD1 == null
                         ? Text('No image selected.')
-                        : Image.file(wpuckSSD1 ),
+                        : Image.file(wpuckSSD1),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          wpuckSSD1 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          wpuckSSD1Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              wpuckSSD1 = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: wpuckSSD1Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 //Row 2 Ending
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
@@ -213,75 +345,180 @@ class _T166 extends State<T166> {
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
-                    puckd2== null
+                  child: Column(children: [
+                    puckd2 == null
                         ? Text('No image selected.')
-                        : Image.file(puckd2 ),
+                        : Image.file(puckd2),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          puckd2 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          puckd2Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              puckd2  = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: puckd2Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Weight of Puck in Water 2 ",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
+                  child: Column(children: [
                     gpuckh2o2 == null
                         ? Text('No image selected.')
                         : Image.file(gpuckh2o2),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          gpuckh2o2 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          gpuckh2o2Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              gpuckh2o2  = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: gpuckh2o2Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Text(
                   "Weight of Puck SSD 2 ",
                   style: TextStyle(color: Colors.black),
                 ),
                 Container(
                   width: double.infinity,
-                  child : Column(children: [
-                   wpuckSSD2== null
+                  child: Column(children: [
+                    wpuckSSD2 == null
                         ? Text('No image selected.')
-                        : Image.file(wpuckSSD2 ),
+                        : Image.file(wpuckSSD2),
                     RaisedButton(
                         child: Text('Choose Photo'),
-                        onPressed: ()async {
+                        onPressed: () async {
                           var imgFile = await ImagePicker.pickImage(
                               source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          wpuckSSD2 = File(imgFile.path);
+                          var visionImage =
+                              FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                              FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                              await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          wpuckSSD2Controller.text = result;
+                          _recognizer.close();
                           setState(() {
-                            if (imgFile != null) {
-                              wpuckSSD2  = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
+                            _isLoading = false;
                           });
-                        }
-                    ),
-                  ] ),),
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                              controller: wpuckSSD2Controller,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (value.isEmpty ||
+                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
 
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
@@ -296,7 +533,7 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid remark";
                     return null;
                   },
@@ -316,7 +553,7 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Name";
                     return null;
                   },
@@ -329,13 +566,12 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
                 ),
                 TextFormField(
-
                   decoration: InputDecoration(
                       labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -343,7 +579,8 @@ class _T166 extends State<T166> {
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))  return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -361,7 +598,7 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Name";
                     return null;
                   },
@@ -374,7 +611,7 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid number";
                     return null;
                   },
@@ -387,12 +624,11 @@ class _T166 extends State<T166> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid comment";
                     return null;
                   },
                 ),
-
 
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
@@ -413,5 +649,10 @@ class _T166 extends State<T166> {
       ),
     );
   }
-}
 
+  Widget _buildWidgetLoading() {
+    return Platform.isIOS
+        ? CupertinoActivityIndicator()
+        : CircularProgressIndicator();
+  }
+}

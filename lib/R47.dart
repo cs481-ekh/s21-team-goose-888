@@ -6,7 +6,6 @@ import 'dart:io';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
 import 'package:itd_888/FireBaseFireStoreDB.dart';
-import 'package:itd_888/main.dart';
 
 class R47 extends StatefulWidget {
   @override

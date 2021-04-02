@@ -145,7 +145,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (value.isEmpty || !RegExp("/^\\S*\$/").hasMatch(value))
-                      return "Enter a valid first Status!";
+                      return "Enter a valid Status!";
                     return null;
                   },
                 ),
