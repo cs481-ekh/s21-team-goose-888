@@ -31,19 +31,19 @@ class _ProjectsPage extends State<ProjectsPage> {
         title: Text("Projects Available"),
         backgroundColor: Colors.blue,
       ),
-      body: //Padding(
-      //padding: const EdgeInsets.all(10.0),
+      body: Padding(
+      padding: const EdgeInsets.all(10.0),
       //padding: EdgeInsets.only(left: 50, right: 50),
 
       //form
 
-      Column(children: <Widget>[
-        // Padding(
-        //   padding: const EdgeInsets.all(10.0),
-        //   child: Form(
-        //     key: formKey,
-        //     child: Column(
-        //       children: <Widget>[
+     // Column(//children: <Widget>[
+      //  Padding(
+          //padding: const EdgeInsets.all(10.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: <Widget>[
         //         DropdownButton(
         //           value: _value,
         //           selectedItemBuilder: (BuildContext context)
@@ -67,58 +67,32 @@ class _ProjectsPage extends State<ProjectsPage> {
         //         SizedBox(
         //           height: MediaQuery.of(context).size.width * 0.05,
         //         ),
-        //         RaisedButton(
-        //           padding: EdgeInsets.symmetric(
-        //             vertical: 1.0,
-        //             horizontal: 10.0,
-        //           ),
-        //           child: Text(
-        //             "Go to Project",
-        //             style: TextStyle(
-        //               fontSize: 16.0,
-        //             ),
-        //           ),
-        //           onPressed: () {
-        //             //bool check = ;
-        //             if (_submit()) {
-        //               showAlertDialog(context);
-        //             }
-        //           },
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
+                RaisedButton(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 1.0,
+                    horizontal: 10.0,
+                  ),
+                  child: Text(
+                    "Go to Project",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  onPressed: () {
+                    //bool check = ;
+                    if (_submit()) {
+                      Navigator.pushNamed(context, '/form');
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
 
-      ]
-      ),
+     // ]
+     // ),
     );
   }
 
-  showAlertDialog(BuildContext context) {
-    // Create button
-    Widget okButton = FlatButton(
-      child: Text("OK"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // Create AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("Code Sent"),
-      content: Text("Code was successfully sent"),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
 }

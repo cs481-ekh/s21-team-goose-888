@@ -30,6 +30,7 @@ void main() {
             text: textEmail,
           ),
       '/form': (context) => FormSections(),
+      '/project': (context) => ProjectsPage(),
       '/LooseMixR97': (context) => LooseMixR97(),
       '/Custody': (context) => Custody(),
       '/R47': (context) => R47(),
@@ -175,7 +176,7 @@ class _HomeLogin extends State<HomeLogin> {
                       emailController.text, passwordController.text);
                   //bool check = ;
                   if (_submit()) {
-                    Navigator.pushNamed(context, '/form');
+                    Navigator.pushNamed(context, '/project');
                   }
                 },
               ),
