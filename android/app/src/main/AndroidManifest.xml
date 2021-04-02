@@ -8,7 +8,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="itd_888"
+        android:label="ITD 888"
         android:icon="@mipmap/ic_launcher">
         <meta-data 
             android:name ="com.google.firebase.ml.vision.DEPENDENCIES" 
