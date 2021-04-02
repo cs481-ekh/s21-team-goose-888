@@ -70,7 +70,6 @@ class _R47 extends State<R47> {
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
-
       "labNumber": labNumberController.text,
       "initReductionLocation": initReductionLocationController.text,
       "performedBy": performedByController.text,
@@ -80,14 +79,12 @@ class _R47 extends State<R47> {
       "sampleTemp": sampleTempController.text,
       "witness": witnessController.text,
       "witnessWAQTCNumber": wWAQTCNumberController.text,
-      "boxSecurityTape": boxSecurityTapeController.text
-
+      "boxSecurityTape": boxSecurityTapeController.text,
       "independentAssessorController": independentAssessorController.text,
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
+      "serialNumController": serialNumController.text,
+      "organizationController": organizationController.text,
       "sampleDateController": sampleDateController.text,
       "statusController": statusController.text,
-
     };
 
     db.setR47(dbMap);
@@ -118,7 +115,6 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Number";
                     return null;
@@ -133,7 +129,6 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid  Organization name!";
                     return null;
@@ -148,7 +143,8 @@ class _R47 extends State<R47> {
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -160,7 +156,6 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Status!";
                     return null;
@@ -439,7 +434,7 @@ class _R47 extends State<R47> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },

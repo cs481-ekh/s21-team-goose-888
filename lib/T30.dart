@@ -71,11 +71,6 @@ class _T30 extends State<T30> {
   TextEditingController organizationController = TextEditingController();
   TextEditingController sampleDateController = TextEditingController();
   TextEditingController statusController = TextEditingController();
-  TextEditingController aggregateCorrectFact50Controller = TextEditingController();
-  TextEditingController aggregateCorrectFact37Controller = TextEditingController();
-  TextEditingController aggregateCorrectFact25Controller = TextEditingController();
-  TextEditingController aggregateCorrectFact19Controller = TextEditingController();
-  TextEditingController aggregateCorrectFact9Controller = TextEditingController();
 
   TextEditingController aggregateCorrectNo4Controller = TextEditingController();
   TextEditingController aggregateCorrectNo8Controller = TextEditingController();
@@ -98,7 +93,6 @@ class _T30 extends State<T30> {
   TextEditingController retestCommentsController = TextEditingController();
 
   void dispose() {
-
     ocr1.dispose();
     ocr2.dispose();
     ocr3.dispose();
@@ -120,7 +114,6 @@ class _T30 extends State<T30> {
 
     ocr16.dispose();
     ocr17.dispose();
-
 
     independentAssessorController.dispose();
     serialNumController.dispose();
@@ -157,7 +150,6 @@ class _T30 extends State<T30> {
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
-
       "panSampleBeforeWashMass": ocr1.text,
       "panBeforeWashMass": ocr2.text,
       "sampleBeforeWashMass": ocr3.text,
@@ -175,13 +167,11 @@ class _T30 extends State<T30> {
       "cMRNo100": ocr15.text,
       "cMRNo200": ocr16.text,
       "cMRPan": ocr17.text,
-
       "independentAssessorController": independentAssessorController.text,
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
+      "serialNumController": serialNumController.text,
+      "organizationController": organizationController.text,
       "sampleDateController": sampleDateController.text,
       "statusController": statusController.text,
-
       "aggregateCorrectFact50": aggregateCorrectFact50Controller.text,
       "aggregateCorrectFact37": aggregateCorrectFact37Controller.text,
       "aggregateCorrectFact25": aggregateCorrectFact25Controller.text,
@@ -268,7 +258,8 @@ class _T30 extends State<T30> {
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
