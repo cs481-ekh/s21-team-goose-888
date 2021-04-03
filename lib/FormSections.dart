@@ -162,6 +162,7 @@ class FormSections extends StatelessWidget {
                           child: Text(
                             'Account Information',
                             style: TextStyle(
+                              color: Colors.white,
                               fontSize: 20.0,
                             ),
                           ),
