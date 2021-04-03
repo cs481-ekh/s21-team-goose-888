@@ -22,9 +22,7 @@ class _T308 extends State<T308> {
   File initial, assembly, fin;
   StoreDb db;
 
-  TextEditingController initialController = TextEditingController();
-  TextEditingController assemblyController = TextEditingController();
-  TextEditingController basketFinalController = TextEditingController();
+
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
@@ -57,7 +55,9 @@ class _T308 extends State<T308> {
     }
   }
 
-  TextEditingController independentAssessorController = TextEditingController();
+  TextEditingController initialController = TextEditingController();
+  TextEditingController assemblyController = TextEditingController();
+  TextEditingController basketFinalController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
   TextEditingController sampleDateController = TextEditingController();
@@ -69,6 +69,8 @@ class _T308 extends State<T308> {
   TextEditingController retestFlaggedbyController = TextEditingController();
   TextEditingController retestFlaggedController = TextEditingController();
   TextEditingController retestCommentsController = TextEditingController();
+  TextEditingController independentAssessorController = TextEditingController();
+
 
   void dispose() {
     initialController.dispose();
@@ -423,7 +425,7 @@ class _T308 extends State<T308> {
                 TextFormField(
                   controller: testedByWAQTCController,
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number ",
+                      labelText: "Tested by WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},

@@ -209,7 +209,7 @@ class _R47 extends State<R47> {
                 TextFormField(
                   controller: wAQTCNumberController,
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number",
+                      labelText: "Witness WAQTC Number",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -323,7 +323,7 @@ class _R47 extends State<R47> {
                 TextFormField(
                   controller: wWAQTCNumberController,
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number",
+                      labelText: "Reduced By WAQTC Number",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},

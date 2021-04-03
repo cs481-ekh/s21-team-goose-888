@@ -40,6 +40,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
   TextEditingController witnessedByController = TextEditingController();
   TextEditingController wWAQTCNumberController = TextEditingController();
   TextEditingController sampleIDNumberController = TextEditingController();
+
   void dispose() {
     independentAssessorController.dispose();
     serialNumController.dispose();
@@ -147,9 +148,9 @@ class _LooseMixR97 extends State<LooseMixR97> {
 
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.text,
 
-                  onFieldSubmitted: (value) {},
+                  onFieldSubmitted: (value) { sampleDateController.text=now;},
                   initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
@@ -421,7 +422,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: WAQTCNumberController,
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number ",
+                      labelText: "Sample WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
@@ -447,7 +448,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 TextFormField(
                   controller: wWAQTCNumberController,
                   decoration: InputDecoration(
-                      labelText: "WAQTC Number ",
+                      labelText: "Witness WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},

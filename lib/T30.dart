@@ -42,6 +42,7 @@ class _T30 extends State<T30> {
   TextEditingController ocr6 = TextEditingController();
 
   TextEditingController ocr7 = TextEditingController();
+  TextEditingController ocr1in = TextEditingController();
   TextEditingController ocr8 = TextEditingController();
   TextEditingController ocr9 = TextEditingController();
   TextEditingController ocr10 = TextEditingController();
@@ -50,6 +51,7 @@ class _T30 extends State<T30> {
   TextEditingController ocr12 = TextEditingController();
   TextEditingController ocr13 = TextEditingController();
   TextEditingController ocr14 = TextEditingController();
+  TextEditingController ocrno50 = TextEditingController();
   TextEditingController ocr15 = TextEditingController();
 
   TextEditingController ocr16 = TextEditingController();
@@ -96,7 +98,7 @@ class _T30 extends State<T30> {
     ocr1.dispose();
     ocr2.dispose();
     ocr3.dispose();
-
+    ocr1in.dispose();
     ocr4.dispose();
     ocr5.dispose();
     ocr6.dispose();
@@ -110,6 +112,7 @@ class _T30 extends State<T30> {
     ocr12.dispose();
     ocr13.dispose();
     ocr14.dispose();
+    ocrno50.dispose();
     ocr15.dispose();
 
     ocr16.dispose();
@@ -153,6 +156,7 @@ class _T30 extends State<T30> {
       "panSampleBeforeWashMass": ocr1.text,
       "panBeforeWashMass": ocr2.text,
       "sampleBeforeWashMass": ocr3.text,
+    "cMRGradation25": ocr1in.text,
       "panSampleAfterWashMass": ocr4.text,
       "panAfterWashMass": ocr5.text,
       "sampleAfterWashMass": ocr6.text,
@@ -164,6 +168,7 @@ class _T30 extends State<T30> {
       "cMRNo8": ocr12.text,
       "cMRNo16": ocr13.text,
       "cMRNo30": ocr14.text,
+      "cMRNo50": ocrno50.text,
       "cMRNo100": ocr15.text,
       "cMRNo200": ocr16.text,
       "cMRPan": ocr17.text,
@@ -765,6 +770,65 @@ class _T30 extends State<T30> {
                   height: MediaQuery.of(context).size.width * 0.05,
                 ),
                 Text(
+                  "CMR Gradation 1 in. (25 mm) ",
+                  style: TextStyle(color: Colors.black),
+                ),
+                Container(
+                  width: double.infinity,
+                  child: Column(children: [
+                    CMR1In == null
+                        ? Text('No image selected.')
+                        : Image.file(CMR1In),
+                    RaisedButton(
+                        child: Text('Choose Photo'),
+                        onPressed: () async {
+                          var imgFile = await ImagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          CMR1In = File(imgFile.path);
+                          var visionImage =
+                          FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                          FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                          await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          ocr1in.text = result;
+                          _recognizer.close();
+                          setState(() {
+                            _isLoading = false;
+                          });
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                        controller: ocr1in,
+                        keyboardType: TextInputType.number,
+                        maxLines: null,
+                        onFieldSubmitted: (value) {},
+                        validator: (value) {
+                          if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                            return "Enter a valid number";
+                          return null;
+                        },
+                      ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
+                Text(
                   "CMR Gradation 3/4 in. (12.5 mm) ",
                   style: TextStyle(color: Colors.black),
                 ),
@@ -1114,6 +1178,65 @@ class _T30 extends State<T30> {
                                 return null;
                               },
                             ),
+                    )
+                  ]),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
+                Text(
+                  "CMR No. 50 (0.300 mm) ",
+                  style: TextStyle(color: Colors.black),
+                ),
+                Container(
+                  width: double.infinity,
+                  child: Column(children: [
+                    No50 == null
+                        ? Text('No image selected.')
+                        : Image.file(No50),
+                    RaisedButton(
+                        child: Text('Choose Photo'),
+                        onPressed: () async {
+                          var imgFile = await ImagePicker.pickImage(
+                              source: ImageSource.gallery);
+                          if (imgFile != null) {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          } else {
+                            print('No image selected.');
+                          }
+
+                          No30 = File(imgFile.path);
+                          var visionImage =
+                          FirebaseVisionImage.fromFile(imgFile);
+                          var _recognizer =
+                          FirebaseVision.instance.textRecognizer();
+                          var _extractText =
+                          await _recognizer.processImage(visionImage);
+                          result = '${_extractText.text}';
+                          result = result.replaceAll(new RegExp("[^\\d.]"), "");
+                          print(result);
+                          ocrno50.text = result;
+                          _recognizer.close();
+                          setState(() {
+                            _isLoading = false;
+                          });
+                        }),
+                    Center(
+                      child: _isLoading
+                          ? _buildWidgetLoading()
+                          : TextFormField(
+                        controller: ocrno50,
+                        keyboardType: TextInputType.number,
+                        maxLines: null,
+                        onFieldSubmitted: (value) {},
+                        validator: (value) {
+                          if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                            return "Enter a valid number";
+                          return null;
+                        },
+                      ),
                     )
                   ]),
                 ),

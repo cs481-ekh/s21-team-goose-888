@@ -32,7 +32,7 @@ class _T209 extends State<T209> {
       massofsamplesub2;
   StoreDb db;
 
-
+  TextEditingController independentAssessorController = TextEditingController();
   TextEditingController mBS1Controller = TextEditingController();
   TextEditingController mB1Controller = TextEditingController();
   TextEditingController mDSA1Controller = TextEditingController();
@@ -89,6 +89,7 @@ class _T209 extends State<T209> {
     retestFlaggedbyController.dispose();
     retestFlaggedController.dispose();
     retestCommentsController.dispose();
+    independentAssessorController.dispose();
     super.dispose();
   }
 
@@ -107,7 +108,7 @@ class _T209 extends State<T209> {
       "sWBS2": sWBS2Controller.text,
       "sWB2": sWB2Controller.text,
       "sWS2": sWS2Controller.text,
-
+      "independentAssessorController": independentAssessorController.text,
       "serialNumController":  serialNumController.text,
       "organizationController":  organizationController.text,
       "sampleDateController": sampleDateController.text,
@@ -1053,7 +1054,19 @@ class _T209 extends State<T209> {
                     return null;
                   },
                 ),
-
+                TextFormField(
+                  controller: independentAssessorController,
+                  decoration: InputDecoration(
+                      labelText: "Independent Assessor Comments",
+                      labelStyle: TextStyle(color: Colors.black)),
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid first name!";
+                    return null;
+                  },
+                ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.2,
                 ),
