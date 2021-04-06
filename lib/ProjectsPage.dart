@@ -21,9 +21,14 @@ class _ProjectsPage extends State<ProjectsPage> {
       return true;
     }
   }
+  List<String> list_items;
   int _value = 1;
   StoreDb db;
-  //final <List<String>> list_items =db.listProjects();
+
+  List <String> getProjects() {
+    List<String> list_items =db.listProjects() as List <String>;
+    return list_items;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,29 +49,30 @@ class _ProjectsPage extends State<ProjectsPage> {
             key: formKey,
             child: Column(
               children: <Widget>[
-        //         DropdownButton(
-        //           value: _value,
-        //           selectedItemBuilder: (BuildContext context)
-        //           {
-        //             return list_items.map<Widget>((int item) {
-        //               return Text('item $item');
-        //             }).toList();
-        //           },
-        //           items: list_items.map((int item) {
-        //             return DropdownMenuItem<int>(
-        //               child: Text('Log $item'),
-        //               value: item,
-        //             );
-        //           }).toList(),
-        //           onChanged: (value) {
-        //             setState(() {
-        //               _value = value;
-        //             });
-        //           },
-        //         ),
-        //         SizedBox(
-        //           height: MediaQuery.of(context).size.width * 0.05,
-        //         ),
+                DropdownButton(
+                  value: _value,
+                  selectedItemBuilder: (BuildContext context)
+                  {
+                     list_items = getProjects();
+                    return list_items.map<Widget>((String item) {
+                      return Text('item $item');
+                    }).toList();
+                  },
+                  items: list_items.map((String item) {
+                    return DropdownMenuItem<String>(
+                      child: Text('Log $item'),
+                      value: item,
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 RaisedButton(
                   padding: EdgeInsets.symmetric(
                     vertical: 1.0,
