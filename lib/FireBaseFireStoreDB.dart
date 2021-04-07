@@ -162,7 +162,7 @@ class StoreDb implements FireStoreDb {
 
   @override
   Future<List<String>> listProjects() async {
-    List<String> projectSerialNumbers;
+    List<String> projectSerialNumbers = List<String>();
     CollectionReference projects = getProjects();
     QuerySnapshot querySnapshot = await projects.get();
     List<QueryDocumentSnapshot> docList = querySnapshot.docs;

@@ -9,6 +9,10 @@ class ProjectsPage extends StatefulWidget {
 
 class _ProjectsPage extends State<ProjectsPage> {
   var formKey = GlobalKey<FormState>();
+  void initState() {
+    db.listProjects();
+    super.initState();
+  }
 
   var isLoading = false;
   //String textEmail = "";
@@ -23,13 +27,14 @@ class _ProjectsPage extends State<ProjectsPage> {
     }
   }
 
-  List<String> list_items;
-  int _value = 1;
+  // Future List<String> list_items;
+  String _dropDownValue = "Select Project";
+  String value = "";
   StoreDb db = StoreDb();
 
-  List<String> getProjects() {
-    List<String> list_items = db.listProjects() as List<String>;
-    return list_items;
+  Future<List> fetchData() async {
+    return db.listProjects();
+
   }
 
   @override
@@ -53,24 +58,27 @@ class _ProjectsPage extends State<ProjectsPage> {
           key: formKey,
           child: Column(
             children: <Widget>[
-              DropdownButton(
-                value: _value,
-                selectedItemBuilder: (BuildContext context) {
-                  list_items = getProjects();
-                  return list_items.map<Widget>((String item) {
-                    return Text('item $item');
-                  }).toList();
-                },
-                items: list_items.map((String item) {
-                  return DropdownMenuItem<String>(
-                    child: Text('Log $item'),
-                    value: item,
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _value = value;
-                  });
+              FutureBuilder<List<String>>(
+                future: db.listProjects(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return DropdownButton(
+                      isExpanded: true,
+                      value: _dropDownValue,
+                      items: snapshot.data.map((value) {
+                        return new DropdownMenuItem(
+                          value: value,
+                          child: new Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          _dropDownValue = newValue;
+                        });
+                      },
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator());
                 },
               ),
               SizedBox(
