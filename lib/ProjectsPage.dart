@@ -34,10 +34,12 @@ class _ProjectsPage extends State<ProjectsPage> {
 
   Future<List> fetchData() async {
     return db.listProjects();
+
   }
 
   @override
   Widget build(BuildContext context) {
+    list_items = getProjects();
     return Scaffold(
       appBar: AppBar(
         title: Text("Projects Available"),
