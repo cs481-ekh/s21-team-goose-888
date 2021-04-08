@@ -33,24 +33,36 @@ void main() {
             text: textEmail,
           ),
       '/form': (context) => FormSections(
-       // db: dbe,
+        db: dbe,
       ),
       '/project': (context) => ProjectsPage(),
       '/LooseMixR97': (context) => LooseMixR97(
         db: dbe,
       ),
-      '/Custody': (context) => Custody(),
+      '/Custody': (context) => Custody(
+        db: dbe,
+      ),
       '/R47': (context) => R47(
         db: dbe,
       ),
       '/T166': (context) => T166(
         db: dbe,
       ),
-      '/T30': (context) => T30(),
-      '/T329': (context) => T329(),
-      '/T308': (context) => T308(),
-      '/T209': (context) => T209(),
-      '/T312': (context) => T312(),
+      '/T30': (context) => T30(
+        db: dbe,
+      ),
+      '/T329': (context) => T329(
+        db: dbe,
+      ),
+      '/T308': (context) => T308(
+        db: dbe,
+      ),
+      '/T209': (context) => T209(
+        db: dbe,
+      ),
+      '/T312': (context) => T312(
+        db: dbe,
+      ),
     },
   ));
 }

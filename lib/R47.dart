@@ -9,9 +9,9 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class R47 extends StatefulWidget {
-  StoreDb db;
 
   @override
+  StoreDb db;
    R47({Key key, @required this.db}) : super(key: key);
   _R47 createState() => _R47();
 }

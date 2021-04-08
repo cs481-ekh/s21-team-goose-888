@@ -9,6 +9,8 @@ import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class T312 extends StatefulWidget {
   @override
+  StoreDb db;
+  T312({Key key, @required this.db}) : super(key: key);
   _T312 createState() => _T312();
 }
 
@@ -19,7 +21,7 @@ class _T312 extends State<T312> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File samp1, samp2;
-  StoreDb db=StoreDb();
+  //StoreDb db=StoreDb();
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
@@ -88,7 +90,7 @@ class _T312 extends State<T312> {
       "retestComments": retestCommentsController.text,
     };
 
-    db.setT312(dbMap);
+    widget.db.setT312(dbMap);
   }
 
   bool _submit() {

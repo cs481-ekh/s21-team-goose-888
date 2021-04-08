@@ -6,13 +6,15 @@ import 'FireBaseFireStoreDB.dart';
 
 class Custody extends StatefulWidget {
   @override
+  StoreDb db;
+  Custody({Key key, @required this.db}) : super(key: key);
   _Custody createState() => _Custody();
 }
 
 class _Custody extends State<Custody> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-  StoreDb db= StoreDb();
+  //StoreDb db= StoreDb();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
   TextEditingController sampleDateController = TextEditingController();
@@ -48,7 +50,7 @@ class _Custody extends State<Custody> {
 
     };
 
-    db.setT312(dbMap);
+    widget.db.setCustody(dbMap);
 
   }
   @override

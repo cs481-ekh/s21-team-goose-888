@@ -152,7 +152,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
 
-                  onFieldSubmitted: (value) { sampleDateController.text=now;},
+                  onFieldSubmitted: (value) { //sampleDateController.text=now;
+                     },
                   initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";

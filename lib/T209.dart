@@ -9,6 +9,8 @@ import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class T209 extends StatefulWidget {
   @override
+  StoreDb db;
+  T209({Key key, @required this.db}) : super(key: key);
   _T209 createState() => _T209();
 }
 
@@ -30,7 +32,7 @@ class _T209 extends State<T209> {
       massbandsamplesub2,
       massofbsub2,
       massofsamplesub2;
-  StoreDb db= StoreDb();
+  //StoreDb db= StoreDb();
 
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController mBS1Controller = TextEditingController();
@@ -122,7 +124,7 @@ class _T209 extends State<T209> {
       "retestComments": retestCommentsController.text,
     };
 
-    db.setT209(dbMap);
+    widget.db.setT209(dbMap);
   }
 
   bool _submit() {
@@ -270,8 +272,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -330,8 +331,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -390,8 +390,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -450,8 +449,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -510,8 +508,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -570,8 +567,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -634,8 +630,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -694,8 +689,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -754,8 +748,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -814,8 +807,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -874,8 +866,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },
@@ -934,8 +925,7 @@ class _T209 extends State<T209> {
                               maxLines: null,
                               onFieldSubmitted: (value) {},
                               validator: (value) {
-                                if (value.isEmpty ||
-                                    !RegExp("/^\d*\.?\d*\$/").hasMatch(value))
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                                   return "Enter a valid number";
                                 return null;
                               },

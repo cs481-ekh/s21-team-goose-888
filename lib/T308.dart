@@ -10,6 +10,8 @@ import 'FireBaseFireStoreDB.dart';
 
 class T308 extends StatefulWidget {
   @override
+  StoreDb db;
+  T308({Key key, @required this.db}) : super(key: key);
   _T308 createState() => _T308();
 }
 
@@ -20,7 +22,7 @@ class _T308 extends State<T308> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File initial, assembly, fin;
-  StoreDb db=StoreDb();
+  //StoreDb db=StoreDb();
 
 
 
@@ -42,7 +44,7 @@ class _T308 extends State<T308> {
       "retestComments": retestCommentsController.text,
     };
 
-    db.setT308(dbMap);
+    widget.db.setT308(dbMap);
   }
 
   bool _submit() {
