@@ -9,6 +9,7 @@ class ProjectsPage extends StatefulWidget {
 
 class _ProjectsPage extends State<ProjectsPage> {
   var formKey = GlobalKey<FormState>();
+  var formKey2 = GlobalKey<FormState>();
   void initState() {
     db.listProjects();
     super.initState();
@@ -43,70 +44,72 @@ class _ProjectsPage extends State<ProjectsPage> {
         title: Text("Projects Available"),
         backgroundColor: Colors.blue,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        //padding: EdgeInsets.only(left: 50, right: 50),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          //padding: EdgeInsets.only(left: 50, right: 50),
 
-        //form
+          //form
 
-        // Column(//children: <Widget>[
-        //  Padding(
-        //padding: const EdgeInsets.all(10.0),
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: <Widget>[
-              FutureBuilder<List<String>>(
-                future: db.listProjects(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return DropdownButton(
-                      isExpanded: true,
-                      value: _dropDownValue,
-                      items: snapshot.data.map((value) {
-                        return new DropdownMenuItem(
-                          value: value,
-                          child: new Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _dropDownValue = newValue;
-                        });
-                      },
-                    );
-                  }
-                  return Center(child: CircularProgressIndicator());
-                },
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.width * 0.05,
-              ),
-              RaisedButton(
-                padding: EdgeInsets.symmetric(
-                  vertical: 1.0,
-                  horizontal: 10.0,
+          // Column(//children: <Widget>[
+          //  Padding(
+          //padding: const EdgeInsets.all(10.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: <Widget>[
+                FutureBuilder<List<String>>(
+                  future: db.listProjects(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return DropdownButton(
+                        isExpanded: true,
+                        value: _dropDownValue,
+                        items: snapshot.data.map((value) {
+                          return new DropdownMenuItem(
+                            value: value,
+                            child: new Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            _dropDownValue = newValue;
+                          });
+                        },
+                      );
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  },
                 ),
-                child: Text(
-                  "Go to Project",
-                  style: TextStyle(
-                    fontSize: 16.0,
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
+                RaisedButton(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 1.0,
+                    horizontal: 10.0,
                   ),
+                  child: Text(
+                    "Go to Project",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  onPressed: () {
+                    //bool check = ;
+                    if (_submit()) {
+                      Navigator.pushNamed(context, '/form');
+                    }
+                  },
                 ),
-                onPressed: () {
-                  //bool check = ;
-                  if (_submit()) {
-                    Navigator.pushNamed(context, '/form');
-                  }
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
 
-      // ]
-      // ),
+        // ]
+        // ),
+      ),
     );
   }
 }
