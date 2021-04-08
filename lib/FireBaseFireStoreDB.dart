@@ -83,6 +83,17 @@ class StoreDb implements FireStoreDb {
     return currentProject;
   }
 
+    void setProjectFromName(String pName) async{
+    CollectionReference projects = getProjects();
+    QuerySnapshot querySnapshot = await projects.get();
+    List<QueryDocumentSnapshot> docList = querySnapshot.docs;
+    docList.forEach((element) {
+      if( element.get('projectName') == pName ){
+        currentProject = element.id;
+      }
+    });
+  }
+
   @override
   Future<String> getStatus() async {
     if (currentProject == 0) {
@@ -181,7 +192,7 @@ class StoreDb implements FireStoreDb {
     CollectionReference projects = getProjects();
     QuerySnapshot querySnapshot = await projects.get();
     List<QueryDocumentSnapshot> docList = querySnapshot.docs;
-    docList.forEach((element) => projectSerialNumbers.add(element.id));
+    docList.forEach((element) => projectSerialNumbers.add(element.get('projectName')));
     return projectSerialNumbers;
   }
 }

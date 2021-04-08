@@ -113,7 +113,7 @@ class _ProjectsPage extends State<ProjectsPage> {
                   onPressed: () {
                     //bool check = ;
                     if (_submit()) {
-                      widget.db.selectProject(_dropDownValue);
+                      widget.db.setProjectFromName(_dropDownValue);
                       Navigator.pushNamed(context, '/form');
                     }
                   },
