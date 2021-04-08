@@ -10,9 +10,20 @@ class ProjectsPage extends StatefulWidget {
 class _ProjectsPage extends State<ProjectsPage> {
   var formKey = GlobalKey<FormState>();
   var formKey2 = GlobalKey<FormState>();
+  TextEditingController projectName = TextEditingController();
+  TextEditingController bidItem = TextEditingController();
+  void dispose() {
+    projectName.dispose();
+    bidItem.dispose();
+
+    super.dispose();
+  }
   void initState() {
     db.listProjects();
     super.initState();
+  }
+  void createProject() {
+    db.createNewProject(projectName.text, bidItem.text);
   }
 
   var isLoading = false;
@@ -45,16 +56,17 @@ class _ProjectsPage extends State<ProjectsPage> {
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
+
+
           //padding: EdgeInsets.only(left: 50, right: 50),
 
           //form
-
-          // Column(//children: <Widget>[
+         child: Column(children: <Widget>[
+            Padding(
+          padding: const EdgeInsets.all(10.0),
           //  Padding(
           //padding: const EdgeInsets.all(10.0),
-          child: Form(
+           child: Form(
             key: formKey,
             child: Column(
               children: <Widget>[
@@ -105,11 +117,78 @@ class _ProjectsPage extends State<ProjectsPage> {
               ],
             ),
           ),
-        ),
+           ),
+           SizedBox(
+             height: MediaQuery.of(context).size.width * 0.05,
+           ),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          //  Padding(
+          //padding: const EdgeInsets.all(10.0),
+          child: Form(
+            key: formKey2,
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  controller: projectName,
+                  decoration: InputDecoration(labelText: "Project Name"),
+                  keyboardType: TextInputType.text,
+                  onFieldSubmitted: (value) {
 
-        // ]
-        // ),
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Enter a valid project name!';
+                    }
+                    //textEmail=value;
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: bidItem,
+                  decoration: InputDecoration(labelText: "Bid Item"),
+                  keyboardType: TextInputType.text,
+                  onFieldSubmitted: (value) {
+
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Enter a valid bid item!';
+                    }
+                    //textEmail=value;
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
+                RaisedButton(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 1.0,
+                    horizontal: 10.0,
+                  ),
+                  child: Text(
+                    "Create Project",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  onPressed: () {
+                    //bool check = ;
+                    if (_submit()) {
+                      createProject();
+                      Navigator.pushNamed(context, '/form');
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+   ]
+        ),
       ),
     );
+
   }
 }
