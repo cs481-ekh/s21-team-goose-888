@@ -46,6 +46,18 @@ class StoreDb implements FireStoreDb {
   Map<String, dynamic> t312;
   Map<String, dynamic> t329;
 
+  StoreDb(){
+    custody = {};
+    r47 = {};
+    r97 = {};
+    t166 = {};
+    t209 = {};
+    t30 = {};
+    t308 = {};
+    t312 = {};
+    t329 = {};
+  }
+
   @override
   Future<String> getBidItem() async {
     if (currentProject == 0) {
