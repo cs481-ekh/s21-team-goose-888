@@ -197,7 +197,7 @@ class _T30 extends State<T30> {
       "retestComments": retestCommentsController.text,
     };
 
-    db.setT312(dbMap);
+    db.setT30(dbMap);
   }
 
   bool _submit() {

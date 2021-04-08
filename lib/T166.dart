@@ -96,6 +96,7 @@ class _T166 extends State<T166> {
       "independentAssessorController": independentAssessorController.text,
 
     };
+    db.setT166(dbMap);
   }
 
   bool _submit() {

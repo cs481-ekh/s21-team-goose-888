@@ -42,7 +42,7 @@ class _T308 extends State<T308> {
       "retestComments": retestCommentsController.text,
     };
 
-    db.setT329(dbMap);
+    db.setT308(dbMap);
   }
 
   bool _submit() {
