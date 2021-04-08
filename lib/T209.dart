@@ -30,7 +30,7 @@ class _T209 extends State<T209> {
       massbandsamplesub2,
       massofbsub2,
       massofsamplesub2;
-  StoreDb db;
+  StoreDb db= StoreDb();
 
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController mBS1Controller = TextEditingController();

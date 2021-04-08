@@ -19,7 +19,7 @@ class _T166 extends State<T166> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File puckd1, gpuckh2o1, wpuckSSD1, puckd2, gpuckh2o2, wpuckSSD2;
-  StoreDb db;
+  StoreDb db= StoreDb();
 
 
   TextEditingController puckd1Controller = TextEditingController();
@@ -681,6 +681,7 @@ class _T166 extends State<T166> {
                 RaisedButton(
                   onPressed: () {
                     if (_submit()) {
+                      createAddDbMap();
                       Navigator.pop(context);
                     }
                   },

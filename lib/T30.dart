@@ -1715,6 +1715,7 @@ class _T30 extends State<T30> {
                 RaisedButton(
                   onPressed: () {
                     if (_submit()) {
+                      createAddDbMap();
                       //Navigator.pushNamed(context, '/form');
                       Navigator.pop(context);
                     }

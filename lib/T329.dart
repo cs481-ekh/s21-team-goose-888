@@ -27,7 +27,7 @@ class _T329 extends State<T329> {
       drySample30,
       panDrySamp,
       panDrySamp30;
-  StoreDb db;
+  StoreDb db=StoreDb();
 
 
   TextEditingController serialNumController = TextEditingController();
@@ -802,6 +802,7 @@ class _T329 extends State<T329> {
                 RaisedButton(
                   onPressed: () {
                     if (_submit()) {
+                      createAddDbMap();
                       //Navigator.pushNamed(context, '/form');
                       Navigator.pop(context);
                     }
