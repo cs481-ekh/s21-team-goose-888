@@ -9,6 +9,8 @@ import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class T30 extends StatefulWidget {
   @override
+  StoreDb db;
+  T30({Key key, @required this.db}) : super(key: key);
   _T30 createState() => _T30();
 }
 
@@ -31,7 +33,7 @@ class _T30 extends State<T30> {
       CMR3eightthsIn;
   File No4, No8, No16, No30, No50, No100, No200, Pan;
 
-  StoreDb db;
+  //StoreDb db;
 
   TextEditingController ocr1 = TextEditingController();
   TextEditingController ocr2 = TextEditingController();
@@ -197,7 +199,7 @@ class _T30 extends State<T30> {
       "retestComments": retestCommentsController.text,
     };
 
-    db.setT30(dbMap);
+    widget.db.setT30(dbMap);
   }
 
   bool _submit() {

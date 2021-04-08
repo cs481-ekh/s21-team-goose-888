@@ -10,6 +10,8 @@ import 'FireBaseFireStoreDB.dart';
 
 class T308 extends StatefulWidget {
   @override
+  StoreDb db;
+  T308({Key key, @required this.db}) : super(key: key);
   _T308 createState() => _T308();
 }
 
@@ -20,30 +22,11 @@ class _T308 extends State<T308> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File initial, assembly, fin;
-  StoreDb db=StoreDb();
+  //StoreDb db=StoreDb();
 
 
 
-  void createAddDbMap() {
-    Map<String, dynamic> dbMap = {
-      "basksetInitialSamp": initialController.text,
-      "assemblyController ": assemblyController.text,
-      "basketFinalAggregate": basketFinalController,
-      "independentAssessorController": independentAssessorController.text,
-      "serialNumController": serialNumController.text,
-      "organizationController": organizationController.text,
-      "sampleDateController": sampleDateController.text,
-      "statusController": statusController.text,
-      "remarks": remarksController.text,
-      "testedBy": testedByController.text,
-      "testedByWAQTC": testedByWAQTCController.text,
-      "retestFlaggedBy": retestFlaggedbyController.text,
-      "retestFlagged": retestFlaggedController.text,
-      "retestComments": retestCommentsController.text,
-    };
 
-    db.setT308(dbMap);
-  }
 
   bool _submit() {
     final isValid = _formKey.currentState.validate();
@@ -70,8 +53,6 @@ class _T308 extends State<T308> {
   TextEditingController retestFlaggedController = TextEditingController();
   TextEditingController retestCommentsController = TextEditingController();
   TextEditingController independentAssessorController = TextEditingController();
-
-
   void dispose() {
     initialController.dispose();
     assemblyController.dispose();
@@ -90,6 +71,27 @@ class _T308 extends State<T308> {
 
     super.dispose();
   }
+  void createAddDbMap() {
+    Map<String, dynamic> dbMap = {
+      "basksetInitialSamp": initialController.text,
+      "assemblyController ": assemblyController.text,
+      "basketFinalAggregate": basketFinalController.text,
+      "independentAssessorController": independentAssessorController.text,
+      "serialNumController": serialNumController.text,
+      "organizationController": organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
+      "remarks": remarksController.text,
+      "testedBy": testedByController.text,
+      "testedByWAQTC": testedByWAQTCController.text,
+      "retestFlaggedBy": retestFlaggedbyController.text,
+      "retestFlagged": retestFlaggedController.text,
+      "retestComments": retestCommentsController.text,
+    };
+
+    widget.db.setT308(dbMap);
+  }
+
 
   @override
   Widget build(BuildContext context) {

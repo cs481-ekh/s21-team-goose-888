@@ -10,6 +10,8 @@ import 'FireBaseFireStoreDB.dart';
 
 class LooseMixR97 extends StatefulWidget {
   @override
+  StoreDb db;
+  LooseMixR97 ({Key key, @required this.db}) : super(key: key);
   _LooseMixR97 createState() => _LooseMixR97();
 }
 
@@ -21,7 +23,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampleTemp, sampleLoc;
-  StoreDb db=StoreDb();
+ // StoreDb db=StoreDb();
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
@@ -78,14 +80,14 @@ class _LooseMixR97 extends State<LooseMixR97> {
       "sampleTemperature": sampleTemperatureController.text,
       "quantityRepresented": quantityRepresentedController.text,
       "sendReportsTo": sendReportsToController.text,
-      "sampledBy": sampledByController,
+      "sampledBy": sampledByController.text,
       "WAQTCNumber": WAQTCNumberController.text,
       "witnessedBy": witnessedByController.text,
       "sampleIDNumber": sampleIDNumberController.text,
       "witnessWAQTCNumber": wWAQTCNumberController.text,
     };
 
-    db.setR97(dbMap);
+    widget.db.setR97(dbMap);
   }
 
   bool _submit() {
@@ -150,7 +152,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
 
-                  onFieldSubmitted: (value) { sampleDateController.text=now;},
+                  onFieldSubmitted: (value) { //sampleDateController.text=now;
+                     },
                   initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";

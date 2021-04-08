@@ -166,6 +166,9 @@ class StoreDb implements FireStoreDb {
   Future<void> setT329(Map map) async {
     await getProjects().doc(currentProject).update({'T329': map});
   }
+  Future<void> setCustody(Map map) async {
+    await getProjects().doc(currentProject).update({'Custody': map});
+  }
 
   @override
   void selectProject(String serialNumber) {
@@ -178,7 +181,7 @@ class StoreDb implements FireStoreDb {
     CollectionReference projects = getProjects();
     QuerySnapshot querySnapshot = await projects.get();
     List<QueryDocumentSnapshot> docList = querySnapshot.docs;
-    docList.forEach((element) => projectSerialNumbers.add(element.get('projectName')));
+    docList.forEach((element) => projectSerialNumbers.add(element.id));
     return projectSerialNumbers;
   }
 }

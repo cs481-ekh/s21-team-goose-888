@@ -9,6 +9,8 @@ import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class T329 extends StatefulWidget {
   @override
+  StoreDb db;
+  T329({Key key, @required this.db}) : super(key: key);
   _T329 createState() => _T329();
 }
 
@@ -27,7 +29,7 @@ class _T329 extends State<T329> {
       drySample30,
       panDrySamp,
       panDrySamp30;
-  StoreDb db=StoreDb();
+  //StoreDb db=StoreDb();
 
 
   TextEditingController serialNumController = TextEditingController();
@@ -99,7 +101,7 @@ class _T329 extends State<T329> {
 
     };
 
-    db.setT329(dbMap);
+    widget.db.setT329(dbMap);
   }
 
   bool _submit() {
