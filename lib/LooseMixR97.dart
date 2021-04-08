@@ -80,7 +80,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
       "sampleTemperature": sampleTemperatureController.text,
       "quantityRepresented": quantityRepresentedController.text,
       "sendReportsTo": sendReportsToController.text,
-      "sampledBy": sampledByController,
+      "sampledBy": sampledByController.text,
       "WAQTCNumber": WAQTCNumberController.text,
       "witnessedBy": witnessedByController.text,
       "sampleIDNumber": sampleIDNumberController.text,

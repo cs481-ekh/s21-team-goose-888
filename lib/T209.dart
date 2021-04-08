@@ -197,7 +197,7 @@ class _T209 extends State<T209> {
                   decoration: InputDecoration(
                      // labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
@@ -1064,6 +1064,7 @@ class _T209 extends State<T209> {
                 RaisedButton(
                   onPressed: () {
                     if (_submit()) {
+                      createAddDbMap();
                       Navigator.pop(context);
                     }
                   },
