@@ -4,12 +4,15 @@ import 'package:flutter/rendering.dart';
 
 class ProjectsPage extends StatefulWidget {
   @override
+  StoreDb db;
+  ProjectsPage({Key key, @required this.db}) : super(key: key);
   _ProjectsPage createState() => _ProjectsPage();
 }
 
 class _ProjectsPage extends State<ProjectsPage> {
   var formKey = GlobalKey<FormState>();
   var formKey2 = GlobalKey<FormState>();
+  //StoreDb db = StoreDb();
   TextEditingController projectName = TextEditingController();
   TextEditingController bidItem = TextEditingController();
   void dispose() {
@@ -19,11 +22,11 @@ class _ProjectsPage extends State<ProjectsPage> {
     super.dispose();
   }
   void initState() {
-    db.listProjects();
+    widget.db.listProjects();
     super.initState();
   }
   void createProject() {
-    db.createNewProject(projectName.text, bidItem.text);
+    widget.db.createNewProject(projectName.text, bidItem.text);
   }
 
   var isLoading = false;
@@ -42,10 +45,10 @@ class _ProjectsPage extends State<ProjectsPage> {
   // Future List<String> list_items;
   String _dropDownValue = "Select Project";
   String value = "";
-  StoreDb db = StoreDb();
+
 
   Future<List> fetchData() async {
-    return db.listProjects();
+    return widget.db.listProjects();
   }
 
   @override
@@ -71,7 +74,7 @@ class _ProjectsPage extends State<ProjectsPage> {
             child: Column(
               children: <Widget>[
                 FutureBuilder<List<String>>(
-                  future: db.listProjects(),
+                  future: widget.db.listProjects(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return DropdownButton(
@@ -110,6 +113,7 @@ class _ProjectsPage extends State<ProjectsPage> {
                   onPressed: () {
                     //bool check = ;
                     if (_submit()) {
+                      widget.db.selectProject(_dropDownValue);
                       Navigator.pushNamed(context, '/form');
                     }
                   },

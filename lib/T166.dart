@@ -9,6 +9,9 @@ import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class T166 extends StatefulWidget {
   @override
+  StoreDb db;
+  T166({Key key, @required this.db}) : super(key: key);
+
   _T166 createState() => _T166();
 }
 
@@ -19,7 +22,7 @@ class _T166 extends State<T166> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File puckd1, gpuckh2o1, wpuckSSD1, puckd2, gpuckh2o2, wpuckSSD2;
-  StoreDb db= StoreDb();
+  //StoreDb db= StoreDb();
 
 
   TextEditingController puckd1Controller = TextEditingController();
@@ -92,11 +95,10 @@ class _T166 extends State<T166> {
       "retestFlaggedBy": retestFlaggedbyController.text,
       "retestFlagged": retestFlaggedController.text,
       "retestComments": retestCommentsController.text,
-
       "independentAssessorController": independentAssessorController.text,
 
     };
-    db.setT166(dbMap);
+    widget.db.setT166(dbMap);
   }
 
   bool _submit() {

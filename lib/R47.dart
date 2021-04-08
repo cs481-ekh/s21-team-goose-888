@@ -4,15 +4,20 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+//import 'main.dart';
 
 import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class R47 extends StatefulWidget {
+  StoreDb db;
+
   @override
+   R47({Key key, @required this.db}) : super(key: key);
   _R47 createState() => _R47();
 }
 
 class _R47 extends State<R47> {
+
   var result = "Result In Here";
   bool _isLoading = false;
   dynamic _extractText = "";
@@ -20,7 +25,7 @@ class _R47 extends State<R47> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampTemp, tapeNum;
-  StoreDb db= StoreDb();
+  //StoreDb db= StoreDb();
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
@@ -86,7 +91,8 @@ class _R47 extends State<R47> {
       "statusController": statusController.text,
     };
 
-    db.setR47(dbMap);
+
+    widget.db.setR47(dbMap);
   }
 
   @override

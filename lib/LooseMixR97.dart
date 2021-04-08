@@ -10,6 +10,8 @@ import 'FireBaseFireStoreDB.dart';
 
 class LooseMixR97 extends StatefulWidget {
   @override
+  StoreDb db;
+  LooseMixR97 ({Key key, @required this.db}) : super(key: key);
   _LooseMixR97 createState() => _LooseMixR97();
 }
 
@@ -21,7 +23,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampleTemp, sampleLoc;
-  StoreDb db=StoreDb();
+ // StoreDb db=StoreDb();
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
@@ -85,7 +87,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
       "witnessWAQTCNumber": wWAQTCNumberController.text,
     };
 
-    db.setR97(dbMap);
+    widget.db.setR97(dbMap);
   }
 
   bool _submit() {

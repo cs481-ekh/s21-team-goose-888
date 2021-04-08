@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class FormSections extends StatelessWidget {
+  final StoreDb db;
+  FormSections({Key key, @required this.db}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
