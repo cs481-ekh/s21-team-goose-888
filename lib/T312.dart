@@ -19,7 +19,7 @@ class _T312 extends State<T312> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File samp1, samp2;
-  StoreDb db;
+  StoreDb db=StoreDb();
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
@@ -511,6 +511,7 @@ class _T312 extends State<T312> {
                 RaisedButton(
                   onPressed: () {
                     if (_submit()) {
+                      createAddDbMap();
                       Navigator.pop(context);
                     }
                   },

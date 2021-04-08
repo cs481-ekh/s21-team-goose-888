@@ -12,7 +12,7 @@ class Custody extends StatefulWidget {
 class _Custody extends State<Custody> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-  StoreDb db;
+  StoreDb db= StoreDb();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
   TextEditingController sampleDateController = TextEditingController();
@@ -396,6 +396,7 @@ class _Custody extends State<Custody> {
                 ),
                 RaisedButton(
                   onPressed: () {
+                    createAddDbMap();
                     Navigator.pop(context);
                   },
                   child: Text('Save'),

@@ -20,15 +20,14 @@ class _R47 extends State<R47> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampTemp, tapeNum;
-  StoreDb db;
+  StoreDb db= StoreDb();
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
   TextEditingController sampleDateController = TextEditingController();
   TextEditingController statusController = TextEditingController();
   TextEditingController labNumberController = TextEditingController();
-  TextEditingController initReductionLocationController =
-      TextEditingController();
+  TextEditingController initReductionLocationController = TextEditingController();
   TextEditingController performedByController = TextEditingController();
   TextEditingController wAQTCNumberController = TextEditingController();
   TextEditingController dataReducedController = TextEditingController();
@@ -443,6 +442,7 @@ class _R47 extends State<R47> {
                 RaisedButton(
                   onPressed: () {
                     if (_submit()) {
+                      createAddDbMap();
                       //Navigator.pushNamed(context, '/form');
                       Navigator.pop(context);
                     }

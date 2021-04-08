@@ -20,7 +20,7 @@ class _T308 extends State<T308> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File initial, assembly, fin;
-  StoreDb db;
+  StoreDb db=StoreDb();
 
 
 
@@ -42,7 +42,7 @@ class _T308 extends State<T308> {
       "retestComments": retestCommentsController.text,
     };
 
-    db.setT329(dbMap);
+    db.setT308(dbMap);
   }
 
   bool _submit() {
@@ -467,6 +467,7 @@ class _T308 extends State<T308> {
                 RaisedButton(
                   onPressed: () {
                     if (_submit()) {
+                      createAddDbMap();
                       //Navigator.pushNamed(context, '/form');
                       Navigator.pop(context);
                     }

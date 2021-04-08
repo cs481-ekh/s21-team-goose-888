@@ -21,7 +21,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampleTemp, sampleLoc;
-  StoreDb db;
+  StoreDb db=StoreDb();
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
@@ -491,6 +491,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 RaisedButton(
                   onPressed: () {
                     if (_submit()) {
+                      createAddDbMap();
                       //Navigator.pushNamed(context, '/form');
                       Navigator.pop(context);
                     }
