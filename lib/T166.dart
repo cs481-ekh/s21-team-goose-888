@@ -25,27 +25,27 @@ class _T166 extends State<T166> {
   //StoreDb db= StoreDb();
 
 
-  TextEditingController puckd1Controller = TextEditingController();
-  TextEditingController gpuckh2o1Controller = TextEditingController();
-  TextEditingController wpuckSSD1Controller = TextEditingController();
-  TextEditingController puckd2Controller = TextEditingController();
-  TextEditingController gpuckh2o2Controller = TextEditingController();
-  TextEditingController wpuckSSD2Controller = TextEditingController();
+  TextEditingController puckd1Controller ;
+  TextEditingController gpuckh2o1Controller ;
+  TextEditingController wpuckSSD1Controller ;
+  TextEditingController puckd2Controller ;
+  TextEditingController gpuckh2o2Controller ;
+  TextEditingController wpuckSSD2Controller ;
 
 
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
+  TextEditingController serialNumController ;
+  TextEditingController organizationController ;
+  TextEditingController sampleDateController ;
+  TextEditingController statusController ;
 
-  TextEditingController remarksController = TextEditingController();
-  TextEditingController testedByController = TextEditingController();
-  TextEditingController testedByWAQTCController = TextEditingController();
-  TextEditingController testedDateController = TextEditingController();
-  TextEditingController retestFlaggedbyController = TextEditingController();
-  TextEditingController retestFlaggedController = TextEditingController();
-  TextEditingController retestCommentsController = TextEditingController();
-  TextEditingController independentAssessorController = TextEditingController();
+  TextEditingController remarksController ;
+  TextEditingController testedByController ;
+  TextEditingController testedByWAQTCController;
+  TextEditingController testedDateController ;
+  TextEditingController retestFlaggedbyController ;
+  TextEditingController retestFlaggedController ;
+  TextEditingController retestCommentsController;
+  TextEditingController independentAssessorController ;
 
 
   void dispose() {
@@ -110,6 +110,31 @@ class _T166 extends State<T166> {
       return true;
     }
   }
+  void initState() {
+    var _map = widget.db.getT166();
+   puckd1Controller = TextEditingController(text: _map["puckd1"]);
+     gpuckh2o1Controller = TextEditingController(text: _map["gpuck2o1"]);
+      wpuckSSD1Controller = TextEditingController(text: _map["wpuckSSD1"]);
+    puckd2Controller = TextEditingController(text: _map["puckd2"]);
+     gpuckh2o2Controller = TextEditingController(text: _map["gpuckh2o2"]);
+     wpuckSSD2Controller = TextEditingController(text: _map["wpuckSSD2"]);
+
+
+     serialNumController = TextEditingController(text: _map["serialNumControlle"]);
+     organizationController = TextEditingController(text: _map["organizationController"]);
+    sampleDateController = TextEditingController(text: now);
+     statusController = TextEditingController(text: _map["statusController"]);
+
+     remarksController = TextEditingController(text: _map["remarks"]);
+     testedByController = TextEditingController(text: _map["testedBy"]);
+     testedByWAQTCController = TextEditingController(text: _map["testedByWAQTC"]);
+     testedDateController = TextEditingController(text: now);
+     retestFlaggedbyController = TextEditingController(text: _map["retestFlaggedBy"]);
+     retestFlaggedController = TextEditingController(text: _map["retestFlagged"]);
+     retestCommentsController = TextEditingController(text: _map["retestComments"]);
+     independentAssessorController = TextEditingController(text: _map["independentAssessorController"]);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,15 +183,13 @@ class _T166 extends State<T166> {
                   },
                 ),
                 TextFormField(
-                 // controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
-
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
                   },
@@ -685,6 +708,7 @@ class _T166 extends State<T166> {
                   onPressed: () {
                     if (_submit()) {
                       createAddDbMap();
+                      widget.db.loadValues();
                       Navigator.pop(context);
                     }
                   },

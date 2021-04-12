@@ -150,7 +150,9 @@ class StoreDb implements FireStoreDb {
   Future<void> setT209(Map map) async {
     await getProjects().doc(currentProject).update({'T209': map});
   }
-
+  Map getT209() {
+    return t209;
+  }
   Future<void> setT30(Map map) async {
     await getProjects().doc(currentProject).update({'T30': map});
   }
@@ -161,6 +163,9 @@ class StoreDb implements FireStoreDb {
 
   Future<void> setT312(Map map) async {
     await getProjects().doc(currentProject).update({'T312': map});
+  }
+  Map getT312() {
+    return t312;
   }
 
   Future<void> setT329(Map map) async {

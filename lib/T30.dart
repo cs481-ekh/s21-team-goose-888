@@ -91,7 +91,6 @@ class _T30 extends State<T30> {
   TextEditingController remarksController = TextEditingController();
   TextEditingController testedByController = TextEditingController();
   TextEditingController testedByWAQTCController = TextEditingController();
-  //zTextEditingController testedDateController = TextEditingController();
   TextEditingController retestFlaggedbyController = TextEditingController();
   TextEditingController retestFlaggedController = TextEditingController();
   TextEditingController retestCommentsController = TextEditingController();
@@ -211,9 +210,77 @@ class _T30 extends State<T30> {
       return true;
     }
   }
+  void initState() {
+    var _map = widget.db.getR97();
+    ocr1 = TextEditingController( text: _map["bidItem"]);
+    ocr2 = TextEditingController( text: _map["panBeforeWashMass"]);
+    ocr3 = TextEditingController( text: _map["sampleBeforeWashMass"]);
+
+    ocr4 = TextEditingController( text: _map["panSampleAfterWashMass"]);
+    ocr5 = TextEditingController( text: _map["panAfterWashMass"]);
+    ocr6 = TextEditingController( text: _map["sampleAfterWashMass"]);
+
+    ocr7 = TextEditingController( text: _map["cMRGradation50"]);
+    ocr1in = TextEditingController( text: _map["cMRGradation25"]);
+    ocr8 = TextEditingController( text: _map["cMRGradation37"]);
+    ocr9 = TextEditingController( text: _map["cMRGradation12"]);
+    ocr10 = TextEditingController( text: _map["cMRGradation9"]);
+
+    ocr11 = TextEditingController( text: _map["cMRNo4"]);
+    ocr12 = TextEditingController( text: _map["cMRNo8"]);
+    ocr13 = TextEditingController( text: _map["cMRNo16"]);
+    ocr14 = TextEditingController( text: _map["cMRNo30"]);
+    ocrno50 = TextEditingController( text: _map["cMRNo50"]);
+    ocr15 = TextEditingController( text: _map["cMRNo100"]);
+
+    ocr16 = TextEditingController( text: _map["cMRNo200"]);
+    ocr17 = TextEditingController( text: _map["cMRPan"]);
+
+    independentAssessorController = TextEditingController( text: _map["independentAssessorController"]);
+    serialNumController = TextEditingController( text: _map["serialNumController"]);
+    organizationController = TextEditingController( text: _map["organizationController"]);
+    sampleDateController = TextEditingController( text: now);
+    statusController = TextEditingController( text: _map["statusController"]);
+
+    aggregateCorrectFact50Controller =
+        TextEditingController( text: _map["aggregateCorrectFact50"]);
+    aggregateCorrectFact37Controller =
+        TextEditingController( text: _map["aggregateCorrectFact37"]);
+    aggregateCorrectFact25Controller =
+        TextEditingController( text: _map["aggregateCorrectFact25"]);
+    aggregateCorrectFact19Controller =
+        TextEditingController( text: _map["aggregateCorrectFact19"]);
+    aggregateCorrectFact9Controller =
+        TextEditingController( text: _map["aggregateCorrectFact9"]);
+
+
+
+    aggregateCorrectNo4Controller = TextEditingController( text: _map["aggregateCorrectNo4"]);
+    aggregateCorrectNo8Controller = TextEditingController( text: _map["aggregateCorrectNo8"]);
+    aggregateCorrectNo16Controller =
+        TextEditingController( text: _map["aggregateCorrectNo16"]);
+    aggregateCorrectNo30Controller =
+        TextEditingController( text: _map["aggregateCorrectNo30"]);
+    aggregateCorrectNo50Controller =
+        TextEditingController( text: _map["aggregateCorrectNo50"]);
+    aggregateCorrectNo100Controller =
+        TextEditingController( text: _map["aggregateCorrectNo100"]);
+    aggregateCorrectNo200Controller =
+        TextEditingController( text: _map["aggregateCorrectNo200"]);
+    remarksController = TextEditingController( text: _map["remarks"]);
+    testedByController = TextEditingController( text: _map["testedBy"]);
+    testedByWAQTCController = TextEditingController( text: _map["testedByWAQTC"]);
+    retestFlaggedbyController = TextEditingController( text: _map["retestFlaggedBy"]);
+    retestFlaggedController = TextEditingController( text: _map["retestFlagged"]);
+    retestCommentsController = TextEditingController( text: _map["retestComments"]);
+
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text("T30 Sieve Analysis Details"),
@@ -257,13 +324,12 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
-                  //controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid date!";
@@ -1718,6 +1784,7 @@ class _T30 extends State<T30> {
                   onPressed: () {
                     if (_submit()) {
                       createAddDbMap();
+                      widget.db.loadValues();
                       //Navigator.pushNamed(context, '/form');
                       Navigator.pop(context);
                     }

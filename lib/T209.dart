@@ -148,6 +148,37 @@ class _T209 extends State<T209> {
           // TODO: Forget the user
         }
       });
+  void initState() {
+    TextEditingController independentAssessorController = TextEditingController();
+    TextEditingController mBS1Controller = TextEditingController();
+    TextEditingController mB1Controller = TextEditingController();
+    TextEditingController mDSA1Controller = TextEditingController();
+    TextEditingController sWBS1Controller = TextEditingController();
+    TextEditingController sWB1Controller = TextEditingController();
+    TextEditingController sWS1Controller = TextEditingController();
+
+    TextEditingController mBS2Controller = TextEditingController();
+    TextEditingController mB2Controller = TextEditingController();
+    TextEditingController mDSA2Controller = TextEditingController();
+    TextEditingController sWBS2Controller = TextEditingController();
+    TextEditingController sWB2Controller = TextEditingController();
+    TextEditingController sWS2Controller = TextEditingController();
+
+
+    TextEditingController serialNumController = TextEditingController();
+    TextEditingController organizationController = TextEditingController();
+    TextEditingController sampleDateController = TextEditingController();
+    TextEditingController statusController = TextEditingController();
+
+    TextEditingController remarksController = TextEditingController();
+    TextEditingController testedByController = TextEditingController();
+    TextEditingController testedByWAQTCController = TextEditingController();
+    TextEditingController testedDateController = TextEditingController();
+    TextEditingController retestFlaggedbyController = TextEditingController();
+    TextEditingController retestFlaggedController = TextEditingController();
+    TextEditingController retestCommentsController = TextEditingController();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
