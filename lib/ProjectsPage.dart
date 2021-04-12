@@ -21,10 +21,12 @@ class _ProjectsPage extends State<ProjectsPage> {
 
     super.dispose();
   }
+
   void initState() {
     widget.db.listProjects();
     super.initState();
   }
+
   void createProject() {
     widget.db.createNewProject(projectName.text, bidItem.text);
   }
@@ -46,7 +48,6 @@ class _ProjectsPage extends State<ProjectsPage> {
   String _dropDownValue = "Select Project";
   String value = "";
 
-
   Future<List> fetchData() async {
     return widget.db.listProjects();
   }
@@ -59,140 +60,133 @@ class _ProjectsPage extends State<ProjectsPage> {
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
+        //padding: EdgeInsets.only(left: 50, right: 50),
 
-
-          //padding: EdgeInsets.only(left: 50, right: 50),
-
-          //form
-         child: Column(children: <Widget>[
-            Padding(
-          padding: const EdgeInsets.all(10.0),
-          //  Padding(
-          //padding: const EdgeInsets.all(10.0),
-           child: Form(
-            key: formKey,
-            child: Column(
-              children: <Widget>[
-                FutureBuilder<List<String>>(
-                  future: widget.db.listProjects(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return DropdownButton(
-                        isExpanded: true,
-                        value: _dropDownValue,
-                        items: snapshot.data.map((value) {
-                          return new DropdownMenuItem(
-                            value: value,
-                            child: new Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) {
-                          setState(() {
-                            _dropDownValue = newValue;
-                          });
-                        },
-                      );
-                    }
-                    return Center(child: CircularProgressIndicator());
-                  },
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.05,
-                ),
-                RaisedButton(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 1.0,
-                    horizontal: 10.0,
+        //form
+        child: Column(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            //  Padding(
+            //padding: const EdgeInsets.all(10.0),
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: <Widget>[
+                  FutureBuilder<List<String>>(
+                    future: widget.db.listProjects(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return DropdownButton(
+                          isExpanded: true,
+                          value: _dropDownValue,
+                          items: snapshot.data.map((value) {
+                            return new DropdownMenuItem(
+                              value: value,
+                              child: new Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              _dropDownValue = newValue;
+                            });
+                          },
+                        );
+                      }
+                      return Center(child: CircularProgressIndicator());
+                    },
                   ),
-                  child: Text(
-                    "Go to Project",
-                    style: TextStyle(
-                      fontSize: 16.0,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  RaisedButton(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 1.0,
+                      horizontal: 10.0,
                     ),
+                    child: Text(
+                      "Go to Project",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    onPressed: () {
+                      //bool check = ;
+                      if (_submit()) {
+                        widget.db.selectProject(_dropDownValue);
+                        widget.db.loadValues();
+                        Navigator.pushNamed(context, '/form');
+                      }
+                    },
                   ),
-                  onPressed: () {
-                    //bool check = ;
-                    if (_submit()) {
-                      widget.db.selectProject(_dropDownValue);
-                      Navigator.pushNamed(context, '/form');
-                    }
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-           ),
-           SizedBox(
-             height: MediaQuery.of(context).size.width * 0.05,
-           ),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          //  Padding(
-          //padding: const EdgeInsets.all(10.0),
-          child: Form(
-            key: formKey2,
-            child: Column(
-              children: <Widget>[
-                TextFormField(
-                  controller: projectName,
-                  decoration: InputDecoration(labelText: "Project Name"),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (value) {
-
-                  },
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Enter a valid project name!';
-                    }
-                    //textEmail=value;
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: bidItem,
-                  decoration: InputDecoration(labelText: "Bid Item"),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (value) {
-
-                  },
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Enter a valid bid item!';
-                    }
-                    //textEmail=value;
-                    return null;
-                  },
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.05,
-                ),
-                RaisedButton(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 1.0,
-                    horizontal: 10.0,
+          SizedBox(
+            height: MediaQuery.of(context).size.width * 0.05,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            //  Padding(
+            //padding: const EdgeInsets.all(10.0),
+            child: Form(
+              key: formKey2,
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    controller: projectName,
+                    decoration: InputDecoration(labelText: "Project Name"),
+                    keyboardType: TextInputType.text,
+                    onFieldSubmitted: (value) {},
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Enter a valid project name!';
+                      }
+                      //textEmail=value;
+                      return null;
+                    },
                   ),
-                  child: Text(
-                    "Create Project",
-                    style: TextStyle(
-                      fontSize: 16.0,
+                  TextFormField(
+                    controller: bidItem,
+                    decoration: InputDecoration(labelText: "Bid Item"),
+                    keyboardType: TextInputType.text,
+                    onFieldSubmitted: (value) {},
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Enter a valid bid item!';
+                      }
+                      //textEmail=value;
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  RaisedButton(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 1.0,
+                      horizontal: 10.0,
                     ),
+                    child: Text(
+                      "Create Project",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    onPressed: () {
+                      //bool check = ;
+                      if (_submit()) {
+                        createProject();
+                        Navigator.pushNamed(context, '/form');
+                      }
+                    },
                   ),
-                  onPressed: () {
-                    //bool check = ;
-                    if (_submit()) {
-                      createProject();
-                      Navigator.pushNamed(context, '/form');
-                    }
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-   ]
-        ),
+        ]),
       ),
     );
-
   }
 }

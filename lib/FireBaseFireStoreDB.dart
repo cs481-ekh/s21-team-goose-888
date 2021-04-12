@@ -46,7 +46,7 @@ class StoreDb implements FireStoreDb {
   Map<String, dynamic> t312;
   Map<String, dynamic> t329;
 
-  StoreDb(){
+  StoreDb() {
     custody = {};
     r47 = {};
     r97 = {};
@@ -166,6 +166,7 @@ class StoreDb implements FireStoreDb {
   Future<void> setT329(Map map) async {
     await getProjects().doc(currentProject).update({'T329': map});
   }
+
   Future<void> setCustody(Map map) async {
     await getProjects().doc(currentProject).update({'Custody': map});
   }
@@ -173,6 +174,23 @@ class StoreDb implements FireStoreDb {
   @override
   void selectProject(String serialNumber) {
     currentProject = serialNumber;
+  }
+
+  loadValues() async {
+    if (currentProject == 0) {
+      return "No Project Selected";
+    } else {
+      DocumentSnapshot snapshot = await getProjects().doc(currentProject).get();
+      this.custody = snapshot.data()['Custody'];
+      this.r47 = snapshot.data()['R47'];
+      this.r97 = snapshot.data()['R97'];
+      this.t166 = snapshot.data()['T166'];
+      this.t209 = snapshot.data()['T209'];
+      this.t30 = snapshot.data()['T30'];
+      this.t308 = snapshot.data()['T308'];
+      this.t312 = snapshot.data()['T312'];
+      this.t329 = snapshot.data()['T329'];
+    }
   }
 
   @override

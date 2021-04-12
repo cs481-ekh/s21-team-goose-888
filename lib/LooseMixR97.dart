@@ -11,7 +11,7 @@ import 'FireBaseFireStoreDB.dart';
 class LooseMixR97 extends StatefulWidget {
   @override
   StoreDb db;
-  LooseMixR97 ({Key key, @required this.db}) : super(key: key);
+  LooseMixR97({Key key, @required this.db}) : super(key: key);
   _LooseMixR97 createState() => _LooseMixR97();
 }
 
@@ -23,13 +23,13 @@ class _LooseMixR97 extends State<LooseMixR97> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampleTemp, sampleLoc;
- // StoreDb db=StoreDb();
+
   TextEditingController independentAssessorController = TextEditingController();
   TextEditingController serialNumController = TextEditingController();
   TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
+  TextEditingController sampleDateController;
   TextEditingController statusController = TextEditingController();
-  TextEditingController bidItemController = TextEditingController();
+  TextEditingController bidItemController;
   TextEditingController projectNumberController = TextEditingController();
   TextEditingController projectNameController = TextEditingController();
   TextEditingController districtController = TextEditingController();
@@ -42,6 +42,16 @@ class _LooseMixR97 extends State<LooseMixR97> {
   TextEditingController witnessedByController = TextEditingController();
   TextEditingController wWAQTCNumberController = TextEditingController();
   TextEditingController sampleIDNumberController = TextEditingController();
+
+  // void initState() {
+  //   super.initState();
+  // }
+
+  // _LooseMixR97() {
+  //   var _map = widget.db.getR97();
+  //   sampleDateController = TextEditingController(text: now);
+  //   bidItemController = TextEditingController(text: _map["bidItem"]);
+  // }
 
   void dispose() {
     independentAssessorController.dispose();
@@ -68,8 +78,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
       "independentAssessorController": independentAssessorController.text,
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
+      "serialNumController": serialNumController.text,
+      "organizationController": organizationController.text,
       "sampleDateController": sampleDateController.text,
       "statusController": statusController.text,
       "bidItem": bidItemController.text,
@@ -102,6 +112,9 @@ class _LooseMixR97 extends State<LooseMixR97> {
 
   @override
   Widget build(BuildContext context) {
+    var _map = widget.db.getR97();
+    sampleDateController = TextEditingController(text: now);
+    bidItemController = TextEditingController(text: _map["bidItem"]);
     return Scaffold(
       appBar: AppBar(
         title: Text("Loose Mix (R97) Details"),
@@ -145,18 +158,17 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   },
                 ),
                 TextFormField(
-                  //controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
-
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
-
-                  onFieldSubmitted: (value) { //sampleDateController.text=now;
-                     },
-                  initialValue: now,
+                  onFieldSubmitted: (value) {
+                    //sampleDateController.text=now;
+                  },
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -168,7 +180,6 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Status!";
                     return null;
@@ -483,7 +494,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
