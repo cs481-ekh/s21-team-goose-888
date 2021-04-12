@@ -22,27 +22,26 @@ class _T312 extends State<T312> {
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File samp1, samp2;
   //StoreDb db=StoreDb();
-  TextEditingController independentAssessorController = TextEditingController();
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
-  TextEditingController gyratoryBrandController = TextEditingController();
-  TextEditingController gyratoryModelController = TextEditingController();
-  TextEditingController gyratorySerialNumberController =
-      TextEditingController();
-  TextEditingController puckMassVolumetricController = TextEditingController();
-  TextEditingController mass1Controller = TextEditingController();
-  TextEditingController mass2Controller = TextEditingController();
-  TextEditingController puckHeight1Controller = TextEditingController();
-  TextEditingController puckHeight2Controller = TextEditingController();
-  TextEditingController remarksController = TextEditingController();
-  TextEditingController testedByController = TextEditingController();
-  TextEditingController testedByWAQTCController = TextEditingController();
-  TextEditingController testedDateController = TextEditingController();
-  TextEditingController retestFlaggedByController = TextEditingController();
-  TextEditingController retestFlaggedController = TextEditingController();
-  TextEditingController retestCommentsController = TextEditingController();
+  TextEditingController independentAssessorController ;
+  TextEditingController serialNumController ;
+  TextEditingController organizationController ;
+  TextEditingController sampleDateController ;
+  TextEditingController statusController ;
+  TextEditingController gyratoryBrandController ;
+  TextEditingController gyratoryModelController ;
+  TextEditingController gyratorySerialNumberController ;
+  TextEditingController puckMassVolumetricController ;
+  TextEditingController mass1Controller ;
+  TextEditingController mass2Controller ;
+  TextEditingController puckHeight1Controller ;
+  TextEditingController puckHeight2Controller ;
+  TextEditingController remarksController ;
+  TextEditingController testedByController ;
+  TextEditingController testedByWAQTCController ;
+  TextEditingController testedDateController ;
+  TextEditingController retestFlaggedByController ;
+  TextEditingController retestFlaggedController ;
+  TextEditingController retestCommentsController ;
   void dispose() {
     independentAssessorController.dispose();
     serialNumController.dispose();
@@ -101,6 +100,30 @@ class _T312 extends State<T312> {
       _formKey.currentState.save();
       return true;
     }
+  }
+  void initState() {
+    var _map = widget.db.getT312();
+    independentAssessorController = TextEditingController(text: _map["independentAssessorController"]);
+    serialNumController = TextEditingController(text: _map["serialNumController"]);
+    organizationController = TextEditingController(text: _map["organizationController"]);
+    sampleDateController = TextEditingController(text: now);
+    statusController = TextEditingController(text: _map["statusController"]);
+    gyratoryBrandController = TextEditingController(text: _map["gyratoryBrand"]);
+    gyratoryModelController = TextEditingController(text: _map["gyratoryModel"]);
+    gyratorySerialNumberController = TextEditingController(text: _map["gyratorySerialNumber"]);
+    puckMassVolumetricController = TextEditingController(text: _map["puckMassVolumetric"]);
+     mass1Controller = TextEditingController(text: _map["mass1"]);
+     mass2Controller = TextEditingController(text: _map["mass2"]);
+    puckHeight1Controller = TextEditingController(text: _map["puckHeight1"]);
+    puckHeight2Controller = TextEditingController(text: _map["puckHeight2"]);
+    remarksController = TextEditingController(text: _map["remarks"]);
+    testedByController = TextEditingController(text: _map["testedBy"]);
+    testedByWAQTCController = TextEditingController(text: _map["testedByWAQTC"]);
+    testedDateController = TextEditingController(text: now);
+    retestFlaggedByController = TextEditingController(text: _map["retestFlaggedBy"]);
+    retestFlaggedController = TextEditingController(text: _map["retestFlagged"]);
+    retestCommentsController = TextEditingController(text: _map["retestComments"]);
+    super.initState();
   }
 
   @override
@@ -513,6 +536,7 @@ class _T312 extends State<T312> {
                 RaisedButton(
                   onPressed: () {
                     if (_submit()) {
+                      widget.db.loadValues();
                       createAddDbMap();
                       Navigator.pop(context);
                     }

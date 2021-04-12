@@ -34,35 +34,70 @@ class _T209 extends State<T209> {
       massofsamplesub2;
   //StoreDb db= StoreDb();
 
-  TextEditingController independentAssessorController = TextEditingController();
-  TextEditingController mBS1Controller = TextEditingController();
-  TextEditingController mB1Controller = TextEditingController();
-  TextEditingController mDSA1Controller = TextEditingController();
-  TextEditingController sWBS1Controller = TextEditingController();
-  TextEditingController sWB1Controller = TextEditingController();
-  TextEditingController sWS1Controller = TextEditingController();
+  TextEditingController independentAssessorController;
+  TextEditingController mBS1Controller ;
+  TextEditingController mB1Controller ;
+  TextEditingController mDSA1Controller ;
+  TextEditingController sWBS1Controller ;
+  TextEditingController sWB1Controller ;
+  TextEditingController sWS1Controller ;
 
-  TextEditingController mBS2Controller = TextEditingController();
-  TextEditingController mB2Controller = TextEditingController();
-  TextEditingController mDSA2Controller = TextEditingController();
-  TextEditingController sWBS2Controller = TextEditingController();
-  TextEditingController sWB2Controller = TextEditingController();
-  TextEditingController sWS2Controller = TextEditingController();
+  TextEditingController mBS2Controller ;
+  TextEditingController mB2Controller ;
+  TextEditingController mDSA2Controller ;
+  TextEditingController sWBS2Controller ;
+  TextEditingController sWB2Controller ;
+  TextEditingController sWS2Controller ;
 
 
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
+  TextEditingController serialNumController ;
+  TextEditingController organizationController ;
+  TextEditingController sampleDateController ;
+  TextEditingController statusController;
 
-  TextEditingController remarksController = TextEditingController();
-  TextEditingController testedByController = TextEditingController();
-  TextEditingController testedByWAQTCController = TextEditingController();
-  TextEditingController testedDateController = TextEditingController();
-  TextEditingController retestFlaggedbyController = TextEditingController();
-  TextEditingController retestFlaggedController = TextEditingController();
-  TextEditingController retestCommentsController = TextEditingController();
+  TextEditingController remarksController;
+  TextEditingController testedByController ;
+  TextEditingController testedByWAQTCController ;
+  TextEditingController retestFlaggedbyController ;
+  TextEditingController retestFlaggedController;
+  TextEditingController testDateController ;
+  TextEditingController retestCommentsController ;
 
+
+
+  void createAddDbMap() {
+    Map<String, dynamic> dbMap = {
+
+      "independentAssessorController": independentAssessorController.text,
+      "mBs1": mBS1Controller.text,
+      "mB1": mB1Controller.text,
+      "mDSA1": mDSA1Controller.text,
+      "sWBS1": sWBS1Controller.text,
+      "sWB1": sWB1Controller.text,
+      "sWS1": sWS1Controller.text,
+      "mBS2": mBS2Controller.text,
+      "mB2": mB2Controller.text,
+      "mDSA2": mDSA2Controller.text,
+      "sWBS2": sWBS2Controller.text,
+      "sWB2": sWB2Controller.text,
+      "sWS2": sWS2Controller.text,
+
+      "serialNumController":  serialNumController.text,
+      "organizationController":  organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
+
+      "remarks": remarksController.text,
+      "testedBy": testedByController.text,
+      "testedByWAQTC": testedByWAQTCController.text,
+      "retestFlaggedBy": retestFlaggedbyController.text,
+      "testDate": testDateController.text,
+      "retestFlagged": retestFlaggedController.text,
+      "retestComments": retestCommentsController.text,
+    };
+
+    widget.db.setT209(dbMap);
+  }
   void dispose() {
 
     mBS1Controller.dispose();
@@ -92,41 +127,9 @@ class _T209 extends State<T209> {
     retestFlaggedController.dispose();
     retestCommentsController.dispose();
     independentAssessorController.dispose();
+    testDateController.dispose();
     super.dispose();
   }
-
-  void createAddDbMap() {
-    Map<String, dynamic> dbMap = {
-
-      "mBs1": mBS1Controller.text,
-      "mB1": mB1Controller.text,
-      "mDSA1": mDSA1Controller.text,
-      "sWBS1": sWBS1Controller.text,
-      "sWB1": sWB1Controller.text,
-      "sWS1": sWS1Controller.text,
-      "mBS2": mBS2Controller.text,
-      "mB2": mB2Controller.text,
-      "mDSA2": mDSA2Controller.text,
-      "sWBS2": sWBS2Controller.text,
-      "sWB2": sWB2Controller.text,
-      "sWS2": sWS2Controller.text,
-      "independentAssessorController": independentAssessorController.text,
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
-      "sampleDateController": sampleDateController.text,
-      "statusController": statusController.text,
-
-      "remarks": remarksController.text,
-      "testedBy": testedByController.text,
-      "testedByWAQTC": testedByWAQTCController.text,
-      "retestFlaggedBy": retestFlaggedbyController.text,
-      "retestFlagged": retestFlaggedController.text,
-      "retestComments": retestCommentsController.text,
-    };
-
-    widget.db.setT209(dbMap);
-  }
-
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -137,17 +140,61 @@ class _T209 extends State<T209> {
     }
   }
 
-  bool rememberMe = false;
+  // bool rememberMe = false;
+  //
+  // void _onRememberMeChanged(bool newValue) => setState(() {
+  //       rememberMe = newValue;
+  //
+  //       if (rememberMe) {
+  //         // TODO: Here goes your functionality that remembers the user.
+  //       } else {
+  //         // TODO: Forget the user
+  //       }
+    //  });
+  void initState() {
+    var _map = widget.db.getT209();
+    independentAssessorController = TextEditingController(text: _map["independentAssessorController"]);
+    mBS1Controller = TextEditingController(text: _map["mBs1"]);
+     mB1Controller = TextEditingController(text: _map["mB1"]);
+    mDSA1Controller = TextEditingController(text: _map["mDSA1"]);
+    sWBS1Controller = TextEditingController(text: _map["sWBS1"]);
+    sWB1Controller = TextEditingController(text: _map["sWB1"]);
+     sWS1Controller = TextEditingController(text: _map["sWS1"]);
 
-  void _onRememberMeChanged(bool newValue) => setState(() {
-        rememberMe = newValue;
+     mBS2Controller = TextEditingController(text: _map["mBS2"]);
+     mB2Controller = TextEditingController(text: _map["mB2"]);
+     mDSA2Controller = TextEditingController(text: _map["mDSA2"]);
+     sWBS2Controller = TextEditingController(text: _map["sWBS2"]);
+     sWB2Controller = TextEditingController(text: _map["sWB2"]);
+    sWS2Controller = TextEditingController(text: _map["sWS2"]);
 
-        if (rememberMe) {
-          // TODO: Here goes your functionality that remembers the user.
-        } else {
-          // TODO: Forget the user
-        }
-      });
+
+    serialNumController = TextEditingController(text: _map["serialNumController"]);
+    organizationController = TextEditingController(text: _map["organizationController"]);
+    //sampleDateController = TextEditingController();
+    if(_map["sampleDateController"]==""){
+      sampleDateController = TextEditingController(text: now);
+    }else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
+     statusController = TextEditingController(text: _map["statusController"]);
+
+    remarksController = TextEditingController(text: _map["remarks"]);
+    testedByController = TextEditingController(text: _map["testedBy"]);
+    testedByWAQTCController = TextEditingController(text: _map["testedByWAQTC"]);
+
+    if(_map["testDate"]==""){
+      testDateController = TextEditingController(text: now);
+    }else {
+      testDateController = TextEditingController(text: _map["testDate"]);
+    }
+    //testedDateController = TextEditingController();
+    retestFlaggedbyController = TextEditingController(text: _map["retestFlaggedby"]);
+    retestFlaggedController = TextEditingController(text: _map["retestFlagged"]);
+    retestCommentsController = TextEditingController(text: _map["retestComments"]);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,13 +240,13 @@ class _T209 extends State<T209> {
                   },
                 ),
                 TextFormField(
-                  //controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
-                     // labelText: "Sample Date ",
+                      labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
+
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
@@ -987,12 +1034,12 @@ class _T209 extends State<T209> {
                 ),
 
                 TextFormField(
-                  decoration: InputDecoration(
+                    controller: testDateController,
+                    decoration: InputDecoration(
                       labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid date!";
@@ -1065,6 +1112,7 @@ class _T209 extends State<T209> {
                   onPressed: () {
                     if (_submit()) {
                       createAddDbMap();
+                      widget.db.loadValues();
                       Navigator.pop(context);
                     }
                   },
