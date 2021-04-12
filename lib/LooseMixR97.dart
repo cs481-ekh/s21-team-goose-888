@@ -16,6 +16,7 @@ class LooseMixR97 extends StatefulWidget {
 }
 
 class _LooseMixR97 extends State<LooseMixR97> {
+  var _check = "";
   var result = "Result In Here";
   bool _isLoading = false;
   dynamic _extractText = "";
@@ -24,34 +25,69 @@ class _LooseMixR97 extends State<LooseMixR97> {
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampleTemp, sampleLoc;
 
-  TextEditingController independentAssessorController = TextEditingController();
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
+  TextEditingController independentAssessorController;
+  TextEditingController serialNumController;
+  TextEditingController organizationController;
   TextEditingController sampleDateController;
-  TextEditingController statusController = TextEditingController();
+  TextEditingController statusController;
   TextEditingController bidItemController;
-  TextEditingController projectNumberController = TextEditingController();
-  TextEditingController projectNameController = TextEditingController();
-  TextEditingController districtController = TextEditingController();
-  TextEditingController randomNumberController = TextEditingController();
-  TextEditingController sampleTemperatureController = TextEditingController();
-  TextEditingController quantityRepresentedController = TextEditingController();
-  TextEditingController sendReportsToController = TextEditingController();
-  TextEditingController sampledByController = TextEditingController();
-  TextEditingController WAQTCNumberController = TextEditingController();
-  TextEditingController witnessedByController = TextEditingController();
-  TextEditingController wWAQTCNumberController = TextEditingController();
-  TextEditingController sampleIDNumberController = TextEditingController();
+  TextEditingController projectNumberController;
+  TextEditingController projectNameController;
+  TextEditingController districtController;
+  TextEditingController randomNumberController;
+  TextEditingController sampleTemperatureController;
+  TextEditingController quantityRepresentedController;
+  TextEditingController sendReportsToController;
+  TextEditingController sampledByController;
+  TextEditingController WAQTCNumberController;
+  TextEditingController witnessedByController;
+  TextEditingController wWAQTCNumberController;
+  TextEditingController sampleIDNumberController;
 
-  // void initState() {
-  //   super.initState();
-  // }
+  void initState() {
+    var _map = widget.db.getR97();
+    _check = _map["reasonForSample"];
 
-  // _LooseMixR97() {
-  //   var _map = widget.db.getR97();
-  //   sampleDateController = TextEditingController(text: now);
-  //   bidItemController = TextEditingController(text: _map["bidItem"]);
-  // }
+    sampleDateController = TextEditingController(text: now);
+    bidItemController = TextEditingController(text: _map["bidItem"]);
+    independentAssessorController =
+        TextEditingController(text: _map["independentAssessorController"]);
+    serialNumController =
+        TextEditingController(text: _map["serialNumController"]);
+    organizationController =
+        TextEditingController(text: _map["organizationController"]);
+    statusController = TextEditingController(text: _map["statusController"]);
+    projectNumberController =
+        TextEditingController(text: _map["projectNumber"]);
+    projectNameController = TextEditingController(text: _map["projectName"]);
+    districtController = TextEditingController(text: _map["district"]);
+    randomNumberController = TextEditingController(text: _map["randomNumber"]);
+    sampleTemperatureController =
+        TextEditingController(text: _map["sampleTemperature"]);
+    quantityRepresentedController =
+        TextEditingController(text: _map["quantityRepresented"]);
+    sendReportsToController =
+        TextEditingController(text: _map["sendReportsTo"]);
+    sampledByController = TextEditingController(text: _map["sampledBy"]);
+    WAQTCNumberController = TextEditingController(text: _map["WAQTCNumber"]);
+    witnessedByController = TextEditingController(text: _map["witnessedBy"]);
+    wWAQTCNumberController =
+        TextEditingController(text: _map["witnessWAQTCNumber"]);
+    sampleIDNumberController =
+        TextEditingController(text: _map["sampleIDNumber"]);
+    if (_check == "0" || _check == "") {
+      dropdownValue = "Select";
+    } else if (_check == "1") {
+      dropdownValue = "Acceptance";
+    } else if (_check == "2") {
+      dropdownValue = "B";
+    } else if (_check == "3") {
+      dropdownValue = "C";
+    } else {
+      dropdownValue = "D";
+    }
+    super.initState();
+  }
 
   void dispose() {
     independentAssessorController.dispose();
@@ -95,6 +131,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
       "witnessedBy": witnessedByController.text,
       "sampleIDNumber": sampleIDNumberController.text,
       "witnessWAQTCNumber": wWAQTCNumberController.text,
+      "reasonForSample": _check,
     };
 
     widget.db.setR97(dbMap);
@@ -112,9 +149,6 @@ class _LooseMixR97 extends State<LooseMixR97> {
 
   @override
   Widget build(BuildContext context) {
-    var _map = widget.db.getR97();
-    sampleDateController = TextEditingController(text: now);
-    bidItemController = TextEditingController(text: _map["bidItem"]);
     return Scaffold(
       appBar: AppBar(
         title: Text("Loose Mix (R97) Details"),
@@ -393,6 +427,17 @@ class _LooseMixR97 extends State<LooseMixR97> {
                     onChanged: (String newValue) {
                       setState(() {
                         dropdownValue = newValue;
+                        if (dropdownValue == "Select") {
+                          _check = "0";
+                        } else if (dropdownValue == "Acceptance") {
+                          _check = "1";
+                        } else if (dropdownValue == "B") {
+                          _check = "2";
+                        } else if (dropdownValue == "C") {
+                          _check = "3";
+                        } else {
+                          _check = "4";
+                        }
                       });
                     },
                     hint: Text(
@@ -506,6 +551,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onPressed: () {
                     if (_submit()) {
                       createAddDbMap();
+                      widget.db.loadValues();
                       //Navigator.pushNamed(context, '/form');
                       Navigator.pop(context);
                     }
