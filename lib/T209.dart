@@ -34,34 +34,34 @@ class _T209 extends State<T209> {
       massofsamplesub2;
   //StoreDb db= StoreDb();
 
-  TextEditingController independentAssessorController = TextEditingController();
-  TextEditingController mBS1Controller = TextEditingController();
-  TextEditingController mB1Controller = TextEditingController();
-  TextEditingController mDSA1Controller = TextEditingController();
-  TextEditingController sWBS1Controller = TextEditingController();
-  TextEditingController sWB1Controller = TextEditingController();
-  TextEditingController sWS1Controller = TextEditingController();
+  TextEditingController independentAssessorController;
+  TextEditingController mBS1Controller ;
+  TextEditingController mB1Controller ;
+  TextEditingController mDSA1Controller ;
+  TextEditingController sWBS1Controller ;
+  TextEditingController sWB1Controller ;
+  TextEditingController sWS1Controller ;
 
-  TextEditingController mBS2Controller = TextEditingController();
-  TextEditingController mB2Controller = TextEditingController();
-  TextEditingController mDSA2Controller = TextEditingController();
-  TextEditingController sWBS2Controller = TextEditingController();
-  TextEditingController sWB2Controller = TextEditingController();
-  TextEditingController sWS2Controller = TextEditingController();
+  TextEditingController mBS2Controller ;
+  TextEditingController mB2Controller ;
+  TextEditingController mDSA2Controller ;
+  TextEditingController sWBS2Controller ;
+  TextEditingController sWB2Controller ;
+  TextEditingController sWS2Controller ;
 
 
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
+  TextEditingController serialNumController ;
+  TextEditingController organizationController ;
+  TextEditingController sampleDateController ;
+  TextEditingController statusController;
 
-  TextEditingController remarksController = TextEditingController();
-  TextEditingController testedByController = TextEditingController();
-  TextEditingController testedByWAQTCController = TextEditingController();
-  TextEditingController testedDateController = TextEditingController();
-  TextEditingController retestFlaggedbyController = TextEditingController();
-  TextEditingController retestFlaggedController = TextEditingController();
-  TextEditingController retestCommentsController = TextEditingController();
+  TextEditingController remarksController;
+  TextEditingController testedByController ;
+  TextEditingController testedByWAQTCController ;
+  TextEditingController testedDateController ;
+  TextEditingController retestFlaggedbyController ;
+  TextEditingController retestFlaggedController;
+  TextEditingController retestCommentsController ;
 
   void dispose() {
 
@@ -98,6 +98,7 @@ class _T209 extends State<T209> {
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
 
+      "independentAssessorController": independentAssessorController.text,
       "mBs1": mBS1Controller.text,
       "mB1": mB1Controller.text,
       "mDSA1": mDSA1Controller.text,
@@ -110,7 +111,7 @@ class _T209 extends State<T209> {
       "sWBS2": sWBS2Controller.text,
       "sWB2": sWB2Controller.text,
       "sWS2": sWS2Controller.text,
-      "independentAssessorController": independentAssessorController.text,
+
       "serialNumController":  serialNumController.text,
       "organizationController":  organizationController.text,
       "sampleDateController": sampleDateController.text,
@@ -149,34 +150,35 @@ class _T209 extends State<T209> {
         }
       });
   void initState() {
-    TextEditingController independentAssessorController = TextEditingController();
-    TextEditingController mBS1Controller = TextEditingController();
-    TextEditingController mB1Controller = TextEditingController();
-    TextEditingController mDSA1Controller = TextEditingController();
-    TextEditingController sWBS1Controller = TextEditingController();
-    TextEditingController sWB1Controller = TextEditingController();
-    TextEditingController sWS1Controller = TextEditingController();
+    var _map = widget.db.getT209();
+    independentAssessorController = TextEditingController(text: _map["independentAssessorController"]);
+    mBS1Controller = TextEditingController(text: _map["mBs1"]);
+     mB1Controller = TextEditingController(text: _map["mB1"]);
+    mDSA1Controller = TextEditingController(text: _map["mDSA1"]);
+    sWBS1Controller = TextEditingController(text: _map["sWBS1"]);
+    sWB1Controller = TextEditingController(text: _map["sWB1"]);
+     sWS1Controller = TextEditingController(text: _map["sWS1"]);
 
-    TextEditingController mBS2Controller = TextEditingController();
-    TextEditingController mB2Controller = TextEditingController();
-    TextEditingController mDSA2Controller = TextEditingController();
-    TextEditingController sWBS2Controller = TextEditingController();
-    TextEditingController sWB2Controller = TextEditingController();
-    TextEditingController sWS2Controller = TextEditingController();
+     mBS2Controller = TextEditingController(text: _map["mBS2"]);
+     mB2Controller = TextEditingController(text: _map["mB2"]);
+     mDSA2Controller = TextEditingController(text: _map["mDSA2"]);
+     sWBS2Controller = TextEditingController(text: _map["sWBS2"]);
+     sWB2Controller = TextEditingController(text: _map["sWB2"]);
+    sWS2Controller = TextEditingController(text: _map["sWS2"]);
 
 
-    TextEditingController serialNumController = TextEditingController();
-    TextEditingController organizationController = TextEditingController();
-    TextEditingController sampleDateController = TextEditingController();
-    TextEditingController statusController = TextEditingController();
+    serialNumController = TextEditingController(text: _map["serialNumController"]);
+    organizationController = TextEditingController(text: _map["organizationController"]);
+    sampleDateController = TextEditingController(text: now);
+     statusController = TextEditingController(text: _map["statusController"]);
 
-    TextEditingController remarksController = TextEditingController();
-    TextEditingController testedByController = TextEditingController();
-    TextEditingController testedByWAQTCController = TextEditingController();
-    TextEditingController testedDateController = TextEditingController();
-    TextEditingController retestFlaggedbyController = TextEditingController();
-    TextEditingController retestFlaggedController = TextEditingController();
-    TextEditingController retestCommentsController = TextEditingController();
+    remarksController = TextEditingController(text: _map["remarks"]);
+    testedByController = TextEditingController(text: _map["testedBy"]);
+    testedByWAQTCController = TextEditingController(text: _map["testedByWAQTC"]);
+    testedDateController = TextEditingController(text: now);
+    retestFlaggedbyController = TextEditingController(text: _map["retestFlaggedby"]);
+    retestFlaggedController = TextEditingController(text: _map["retestFlagged"]);
+    retestCommentsController = TextEditingController(text: _map["retestComments"]);
     super.initState();
   }
   @override
@@ -1096,6 +1098,7 @@ class _T209 extends State<T209> {
                   onPressed: () {
                     if (_submit()) {
                       createAddDbMap();
+                      widget.db.loadValues();
                       Navigator.pop(context);
                     }
                   },
