@@ -58,11 +58,46 @@ class _T209 extends State<T209> {
   TextEditingController remarksController;
   TextEditingController testedByController ;
   TextEditingController testedByWAQTCController ;
-  TextEditingController testedDateController ;
   TextEditingController retestFlaggedbyController ;
   TextEditingController retestFlaggedController;
+  TextEditingController testDateController ;
   TextEditingController retestCommentsController ;
 
+
+
+  void createAddDbMap() {
+    Map<String, dynamic> dbMap = {
+
+      "independentAssessorController": independentAssessorController.text,
+      "mBs1": mBS1Controller.text,
+      "mB1": mB1Controller.text,
+      "mDSA1": mDSA1Controller.text,
+      "sWBS1": sWBS1Controller.text,
+      "sWB1": sWB1Controller.text,
+      "sWS1": sWS1Controller.text,
+      "mBS2": mBS2Controller.text,
+      "mB2": mB2Controller.text,
+      "mDSA2": mDSA2Controller.text,
+      "sWBS2": sWBS2Controller.text,
+      "sWB2": sWB2Controller.text,
+      "sWS2": sWS2Controller.text,
+
+      "serialNumController":  serialNumController.text,
+      "organizationController":  organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
+
+      "remarks": remarksController.text,
+      "testedBy": testedByController.text,
+      "testedByWAQTC": testedByWAQTCController.text,
+      "retestFlaggedBy": retestFlaggedbyController.text,
+      "testDate": testDateController.text,
+      "retestFlagged": retestFlaggedController.text,
+      "retestComments": retestCommentsController.text,
+    };
+
+    widget.db.setT209(dbMap);
+  }
   void dispose() {
 
     mBS1Controller.dispose();
@@ -92,42 +127,9 @@ class _T209 extends State<T209> {
     retestFlaggedController.dispose();
     retestCommentsController.dispose();
     independentAssessorController.dispose();
+    testDateController.dispose();
     super.dispose();
   }
-
-  void createAddDbMap() {
-    Map<String, dynamic> dbMap = {
-
-      "independentAssessorController": independentAssessorController.text,
-      "mBs1": mBS1Controller.text,
-      "mB1": mB1Controller.text,
-      "mDSA1": mDSA1Controller.text,
-      "sWBS1": sWBS1Controller.text,
-      "sWB1": sWB1Controller.text,
-      "sWS1": sWS1Controller.text,
-      "mBS2": mBS2Controller.text,
-      "mB2": mB2Controller.text,
-      "mDSA2": mDSA2Controller.text,
-      "sWBS2": sWBS2Controller.text,
-      "sWB2": sWB2Controller.text,
-      "sWS2": sWS2Controller.text,
-
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
-      "sampleDateController": sampleDateController.text,
-      "statusController": statusController.text,
-
-      "remarks": remarksController.text,
-      "testedBy": testedByController.text,
-      "testedByWAQTC": testedByWAQTCController.text,
-      "retestFlaggedBy": retestFlaggedbyController.text,
-      "retestFlagged": retestFlaggedController.text,
-      "retestComments": retestCommentsController.text,
-    };
-
-    widget.db.setT209(dbMap);
-  }
-
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -138,17 +140,17 @@ class _T209 extends State<T209> {
     }
   }
 
-  bool rememberMe = false;
-
-  void _onRememberMeChanged(bool newValue) => setState(() {
-        rememberMe = newValue;
-
-        if (rememberMe) {
-          // TODO: Here goes your functionality that remembers the user.
-        } else {
-          // TODO: Forget the user
-        }
-      });
+  // bool rememberMe = false;
+  //
+  // void _onRememberMeChanged(bool newValue) => setState(() {
+  //       rememberMe = newValue;
+  //
+  //       if (rememberMe) {
+  //         // TODO: Here goes your functionality that remembers the user.
+  //       } else {
+  //         // TODO: Forget the user
+  //       }
+    //  });
   void initState() {
     var _map = widget.db.getT209();
     independentAssessorController = TextEditingController(text: _map["independentAssessorController"]);
@@ -169,13 +171,25 @@ class _T209 extends State<T209> {
 
     serialNumController = TextEditingController(text: _map["serialNumController"]);
     organizationController = TextEditingController(text: _map["organizationController"]);
-    sampleDateController = TextEditingController(text: now);
+    //sampleDateController = TextEditingController();
+    if(_map["sampleDateController"]==""){
+      sampleDateController = TextEditingController(text: now);
+    }else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
      statusController = TextEditingController(text: _map["statusController"]);
 
     remarksController = TextEditingController(text: _map["remarks"]);
     testedByController = TextEditingController(text: _map["testedBy"]);
     testedByWAQTCController = TextEditingController(text: _map["testedByWAQTC"]);
-    testedDateController = TextEditingController(text: now);
+
+    if(_map["testDate"]==""){
+      testDateController = TextEditingController(text: now);
+    }else {
+      testDateController = TextEditingController(text: _map["testDate"]);
+    }
+    //testedDateController = TextEditingController();
     retestFlaggedbyController = TextEditingController(text: _map["retestFlaggedby"]);
     retestFlaggedController = TextEditingController(text: _map["retestFlagged"]);
     retestCommentsController = TextEditingController(text: _map["retestComments"]);
@@ -226,13 +240,13 @@ class _T209 extends State<T209> {
                   },
                 ),
                 TextFormField(
-                  //controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
-                     // labelText: "Sample Date ",
+                      labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
+
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
@@ -1020,12 +1034,12 @@ class _T209 extends State<T209> {
                 ),
 
                 TextFormField(
-                  decoration: InputDecoration(
+                    controller: testDateController,
+                    decoration: InputDecoration(
                       labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid date!";
