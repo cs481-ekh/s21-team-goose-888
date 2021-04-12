@@ -171,6 +171,10 @@ class StoreDb implements FireStoreDb {
     await getProjects().doc(currentProject).update({'Custody': map});
   }
 
+  Map getCustody() {
+    return custody;
+  }
+
   @override
   void selectProject(String serialNumber) {
     currentProject = serialNumber;
