@@ -40,8 +40,8 @@ class _T166 extends State<T166> {
 
   TextEditingController remarksController ;
   TextEditingController testedByController ;
+  TextEditingController testDateController;
   TextEditingController testedByWAQTCController;
-  TextEditingController testedDateController ;
   TextEditingController retestFlaggedbyController ;
   TextEditingController retestFlaggedController ;
   TextEditingController retestCommentsController;
@@ -67,6 +67,7 @@ class _T166 extends State<T166> {
     testedByController.dispose();
     testedByWAQTCController.dispose();
     retestFlaggedbyController.dispose();
+    testDateController.dispose();
     retestFlaggedController.dispose();
     retestCommentsController.dispose();
     independentAssessorController.dispose();
@@ -92,6 +93,7 @@ class _T166 extends State<T166> {
       "remarks": remarksController.text,
       "testedBy": testedByController.text,
       "testedByWAQTC": testedByWAQTCController.text,
+      "testDate": testDateController.text,
       "retestFlaggedBy": retestFlaggedbyController.text,
       "retestFlagged": retestFlaggedController.text,
       "retestComments": retestCommentsController.text,
@@ -120,15 +122,25 @@ class _T166 extends State<T166> {
      wpuckSSD2Controller = TextEditingController(text: _map["wpuckSSD2"]);
 
 
-     serialNumController = TextEditingController(text: _map["serialNumControlle"]);
+     serialNumController = TextEditingController(text: _map["serialNumController"]);
      organizationController = TextEditingController(text: _map["organizationController"]);
-    sampleDateController = TextEditingController(text: now);
+    if(_map["sampleDateController"]==""){
+      sampleDateController = TextEditingController(text: now);
+    }else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
      statusController = TextEditingController(text: _map["statusController"]);
 
      remarksController = TextEditingController(text: _map["remarks"]);
      testedByController = TextEditingController(text: _map["testedBy"]);
      testedByWAQTCController = TextEditingController(text: _map["testedByWAQTC"]);
-     testedDateController = TextEditingController(text: now);
+    if(_map["testDate"]==""){
+      testDateController = TextEditingController(text: now);
+    }else {
+      testDateController = TextEditingController(text: _map["testDate"]);
+    }
+     //testedDateController = TextEditingController(text: now);
      retestFlaggedbyController = TextEditingController(text: _map["retestFlaggedBy"]);
      retestFlaggedController = TextEditingController(text: _map["retestFlagged"]);
      retestCommentsController = TextEditingController(text: _map["retestComments"]);
@@ -646,7 +658,7 @@ class _T166 extends State<T166> {
 
                 //Row 6 Begining
                 TextFormField(
-                  controller: testedDateController,
+                  controller: testDateController,
                   decoration: InputDecoration(
                       labelText: "Retest Flagged by",
                       labelStyle: TextStyle(color: Colors.black)),

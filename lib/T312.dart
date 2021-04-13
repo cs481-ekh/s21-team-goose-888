@@ -38,10 +38,38 @@ class _T312 extends State<T312> {
   TextEditingController remarksController ;
   TextEditingController testedByController ;
   TextEditingController testedByWAQTCController ;
-  TextEditingController testedDateController ;
+  TextEditingController testDateController ;
   TextEditingController retestFlaggedByController ;
   TextEditingController retestFlaggedController ;
   TextEditingController retestCommentsController ;
+
+
+  void createAddDbMap() {
+    Map<String, dynamic> dbMap = {
+      "independentAssessorController": independentAssessorController.text,
+      "serialNumController":  serialNumController.text,
+      "organizationController":  organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
+      "gyratoryBrand": gyratoryBrandController.text,
+      "gyratoryModel": gyratoryModelController.text,
+      "gyratorySerialNumber": gyratorySerialNumberController.text,
+      "puckMassVolumetric": puckMassVolumetricController.text,
+      "mass1": mass1Controller.text,
+      "mass2": mass2Controller.text,
+      "puckHeight1": puckHeight1Controller.text,
+      "puckHeight2": puckHeight2Controller.text,
+      "remarks": remarksController.text,
+       "testDate": testDateController.text,
+      "testedBy": testedByController.text,
+      "testedByWAQTC": testedByWAQTCController.text,
+      "retestFlaggedBy": retestFlaggedByController.text,
+      "retestFlagged": retestFlaggedController.text,
+      "retestComments": retestCommentsController.text,
+    };
+
+    widget.db.setT312(dbMap);
+  }
   void dispose() {
     independentAssessorController.dispose();
     serialNumController.dispose();
@@ -57,6 +85,7 @@ class _T312 extends State<T312> {
     puckHeight1Controller.dispose();
     puckHeight2Controller.dispose();
     remarksController.dispose();
+    testDateController.dispose();
     testedByController.dispose();
     testedByWAQTCController.dispose();
     retestFlaggedByController.dispose();
@@ -65,33 +94,6 @@ class _T312 extends State<T312> {
 
     super.dispose();
   }
-
-  void createAddDbMap() {
-    Map<String, dynamic> dbMap = {
-      "independentAssessorController": independentAssessorController.text,
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
-      "sampleDateController": sampleDateController.text,
-      "statusController": statusController.text,
-      "gyratoryBrand": gyratoryBrandController.text,
-      "gyratoryModel": gyratoryModelController.text,
-      "gyratorySerialNumber": gyratorySerialNumberController.text,
-      "puckMassVolumetric": puckMassVolumetricController.text,
-      "mass1": mass1Controller.text,
-      "mass2": mass1Controller.text,
-      "puckHeight1": puckHeight1Controller.text,
-      "puckHeight2": puckHeight2Controller.text,
-      "remarks": remarksController.text,
-      "testedBy": testedByController.text,
-      "testedByWAQTC": testedByWAQTCController.text,
-      "retestFlaggedBy": retestFlaggedByController.text,
-      "retestFlagged": retestFlaggedController.text,
-      "retestComments": retestCommentsController.text,
-    };
-
-    widget.db.setT312(dbMap);
-  }
-
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -106,7 +108,12 @@ class _T312 extends State<T312> {
     independentAssessorController = TextEditingController(text: _map["independentAssessorController"]);
     serialNumController = TextEditingController(text: _map["serialNumController"]);
     organizationController = TextEditingController(text: _map["organizationController"]);
-    sampleDateController = TextEditingController(text: now);
+    if(_map["sampleDateController"]==""){
+      sampleDateController = TextEditingController(text: now);
+    }else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
     statusController = TextEditingController(text: _map["statusController"]);
     gyratoryBrandController = TextEditingController(text: _map["gyratoryBrand"]);
     gyratoryModelController = TextEditingController(text: _map["gyratoryModel"]);
@@ -119,7 +126,12 @@ class _T312 extends State<T312> {
     remarksController = TextEditingController(text: _map["remarks"]);
     testedByController = TextEditingController(text: _map["testedBy"]);
     testedByWAQTCController = TextEditingController(text: _map["testedByWAQTC"]);
-    testedDateController = TextEditingController(text: now);
+    if(_map["testDate"]==""){
+      testDateController = TextEditingController(text: now);
+    }else {
+      testDateController = TextEditingController(text: _map["testDate"]);
+    }
+
     retestFlaggedByController = TextEditingController(text: _map["retestFlaggedBy"]);
     retestFlaggedController = TextEditingController(text: _map["retestFlagged"]);
     retestCommentsController = TextEditingController(text: _map["retestComments"]);
@@ -171,13 +183,12 @@ class _T312 extends State<T312> {
                   },
                 ),
                 TextFormField(
-                  //controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
                     return null;
@@ -456,12 +467,12 @@ class _T312 extends State<T312> {
                   },
                 ),
                 TextFormField(
+                  controller: testDateController,
                   decoration: InputDecoration(
                       labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid date!";
