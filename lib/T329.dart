@@ -58,9 +58,10 @@ class _T329 extends State<T329> {
         TextEditingController(text: _map["serialNumController"]);
     organizationController =
         TextEditingController(text: _map["organizationController"]);
-    if(_map["sampleDateController"]==""){
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey("sampleDateController")) {
       sampleDateController = TextEditingController(text: now);
-    }else {
+    } else {
       sampleDateController =
           TextEditingController(text: _map["sampleDateController"]);
     }
@@ -83,10 +84,10 @@ class _T329 extends State<T329> {
     testedByController = TextEditingController(text: _map["testedBy"]);
     WAQTCNumberController = TextEditingController(text: _map["WAQTCNumber"]);
     dateController = TextEditingController(text: _map["date"]);
-    if(_map["date"]==""){
+    if (_map["date"] == "" || !_map.containsKey("date")) {
       dateController = TextEditingController(text: now);
-    }else {
-      dateController= TextEditingController(text: _map["date"]);
+    } else {
+      dateController = TextEditingController(text: _map["date"]);
     }
 
     independentAssessorController =

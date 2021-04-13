@@ -49,7 +49,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
     _check = _map["reasonForSample"];
 
     if (_map["sampleDateController"] == "" ||
-        !_map.containsKey(sampleDateController)) {
+        !_map.containsKey("sampleDateController")) {
       sampleDateController = TextEditingController(text: now);
     } else {
       sampleDateController =

@@ -35,65 +35,63 @@ class _T30 extends State<T30> {
 
   //StoreDb db;
 
-  TextEditingController ocr1 ;
-  TextEditingController ocr2 ;
-  TextEditingController ocr3 ;
+  TextEditingController ocr1;
+  TextEditingController ocr2;
+  TextEditingController ocr3;
 
-  TextEditingController ocr4 ;
-  TextEditingController ocr5 ;
-  TextEditingController ocr6 ;
+  TextEditingController ocr4;
+  TextEditingController ocr5;
+  TextEditingController ocr6;
 
-  TextEditingController ocr7 ;
-  TextEditingController ocr1in ;
-  TextEditingController ocr8 ;
-  TextEditingController ocr9 ;
-  TextEditingController ocr10 ;
+  TextEditingController ocr7;
+  TextEditingController ocr1in;
+  TextEditingController ocr8;
+  TextEditingController ocr9;
+  TextEditingController ocr10;
 
-  TextEditingController ocr11 ;
-  TextEditingController ocr12 ;
-  TextEditingController ocr13 ;
-  TextEditingController ocr14 ;
-  TextEditingController ocrno50 ;
-  TextEditingController ocr15 ;
+  TextEditingController ocr11;
+  TextEditingController ocr12;
+  TextEditingController ocr13;
+  TextEditingController ocr14;
+  TextEditingController ocrno50;
+  TextEditingController ocr15;
 
-  TextEditingController ocr16 ;
-  TextEditingController ocr17 ;
+  TextEditingController ocr16;
+  TextEditingController ocr17;
 
-  TextEditingController aggregateCorrectFact50Controller ;
-  TextEditingController aggregateCorrectFact37Controller ;
-  TextEditingController aggregateCorrectFact25Controller ;
-  TextEditingController aggregateCorrectFact19Controller ;
-  TextEditingController aggregateCorrectFact9Controller ;
+  TextEditingController aggregateCorrectFact50Controller;
+  TextEditingController aggregateCorrectFact37Controller;
+  TextEditingController aggregateCorrectFact25Controller;
+  TextEditingController aggregateCorrectFact19Controller;
+  TextEditingController aggregateCorrectFact9Controller;
 
   TextEditingController independentAssessorController;
-  TextEditingController serialNumController ;
-  TextEditingController organizationController ;
-  TextEditingController sampleDateController ;
-  TextEditingController statusController ;
+  TextEditingController serialNumController;
+  TextEditingController organizationController;
+  TextEditingController sampleDateController;
+  TextEditingController statusController;
 
-  TextEditingController aggregateCorrectNo4Controller ;
-  TextEditingController aggregateCorrectNo8Controller ;
-  TextEditingController aggregateCorrectNo16Controller ;
-  TextEditingController aggregateCorrectNo30Controller ;
-  TextEditingController aggregateCorrectNo50Controller ;
-  TextEditingController aggregateCorrectNo100Controller ;
-  TextEditingController aggregateCorrectNo200Controller ;
+  TextEditingController aggregateCorrectNo4Controller;
+  TextEditingController aggregateCorrectNo8Controller;
+  TextEditingController aggregateCorrectNo16Controller;
+  TextEditingController aggregateCorrectNo30Controller;
+  TextEditingController aggregateCorrectNo50Controller;
+  TextEditingController aggregateCorrectNo100Controller;
+  TextEditingController aggregateCorrectNo200Controller;
   TextEditingController remarksController;
   TextEditingController testedByController;
-  TextEditingController testDateController ;
+  TextEditingController testDateController;
   TextEditingController testedByWAQTCController;
-  TextEditingController retestFlaggedbyController ;
-  TextEditingController retestFlaggedController ;
-  TextEditingController retestCommentsController ;
-
-
+  TextEditingController retestFlaggedbyController;
+  TextEditingController retestFlaggedController;
+  TextEditingController retestCommentsController;
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
       "panSampleBeforeWashMass": ocr1.text,
       "panBeforeWashMass": ocr2.text,
       "sampleBeforeWashMass": ocr3.text,
-    "cMRGradation25": ocr1in.text,
+      "cMRGradation25": ocr1in.text,
       "panSampleAfterWashMass": ocr4.text,
       "panAfterWashMass": ocr5.text,
       "sampleAfterWashMass": ocr6.text,
@@ -132,7 +130,7 @@ class _T30 extends State<T30> {
       "retestFlaggedBy": retestFlaggedbyController.text,
       "retestFlagged": retestFlaggedController.text,
       "retestComments": retestCommentsController.text,
-     "testDate": testDateController.text,
+      "testDate": testDateController.text,
     };
 
     widget.db.setT30(dbMap);
@@ -147,83 +145,93 @@ class _T30 extends State<T30> {
       return true;
     }
   }
+
   void initState() {
     var _map = widget.db.getT30();
-    ocr1 = TextEditingController( text: _map["panSampleBeforeWashMass"]);
-    ocr2 = TextEditingController( text: _map["panBeforeWashMass"]);
-    ocr3 = TextEditingController( text: _map["sampleBeforeWashMass"]);
+    ocr1 = TextEditingController(text: _map["panSampleBeforeWashMass"]);
+    ocr2 = TextEditingController(text: _map["panBeforeWashMass"]);
+    ocr3 = TextEditingController(text: _map["sampleBeforeWashMass"]);
 
-    ocr4 = TextEditingController( text: _map["panSampleAfterWashMass"]);
-    ocr5 = TextEditingController( text: _map["panAfterWashMass"]);
-    ocr6 = TextEditingController( text: _map["sampleAfterWashMass"]);
+    ocr4 = TextEditingController(text: _map["panSampleAfterWashMass"]);
+    ocr5 = TextEditingController(text: _map["panAfterWashMass"]);
+    ocr6 = TextEditingController(text: _map["sampleAfterWashMass"]);
 
-    ocr7 = TextEditingController( text: _map["cMRGradation50"]);
-    ocr1in = TextEditingController( text: _map["cMRGradation25"]);
-    ocr8 = TextEditingController( text: _map["cMRGradation37"]);
-    ocr9 = TextEditingController( text: _map["cMRGradation12"]);
-    ocr10 = TextEditingController( text: _map["cMRGradation9"]);
+    ocr7 = TextEditingController(text: _map["cMRGradation50"]);
+    ocr1in = TextEditingController(text: _map["cMRGradation25"]);
+    ocr8 = TextEditingController(text: _map["cMRGradation37"]);
+    ocr9 = TextEditingController(text: _map["cMRGradation12"]);
+    ocr10 = TextEditingController(text: _map["cMRGradation9"]);
 
-    ocr11 = TextEditingController( text: _map["cMRNo4"]);
-    ocr12 = TextEditingController( text: _map["cMRNo8"]);
-    ocr13 = TextEditingController( text: _map["cMRNo16"]);
-    ocr14 = TextEditingController( text: _map["cMRNo30"]);
-    ocrno50 = TextEditingController( text: _map["cMRNo50"]);
-    ocr15 = TextEditingController( text: _map["cMRNo100"]);
+    ocr11 = TextEditingController(text: _map["cMRNo4"]);
+    ocr12 = TextEditingController(text: _map["cMRNo8"]);
+    ocr13 = TextEditingController(text: _map["cMRNo16"]);
+    ocr14 = TextEditingController(text: _map["cMRNo30"]);
+    ocrno50 = TextEditingController(text: _map["cMRNo50"]);
+    ocr15 = TextEditingController(text: _map["cMRNo100"]);
 
-    ocr16 = TextEditingController( text: _map["cMRNo200"]);
-    ocr17 = TextEditingController( text: _map["cMRPan"]);
+    ocr16 = TextEditingController(text: _map["cMRNo200"]);
+    ocr17 = TextEditingController(text: _map["cMRPan"]);
 
-    independentAssessorController = TextEditingController( text: _map["independentAssessorController"]);
-    serialNumController = TextEditingController( text: _map["serialNumController"]);
-    organizationController = TextEditingController( text: _map["organizationController"]);
-    if(_map["sampleDateController"]==""){
+    independentAssessorController =
+        TextEditingController(text: _map["independentAssessorController"]);
+    serialNumController =
+        TextEditingController(text: _map["serialNumController"]);
+    organizationController =
+        TextEditingController(text: _map["organizationController"]);
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey("sampleDateController")) {
       sampleDateController = TextEditingController(text: now);
-    }else {
+    } else {
       sampleDateController =
           TextEditingController(text: _map["sampleDateController"]);
     }
 
-    statusController = TextEditingController( text: _map["statusController"]);
+    statusController = TextEditingController(text: _map["statusController"]);
 
     aggregateCorrectFact50Controller =
-        TextEditingController( text: _map["aggregateCorrectFact50"]);
+        TextEditingController(text: _map["aggregateCorrectFact50"]);
     aggregateCorrectFact37Controller =
-        TextEditingController( text: _map["aggregateCorrectFact37"]);
+        TextEditingController(text: _map["aggregateCorrectFact37"]);
     aggregateCorrectFact25Controller =
-        TextEditingController( text: _map["aggregateCorrectFact25"]);
+        TextEditingController(text: _map["aggregateCorrectFact25"]);
     aggregateCorrectFact19Controller =
-        TextEditingController( text: _map["aggregateCorrectFact19"]);
+        TextEditingController(text: _map["aggregateCorrectFact19"]);
     aggregateCorrectFact9Controller =
-        TextEditingController( text: _map["aggregateCorrectFact9"]);
+        TextEditingController(text: _map["aggregateCorrectFact9"]);
 
-
-
-    aggregateCorrectNo4Controller = TextEditingController( text: _map["aggregateCorrectNo4"]);
-    aggregateCorrectNo8Controller = TextEditingController( text: _map["aggregateCorrectNo8"]);
+    aggregateCorrectNo4Controller =
+        TextEditingController(text: _map["aggregateCorrectNo4"]);
+    aggregateCorrectNo8Controller =
+        TextEditingController(text: _map["aggregateCorrectNo8"]);
     aggregateCorrectNo16Controller =
-        TextEditingController( text: _map["aggregateCorrectNo16"]);
+        TextEditingController(text: _map["aggregateCorrectNo16"]);
     aggregateCorrectNo30Controller =
-        TextEditingController( text: _map["aggregateCorrectNo30"]);
+        TextEditingController(text: _map["aggregateCorrectNo30"]);
     aggregateCorrectNo50Controller =
-        TextEditingController( text: _map["aggregateCorrectNo50"]);
+        TextEditingController(text: _map["aggregateCorrectNo50"]);
     aggregateCorrectNo100Controller =
-        TextEditingController( text: _map["aggregateCorrectNo100"]);
+        TextEditingController(text: _map["aggregateCorrectNo100"]);
     aggregateCorrectNo200Controller =
-        TextEditingController( text: _map["aggregateCorrectNo200"]);
-    remarksController = TextEditingController( text: _map["remarks"]);
-    testedByController = TextEditingController( text: _map["testedBy"]);
-    testedByWAQTCController = TextEditingController( text: _map["testedByWAQTC"]);
-    if(_map["testDate"]==""){
+        TextEditingController(text: _map["aggregateCorrectNo200"]);
+    remarksController = TextEditingController(text: _map["remarks"]);
+    testedByController = TextEditingController(text: _map["testedBy"]);
+    testedByWAQTCController =
+        TextEditingController(text: _map["testedByWAQTC"]);
+    if (_map["testDate"] == "" || !_map.containsKey("testDate")) {
       testDateController = TextEditingController(text: now);
-    }else {
+    } else {
       testDateController = TextEditingController(text: _map["testDate"]);
     }
-    retestFlaggedbyController = TextEditingController( text: _map["retestFlaggedBy"]);
-    retestFlaggedController = TextEditingController( text: _map["retestFlagged"]);
-    retestCommentsController = TextEditingController( text: _map["retestComments"]);
+    retestFlaggedbyController =
+        TextEditingController(text: _map["retestFlaggedBy"]);
+    retestFlaggedController =
+        TextEditingController(text: _map["retestFlagged"]);
+    retestCommentsController =
+        TextEditingController(text: _map["retestComments"]);
 
     super.initState();
   }
+
   void dispose() {
     ocr1.dispose();
     ocr2.dispose();
@@ -278,7 +286,6 @@ class _T30 extends State<T30> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("T30 Sieve Analysis Details"),
@@ -860,11 +867,11 @@ class _T30 extends State<T30> {
 
                           CMR1In = File(imgFile.path);
                           var visionImage =
-                          FirebaseVisionImage.fromFile(imgFile);
+                              FirebaseVisionImage.fromFile(imgFile);
                           var _recognizer =
-                          FirebaseVision.instance.textRecognizer();
+                              FirebaseVision.instance.textRecognizer();
                           var _extractText =
-                          await _recognizer.processImage(visionImage);
+                              await _recognizer.processImage(visionImage);
                           result = '${_extractText.text}';
                           result = result.replaceAll(new RegExp("[^\\d.]"), "");
                           print(result);
@@ -878,16 +885,16 @@ class _T30 extends State<T30> {
                       child: _isLoading
                           ? _buildWidgetLoading()
                           : TextFormField(
-                        controller: ocr1in,
-                        keyboardType: TextInputType.number,
-                        maxLines: null,
-                        onFieldSubmitted: (value) {},
-                        validator: (value) {
-                          if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                            return "Enter a valid number";
-                          return null;
-                        },
-                      ),
+                              controller: ocr1in,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
                     )
                   ]),
                 ),
@@ -1275,11 +1282,11 @@ class _T30 extends State<T30> {
 
                           No30 = File(imgFile.path);
                           var visionImage =
-                          FirebaseVisionImage.fromFile(imgFile);
+                              FirebaseVisionImage.fromFile(imgFile);
                           var _recognizer =
-                          FirebaseVision.instance.textRecognizer();
+                              FirebaseVision.instance.textRecognizer();
                           var _extractText =
-                          await _recognizer.processImage(visionImage);
+                              await _recognizer.processImage(visionImage);
                           result = '${_extractText.text}';
                           result = result.replaceAll(new RegExp("[^\\d.]"), "");
                           print(result);
@@ -1293,16 +1300,16 @@ class _T30 extends State<T30> {
                       child: _isLoading
                           ? _buildWidgetLoading()
                           : TextFormField(
-                        controller: ocrno50,
-                        keyboardType: TextInputType.number,
-                        maxLines: null,
-                        onFieldSubmitted: (value) {},
-                        validator: (value) {
-                          if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                            return "Enter a valid number";
-                          return null;
-                        },
-                      ),
+                              controller: ocrno50,
+                              keyboardType: TextInputType.number,
+                              maxLines: null,
+                              onFieldSubmitted: (value) {},
+                              validator: (value) {
+                                if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                                  return "Enter a valid number";
+                                return null;
+                              },
+                            ),
                     )
                   ]),
                 ),
