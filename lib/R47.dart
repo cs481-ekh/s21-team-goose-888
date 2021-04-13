@@ -50,7 +50,13 @@ class _R47 extends State<R47> {
         TextEditingController(text: _map["serialNumController"]);
     organizationController =
         TextEditingController(text: _map["organizationController"]);
-    sampleDateController = TextEditingController(text: now);
+    if(_map["sampleDateController"]==""){
+      sampleDateController = TextEditingController(text: now);
+    }else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
+ 
     statusController = TextEditingController(text: _map["statusController"]);
 
     labNumberController = TextEditingController(text: _map["labNumber"]);
