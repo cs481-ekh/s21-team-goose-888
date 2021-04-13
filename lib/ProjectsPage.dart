@@ -112,9 +112,15 @@ class _ProjectsPage extends State<ProjectsPage> {
                     onPressed: () {
                       //bool check = ;
                       if (_submit()) {
-                        widget.db.selectProject(_dropDownValue);
-                        widget.db.loadValues();
-                        Navigator.pushNamed(context, '/form');
+                        if(_dropDownValue=="Select Project"){
+                          showAlertDialog(context);
+                        }else{
+                          widget.db.selectProject(_dropDownValue);
+                          widget.db.loadValues();
+                          Navigator.pushNamed(context, '/form');
+                        }
+
+
                       }
                     },
                   ),
@@ -189,4 +195,34 @@ class _ProjectsPage extends State<ProjectsPage> {
       ),
     );
   }
+  showAlertDialog(BuildContext context) {
+    // Create button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("No Project Selected"),
+      content: Text("You must either select a project or create one"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+
+
+
 }
