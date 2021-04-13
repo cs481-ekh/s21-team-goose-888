@@ -22,11 +22,6 @@ class _T308 extends State<T308> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File initial, assembly, fin;
-  //StoreDb db=StoreDb();
-
-
-
-
 
   bool _submit() {
     final isValid = _formKey.currentState.validate();
@@ -38,21 +33,36 @@ class _T308 extends State<T308> {
     }
   }
 
+  TextEditingController serialNumController;
+  TextEditingController organizationController;
+  TextEditingController sampleDateController;
+  TextEditingController statusController;
+
   TextEditingController initialController = TextEditingController();
   TextEditingController assemblyController = TextEditingController();
   TextEditingController basketFinalController = TextEditingController();
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
   TextEditingController remarksController = TextEditingController();
   TextEditingController testedByController = TextEditingController();
   TextEditingController testedByWAQTCController = TextEditingController();
-  //zTextEditingController testedDateController = TextEditingController();
+  TextEditingController testedDateController = TextEditingController();
   TextEditingController retestFlaggedbyController = TextEditingController();
   TextEditingController retestFlaggedController = TextEditingController();
   TextEditingController retestCommentsController = TextEditingController();
   TextEditingController independentAssessorController = TextEditingController();
+
+  void initState() {
+    var _map = widget.db.getT308();
+
+    serialNumController =
+        TextEditingController(text: _map["serialNumController"]);
+    organizationController =
+        TextEditingController(text: _map["organizationController"]);
+    sampleDateController = TextEditingController(text: now);
+    statusController = TextEditingController(text: _map["statusController"]);
+
+    super.initState();
+  }
+
   void dispose() {
     initialController.dispose();
     assemblyController.dispose();
@@ -65,12 +75,14 @@ class _T308 extends State<T308> {
     remarksController.dispose();
     testedByController.dispose();
     testedByWAQTCController.dispose();
+    testedDateController.dispose();
     retestFlaggedbyController.dispose();
     retestFlaggedController.dispose();
     retestCommentsController.dispose();
 
     super.dispose();
   }
+
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
       "basksetInitialSamp": initialController.text,
@@ -91,7 +103,6 @@ class _T308 extends State<T308> {
 
     widget.db.setT308(dbMap);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +212,8 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a Number";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a Number";
                     return null;
                   },
                 ),
@@ -345,7 +357,8 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid Number!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid Number!";
                     return null;
                   },
                 ),
@@ -420,7 +433,8 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid entry!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid entry!";
                     return null;
                   },
                 ),
@@ -432,7 +446,8 @@ class _T308 extends State<T308> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid WAQTC Number!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid WAQTC Number!";
                     return null;
                   },
                 ),
@@ -444,7 +459,8 @@ class _T308 extends State<T308> {
                   onFieldSubmitted: (value) {},
                   initialValue: now,
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),

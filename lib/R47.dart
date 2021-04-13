@@ -4,43 +4,86 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
-//import 'main.dart';
 
 import 'package:itd_888/FireBaseFireStoreDB.dart';
 
 class R47 extends StatefulWidget {
-
   @override
   StoreDb db;
-   R47({Key key, @required this.db}) : super(key: key);
+  R47({Key key, @required this.db}) : super(key: key);
   _R47 createState() => _R47();
 }
 
 class _R47 extends State<R47> {
-
   var result = "Result In Here";
+  var _check = "";
   bool _isLoading = false;
   dynamic _extractText = "";
   String dropdownValue = "Select";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampTemp, tapeNum;
-  //StoreDb db= StoreDb();
-  TextEditingController independentAssessorController = TextEditingController();
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
-  TextEditingController labNumberController = TextEditingController();
-  TextEditingController initReductionLocationController = TextEditingController();
-  TextEditingController performedByController = TextEditingController();
-  TextEditingController wAQTCNumberController = TextEditingController();
-  TextEditingController dataReducedController = TextEditingController();
-  TextEditingController timeReducedController = TextEditingController();
-  TextEditingController sampleTempController = TextEditingController();
-  TextEditingController witnessController = TextEditingController();
-  TextEditingController wWAQTCNumberController = TextEditingController();
-  TextEditingController boxSecurityTapeController = TextEditingController();
+
+  TextEditingController serialNumController;
+  TextEditingController organizationController;
+  TextEditingController sampleDateController;
+  TextEditingController statusController;
+
+  TextEditingController labNumberController;
+  TextEditingController initReductionLocationController;
+  TextEditingController performedByController;
+  TextEditingController wAQTCNumberController;
+  TextEditingController dataReducedController;
+  TextEditingController timeReducedController;
+  TextEditingController sampleTempController;
+  TextEditingController witnessController;
+  TextEditingController wWAQTCNumberController;
+  TextEditingController boxSecurityTapeController;
+
+  TextEditingController independentAssessorController;
+
+  void initState() {
+    var _map = widget.db.getR47();
+    _check = _map["reasonForSample"];
+
+    serialNumController =
+        TextEditingController(text: _map["serialNumController"]);
+    organizationController =
+        TextEditingController(text: _map["organizationController"]);
+    sampleDateController = TextEditingController(text: now);
+    statusController = TextEditingController(text: _map["statusController"]);
+
+    labNumberController = TextEditingController(text: _map["labNumber"]);
+    initReductionLocationController =
+        TextEditingController(text: _map["initReductionLocation"]);
+    performedByController = TextEditingController(text: _map["performedBy"]);
+    wAQTCNumberController = TextEditingController(text: _map["WAQTCNumber"]);
+    dataReducedController = TextEditingController(text: _map["dataReduced"]);
+    timeReducedController = TextEditingController(text: _map["timeReduced"]);
+    sampleTempController = TextEditingController(text: _map["sampleTemp"]);
+    witnessController = TextEditingController(text: _map["witness"]);
+    wWAQTCNumberController =
+        TextEditingController(text: _map["witnessWAQTCNumber"]);
+    boxSecurityTapeController =
+        TextEditingController(text: _map["boxSecurityTape"]);
+    independentAssessorController =
+        TextEditingController(text: _map["independentAssessorController"]);
+
+    if (_check == "0" || _check == "") {
+      dropdownValue = "Select";
+    } else if (_check == "1") {
+      dropdownValue = "Acceptance";
+    } else if (_check == "2") {
+      dropdownValue = "B";
+    } else if (_check == "3") {
+      dropdownValue = "C";
+    } else if (_check == "4") {
+      dropdownValue = "D";
+    } else {
+      dropdownValue = "Select";
+    }
+    super.initState();
+  }
 
   bool _submit() {
     final isValid = _formKey.currentState.validate();
@@ -90,7 +133,6 @@ class _R47 extends State<R47> {
       "sampleDateController": sampleDateController.text,
       "statusController": statusController.text,
     };
-
 
     widget.db.setR47(dbMap);
   }
@@ -362,6 +404,17 @@ class _R47 extends State<R47> {
                     onChanged: (String newValue) {
                       setState(() {
                         dropdownValue = newValue;
+                        if (dropdownValue == "Select") {
+                          _check = "0";
+                        } else if (dropdownValue == "Acceptance") {
+                          _check = "1";
+                        } else if (dropdownValue == "B") {
+                          _check = "2";
+                        } else if (dropdownValue == "C") {
+                          _check = "3";
+                        } else {
+                          _check = "4";
+                        }
                       });
                     },
                     hint: Text(
@@ -449,6 +502,7 @@ class _R47 extends State<R47> {
                   onPressed: () {
                     if (_submit()) {
                       createAddDbMap();
+                      widget.db.loadValues();
                       //Navigator.pushNamed(context, '/form');
                       Navigator.pop(context);
                     }

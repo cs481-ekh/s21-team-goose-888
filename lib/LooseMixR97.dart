@@ -83,8 +83,10 @@ class _LooseMixR97 extends State<LooseMixR97> {
       dropdownValue = "B";
     } else if (_check == "3") {
       dropdownValue = "C";
-    } else {
+    } else if (_check == "4") {
       dropdownValue = "D";
+    } else {
+      dropdownValue = "Select";
     }
     super.initState();
   }
