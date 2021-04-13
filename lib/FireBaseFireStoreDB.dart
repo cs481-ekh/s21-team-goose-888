@@ -156,6 +156,9 @@ class StoreDb implements FireStoreDb {
   Future<void> setT30(Map map) async {
     await getProjects().doc(currentProject).update({'T30': map});
   }
+  Map getT30() {
+    return t30;
+  }
 
   Future<void> setT308(Map map) async {
     await getProjects().doc(currentProject).update({'T308': map});

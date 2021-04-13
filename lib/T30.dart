@@ -35,122 +35,58 @@ class _T30 extends State<T30> {
 
   //StoreDb db;
 
-  TextEditingController ocr1 = TextEditingController();
-  TextEditingController ocr2 = TextEditingController();
-  TextEditingController ocr3 = TextEditingController();
+  TextEditingController ocr1 ;
+  TextEditingController ocr2 ;
+  TextEditingController ocr3 ;
 
-  TextEditingController ocr4 = TextEditingController();
-  TextEditingController ocr5 = TextEditingController();
-  TextEditingController ocr6 = TextEditingController();
+  TextEditingController ocr4 ;
+  TextEditingController ocr5 ;
+  TextEditingController ocr6 ;
 
-  TextEditingController ocr7 = TextEditingController();
-  TextEditingController ocr1in = TextEditingController();
-  TextEditingController ocr8 = TextEditingController();
-  TextEditingController ocr9 = TextEditingController();
-  TextEditingController ocr10 = TextEditingController();
+  TextEditingController ocr7 ;
+  TextEditingController ocr1in ;
+  TextEditingController ocr8 ;
+  TextEditingController ocr9 ;
+  TextEditingController ocr10 ;
 
-  TextEditingController ocr11 = TextEditingController();
-  TextEditingController ocr12 = TextEditingController();
-  TextEditingController ocr13 = TextEditingController();
-  TextEditingController ocr14 = TextEditingController();
-  TextEditingController ocrno50 = TextEditingController();
-  TextEditingController ocr15 = TextEditingController();
+  TextEditingController ocr11 ;
+  TextEditingController ocr12 ;
+  TextEditingController ocr13 ;
+  TextEditingController ocr14 ;
+  TextEditingController ocrno50 ;
+  TextEditingController ocr15 ;
 
-  TextEditingController ocr16 = TextEditingController();
-  TextEditingController ocr17 = TextEditingController();
+  TextEditingController ocr16 ;
+  TextEditingController ocr17 ;
 
-  TextEditingController aggregateCorrectFact50Controller =
-      TextEditingController();
-  TextEditingController aggregateCorrectFact37Controller =
-      TextEditingController();
-  TextEditingController aggregateCorrectFact25Controller =
-      TextEditingController();
-  TextEditingController aggregateCorrectFact19Controller =
-      TextEditingController();
-  TextEditingController aggregateCorrectFact9Controller =
-      TextEditingController();
+  TextEditingController aggregateCorrectFact50Controller ;
+  TextEditingController aggregateCorrectFact37Controller ;
+  TextEditingController aggregateCorrectFact25Controller ;
+  TextEditingController aggregateCorrectFact19Controller ;
+  TextEditingController aggregateCorrectFact9Controller ;
 
-  TextEditingController independentAssessorController = TextEditingController();
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
+  TextEditingController independentAssessorController;
+  TextEditingController serialNumController ;
+  TextEditingController organizationController ;
+  TextEditingController sampleDateController ;
+  TextEditingController statusController ;
 
-  TextEditingController aggregateCorrectNo4Controller = TextEditingController();
-  TextEditingController aggregateCorrectNo8Controller = TextEditingController();
-  TextEditingController aggregateCorrectNo16Controller =
-      TextEditingController();
-  TextEditingController aggregateCorrectNo30Controller =
-      TextEditingController();
-  TextEditingController aggregateCorrectNo50Controller =
-      TextEditingController();
-  TextEditingController aggregateCorrectNo100Controller =
-      TextEditingController();
-  TextEditingController aggregateCorrectNo200Controller =
-      TextEditingController();
-  TextEditingController remarksController = TextEditingController();
-  TextEditingController testedByController = TextEditingController();
-  TextEditingController testedByWAQTCController = TextEditingController();
-  TextEditingController retestFlaggedbyController = TextEditingController();
-  TextEditingController retestFlaggedController = TextEditingController();
-  TextEditingController retestCommentsController = TextEditingController();
+  TextEditingController aggregateCorrectNo4Controller ;
+  TextEditingController aggregateCorrectNo8Controller ;
+  TextEditingController aggregateCorrectNo16Controller ;
+  TextEditingController aggregateCorrectNo30Controller ;
+  TextEditingController aggregateCorrectNo50Controller ;
+  TextEditingController aggregateCorrectNo100Controller ;
+  TextEditingController aggregateCorrectNo200Controller ;
+  TextEditingController remarksController;
+  TextEditingController testedByController;
+  TextEditingController testDateController ;
+  TextEditingController testedByWAQTCController;
+  TextEditingController retestFlaggedbyController ;
+  TextEditingController retestFlaggedController ;
+  TextEditingController retestCommentsController ;
 
-  void dispose() {
-    ocr1.dispose();
-    ocr2.dispose();
-    ocr3.dispose();
-    ocr1in.dispose();
-    ocr4.dispose();
-    ocr5.dispose();
-    ocr6.dispose();
 
-    ocr7.dispose();
-    ocr8.dispose();
-    ocr9.dispose();
-    ocr10.dispose();
-
-    ocr11.dispose();
-    ocr12.dispose();
-    ocr13.dispose();
-    ocr14.dispose();
-    ocrno50.dispose();
-    ocr15.dispose();
-
-    ocr16.dispose();
-    ocr17.dispose();
-
-    independentAssessorController.dispose();
-    serialNumController.dispose();
-    organizationController.dispose();
-    sampleDateController.dispose();
-    statusController.dispose();
-
-    aggregateCorrectFact50Controller.dispose();
-    aggregateCorrectFact37Controller.dispose();
-    aggregateCorrectFact25Controller.dispose();
-    aggregateCorrectFact19Controller.dispose();
-    aggregateCorrectFact9Controller.dispose();
-    aggregateCorrectFact50Controller.dispose();
-    aggregateCorrectFact50Controller.dispose();
-    aggregateCorrectFact50Controller.dispose();
-    aggregateCorrectFact50Controller.dispose();
-    aggregateCorrectFact50Controller.dispose();
-    aggregateCorrectNo4Controller.dispose();
-    aggregateCorrectNo8Controller.dispose();
-    aggregateCorrectNo16Controller.dispose();
-    aggregateCorrectNo30Controller.dispose();
-    aggregateCorrectNo50Controller.dispose();
-    aggregateCorrectNo100Controller.dispose();
-    aggregateCorrectNo200Controller.dispose();
-    remarksController.dispose();
-    testedByController.dispose();
-    testedByWAQTCController.dispose();
-    retestFlaggedbyController.dispose();
-    retestFlaggedController.dispose();
-    retestCommentsController.dispose();
-
-    super.dispose();
-  }
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
@@ -196,6 +132,7 @@ class _T30 extends State<T30> {
       "retestFlaggedBy": retestFlaggedbyController.text,
       "retestFlagged": retestFlaggedController.text,
       "retestComments": retestCommentsController.text,
+     "testDate": testDateController.text,
     };
 
     widget.db.setT30(dbMap);
@@ -211,8 +148,8 @@ class _T30 extends State<T30> {
     }
   }
   void initState() {
-    var _map = widget.db.getR97();
-    ocr1 = TextEditingController( text: _map["bidItem"]);
+    var _map = widget.db.getT30();
+    ocr1 = TextEditingController( text: _map["panSampleBeforeWashMass"]);
     ocr2 = TextEditingController( text: _map["panBeforeWashMass"]);
     ocr3 = TextEditingController( text: _map["sampleBeforeWashMass"]);
 
@@ -239,7 +176,13 @@ class _T30 extends State<T30> {
     independentAssessorController = TextEditingController( text: _map["independentAssessorController"]);
     serialNumController = TextEditingController( text: _map["serialNumController"]);
     organizationController = TextEditingController( text: _map["organizationController"]);
-    sampleDateController = TextEditingController( text: now);
+    if(_map["sampleDateController"]==""){
+      sampleDateController = TextEditingController(text: now);
+    }else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
+
     statusController = TextEditingController( text: _map["statusController"]);
 
     aggregateCorrectFact50Controller =
@@ -270,13 +213,68 @@ class _T30 extends State<T30> {
     remarksController = TextEditingController( text: _map["remarks"]);
     testedByController = TextEditingController( text: _map["testedBy"]);
     testedByWAQTCController = TextEditingController( text: _map["testedByWAQTC"]);
+    if(_map["testDate"]==""){
+      testDateController = TextEditingController(text: now);
+    }else {
+      testDateController = TextEditingController(text: _map["testDate"]);
+    }
     retestFlaggedbyController = TextEditingController( text: _map["retestFlaggedBy"]);
     retestFlaggedController = TextEditingController( text: _map["retestFlagged"]);
     retestCommentsController = TextEditingController( text: _map["retestComments"]);
 
     super.initState();
   }
+  void dispose() {
+    ocr1.dispose();
+    ocr2.dispose();
+    ocr3.dispose();
+    ocr1in.dispose();
+    ocr4.dispose();
+    ocr5.dispose();
+    ocr6.dispose();
 
+    ocr7.dispose();
+    ocr8.dispose();
+    ocr9.dispose();
+    ocr10.dispose();
+
+    ocr11.dispose();
+    ocr12.dispose();
+    ocr13.dispose();
+    ocr14.dispose();
+    ocrno50.dispose();
+    ocr15.dispose();
+
+    ocr16.dispose();
+    ocr17.dispose();
+
+    independentAssessorController.dispose();
+    serialNumController.dispose();
+    organizationController.dispose();
+    sampleDateController.dispose();
+    statusController.dispose();
+
+    aggregateCorrectFact50Controller.dispose();
+    aggregateCorrectFact37Controller.dispose();
+    aggregateCorrectFact25Controller.dispose();
+    aggregateCorrectFact19Controller.dispose();
+    aggregateCorrectFact9Controller.dispose();
+    aggregateCorrectNo4Controller.dispose();
+    aggregateCorrectNo8Controller.dispose();
+    aggregateCorrectNo16Controller.dispose();
+    aggregateCorrectNo30Controller.dispose();
+    aggregateCorrectNo50Controller.dispose();
+    aggregateCorrectNo100Controller.dispose();
+    aggregateCorrectNo200Controller.dispose();
+    remarksController.dispose();
+    testedByController.dispose();
+    testedByWAQTCController.dispose();
+    retestFlaggedbyController.dispose();
+    retestFlaggedController.dispose();
+    retestCommentsController.dispose();
+    testDateController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1711,13 +1709,12 @@ class _T30 extends State<T30> {
                   },
                 ),
                 TextFormField(
-                  //controller: testedDateController,
+                  controller: testDateController,
                   decoration: InputDecoration(
                       labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid date!";
