@@ -51,7 +51,7 @@ class _R47 extends State<R47> {
     organizationController =
         TextEditingController(text: _map["organizationController"]);
     if (_map["sampleDateController"] == "" ||
-        !_map.containsKey(sampleDateController)) {
+        !_map.containsKey("sampleDateController")) {
       sampleDateController = TextEditingController(text: now);
     } else {
       sampleDateController =
@@ -66,20 +66,16 @@ class _R47 extends State<R47> {
     performedByController = TextEditingController(text: _map["performedBy"]);
     wAQTCNumberController = TextEditingController(text: _map["WAQTCNumber"]);
 
-    if (_map["dateReducedController"] == "" ||
-        !_map.containsKey(dateReducedController)) {
+    if (_map["dateReduced"] == "" || !_map.containsKey("dateReduced")) {
       dateReducedController = TextEditingController(text: now);
     } else {
-      dateReducedController =
-          TextEditingController(text: _map["dateReducedController"]);
+      dateReducedController = TextEditingController(text: _map["dateReduced"]);
     }
 
-    if (_map["timeReducedController"] == "" ||
-        !_map.containsKey(timeReducedController)) {
+    if (_map["timeReduced"] == "" || !_map.containsKey("timeReduced")) {
       timeReducedController = TextEditingController(text: now);
     } else {
-      timeReducedController =
-          TextEditingController(text: _map["timeReducedController"]);
+      timeReducedController = TextEditingController(text: _map["timeReduced"]);
     }
 
     sampleTempController = TextEditingController(text: _map["sampleTemp"]);

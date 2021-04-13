@@ -80,7 +80,7 @@ class _Custody extends State<Custody> {
     organizationController =
         TextEditingController(text: _map["organizationController"]);
     if (_map["sampleDateController"] == "" ||
-        !_map.containsKey(sampleDateController)) {
+        !_map.containsKey("sampleDateController")) {
       sampleDateController = TextEditingController(text: now);
     } else {
       sampleDateController =
