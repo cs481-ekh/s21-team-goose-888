@@ -79,7 +79,12 @@ class _Custody extends State<Custody> {
         TextEditingController(text: _map["serialNumController"]);
     organizationController =
         TextEditingController(text: _map["organizationController"]);
-    sampleDateController = TextEditingController(text: now);
+    if(_map["sampleDateController"]==""){
+      sampleDateController = TextEditingController(text: now);
+    }else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
     statusController = TextEditingController(text: _map["statusController"]);
 
     sampleCustodian1 = TextEditingController(text: _map["sampleCustodian1"]);
