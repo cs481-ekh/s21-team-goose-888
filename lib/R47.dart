@@ -33,7 +33,7 @@ class _R47 extends State<R47> {
   TextEditingController initReductionLocationController;
   TextEditingController performedByController;
   TextEditingController wAQTCNumberController;
-  TextEditingController dataReducedController;
+  TextEditingController dateReducedController;
   TextEditingController timeReducedController;
   TextEditingController sampleTempController;
   TextEditingController witnessController;
@@ -50,9 +50,10 @@ class _R47 extends State<R47> {
         TextEditingController(text: _map["serialNumController"]);
     organizationController =
         TextEditingController(text: _map["organizationController"]);
-    if(_map["sampleDateController"]==""){
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey(sampleDateController)) {
       sampleDateController = TextEditingController(text: now);
-    }else {
+    } else {
       sampleDateController =
           TextEditingController(text: _map["sampleDateController"]);
     }
@@ -64,8 +65,23 @@ class _R47 extends State<R47> {
         TextEditingController(text: _map["initReductionLocation"]);
     performedByController = TextEditingController(text: _map["performedBy"]);
     wAQTCNumberController = TextEditingController(text: _map["WAQTCNumber"]);
-    dataReducedController = TextEditingController(text: _map["dataReduced"]);
-    timeReducedController = TextEditingController(text: _map["timeReduced"]);
+
+    if (_map["dateReducedController"] == "" ||
+        !_map.containsKey(dateReducedController)) {
+      dateReducedController = TextEditingController(text: now);
+    } else {
+      dateReducedController =
+          TextEditingController(text: _map["dateReducedController"]);
+    }
+
+    if (_map["timeReducedController"] == "" ||
+        !_map.containsKey(timeReducedController)) {
+      timeReducedController = TextEditingController(text: now);
+    } else {
+      timeReducedController =
+          TextEditingController(text: _map["timeReducedController"]);
+    }
+
     sampleTempController = TextEditingController(text: _map["sampleTemp"]);
     witnessController = TextEditingController(text: _map["witness"]);
     wWAQTCNumberController =
@@ -112,7 +128,7 @@ class _R47 extends State<R47> {
     initReductionLocationController.dispose();
     performedByController.dispose();
     wAQTCNumberController.dispose();
-    dataReducedController.dispose();
+    dateReducedController.dispose();
     timeReducedController.dispose();
     sampleTempController.dispose();
     witnessController.dispose();
@@ -127,7 +143,7 @@ class _R47 extends State<R47> {
       "initReductionLocation": initReductionLocationController.text,
       "performedBy": performedByController.text,
       "WAQTCNumber": wAQTCNumberController.text,
-      "dataReduced": dataReducedController.text,
+      "dateReduced": dateReducedController.text,
       "timeReduced": timeReducedController.text,
       "sampleTemp": sampleTempController.text,
       "witness": witnessController.text,
@@ -273,7 +289,7 @@ class _R47 extends State<R47> {
                   },
                 ),
                 TextFormField(
-                  controller: dataReducedController,
+                  controller: dateReducedController,
                   decoration: InputDecoration(
                       labelText: "Data Reduced",
                       labelStyle: TextStyle(color: Colors.black)),

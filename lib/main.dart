@@ -22,7 +22,6 @@ String textEmail = "";
 //StoreDb db = StoreDb();
 StoreDb dbe = StoreDb();
 void main() {
-
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
@@ -34,38 +33,38 @@ void main() {
             text: textEmail,
           ),
       '/form': (context) => FormSections(
-        db: dbe,
-      ),
+            db: dbe,
+          ),
       '/project': (context) => ProjectsPage(
-        db: dbe,
-      ),
+            db: dbe,
+          ),
       '/LooseMixR97': (context) => LooseMixR97(
-        db: dbe,
-      ),
+            db: dbe,
+          ),
       '/Custody': (context) => Custody(
-        db: dbe,
-      ),
+            db: dbe,
+          ),
       '/R47': (context) => R47(
-        db: dbe,
-      ),
+            db: dbe,
+          ),
       '/T166': (context) => T166(
-        db: dbe,
-      ),
+            db: dbe,
+          ),
       '/T30': (context) => T30(
-        db: dbe,
-      ),
+            db: dbe,
+          ),
       '/T329': (context) => T329(
-        db: dbe,
-      ),
+            db: dbe,
+          ),
       '/T308': (context) => T308(
-        db: dbe,
-      ),
+            db: dbe,
+          ),
       '/T209': (context) => T209(
-        db: dbe,
-      ),
+            db: dbe,
+          ),
       '/T312': (context) => T312(
-        db: dbe,
-      ),
+            db: dbe,
+          ),
     },
   ));
 }
@@ -235,5 +234,3 @@ class _HomeLogin extends State<HomeLogin> {
     );
   }
 }
-
-
