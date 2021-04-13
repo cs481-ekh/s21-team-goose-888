@@ -172,9 +172,10 @@ class _T209 extends State<T209> {
     serialNumController = TextEditingController(text: _map["serialNumController"]);
     organizationController = TextEditingController(text: _map["organizationController"]);
     //sampleDateController = TextEditingController();
-    if(_map["sampleDateController"]==""){
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey(sampleDateController)) {
       sampleDateController = TextEditingController(text: now);
-    }else {
+    } else {
       sampleDateController =
           TextEditingController(text: _map["sampleDateController"]);
     }
@@ -184,10 +185,17 @@ class _T209 extends State<T209> {
     testedByController = TextEditingController(text: _map["testedBy"]);
     testedByWAQTCController = TextEditingController(text: _map["testedByWAQTC"]);
 
-    if(_map["testDate"]==""){
+    // if(_map["testDate"]==""){
+    //   testDateController = TextEditingController(text: now);
+    // }else {
+    //   testDateController = TextEditingController(text: _map["testDate"]);
+    // }
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey("testDate")) {
       testDateController = TextEditingController(text: now);
-    }else {
-      testDateController = TextEditingController(text: _map["testDate"]);
+    } else {
+      testDateController =
+          TextEditingController(text: _map["testDate"]);
     }
     //testedDateController = TextEditingController();
     retestFlaggedbyController = TextEditingController(text: _map["retestFlaggedBy"]);
