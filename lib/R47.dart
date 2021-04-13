@@ -200,13 +200,12 @@ class _R47 extends State<R47> {
                   },
                 ),
                 TextFormField(
-                  //controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid date!";

@@ -35,39 +35,35 @@ class _T209 extends State<T209> {
   //StoreDb db= StoreDb();
 
   TextEditingController independentAssessorController;
-  TextEditingController mBS1Controller ;
-  TextEditingController mB1Controller ;
-  TextEditingController mDSA1Controller ;
-  TextEditingController sWBS1Controller ;
-  TextEditingController sWB1Controller ;
-  TextEditingController sWS1Controller ;
+  TextEditingController mBS1Controller;
+  TextEditingController mB1Controller;
+  TextEditingController mDSA1Controller;
+  TextEditingController sWBS1Controller;
+  TextEditingController sWB1Controller;
+  TextEditingController sWS1Controller;
 
-  TextEditingController mBS2Controller ;
-  TextEditingController mB2Controller ;
-  TextEditingController mDSA2Controller ;
-  TextEditingController sWBS2Controller ;
-  TextEditingController sWB2Controller ;
-  TextEditingController sWS2Controller ;
+  TextEditingController mBS2Controller;
+  TextEditingController mB2Controller;
+  TextEditingController mDSA2Controller;
+  TextEditingController sWBS2Controller;
+  TextEditingController sWB2Controller;
+  TextEditingController sWS2Controller;
 
-
-  TextEditingController serialNumController ;
-  TextEditingController organizationController ;
-  TextEditingController sampleDateController ;
+  TextEditingController serialNumController;
+  TextEditingController organizationController;
+  TextEditingController sampleDateController;
   TextEditingController statusController;
 
   TextEditingController remarksController;
-  TextEditingController testedByController ;
-  TextEditingController testedByWAQTCController ;
-  TextEditingController retestFlaggedbyController ;
+  TextEditingController testedByController;
+  TextEditingController testedByWAQTCController;
+  TextEditingController retestFlaggedbyController;
   TextEditingController retestFlaggedController;
-  TextEditingController testDateController ;
-  TextEditingController retestCommentsController ;
-
-
+  TextEditingController testDateController;
+  TextEditingController retestCommentsController;
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
-
       "independentAssessorController": independentAssessorController.text,
       "mBs1": mBS1Controller.text,
       "mB1": mB1Controller.text,
@@ -81,12 +77,10 @@ class _T209 extends State<T209> {
       "sWBS2": sWBS2Controller.text,
       "sWB2": sWB2Controller.text,
       "sWS2": sWS2Controller.text,
-
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
+      "serialNumController": serialNumController.text,
+      "organizationController": organizationController.text,
       "sampleDateController": sampleDateController.text,
       "statusController": statusController.text,
-
       "remarks": remarksController.text,
       "testedBy": testedByController.text,
       "testedByWAQTC": testedByWAQTCController.text,
@@ -98,8 +92,8 @@ class _T209 extends State<T209> {
 
     widget.db.setT209(dbMap);
   }
-  void dispose() {
 
+  void dispose() {
     mBS1Controller.dispose();
     mB1Controller.dispose();
     mDSA1Controller.dispose();
@@ -113,7 +107,6 @@ class _T209 extends State<T209> {
     sWBS2Controller.dispose();
     sWB2Controller.dispose();
     sWS2Controller.dispose();
-
 
     serialNumController.dispose();
     organizationController.dispose();
@@ -130,6 +123,7 @@ class _T209 extends State<T209> {
     testDateController.dispose();
     super.dispose();
   }
+
   bool _submit() {
     final isValid = _formKey.currentState.validate();
     if (!isValid) {
@@ -150,27 +144,29 @@ class _T209 extends State<T209> {
   //       } else {
   //         // TODO: Forget the user
   //       }
-    //  });
+  //  });
   void initState() {
     var _map = widget.db.getT209();
-    independentAssessorController = TextEditingController(text: _map["independentAssessorController"]);
+    independentAssessorController =
+        TextEditingController(text: _map["independentAssessorController"]);
     mBS1Controller = TextEditingController(text: _map["mBs1"]);
-     mB1Controller = TextEditingController(text: _map["mB1"]);
+    mB1Controller = TextEditingController(text: _map["mB1"]);
     mDSA1Controller = TextEditingController(text: _map["mDSA1"]);
     sWBS1Controller = TextEditingController(text: _map["sWBS1"]);
     sWB1Controller = TextEditingController(text: _map["sWB1"]);
-     sWS1Controller = TextEditingController(text: _map["sWS1"]);
+    sWS1Controller = TextEditingController(text: _map["sWS1"]);
 
-     mBS2Controller = TextEditingController(text: _map["mBS2"]);
-     mB2Controller = TextEditingController(text: _map["mB2"]);
-     mDSA2Controller = TextEditingController(text: _map["mDSA2"]);
-     sWBS2Controller = TextEditingController(text: _map["sWBS2"]);
-     sWB2Controller = TextEditingController(text: _map["sWB2"]);
+    mBS2Controller = TextEditingController(text: _map["mBS2"]);
+    mB2Controller = TextEditingController(text: _map["mB2"]);
+    mDSA2Controller = TextEditingController(text: _map["mDSA2"]);
+    sWBS2Controller = TextEditingController(text: _map["sWBS2"]);
+    sWB2Controller = TextEditingController(text: _map["sWB2"]);
     sWS2Controller = TextEditingController(text: _map["sWS2"]);
 
-
-    serialNumController = TextEditingController(text: _map["serialNumController"]);
-    organizationController = TextEditingController(text: _map["organizationController"]);
+    serialNumController =
+        TextEditingController(text: _map["serialNumController"]);
+    organizationController =
+        TextEditingController(text: _map["organizationController"]);
     //sampleDateController = TextEditingController();
     if (_map["sampleDateController"] == "" ||
         !_map.containsKey("sampleDateController")) {
@@ -179,30 +175,33 @@ class _T209 extends State<T209> {
       sampleDateController =
           TextEditingController(text: _map["sampleDateController"]);
     }
-     statusController = TextEditingController(text: _map["statusController"]);
+    statusController = TextEditingController(text: _map["statusController"]);
 
     remarksController = TextEditingController(text: _map["remarks"]);
     testedByController = TextEditingController(text: _map["testedBy"]);
-    testedByWAQTCController = TextEditingController(text: _map["testedByWAQTC"]);
+    testedByWAQTCController =
+        TextEditingController(text: _map["testedByWAQTC"]);
 
     // if(_map["testDate"]==""){
     //   testDateController = TextEditingController(text: now);
     // }else {
     //   testDateController = TextEditingController(text: _map["testDate"]);
     // }
-    if (_map["testDate"] == "" ||
-        !_map.containsKey("testDate")) {
+    if (_map["testDate"] == "" || !_map.containsKey("testDate")) {
       testDateController = TextEditingController(text: now);
     } else {
-      testDateController =
-          TextEditingController(text: _map["testDate"]);
+      testDateController = TextEditingController(text: _map["testDate"]);
     }
     //testedDateController = TextEditingController();
-    retestFlaggedbyController = TextEditingController(text: _map["retestFlaggedBy"]);
-    retestFlaggedController = TextEditingController(text: _map["retestFlagged"]);
-    retestCommentsController = TextEditingController(text: _map["retestComments"]);
+    retestFlaggedbyController =
+        TextEditingController(text: _map["retestFlaggedBy"]);
+    retestFlaggedController =
+        TextEditingController(text: _map["retestFlagged"]);
+    retestCommentsController =
+        TextEditingController(text: _map["retestComments"]);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -254,9 +253,9 @@ class _T209 extends State<T209> {
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
-
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -1042,8 +1041,8 @@ class _T209 extends State<T209> {
                 ),
 
                 TextFormField(
-                    controller: testDateController,
-                    decoration: InputDecoration(
+                  controller: testDateController,
+                  decoration: InputDecoration(
                       labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
