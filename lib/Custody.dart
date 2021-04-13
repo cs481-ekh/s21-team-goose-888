@@ -47,7 +47,29 @@ class _Custody extends State<Custody> {
     organizationController.dispose();
     sampleDateController.dispose();
     statusController.dispose();
+    sampleCustodian1.dispose();
+    wAQTCNumber1.dispose();
+    receivedBy1.dispose();
+    receivedWAQTCNumber1.dispose();
+    details1.dispose();
 
+    sampleCustodian2.dispose();
+    wAQTCNumber2.dispose();
+    receivedBy2.dispose();
+    receivedWAQTCNumber2.dispose();
+    details2.dispose();
+
+    sampleCustodian3.dispose();
+    wAQTCNumber3.dispose();
+    receivedBy3.dispose();
+    receivedWAQTCNumber3.dispose();
+    details3.dispose();
+
+    sampleCustodian4.dispose();
+    wAQTCNumber4.dispose();
+    receivedBy4.dispose();
+    receivedWAQTCNumber4.dispose();
+    details4.dispose();
     super.dispose();
   }
 
