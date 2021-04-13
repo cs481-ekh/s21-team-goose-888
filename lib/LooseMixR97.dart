@@ -48,9 +48,10 @@ class _LooseMixR97 extends State<LooseMixR97> {
     var _map = widget.db.getR97();
     _check = _map["reasonForSample"];
 
-    if(_map["sampleDateController"]==""){
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey(sampleDateController)) {
       sampleDateController = TextEditingController(text: now);
-    }else {
+    } else {
       sampleDateController =
           TextEditingController(text: _map["sampleDateController"]);
     }
