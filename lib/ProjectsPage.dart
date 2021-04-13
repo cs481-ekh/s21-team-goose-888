@@ -12,6 +12,7 @@ class ProjectsPage extends StatefulWidget {
 class _ProjectsPage extends State<ProjectsPage> {
   var formKey = GlobalKey<FormState>();
   var formKey2 = GlobalKey<FormState>();
+  Map<String, dynamic> projNameMap;
   //StoreDb db = StoreDb();
   TextEditingController projectName = TextEditingController();
   TextEditingController bidItem = TextEditingController();
@@ -23,7 +24,10 @@ class _ProjectsPage extends State<ProjectsPage> {
   }
 
   void initState() {
+    widget.db.loadMapNames();
     widget.db.listProjects();
+    projNameMap =widget.db.getMapNames();
+
     super.initState();
   }
 
@@ -51,7 +55,6 @@ class _ProjectsPage extends State<ProjectsPage> {
   Future<List> fetchData() async {
     return widget.db.listProjects();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,7 +118,8 @@ class _ProjectsPage extends State<ProjectsPage> {
                         if(_dropDownValue=="Select Project"){
                           showAlertDialog(context);
                         }else{
-                          widget.db.selectProject(_dropDownValue);
+                         dynamic word= projNameMap[_dropDownValue];
+                          widget.db.selectProject(word);
                           widget.db.loadValues();
                           Navigator.pushNamed(context, '/form');
                         }
@@ -182,8 +186,13 @@ class _ProjectsPage extends State<ProjectsPage> {
                     onPressed: () {
                       //bool check = ;
                       if (_submit()) {
-                        createProject();
-                        Navigator.pushNamed(context, '/form');
+                        if(projNameMap.containsKey(projectName.text)){
+                          showSameNameAlertDialog(context);
+                        }else{
+                          createProject();
+                          Navigator.pushNamed(context, '/form');
+                        }
+
                       }
                     },
                   ),
@@ -213,6 +222,7 @@ class _ProjectsPage extends State<ProjectsPage> {
       ],
     );
 
+
     // show the dialog
     showDialog(
       context: context,
@@ -222,6 +232,33 @@ class _ProjectsPage extends State<ProjectsPage> {
     );
   }
 
+  showSameNameAlertDialog(BuildContext context) {
+    // Create button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Same Name"),
+      content: Text("Please use project name that has not been used already"),
+      actions: [
+        okButton,
+      ],
+    );
+
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
 
 

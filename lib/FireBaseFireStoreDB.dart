@@ -17,6 +17,7 @@ abstract class FireStoreDb {
   Map<String, dynamic> t209;
   Map<String, dynamic> t166;
   Map<String, dynamic> t312;
+  Map<String, dynamic> mapNames;
 
   // First set of methods are methods to get info from the ITD-888 collection
   String getSerialNumber();
@@ -26,6 +27,7 @@ abstract class FireStoreDb {
   void selectProject(String serialNumber);
   CollectionReference getProjects();
   Future<List> listProjects();
+  Map<String, dynamic>  getMapNames();
 
   // this method creates a new document in the ITD-888 collection with an
   //auto generated id
@@ -219,7 +221,22 @@ class StoreDb implements FireStoreDb {
     CollectionReference projects = getProjects();
     QuerySnapshot querySnapshot = await projects.get();
     List<QueryDocumentSnapshot> docList = querySnapshot.docs;
-    docList.forEach((element) => projectSerialNumbers.add(element.id));
+    docList.forEach((element) => projectSerialNumbers.add(element.get('projectName')));
     return projectSerialNumbers;
   }
+  void loadMapNames() async {
+    List<String> projectSerialNumbers = List<String>();
+    CollectionReference projects = getProjects();
+    QuerySnapshot querySnapshot = await projects.get();
+    List<QueryDocumentSnapshot> docList = querySnapshot.docs;
+    mapNames={ "": ""};
+    docList.forEach((element) => mapNames[element.get('projectName')]= element.id);
+    print(mapNames);
+  }
+  Map<String, dynamic>  getMapNames(){
+    return mapNames;
+  }
+
+  @override
+  Map<String,dynamic > mapNames;
 }
