@@ -173,7 +173,7 @@ class _T209 extends State<T209> {
     organizationController = TextEditingController(text: _map["organizationController"]);
     //sampleDateController = TextEditingController();
     if (_map["sampleDateController"] == "" ||
-        !_map.containsKey(sampleDateController)) {
+        !_map.containsKey("sampleDateController")) {
       sampleDateController = TextEditingController(text: now);
     } else {
       sampleDateController =
