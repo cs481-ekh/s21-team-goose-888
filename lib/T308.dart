@@ -38,18 +38,18 @@ class _T308 extends State<T308> {
   TextEditingController sampleDateController;
   TextEditingController statusController;
 
-  TextEditingController furnaceController = TextEditingController();
-  TextEditingController dateTicketController = TextEditingController();
-  TextEditingController ticketACController = TextEditingController();
-  TextEditingController timeTicketController = TextEditingController();
-  TextEditingController basketInitialController = TextEditingController();
-  TextEditingController basketAssemblyController = TextEditingController();
-  TextEditingController calculatedInitialController = TextEditingController();
-  TextEditingController basketFinalController = TextEditingController();
-  TextEditingController t308TestedController = TextEditingController();
-  TextEditingController testedWAQTCController = TextEditingController();
-  TextEditingController testedDateController = TextEditingController();
-  TextEditingController independentAssessorController = TextEditingController();
+  TextEditingController furnaceController ;
+  TextEditingController dateTicketController ;
+  TextEditingController ticketACController ;
+  TextEditingController timeTicketController;
+  TextEditingController basketInitialController ;
+  TextEditingController basketAssemblyController ;
+  TextEditingController calculatedInitialController ;
+  TextEditingController basketFinalController ;
+  TextEditingController t308TestedController ;
+  TextEditingController testedWAQTCController ;
+  TextEditingController testedDateController ;
+  TextEditingController independentAssessorController ;
 
   void initState() {
     var _map = widget.db.getT308();
@@ -58,13 +58,34 @@ class _T308 extends State<T308> {
         TextEditingController(text: _map["serialNumController"]);
     organizationController =
         TextEditingController(text: _map["organizationController"]);
-    sampleDateController = TextEditingController(text: now);
+    //sampleDateController = TextEditingController(text: now);
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey("sampleDateController")) {
+      sampleDateController = TextEditingController(text: now);
+    } else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
     statusController = TextEditingController(text: _map["statusController"]);
 
     furnaceController = TextEditingController(text: _map["furnace"]);
-    dateTicketController = TextEditingController(text: _map["dateTicket"]);
+    //dateTicketController = TextEditingController(text: _map["dateTicket"]);
+    if (_map["dateTicket"] == "" ||
+        !_map.containsKey("dateTicket")) {
+      dateTicketController = TextEditingController(text: now);
+    } else {
+      dateTicketController =
+          TextEditingController(text: _map["dateTicket"]);
+    }
     ticketACController = TextEditingController(text: _map["ticketAC"]);
     timeTicketController = TextEditingController(text: _map["timeTicket"]);
+    if (_map["timeTicket"] == "" ||
+        !_map.containsKey("timeTicket")) {
+      timeTicketController = TextEditingController(text: now);
+    } else {
+      timeTicketController =
+          TextEditingController(text: _map["timeTicket"]);
+    }
     basketInitialController =
         TextEditingController(text: _map["basketInitial"]);
     basketAssemblyController =
@@ -75,6 +96,13 @@ class _T308 extends State<T308> {
     t308TestedController = TextEditingController(text: _map["t308Tested"]);
     testedWAQTCController = TextEditingController(text: _map["testedWQATC"]);
     testedDateController = TextEditingController(text: _map["testedDate"]);
+    if (_map["testedDate"] == "" ||
+        !_map.containsKey("testedDate")) {
+      testedDateController = TextEditingController(text: now);
+    } else {
+      testedDateController =
+          TextEditingController(text: _map["testedDate"]);
+    }
     independentAssessorController =
         TextEditingController(text: _map["indepdentAssessor"]);
 
@@ -170,11 +198,11 @@ class _T308 extends State<T308> {
                   },
                 ),
                 TextFormField(
-                  //controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
-                  keyboardType: TextInputType.datetime,
+                  keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
