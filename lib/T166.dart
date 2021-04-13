@@ -124,9 +124,10 @@ class _T166 extends State<T166> {
 
      serialNumController = TextEditingController(text: _map["serialNumController"]);
      organizationController = TextEditingController(text: _map["organizationController"]);
-    if(_map["sampleDateController"]==""){
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey("sampleDateController")) {
       sampleDateController = TextEditingController(text: now);
-    }else {
+    } else {
       sampleDateController =
           TextEditingController(text: _map["sampleDateController"]);
     }
@@ -135,10 +136,12 @@ class _T166 extends State<T166> {
      remarksController = TextEditingController(text: _map["remarks"]);
      testedByController = TextEditingController(text: _map["testedBy"]);
      testedByWAQTCController = TextEditingController(text: _map["testedByWAQTC"]);
-    if(_map["testDate"]==""){
+    if (_map["testDate"] == "" ||
+        !_map.containsKey("testDate")) {
       testDateController = TextEditingController(text: now);
-    }else {
-      testDateController = TextEditingController(text: _map["testDate"]);
+    } else {
+      testDateController =
+          TextEditingController(text: _map["testDate"]);
     }
      //testedDateController = TextEditingController(text: now);
      retestFlaggedbyController = TextEditingController(text: _map["retestFlaggedBy"]);
@@ -639,12 +642,12 @@ class _T166 extends State<T166> {
                   },
                 ),
                 TextFormField(
+                  controller: testDateController,
                   decoration: InputDecoration(
                       labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid date!";
@@ -658,7 +661,7 @@ class _T166 extends State<T166> {
 
                 //Row 6 Begining
                 TextFormField(
-                  controller: testDateController,
+                  controller: retestFlaggedbyController,
                   decoration: InputDecoration(
                       labelText: "Retest Flagged by",
                       labelStyle: TextStyle(color: Colors.black)),
