@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:itd_888/FireBaseFireStoreDB.dart';
+import 'package:itd_888/auth.dart';
 
 class FormSections extends StatelessWidget {
   final StoreDb db;
-  FormSections({Key key, @required this.db}) : super(key: key);
+  FormSections({Key key, @required this.db, Auth auth}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:itd_888/auth.dart';
 
 class PasswordPage extends StatelessWidget {
+  Auth auth;
+  PasswordPage({Key key, @required this.auth}) : super(key: key);
   var formKey = GlobalKey<FormState>();
   var formKey2 = GlobalKey<FormState>();
   var isLoading = false;
+  TextEditingController emailController = TextEditingController();
   //String textEmail = "";
 
   bool _submit() {
@@ -51,6 +55,7 @@ class PasswordPage extends StatelessWidget {
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'E-Mail'),
+                  controller: emailController,
                   keyboardType: TextInputType.emailAddress,
                   onFieldSubmitted: (value) {
                     //Validator
@@ -80,6 +85,7 @@ class PasswordPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
+                    auth.resetPassword(emailController.text);
                     //bool check = ;
                     if (_submit()) {
                       showAlertDialog(context);

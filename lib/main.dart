@@ -19,7 +19,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 String textEmail = "";
-//StoreDb db = StoreDb();
+Auth auth = Auth();
 StoreDb dbe = StoreDb();
 void main() {
   runApp(MaterialApp(
@@ -28,15 +28,19 @@ void main() {
     routes: {
       '/': (context) => HomeLogin(),
       '/register': (context) => Registration(),
-      '/password': (context) => PasswordPage(),
+      '/password': (context) => PasswordPage(
+            auth: auth,
+      ),
       '/account': (context) => AccountInfo(
             text: textEmail,
           ),
       '/form': (context) => FormSections(
             db: dbe,
+            auth: auth,
           ),
       '/project': (context) => ProjectsPage(
             db: dbe,
+            auth: auth,
           ),
       '/LooseMixR97': (context) => LooseMixR97(
             db: dbe,
