@@ -23,7 +23,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
   String dropdownValue = "Select";
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-  File sampleTemp, sampleLoc;
+  File sampleTemp;
 
   TextEditingController independentAssessorController;
   TextEditingController serialNumController;
@@ -36,6 +36,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
   TextEditingController districtController;
   TextEditingController randomNumberController;
   TextEditingController sampleTemperatureController;
+  TextEditingController sampleLocationController;
   TextEditingController quantityRepresentedController;
   TextEditingController sendReportsToController;
   TextEditingController sampledByController;
@@ -70,6 +71,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
     randomNumberController = TextEditingController(text: _map["randomNumber"]);
     sampleTemperatureController =
         TextEditingController(text: _map["sampleTemperature"]);
+    sampleTemperatureController =
+        TextEditingController(text: _map["sampleLocation"]);
     quantityRepresentedController =
         TextEditingController(text: _map["quantityRepresented"]);
     sendReportsToController =
@@ -109,6 +112,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
     districtController.dispose();
     randomNumberController.dispose();
     sampleTemperatureController.dispose();
+    sampleLocationController.dispose();
     quantityRepresentedController.dispose();
     sendReportsToController.dispose();
     sampledByController.dispose();
@@ -132,6 +136,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
       "district": districtController.text,
       "randomNumber": randomNumberController.text,
       "sampleTemperature": sampleTemperatureController.text,
+      "sampleLocation": sampleLocationController.text,
       "quantityRepresented": quantityRepresentedController.text,
       "sendReportsTo": sendReportsToController.text,
       "sampledBy": sampledByController.text,
@@ -368,30 +373,18 @@ class _LooseMixR97 extends State<LooseMixR97> {
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.02,
                 ),
-                Text(
-                  "Sample Location",
-                  style: TextStyle(color: Colors.black),
-                ),
-                Container(
-                  width: double.infinity,
-                  child: Column(children: [
-                    sampleLoc == null
-                        ? Text('No image selected.')
-                        : Image.file(sampleLoc),
-                    RaisedButton(
-                        child: Text('Choose Photo'),
-                        onPressed: () async {
-                          var imgFile = await ImagePicker.pickImage(
-                              source: ImageSource.gallery);
-                          setState(() {
-                            if (imgFile != null) {
-                              sampleLoc = File(imgFile.path);
-                            } else {
-                              print('No image selected.');
-                            }
-                          });
-                        }),
-                  ]),
+                TextFormField(
+                  controller: sampleLocationController,
+                  decoration: InputDecoration(
+                      labelText: "Sample Location",
+                      labelStyle: TextStyle(color: Colors.black)),
+                  keyboardType: TextInputType.number,
+                  onFieldSubmitted: (value) {},
+                  validator: (value) {
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a Sample Location!";
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.05,
@@ -405,7 +398,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onFieldSubmitted: (value) {},
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
-                      return "Enter a valid first name!";
+                      return "Enter a Quanitity Represented (Tons)!";
                     return null;
                   },
                 ),
