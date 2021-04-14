@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:itd_888/auth.dart';
 import 'FireBaseFireStoreDB.dart';
 import 'package:flutter/rendering.dart';
 
 class ProjectsPage extends StatefulWidget {
   @override
   StoreDb db;
-  ProjectsPage({Key key, @required this.db}) : super(key: key);
+  ProjectsPage({Key key, @required this.db, Auth auth}) : super(key: key);
   _ProjectsPage createState() => _ProjectsPage();
 }
 
@@ -119,7 +120,7 @@ class _ProjectsPage extends State<ProjectsPage> {
                           showAlertDialog(context);
                         }else{
                          dynamic word= projNameMap[_dropDownValue];
-                          widget.db.selectProject(word);
+                          widget.db.setProjectFromName(word);
                           widget.db.loadValues();
                           Navigator.pushNamed(context, '/form');
                         }
