@@ -243,7 +243,7 @@ class _ProjectsPage extends State<ProjectsPage> {
 
     // Create AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Same Name"),
+      title: Text("Same Project Name"),
       content: Text("Please use project name that has not been used already"),
       actions: [
         okButton,
