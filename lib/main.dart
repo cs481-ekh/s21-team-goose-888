@@ -200,11 +200,16 @@ class _HomeLogin extends State<HomeLogin> {
                   ),
                 ),
                 onPressed: () {
-                  firebaseAuthLogin(
-                      emailController.text, passwordController.text);
+
                   //bool check = ;
                   if (_submit()) {
-                    Navigator.pushNamed(context, '/project');
+
+                    if(auth.signIn( emailController.text, passwordController.text) is Future<String>){
+                      Navigator.pushNamed(context, '/project');
+                    }else{
+                      showAlertDialog(context);
+                    }
+
                   }
                 },
               ),
@@ -237,4 +242,33 @@ class _HomeLogin extends State<HomeLogin> {
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  // Create button
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+
+  // Create AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text(""
+        "Incorrect Credentials"),
+    content: Text("Please try again or click on register."),
+    actions: [
+      okButton,
+    ],
+  );
+
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
