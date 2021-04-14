@@ -21,28 +21,55 @@ class _T312 extends State<T312> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File samp1, samp2;
-  //StoreDb db=StoreDb();
-  TextEditingController independentAssessorController = TextEditingController();
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
-  TextEditingController gyratoryBrandController = TextEditingController();
-  TextEditingController gyratoryModelController = TextEditingController();
-  TextEditingController gyratorySerialNumberController =
-      TextEditingController();
-  TextEditingController puckMassVolumetricController = TextEditingController();
-  TextEditingController mass1Controller = TextEditingController();
-  TextEditingController mass2Controller = TextEditingController();
-  TextEditingController puckHeight1Controller = TextEditingController();
-  TextEditingController puckHeight2Controller = TextEditingController();
-  TextEditingController remarksController = TextEditingController();
-  TextEditingController testedByController = TextEditingController();
-  TextEditingController testedByWAQTCController = TextEditingController();
-  TextEditingController testedDateController = TextEditingController();
-  TextEditingController retestFlaggedByController = TextEditingController();
-  TextEditingController retestFlaggedController = TextEditingController();
-  TextEditingController retestCommentsController = TextEditingController();
+
+  TextEditingController independentAssessorController;
+  TextEditingController serialNumController;
+  TextEditingController organizationController;
+  TextEditingController sampleDateController;
+  TextEditingController statusController;
+  TextEditingController gyratoryBrandController;
+  TextEditingController gyratoryModelController;
+  TextEditingController gyratorySerialNumberController;
+  TextEditingController puckMassVolumetricController;
+  TextEditingController mass1Controller;
+  TextEditingController mass2Controller;
+  TextEditingController puckHeight1Controller;
+  TextEditingController puckHeight2Controller;
+  TextEditingController remarksController;
+  TextEditingController testedByController;
+  TextEditingController testedByWAQTCController;
+  TextEditingController testDateController;
+  TextEditingController retestFlaggedByController;
+  TextEditingController retestFlaggedController;
+  TextEditingController retestCommentsController;
+
+  void createAddDbMap() {
+    Map<String, dynamic> dbMap = {
+      "independentAssessorController": independentAssessorController.text,
+      "serialNumController": serialNumController.text,
+      "organizationController": organizationController.text,
+      "sampleDateController": sampleDateController.text,
+      "statusController": statusController.text,
+      "gyratoryBrand": gyratoryBrandController.text,
+      "gyratoryModel": gyratoryModelController.text,
+      "gyratorySerialNumber": gyratorySerialNumberController.text,
+      "puckMassVolumetric": puckMassVolumetricController.text,
+      "mass1": mass1Controller.text,
+      "mass2": mass2Controller.text,
+      "puckHeight1": puckHeight1Controller.text,
+      "puckHeight2": puckHeight2Controller.text,
+      "remarks": remarksController.text,
+      "testDate": testDateController.text,
+      "testedBy": testedByController.text,
+      "testedByWAQTC": testedByWAQTCController.text,
+      "retestFlaggedBy": retestFlaggedByController.text,
+      "retestFlagged": retestFlaggedController.text,
+      "retestComments": retestCommentsController.text,
+    };
+
+    widget.db.setT312(dbMap);
+  }
+
   void dispose() {
     independentAssessorController.dispose();
     serialNumController.dispose();
@@ -58,6 +85,7 @@ class _T312 extends State<T312> {
     puckHeight1Controller.dispose();
     puckHeight2Controller.dispose();
     remarksController.dispose();
+    testDateController.dispose();
     testedByController.dispose();
     testedByWAQTCController.dispose();
     retestFlaggedByController.dispose();
@@ -65,32 +93,6 @@ class _T312 extends State<T312> {
     retestCommentsController.dispose();
 
     super.dispose();
-  }
-
-  void createAddDbMap() {
-    Map<String, dynamic> dbMap = {
-      "independentAssessorController": independentAssessorController.text,
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
-      "sampleDateController": sampleDateController.text,
-      "statusController": statusController.text,
-      "gyratoryBrand": gyratoryBrandController.text,
-      "gyratoryModel": gyratoryModelController.text,
-      "gyratorySerialNumber": gyratorySerialNumberController.text,
-      "puckMassVolumetric": puckMassVolumetricController.text,
-      "mass1": mass1Controller.text,
-      "mass2": mass1Controller.text,
-      "puckHeight1": puckHeight1Controller.text,
-      "puckHeight2": puckHeight2Controller.text,
-      "remarks": remarksController.text,
-      "testedBy": testedByController.text,
-      "testedByWAQTC": testedByWAQTCController.text,
-      "retestFlaggedBy": retestFlaggedByController.text,
-      "retestFlagged": retestFlaggedController.text,
-      "retestComments": retestCommentsController.text,
-    };
-
-    widget.db.setT312(dbMap);
   }
 
   bool _submit() {
@@ -101,6 +103,53 @@ class _T312 extends State<T312> {
       _formKey.currentState.save();
       return true;
     }
+  }
+
+  void initState() {
+    var _map = widget.db.getT312();
+    independentAssessorController =
+        TextEditingController(text: _map["independentAssessorController"]);
+    serialNumController =
+        TextEditingController(text: _map["serialNumController"]);
+    organizationController =
+        TextEditingController(text: _map["organizationController"]);
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey("sampleDateController")) {
+      sampleDateController = TextEditingController(text: now);
+    } else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
+    statusController = TextEditingController(text: _map["statusController"]);
+    gyratoryBrandController =
+        TextEditingController(text: _map["gyratoryBrand"]);
+    gyratoryModelController =
+        TextEditingController(text: _map["gyratoryModel"]);
+    gyratorySerialNumberController =
+        TextEditingController(text: _map["gyratorySerialNumber"]);
+    puckMassVolumetricController =
+        TextEditingController(text: _map["puckMassVolumetric"]);
+    mass1Controller = TextEditingController(text: _map["mass1"]);
+    mass2Controller = TextEditingController(text: _map["mass2"]);
+    puckHeight1Controller = TextEditingController(text: _map["puckHeight1"]);
+    puckHeight2Controller = TextEditingController(text: _map["puckHeight2"]);
+    remarksController = TextEditingController(text: _map["remarks"]);
+    testedByController = TextEditingController(text: _map["testedBy"]);
+    testedByWAQTCController =
+        TextEditingController(text: _map["testedByWAQTC"]);
+    if (_map["testDate"] == "" || !_map.containsKey("testDate")) {
+      testDateController = TextEditingController(text: now);
+    } else {
+      testDateController = TextEditingController(text: _map["testDate"]);
+    }
+
+    retestFlaggedByController =
+        TextEditingController(text: _map["retestFlaggedBy"]);
+    retestFlaggedController =
+        TextEditingController(text: _map["retestFlagged"]);
+    retestCommentsController =
+        TextEditingController(text: _map["retestComments"]);
+    super.initState();
   }
 
   @override
@@ -148,15 +197,15 @@ class _T312 extends State<T312> {
                   },
                 ),
                 TextFormField(
-                  //controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -433,12 +482,12 @@ class _T312 extends State<T312> {
                   },
                 ),
                 TextFormField(
+                  controller: testDateController,
                   decoration: InputDecoration(
                       labelText: "Tested Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid date!";
@@ -491,7 +540,6 @@ class _T312 extends State<T312> {
                   },
                 ),
 
-
                 TextFormField(
                   controller: independentAssessorController,
                   decoration: InputDecoration(
@@ -500,7 +548,7 @@ class _T312 extends State<T312> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -513,6 +561,7 @@ class _T312 extends State<T312> {
                 RaisedButton(
                   onPressed: () {
                     if (_submit()) {
+                      widget.db.loadValues();
                       createAddDbMap();
                       Navigator.pop(context);
                     }

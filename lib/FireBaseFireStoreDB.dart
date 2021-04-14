@@ -17,6 +17,7 @@ abstract class FireStoreDb {
   Map<String, dynamic> t209;
   Map<String, dynamic> t166;
   Map<String, dynamic> t312;
+  Map<String, dynamic> mapNames;
 
   // First set of methods are methods to get info from the ITD-888 collection
   String getSerialNumber();
@@ -26,6 +27,7 @@ abstract class FireStoreDb {
   void selectProject(String serialNumber);
   CollectionReference getProjects();
   Future<List> listProjects();
+  Map<String, dynamic>  getMapNames();
 
   // this method creates a new document in the ITD-888 collection with an
   //auto generated id
@@ -46,7 +48,7 @@ class StoreDb implements FireStoreDb {
   Map<String, dynamic> t312;
   Map<String, dynamic> t329;
 
-  StoreDb(){
+  StoreDb() {
     custody = {};
     r47 = {};
     r97 = {};
@@ -161,29 +163,67 @@ class StoreDb implements FireStoreDb {
   Future<void> setT209(Map map) async {
     await getProjects().doc(currentProject).update({'T209': map});
   }
-
+  Map getT209() {
+    return t209;
+  }
   Future<void> setT30(Map map) async {
     await getProjects().doc(currentProject).update({'T30': map});
+  }
+  Map getT30() {
+    return t30;
   }
 
   Future<void> setT308(Map map) async {
     await getProjects().doc(currentProject).update({'T308': map});
   }
 
+  Map getT308() {
+    return t308;
+  }
+
   Future<void> setT312(Map map) async {
     await getProjects().doc(currentProject).update({'T312': map});
+  }
+  Map getT312() {
+    return t312;
   }
 
   Future<void> setT329(Map map) async {
     await getProjects().doc(currentProject).update({'T329': map});
   }
+
+  Map getT329() {
+    return t329;
+  }
+
   Future<void> setCustody(Map map) async {
     await getProjects().doc(currentProject).update({'Custody': map});
+  }
+
+  Map getCustody() {
+    return custody;
   }
 
   @override
   void selectProject(String serialNumber) {
     currentProject = serialNumber;
+  }
+
+  loadValues() async {
+    if (currentProject == 0) {
+      return "No Project Selected";
+    } else {
+      DocumentSnapshot snapshot = await getProjects().doc(currentProject).get();
+      this.custody = snapshot.data()['Custody'];
+      this.r47 = snapshot.data()['R47'];
+      this.r97 = snapshot.data()['R97'];
+      this.t166 = snapshot.data()['T166'];
+      this.t209 = snapshot.data()['T209'];
+      this.t30 = snapshot.data()['T30'];
+      this.t308 = snapshot.data()['T308'];
+      this.t312 = snapshot.data()['T312'];
+      this.t329 = snapshot.data()['T329'];
+    }
   }
 
   @override
@@ -195,4 +235,19 @@ class StoreDb implements FireStoreDb {
     docList.forEach((element) => projectSerialNumbers.add(element.get('projectName')));
     return projectSerialNumbers;
   }
+  void loadMapNames() async {
+    List<String> projectSerialNumbers = List<String>();
+    CollectionReference projects = getProjects();
+    QuerySnapshot querySnapshot = await projects.get();
+    List<QueryDocumentSnapshot> docList = querySnapshot.docs;
+    mapNames={ "": ""};
+    docList.forEach((element) => mapNames[element.get('projectName')]= element.id);
+    print(mapNames);
+  }
+  Map<String, dynamic>  getMapNames(){
+    return mapNames;
+  }
+
+  @override
+  Map<String,dynamic > mapNames;
 }

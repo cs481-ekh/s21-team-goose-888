@@ -29,30 +29,72 @@ class _T329 extends State<T329> {
       drySample30,
       panDrySamp,
       panDrySamp30;
-  //StoreDb db=StoreDb();
 
+  TextEditingController serialNumController;
+  TextEditingController organizationController;
+  TextEditingController sampleDateController;
+  TextEditingController statusController;
 
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
+  TextEditingController ovenTempController;
+  TextEditingController panMassController;
+  TextEditingController initialSampController;
+  TextEditingController initialSamp90Controller;
+  TextEditingController panInitialSampController;
+  TextEditingController panInitialSamp30Controller;
+  TextEditingController drySampleController;
+  TextEditingController drySample30Controller;
+  TextEditingController panDrySampController;
+  TextEditingController panDrySamp30Controller;
 
-  TextEditingController ovenTempController = TextEditingController();
-  TextEditingController panMassController = TextEditingController();
-  TextEditingController initialSampController = TextEditingController();
-  TextEditingController initialSamp90Controller = TextEditingController();
-  TextEditingController panInitialSampController = TextEditingController();
-  TextEditingController panInitialSamp30Controller = TextEditingController();
-  TextEditingController drySampleController = TextEditingController();
-  TextEditingController drySample30Controller = TextEditingController();
-  TextEditingController panDrySampController = TextEditingController();
-  TextEditingController panDrySamp30Controller = TextEditingController();
+  TextEditingController testedByController;
+  TextEditingController WAQTCNumberController;
+  TextEditingController dateController;
+  TextEditingController independentAssessorController;
 
-  TextEditingController testedByController = TextEditingController();
-  TextEditingController WAQTCNumberController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
-  TextEditingController independentAssessorController = TextEditingController();
+  void initState() {
+    var _map = widget.db.getT329();
 
+    serialNumController =
+        TextEditingController(text: _map["serialNumController"]);
+    organizationController =
+        TextEditingController(text: _map["organizationController"]);
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey("sampleDateController")) {
+      sampleDateController = TextEditingController(text: now);
+    } else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
+    statusController = TextEditingController(text: _map["statusController"]);
+
+    ovenTempController = TextEditingController(text: _map["ovenTemp"]);
+    panMassController = TextEditingController(text: _map["panMass"]);
+    initialSampController = TextEditingController(text: _map["initialSamp"]);
+    initialSamp90Controller =
+        TextEditingController(text: _map["initialSamp90"]);
+    panInitialSampController =
+        TextEditingController(text: _map["panInitialSamp"]);
+    panInitialSamp30Controller =
+        TextEditingController(text: _map["panInitialSamp30"]);
+    drySampleController = TextEditingController(text: _map["drySamp"]);
+    drySample30Controller = TextEditingController(text: _map["drySamp30"]);
+    panDrySampController = TextEditingController(text: _map["panDrySamp"]);
+    panDrySamp30Controller = TextEditingController(text: _map["panDrySamp30"]);
+
+    testedByController = TextEditingController(text: _map["testedBy"]);
+    WAQTCNumberController = TextEditingController(text: _map["WAQTCNumber"]);
+    dateController = TextEditingController(text: _map["date"]);
+    if (_map["date"] == "" || !_map.containsKey("date")) {
+      dateController = TextEditingController(text: now);
+    } else {
+      dateController = TextEditingController(text: _map["date"]);
+    }
+
+    independentAssessorController =
+        TextEditingController(text: _map["independentAssessorController"]);
+
+    super.initState();
+  }
 
   void dispose() {
     independentAssessorController.dispose();
@@ -79,8 +121,8 @@ class _T329 extends State<T329> {
 
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
+      "serialNumController": serialNumController.text,
+      "organizationController": organizationController.text,
       "sampleDateController": sampleDateController.text,
       "statusController": statusController.text,
       "ovenTemp": ovenTempController.text,
@@ -94,11 +136,9 @@ class _T329 extends State<T329> {
       "panDrySamp": panDrySampController.text,
       "panDrySamp30": panDrySamp30Controller.text,
       "testedBy": testedByController.text,
-      "WAQTCNumber":WAQTCNumberController.text,
-      "date":dateController.text,
+      "WAQTCNumber": WAQTCNumberController.text,
+      "date": dateController.text,
       "independentAssessorController": independentAssessorController.text,
-
-
     };
 
     widget.db.setT329(dbMap);
@@ -159,15 +199,15 @@ class _T329 extends State<T329> {
                   },
                 ),
                 TextFormField(
-                  //controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -198,7 +238,8 @@ class _T329 extends State<T329> {
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid temperature!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid temperature!";
                     return null;
                   },
                 ),
@@ -750,36 +791,35 @@ class _T329 extends State<T329> {
                       labelText: "T308 Tested by",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
-                  
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid name!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid name!";
                     return null;
                   },
                 ),
                 TextFormField(
                   controller: WAQTCNumberController,
                   decoration: InputDecoration(
-
                       labelText: "Testesd by WAQTC Number",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid number!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid number!";
                     return null;
                   },
                 ),
                 TextFormField(
-                  //controller: dateController,
                   decoration: InputDecoration(
                       labelText: "Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -791,7 +831,7 @@ class _T329 extends State<T329> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -805,6 +845,7 @@ class _T329 extends State<T329> {
                   onPressed: () {
                     if (_submit()) {
                       createAddDbMap();
+                      widget.db.loadValues();
                       //Navigator.pushNamed(context, '/form');
                       Navigator.pop(context);
                     }

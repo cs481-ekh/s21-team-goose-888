@@ -11,11 +11,12 @@ import 'FireBaseFireStoreDB.dart';
 class LooseMixR97 extends StatefulWidget {
   @override
   StoreDb db;
-  LooseMixR97 ({Key key, @required this.db}) : super(key: key);
+  LooseMixR97({Key key, @required this.db}) : super(key: key);
   _LooseMixR97 createState() => _LooseMixR97();
 }
 
 class _LooseMixR97 extends State<LooseMixR97> {
+  var _check = "";
   var result = "Result In Here";
   bool _isLoading = false;
   dynamic _extractText = "";
@@ -23,25 +24,78 @@ class _LooseMixR97 extends State<LooseMixR97> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
   File sampleTemp, sampleLoc;
- // StoreDb db=StoreDb();
-  TextEditingController independentAssessorController = TextEditingController();
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
-  TextEditingController bidItemController = TextEditingController();
-  TextEditingController projectNumberController = TextEditingController();
-  TextEditingController projectNameController = TextEditingController();
-  TextEditingController districtController = TextEditingController();
-  TextEditingController randomNumberController = TextEditingController();
-  TextEditingController sampleTemperatureController = TextEditingController();
-  TextEditingController quantityRepresentedController = TextEditingController();
-  TextEditingController sendReportsToController = TextEditingController();
-  TextEditingController sampledByController = TextEditingController();
-  TextEditingController WAQTCNumberController = TextEditingController();
-  TextEditingController witnessedByController = TextEditingController();
-  TextEditingController wWAQTCNumberController = TextEditingController();
-  TextEditingController sampleIDNumberController = TextEditingController();
+
+  TextEditingController independentAssessorController;
+  TextEditingController serialNumController;
+  TextEditingController organizationController;
+  TextEditingController sampleDateController;
+  TextEditingController statusController;
+  TextEditingController bidItemController;
+  TextEditingController projectNumberController;
+  TextEditingController projectNameController;
+  TextEditingController districtController;
+  TextEditingController randomNumberController;
+  TextEditingController sampleTemperatureController;
+  TextEditingController quantityRepresentedController;
+  TextEditingController sendReportsToController;
+  TextEditingController sampledByController;
+  TextEditingController WAQTCNumberController;
+  TextEditingController witnessedByController;
+  TextEditingController wWAQTCNumberController;
+  TextEditingController sampleIDNumberController;
+
+  void initState() {
+    var _map = widget.db.getR97();
+    _check = _map["reasonForSample"];
+
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey("sampleDateController")) {
+      sampleDateController = TextEditingController(text: now);
+    } else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
+    bidItemController = TextEditingController(text: _map["bidItem"]);
+    independentAssessorController =
+        TextEditingController(text: _map["independentAssessorController"]);
+    serialNumController =
+        TextEditingController(text: _map["serialNumController"]);
+    organizationController =
+        TextEditingController(text: _map["organizationController"]);
+    statusController = TextEditingController(text: _map["statusController"]);
+    projectNumberController =
+        TextEditingController(text: _map["projectNumber"]);
+    projectNameController = TextEditingController(text: _map["projectName"]);
+    districtController = TextEditingController(text: _map["district"]);
+    randomNumberController = TextEditingController(text: _map["randomNumber"]);
+    sampleTemperatureController =
+        TextEditingController(text: _map["sampleTemperature"]);
+    quantityRepresentedController =
+        TextEditingController(text: _map["quantityRepresented"]);
+    sendReportsToController =
+        TextEditingController(text: _map["sendReportsTo"]);
+    sampledByController = TextEditingController(text: _map["sampledBy"]);
+    WAQTCNumberController = TextEditingController(text: _map["WAQTCNumber"]);
+    witnessedByController = TextEditingController(text: _map["witnessedBy"]);
+    wWAQTCNumberController =
+        TextEditingController(text: _map["witnessWAQTCNumber"]);
+    sampleIDNumberController =
+        TextEditingController(text: _map["sampleIDNumber"]);
+    if (_check == "0" || _check == "") {
+      dropdownValue = "Select";
+    } else if (_check == "1") {
+      dropdownValue = "Acceptance";
+    } else if (_check == "2") {
+      dropdownValue = "B";
+    } else if (_check == "3") {
+      dropdownValue = "C";
+    } else if (_check == "4") {
+      dropdownValue = "D";
+    } else {
+      dropdownValue = "Select";
+    }
+    super.initState();
+  }
 
   void dispose() {
     independentAssessorController.dispose();
@@ -68,8 +122,8 @@ class _LooseMixR97 extends State<LooseMixR97> {
   void createAddDbMap() {
     Map<String, dynamic> dbMap = {
       "independentAssessorController": independentAssessorController.text,
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
+      "serialNumController": serialNumController.text,
+      "organizationController": organizationController.text,
       "sampleDateController": sampleDateController.text,
       "statusController": statusController.text,
       "bidItem": bidItemController.text,
@@ -85,6 +139,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
       "witnessedBy": witnessedByController.text,
       "sampleIDNumber": sampleIDNumberController.text,
       "witnessWAQTCNumber": wWAQTCNumberController.text,
+      "reasonForSample": _check,
     };
 
     widget.db.setR97(dbMap);
@@ -145,18 +200,15 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   },
                 ),
                 TextFormField(
-                  //controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
-
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.text,
-
-                  onFieldSubmitted: (value) { //sampleDateController.text=now;
-                     },
-                  initialValue: now,
+                  onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -168,7 +220,6 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Status!";
                     return null;
@@ -382,6 +433,17 @@ class _LooseMixR97 extends State<LooseMixR97> {
                     onChanged: (String newValue) {
                       setState(() {
                         dropdownValue = newValue;
+                        if (dropdownValue == "Select") {
+                          _check = "0";
+                        } else if (dropdownValue == "Acceptance") {
+                          _check = "1";
+                        } else if (dropdownValue == "B") {
+                          _check = "2";
+                        } else if (dropdownValue == "C") {
+                          _check = "3";
+                        } else {
+                          _check = "4";
+                        }
                       });
                     },
                     hint: Text(
@@ -483,7 +545,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-                    if ( !RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid first name!";
                     return null;
                   },
@@ -495,6 +557,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
                   onPressed: () {
                     if (_submit()) {
                       createAddDbMap();
+                      widget.db.loadValues();
                       //Navigator.pushNamed(context, '/form');
                       Navigator.pop(context);
                     }

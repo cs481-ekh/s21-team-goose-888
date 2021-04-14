@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'dart:io';
 import 'FireBaseFireStoreDB.dart';
 
 class Custody extends StatefulWidget {
@@ -14,45 +12,144 @@ class Custody extends StatefulWidget {
 class _Custody extends State<Custody> {
   var _formKey = GlobalKey<FormState>();
   String now = DateFormat("yyyy-MM-dd h:mm:ss a").format(DateTime.now());
-  //StoreDb db= StoreDb();
-  TextEditingController serialNumController = TextEditingController();
-  TextEditingController organizationController = TextEditingController();
-  TextEditingController sampleDateController = TextEditingController();
-  TextEditingController statusController = TextEditingController();
-  TextEditingController sampleCustodianController = TextEditingController();
-  TextEditingController WAQTCNumberController = TextEditingController();
-  TextEditingController receivedByController = TextEditingController();
-  TextEditingController Controller = TextEditingController();
-  TextEditingController districtController = TextEditingController();
-  TextEditingController randomNumberController = TextEditingController();
-  TextEditingController quantityRepresentedController = TextEditingController();
-  TextEditingController sendReportsToController = TextEditingController();
-  TextEditingController sampledByController = TextEditingController();
-  TextEditingController witnessedByController = TextEditingController();
-  TextEditingController wWAQTCNumberController = TextEditingController();
-  TextEditingController sampleIDNumberController = TextEditingController();
+
+  TextEditingController serialNumController;
+  TextEditingController organizationController;
+  TextEditingController sampleDateController;
+  TextEditingController statusController;
+
+  TextEditingController sampleCustodian1;
+  TextEditingController wAQTCNumber1;
+  TextEditingController receivedBy1;
+  TextEditingController receivedWAQTCNumber1;
+  TextEditingController details1;
+
+  TextEditingController sampleCustodian2;
+  TextEditingController wAQTCNumber2;
+  TextEditingController receivedBy2;
+  TextEditingController receivedWAQTCNumber2;
+  TextEditingController details2;
+
+  TextEditingController sampleCustodian3;
+  TextEditingController wAQTCNumber3;
+  TextEditingController receivedBy3;
+  TextEditingController receivedWAQTCNumber3;
+  TextEditingController details3;
+
+  TextEditingController sampleCustodian4;
+  TextEditingController wAQTCNumber4;
+  TextEditingController receivedBy4;
+  TextEditingController receivedWAQTCNumber4;
+  TextEditingController details4;
+
   void dispose() {
     serialNumController.dispose();
     organizationController.dispose();
     sampleDateController.dispose();
     statusController.dispose();
+    sampleCustodian1.dispose();
+    wAQTCNumber1.dispose();
+    receivedBy1.dispose();
+    receivedWAQTCNumber1.dispose();
+    details1.dispose();
 
+    sampleCustodian2.dispose();
+    wAQTCNumber2.dispose();
+    receivedBy2.dispose();
+    receivedWAQTCNumber2.dispose();
+    details2.dispose();
+
+    sampleCustodian3.dispose();
+    wAQTCNumber3.dispose();
+    receivedBy3.dispose();
+    receivedWAQTCNumber3.dispose();
+    details3.dispose();
+
+    sampleCustodian4.dispose();
+    wAQTCNumber4.dispose();
+    receivedBy4.dispose();
+    receivedWAQTCNumber4.dispose();
+    details4.dispose();
     super.dispose();
   }
 
-  void createAddDbMap(){
+  void initState() {
+    var _map = widget.db.getCustody();
+    serialNumController =
+        TextEditingController(text: _map["serialNumController"]);
+    organizationController =
+        TextEditingController(text: _map["organizationController"]);
+    if (_map["sampleDateController"] == "" ||
+        !_map.containsKey("sampleDateController")) {
+      sampleDateController = TextEditingController(text: now);
+    } else {
+      sampleDateController =
+          TextEditingController(text: _map["sampleDateController"]);
+    }
+    statusController = TextEditingController(text: _map["statusController"]);
+
+    sampleCustodian1 = TextEditingController(text: _map["sampleCustodian1"]);
+    wAQTCNumber1 = TextEditingController(text: _map["wAQTCNumber1"]);
+    receivedBy1 = TextEditingController(text: _map["receivedBy1"]);
+    receivedWAQTCNumber1 =
+        TextEditingController(text: _map["receivedWAQTCNumber1"]);
+    details1 = TextEditingController(text: _map["details1"]);
+
+    sampleCustodian2 = TextEditingController(text: _map["sampleCustodian2"]);
+    wAQTCNumber2 = TextEditingController(text: _map["wAQTCNumber2"]);
+    receivedBy2 = TextEditingController(text: _map["receivedBy2"]);
+    receivedWAQTCNumber2 =
+        TextEditingController(text: _map["receivedWAQTCNumber2"]);
+    details2 = TextEditingController(text: _map["details2"]);
+
+    sampleCustodian3 = TextEditingController(text: _map["sampleCustodian3"]);
+    wAQTCNumber3 = TextEditingController(text: _map["wAQTCNumber3"]);
+    receivedBy3 = TextEditingController(text: _map["receivedBy3"]);
+    receivedWAQTCNumber3 =
+        TextEditingController(text: _map["receivedWAQTCNumber3"]);
+    details3 = TextEditingController(text: _map["details3"]);
+
+    sampleCustodian4 = TextEditingController(text: _map["sampleCustodian4"]);
+    wAQTCNumber4 = TextEditingController(text: _map["wAQTCNumber4"]);
+    receivedBy4 = TextEditingController(text: _map["receivedBy4"]);
+    receivedWAQTCNumber4 =
+        TextEditingController(text: _map["receivedWAQTCNumber4"]);
+    details4 = TextEditingController(text: _map["details4"]);
+
+    super.initState();
+  }
+
+  void createAddDbMap() {
     Map<String, dynamic> dbMap = {
-      "serialNumController":  serialNumController.text,
-      "organizationController":  organizationController.text,
+      "serialNumController": serialNumController.text,
+      "organizationController": organizationController.text,
       "sampleDateController": sampleDateController.text,
       "statusController": statusController.text,
-
-
+      "sampleCustodian1": sampleCustodian1.text,
+      "wAQTCNumber1": wAQTCNumber1.text,
+      "receivedBy1": receivedBy1.text,
+      "receivedWAQTCNumber1": receivedWAQTCNumber1.text,
+      "details1": details1.text,
+      "sampleCustodian2": sampleCustodian1.text,
+      "wAQTCNumber2": wAQTCNumber1.text,
+      "receivedBy2": receivedBy1.text,
+      "receivedWAQTCNumber2": receivedWAQTCNumber1.text,
+      "details2": details1.text,
+      "sampleCustodian3": sampleCustodian1.text,
+      "wAQTCNumber3": wAQTCNumber1.text,
+      "receivedBy3": receivedBy1.text,
+      "receivedWAQTCNumber3": receivedWAQTCNumber1.text,
+      "details3": details1.text,
+      "sampleCustodian4": sampleCustodian1.text,
+      "wAQTCNumber4": wAQTCNumber1.text,
+      "receivedBy4": receivedBy1.text,
+      "receivedWAQTCNumber4": receivedWAQTCNumber1.text,
+      "details4": details1.text,
     };
 
     widget.db.setCustody(dbMap);
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +175,6 @@ class _Custody extends State<Custody> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Number";
                     return null;
@@ -93,7 +189,6 @@ class _Custody extends State<Custody> {
                   keyboardType: TextInputType.text,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid  Organization name!";
 
@@ -101,15 +196,15 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
-                  //controller: sampleDateController,
+                  controller: sampleDateController,
                   decoration: InputDecoration(
                       labelText: "Sample Date ",
                       labelStyle: TextStyle(color: Colors.black)),
                   keyboardType: TextInputType.datetime,
                   onFieldSubmitted: (value) {},
-                  initialValue: now,
                   validator: (value) {
-                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value)) return "Enter a valid date!";
+                    if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
+                      return "Enter a valid date!";
                     return null;
                   },
                 ),
@@ -121,7 +216,6 @@ class _Custody extends State<Custody> {
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (value) {},
                   validator: (value) {
-
                     if (!RegExp("[a-zA-Z+0-9+.]?").hasMatch(value))
                       return "Enter a valid Status!";
                     return null;
@@ -134,6 +228,7 @@ class _Custody extends State<Custody> {
 
                 //Row 2 BEGINNING
                 TextFormField(
+                  controller: sampleCustodian1,
                   decoration: InputDecoration(
                       labelText: "Sample Custodian",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -146,6 +241,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: wAQTCNumber1,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -158,6 +254,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: receivedBy1,
                   decoration: InputDecoration(
                       labelText: "Received by",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -170,6 +267,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: receivedWAQTCNumber1,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -182,6 +280,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: details1,
                   decoration: InputDecoration(
                       labelText: "Details / Location / Condition of Sample",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -200,6 +299,7 @@ class _Custody extends State<Custody> {
 
                 //Row 3 BEGINNING
                 TextFormField(
+                  controller: sampleCustodian2,
                   decoration: InputDecoration(
                       labelText: "Sample Custodian ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -212,6 +312,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: wAQTCNumber2,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -224,6 +325,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: receivedBy2,
                   decoration: InputDecoration(
                       labelText: "Received by ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -236,6 +338,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: receivedWAQTCNumber2,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -248,6 +351,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: details2,
                   decoration: InputDecoration(
                       labelText: "Details / Location / Condition of Sample",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -266,6 +370,7 @@ class _Custody extends State<Custody> {
 
                 //Row 4 BEGINNING
                 TextFormField(
+                  controller: sampleCustodian3,
                   decoration: InputDecoration(
                       labelText: "Sample Custodian ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -278,6 +383,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: wAQTCNumber3,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -290,6 +396,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: receivedBy3,
                   decoration: InputDecoration(
                       labelText: "Received by",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -302,6 +409,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: receivedWAQTCNumber3,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -314,6 +422,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: details3,
                   decoration: InputDecoration(
                       labelText: "Details / Location / Condition of Sample",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -332,6 +441,7 @@ class _Custody extends State<Custody> {
 
                 //Row 5 BEGINNING
                 TextFormField(
+                  controller: sampleCustodian4,
                   decoration: InputDecoration(
                       labelText: "Sample Custodian",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -344,6 +454,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: wAQTCNumber4,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -356,6 +467,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: receivedBy4,
                   decoration: InputDecoration(
                       labelText: "Received by ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -368,6 +480,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: receivedWAQTCNumber4,
                   decoration: InputDecoration(
                       labelText: "WAQTC Number ",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -380,6 +493,7 @@ class _Custody extends State<Custody> {
                   },
                 ),
                 TextFormField(
+                  controller: details4,
                   decoration: InputDecoration(
                       labelText: "Details / Location / Condition of Sample",
                       labelStyle: TextStyle(color: Colors.black)),
@@ -399,6 +513,7 @@ class _Custody extends State<Custody> {
                 RaisedButton(
                   onPressed: () {
                     createAddDbMap();
+                    widget.db.loadValues();
                     Navigator.pop(context);
                   },
                   child: Text('Save'),
