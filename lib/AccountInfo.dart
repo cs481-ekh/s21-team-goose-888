@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:itd_888/auth.dart';
+import 'package:itd_888/FireBaseFireStoreDB.dart';
 
-class AccountInfo extends StatelessWidget {
-  final String text;
+class AccountInfo extends StatefulWidget {
+  @override
+  StoreDb db;
+  Auth auth;
+
+  AccountInfo({Key, key, @required this.db, @required this.auth})
+      : super(key: key);
+
+  _AccountInfo createState() => _AccountInfo();
+}
+
+class _AccountInfo extends State<AccountInfo> {
+  final _formKey = GlobalKey<FormState>();
+  String email;
   String fullName = "";
   int waqtcNumber = 0;
   String userType = "";
   String pd = "";
-  AccountInfo({Key key, @required this.text}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +37,7 @@ class AccountInfo extends StatelessWidget {
 
               children: <Widget>[
                 Text(
-                  "Email: " + text,
+                  "Email: " + email,
                   style: TextStyle(fontSize: 24),
                 ),
                 SizedBox(

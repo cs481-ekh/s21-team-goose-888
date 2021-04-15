@@ -34,7 +34,7 @@ void main() {
             auth: auth,
       ),
       '/account': (context) => AccountInfo(
-            text: textEmail,
+            email: textEmail,
           ),
       '/form': (context) => FormSections(
             db: dbe,
