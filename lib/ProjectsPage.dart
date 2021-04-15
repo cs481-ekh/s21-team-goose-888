@@ -14,7 +14,6 @@ class _ProjectsPage extends State<ProjectsPage> {
   var formKey = GlobalKey<FormState>();
   var formKey2 = GlobalKey<FormState>();
   Map<String, dynamic> projNameMap;
-  //StoreDb db = StoreDb();
   TextEditingController projectName = TextEditingController();
   TextEditingController bidItem = TextEditingController();
   void dispose() {

@@ -27,7 +27,9 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => HomeLogin(),
-      '/register': (context) => Registration(),
+      '/register': (context) => Registration(
+        db: dbe,
+      ),
       '/password': (context) => PasswordPage(
             auth: auth,
       ),
@@ -98,23 +100,6 @@ class _HomeLogin extends State<HomeLogin> {
       _formKey.currentState.save();
       return true;
     }
-  }
-
-  Future<UserCredential> firebaseAuthLogin(
-      String email, String password) async {
-    UserCredential userCredential;
-    try {
-      userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      print("login successful");
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user with any such email');
-      } else {
-        print('Incorrect credentials entered');
-      }
-    }
-    return userCredential;
   }
 
   @override

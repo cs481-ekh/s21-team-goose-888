@@ -28,8 +28,10 @@ abstract class FireStoreDb {
   String getProjName();
   void selectProject(String serialNumber);
   CollectionReference getProjects();
+  CollectionReference getUsers();
   Future<List> listProjects();
   Map<String, dynamic>  getMapNames();
+  Future<void> addNewUser(String firstName, String lastName, String email, String waqtcNumber);
 
   // this method creates a new document in the ITD-888 collection with an
   //auto generated id
@@ -114,6 +116,21 @@ class StoreDb implements FireStoreDb {
   @override
   CollectionReference getProjects() {
     return _firebaseFirestore.collection('ITD-888');
+  }
+
+  @override
+  CollectionReference getUsers() {
+    return _firebaseFirestore.collection('Users');
+  }
+
+  Future<void> addNewUser(String firstName, String lastName, String email, String waqtcNumber) async {
+    CollectionReference users = getUsers();
+    await users.add(({
+      'firstName': firstName,
+      'lastName' : lastName,
+      'email' : email,
+      'waqtcNumber' : waqtcNumber
+    }));
   }
 
   @override
