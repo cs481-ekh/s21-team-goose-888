@@ -6,7 +6,6 @@ class AccountInfo extends StatefulWidget {
   @override
   StoreDb db;
   Auth auth;
-
   AccountInfo({Key, key, @required this.db, @required this.auth})
       : super(key: key);
 
@@ -15,14 +14,18 @@ class AccountInfo extends StatefulWidget {
 
 class _AccountInfo extends State<AccountInfo> {
   final _formKey = GlobalKey<FormState>();
+  Map<dynamic, dynamic> dataMap;
   String email;
   String fullName = "";
-  int waqtcNumber = 0;
-  String userType = "";
-  String pd = "";
+  String waqtcNumber = '0';
 
   @override
   Widget build(BuildContext context) {
+    dataMap =  widget.db.getUserInfo();
+    fullName = "Name: " + dataMap["firstName"] + " " + dataMap["lastName"];
+    waqtcNumber = "WAQTC Number: " + dataMap["waqtcNumber"];
+    email = "email: " + dataMap["email"];
+
     return Scaffold(
       appBar: AppBar(
         title: Text("ITD-888 Account Information"),
@@ -37,32 +40,19 @@ class _AccountInfo extends State<AccountInfo> {
 
               children: <Widget>[
                 Text(
-                  "Email: " + email,
+                  email,
                   style: TextStyle(fontSize: 24),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.05,
                 ),
                 Text(
-                  "Full Name: " + fullName,
+                      fullName,
                   style: TextStyle(fontSize: 24),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.05,
                 ),
-                Text(
-                  "Type of User: " + userType,
-                  style: TextStyle(fontSize: 24),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.05,
-                ),
-                Text(
-                  "pd: " + pd,
-                  style: TextStyle(fontSize: 24),
-                ),
-
-
                 ],
           ),
       ),

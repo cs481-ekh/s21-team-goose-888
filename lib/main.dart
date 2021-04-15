@@ -34,7 +34,8 @@ void main() {
             auth: auth,
       ),
       '/account': (context) => AccountInfo(
-            email: textEmail,
+            db: dbe,
+            auth: auth,
           ),
       '/form': (context) => FormSections(
             db: dbe,
@@ -192,6 +193,7 @@ class _HomeLogin extends State<HomeLogin> {
                       text)
                         .then((value) => uid = value);
                     if(uid != 'login failed') {
+                      dbe.setUserFromEmail(emailController.text);
                       Navigator.pushNamed(context, '/project');
                     }else {
                       showAlertDialog(context);
