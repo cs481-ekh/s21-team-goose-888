@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:itd_888/FireBaseFireStoreDB.dart';
 
-String _textEmail = "";
 
-class _RegInfo {
-  var firstName;
-  var lastName;
-  var email;
-  int userType;
-  int waqtcNum;
-  var password;
-  FirebaseAuth auth = FirebaseAuth.instance;
-
-  _RegInfo(this.firstName, this.lastName, this.email, this.userType,
-      this.waqtcNum, this.password, this.auth);
+class Registration extends StatefulWidget {
+  @override
+  StoreDb db;
+  Registration({Key key, @required this.db}) : super(key: key);
+  _Registration createState() => _Registration();
 }
 
-class Registration extends StatelessWidget {
+class _Registration extends State<Registration> {
   final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _waqtcController = TextEditingController();
 
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _waqtcController.dispose();
+    super.dispose();
   }
 
   bool _submit() {
@@ -58,6 +59,7 @@ class Registration extends StatelessWidget {
                       alignment: Alignment.topLeft,
                     ),
                     TextFormField(
+                      controller: _firstNameController,
                       decoration: InputDecoration(
                           labelText: "First Name *",
                           labelStyle: TextStyle(color: Colors.red)),
@@ -72,6 +74,7 @@ class Registration extends StatelessWidget {
                       },
                     ),
                     TextFormField(
+                      controller: _lastNameController,
                       decoration: InputDecoration(
                           labelText: "Last Name *",
                           labelStyle: TextStyle(color: Colors.red)),
@@ -86,7 +89,7 @@ class Registration extends StatelessWidget {
                       },
                     ),
                     TextFormField(
-                      controller: emailController,
+                      controller: _emailController,
                       decoration: InputDecoration(
                           labelText: "E-mail *",
                           labelStyle: TextStyle(color: Colors.red)),
@@ -100,7 +103,6 @@ class Registration extends StatelessWidget {
                                 .hasMatch(value)) {
                           return 'Enter a valid email!';
                         }
-                        _textEmail = value;
                         return null;
                       },
                     ),
@@ -117,6 +119,7 @@ class Registration extends StatelessWidget {
                       },
                     ),
                     TextFormField(
+                      controller: _waqtcController,
                       decoration: InputDecoration(labelText: "WAQTC Number"),
                       keyboardType: TextInputType.name,
                       onFieldSubmitted: (value) {},
@@ -129,7 +132,7 @@ class Registration extends StatelessWidget {
                       },
                     ),
                     TextFormField(
-                      controller: passwordController,
+                      controller: _passwordController,
                       decoration: InputDecoration(
                           labelText: 'Password *',
                           labelStyle: TextStyle(color: Colors.red)),
@@ -162,9 +165,11 @@ class Registration extends StatelessWidget {
                     ),
                     Center(
                       child: RaisedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           _register(
-                              emailController.text, passwordController.text);
+                              _emailController.text, _passwordController.text);
+                          widget.db.addNewUser(_firstNameController.text, _lastNameController.text,
+                          _emailController.text, _waqtcController.text);
                           Navigator.pop(context);
                         },
                         child: Text('Register'),
