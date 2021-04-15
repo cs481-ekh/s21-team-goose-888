@@ -119,8 +119,7 @@ class _ProjectsPage extends State<ProjectsPage> {
                         if(_dropDownValue=="Select Project"){
                           showAlertDialog(context);
                         }else{
-                         dynamic word= projNameMap[_dropDownValue];
-                          widget.db.setProjectFromName(word);
+                          widget.db.setProjectFromName(_dropDownValue);
                           widget.db.loadValues();
                           Navigator.pushNamed(context, '/form');
                         }
