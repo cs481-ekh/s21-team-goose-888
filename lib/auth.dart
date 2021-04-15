@@ -14,9 +14,15 @@ class Auth implements BaseAuth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<String> signIn(String email, String password) async {
-    UserCredential userCred = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-    User user = userCred.user;
-    return user.uid;
+    try {
+      UserCredential userCred = await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User user = userCred.user;
+      return user.uid;
+    } on FirebaseAuthException catch(e){
+      return 'login failed';
+    }
+
   }
 
   Future<String> createUser(String email, String password) async {

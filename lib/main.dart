@@ -199,17 +199,18 @@ class _HomeLogin extends State<HomeLogin> {
                     fontSize: 16.0,
                   ),
                 ),
-                onPressed: () {
-
+                onPressed: () async {
                   //bool check = ;
                   if (_submit()) {
-
-                    if(auth.signIn( emailController.text, passwordController.text) is Future<String>){
+                    String uid;
+                    await auth.signIn( emailController.text, passwordController.
+                      text)
+                        .then((value) => uid = value);
+                    if(uid != 'login failed') {
                       Navigator.pushNamed(context, '/project');
-                    }else{
+                    }else {
                       showAlertDialog(context);
                     }
-
                   }
                 },
               ),
