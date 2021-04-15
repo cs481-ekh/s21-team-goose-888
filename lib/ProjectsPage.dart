@@ -27,12 +27,13 @@ class _ProjectsPage extends State<ProjectsPage> {
     widget.db.loadMapNames();
     widget.db.listProjects();
     projNameMap =widget.db.getMapNames();
+    //print(projNameMap);
 
     super.initState();
   }
 
   void createProject() {
-    widget.db.createNewProject(projectName.text, bidItem.text);
+    widget.db.createNewProject( bidItem.text, projectName.text,);
   }
 
   var isLoading = false;
@@ -185,6 +186,7 @@ class _ProjectsPage extends State<ProjectsPage> {
                     onPressed: () {
                       //bool check = ;
                       if (_submit()) {
+                        print(projNameMap);
                         if(projNameMap.containsKey(projectName.text)){
                           showSameNameAlertDialog(context);
                         }else{

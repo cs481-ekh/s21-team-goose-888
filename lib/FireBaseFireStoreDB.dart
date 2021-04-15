@@ -6,6 +6,7 @@ abstract class FireStoreDb {
   // current project will be the id of the selected project
   //this id will be used to reference all other parts of the form.
   var currentProject;
+  var projName;
 
   //each map will reference the subsections and their data
   Map<String, dynamic> r97;
@@ -24,6 +25,7 @@ abstract class FireStoreDb {
   Future<String> getStatus();
   Future<String> getBidItem();
   Future<String> getProjectName();
+  String getProjName();
   void selectProject(String serialNumber);
   CollectionReference getProjects();
   CollectionReference getUsers();
@@ -39,6 +41,8 @@ abstract class FireStoreDb {
 class StoreDb implements FireStoreDb {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   var currentProject = 0;
+  var projName="";
+
   @override
   Map<String, dynamic> custody;
   Map<String, dynamic> r47;
@@ -88,6 +92,7 @@ class StoreDb implements FireStoreDb {
   }
 
     void setProjectFromName(String pName) async{
+      projName=pName;
     CollectionReference projects = getProjects();
     QuerySnapshot querySnapshot = await projects.get();
     List<QueryDocumentSnapshot> docList = querySnapshot.docs;
@@ -130,6 +135,7 @@ class StoreDb implements FireStoreDb {
 
   @override
   void createNewProject(String bidItem, String projectName) async {
+    projName=projectName;
     CollectionReference projects = getProjects();
 
     // add the new project to the db
@@ -264,7 +270,9 @@ class StoreDb implements FireStoreDb {
   Map<String, dynamic>  getMapNames(){
     return mapNames;
   }
-
+  String getProjName(){
+    return projName;
+  }
   @override
   Map<String,dynamic > mapNames;
 }

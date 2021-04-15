@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:itd_888/FireBaseFireStoreDB.dart';
 import 'package:itd_888/auth.dart';
+class FormSections  extends StatefulWidget {
 
-class FormSections extends StatelessWidget {
-  final StoreDb db;
-  FormSections({Key key, @required this.db, Auth auth}) : super(key: key);
   @override
+  final StoreDb db;
+final  Auth auth;
+  FormSections({Key key, @required this.db, this.auth}) : super(key: key);
+  _FormSections createState() => _FormSections();
+
+
+}
+  class _FormSections extends State<FormSections> {
+  var  projName;
+    void initState() {
+
+      projName =widget.db.getProjName();
+      projName="Project Name: "+projName;
+
+      super.initState();
+    }
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -26,14 +40,7 @@ class FormSections extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Text(
-                      'Project Number: ',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 15.0,
-                      ),
-                    ),
-                    Text(
-                      'Project Name: ',
+                      projName,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         fontSize: 15.0,
