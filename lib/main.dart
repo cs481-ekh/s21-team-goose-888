@@ -195,6 +195,7 @@ class _HomeLogin extends State<HomeLogin> {
                           .signIn(emailController.text, passwordController.text)
                           .then((value) => uid = value);
                       if (uid != 'login failed') {
+                        dbe.setUserFromEmail(emailController.text);
                         Navigator.pushNamed(context, '/project');
                       } else {
                         showAlertDialog(context);

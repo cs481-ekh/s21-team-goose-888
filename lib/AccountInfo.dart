@@ -34,9 +34,11 @@ class _AccountInfo extends State<AccountInfo> {
                 FutureBuilder<Map>(
                   future: widget.db.getUserInfo(),
                   builder: (context, snapshot){
+                    if(snapshot.connectionState == ConnectionState.waiting){
+                      return Center(child: CircularProgressIndicator());
+                    }
                     if (snapshot.hasData){
                      dataMap = Map.from(snapshot.data);
-
                      return Column (
                        crossAxisAlignment: CrossAxisAlignment.start,
                        children: <Widget>[
