@@ -28,6 +28,7 @@
 .dart_tool/
 
 # packages file containing multi-root paths
+.packages
 .packages.generated
 
 # Flutter/Dart/Pub related
@@ -44,6 +45,7 @@ flutter_*.png
 linked_*.ds
 unlinked.ds
 unlinked_spec.ds
+.dart_tool/package_config.json
 
 # Android related
 **/android/**/gradle-wrapper.jar
