@@ -34,7 +34,8 @@ void main() {
             auth: auth,
           ),
       '/account': (context) => AccountInfo(
-            text: textEmail,
+            db: dbe,
+            auth: auth,
           ),
       '/form': (context) => FormSections(
             db: dbe,
@@ -157,6 +158,7 @@ class _HomeLogin extends State<HomeLogin> {
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.1,
                 ),
+
                 //text input
                 TextFormField(
                   controller: passwordController,
