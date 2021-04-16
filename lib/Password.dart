@@ -42,112 +42,63 @@ class PasswordPage extends StatelessWidget {
           //padding: EdgeInsets.only(left: 50, right: 50),
 
           //form
-          Column(children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              children: <Widget>[
-                Text(
-                  "Please type in the email you have connected to your account",
-                  style: TextStyle(fontSize: 24),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'E-Mail'),
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  onFieldSubmitted: (value) {
-                    //Validator
-                  },
-                  validator: (value) {
-                    if (value.isEmpty ||
-                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value)) {
-                      return 'Enter a valid email!';
-                    }
-                    //textEmail=value;
-                    return null;
-                  },
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.05,
-                ),
-                RaisedButton(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 1.0,
-                    horizontal: 10.0,
+          SingleChildScrollView(
+        child: Column(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    "Please type in the email you have connected to your account",
+                    style: TextStyle(fontSize: 24),
                   ),
-                  child: Text(
-                    "Send Code",
-                    style: TextStyle(
-                      fontSize: 16.0,
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'E-Mail'),
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    onFieldSubmitted: (value) {
+                      //Validator
+                    },
+                    validator: (value) {
+                      if (value.isEmpty ||
+                          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(value)) {
+                        return 'Enter a valid email!';
+                      }
+                      //textEmail=value;
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  RaisedButton(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 1.0,
+                      horizontal: 10.0,
                     ),
+                    child: Text(
+                      "Send Code",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    onPressed: () {
+                      auth.resetPassword(emailController.text);
+                      //bool check = ;
+                      if (_submit()) {
+                        showAlertDialog(context);
+                      }
+                    },
                   ),
-                  onPressed: () {
-                    auth.resetPassword(emailController.text);
-                    //bool check = ;
-                    if (_submit()) {
-                      showAlertDialog(context);
-                    }
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-    Padding(
-    padding: const EdgeInsets.all(10.0),
-       child: Form(
-          key: formKey2,
-          child: Column(
-
-            children: <Widget>[
-              Text(
-                " Input the code in your email",
-                style: TextStyle(fontSize: 24),
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Code'),
-                keyboardType: TextInputType.number,
-                onFieldSubmitted: (value) {
-                  //Validator
-                },
-                validator: (value) {
-                  if (value.isEmpty || value.length != 6) {
-                    return 'Enter a valid Code!';
-                  }
-                  //textEmail=value;
-                  return null;
-                },
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.width * 0.05,
-              ),
-              RaisedButton(
-                padding: EdgeInsets.symmetric(
-                  vertical: 1.0,
-                  horizontal: 10.0,
-                ),
-                child: Text(
-                  "Input Code",
-                  style: TextStyle(
-                    fontSize: 16.0,
-                  ),
-                ),
-                onPressed: () {
-                  //bool check = ;
-                  if (submit()) {
-                    Navigator.pushNamed(context, '/form');
-                  }
-                },
-              ),
-            ],
-          ),
-        ),
-    ),
-      ]
-          ),
+        ]),
+      ),
     );
   }
 
