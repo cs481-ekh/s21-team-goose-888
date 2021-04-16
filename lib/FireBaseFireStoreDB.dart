@@ -20,7 +20,7 @@ abstract class FireStoreDb {
   Map<String, dynamic> t166;
   Map<String, dynamic> t312;
   Map<String, dynamic> mapNames;
-  Map<String, dynamic> userInfo;
+
 
   // First set of methods are methods to get info from the ITD-888 collection
   String getSerialNumber();
@@ -34,8 +34,7 @@ abstract class FireStoreDb {
   Future<List> listProjects();
   Map<String, dynamic>  getMapNames();
   Future<void> addNewUser(String firstName, String lastName, String email, String waqtcNumber);
-  Future<void> loadUserInfo();
-  Map getUserInfo();
+  Future<Map> getUserInfo();
 
   // this method creates a new document in the ITD-888 collection with an
   //auto generated id
@@ -58,7 +57,6 @@ class StoreDb implements FireStoreDb {
   Map<String, dynamic> t308;
   Map<String, dynamic> t312;
   Map<String, dynamic> t329;
-  Map<String, dynamic> userInfo;
 
   StoreDb() {
     custody = {};
@@ -152,14 +150,9 @@ class StoreDb implements FireStoreDb {
   }
 
   @override
-  Future<void> loadUserInfo() async{
+  Future<Map> getUserInfo() async{
     DocumentSnapshot snapshot = await getUsers().doc(currentUser).get();
-    userInfo = snapshot.data();
-  }
-
-  Map getUserInfo(){
-    loadUserInfo();
-    return userInfo;
+    return snapshot.data();
   }
 
 
@@ -305,4 +298,5 @@ class StoreDb implements FireStoreDb {
   }
   @override
   Map<String,dynamic > mapNames;
+
 }

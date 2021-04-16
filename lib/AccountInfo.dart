@@ -15,16 +15,9 @@ class AccountInfo extends StatefulWidget {
 class _AccountInfo extends State<AccountInfo> {
   final _formKey = GlobalKey<FormState>();
   Map<dynamic, dynamic> dataMap;
-  String email;
-  String fullName = "";
-  String waqtcNumber = '0';
 
   @override
   Widget build(BuildContext context) {
-    dataMap =  widget.db.getUserInfo();
-    fullName = "Name: " + dataMap["firstName"] + " " + dataMap["lastName"];
-    waqtcNumber = "WAQTC Number: " + dataMap["waqtcNumber"];
-    email = "email: " + dataMap["email"];
 
     return Scaffold(
       appBar: AppBar(
@@ -37,22 +30,44 @@ class _AccountInfo extends State<AccountInfo> {
 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-
               children: <Widget>[
-                Text(
-                  email,
-                  style: TextStyle(fontSize: 24),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.05,
-                ),
-                Text(
-                      fullName,
-                  style: TextStyle(fontSize: 24),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.05,
-                ),
+                FutureBuilder<Map>(
+                  future: widget.db.getUserInfo(),
+                  builder: (context, snapshot){
+                    if (snapshot.hasData){
+                     dataMap = Map.from(snapshot.data);
+
+                     return Column (
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: <Widget>[
+                       Text(
+                         "Email: " + dataMap["email"],
+                         style: TextStyle(fontSize: 24),
+                       ),
+                       SizedBox(
+                         height: MediaQuery.of(context).size.width * 0.05,
+                       ),
+                       Text(
+                         "Name: " + dataMap["firstName"] + " " + dataMap["lastName"],
+                         style: TextStyle(fontSize: 24),
+                       ),
+                       SizedBox(
+                         height: MediaQuery.of(context).size.width * 0.05,
+                       ),
+                         Text(
+                           "WAQTC number: " + dataMap["waqtcNumber"],
+                           style: TextStyle(fontSize: 24),
+                         ),
+                         SizedBox(
+                           height: MediaQuery.of(context).size.width * 0.05,
+                         ),
+                       ]);
+                    }
+
+                    return Center(child: CircularProgressIndicator());
+                  }
+                )
+
                 ],
           ),
       ),
