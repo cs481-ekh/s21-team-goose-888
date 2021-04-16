@@ -71,7 +71,7 @@ class _LooseMixR97 extends State<LooseMixR97> {
     randomNumberController = TextEditingController(text: _map["randomNumber"]);
     sampleTemperatureController =
         TextEditingController(text: _map["sampleTemperature"]);
-    sampleTemperatureController =
+    sampleLocationController =
         TextEditingController(text: _map["sampleLocation"]);
     quantityRepresentedController =
         TextEditingController(text: _map["quantityRepresented"]);
