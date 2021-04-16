@@ -9,7 +9,6 @@ abstract class FireStoreDb {
   var projName;
   var currentUser;
 
-
   //each map will reference the subsections and their data
   Map<String, dynamic> r97;
   Map<String, dynamic> custody;
@@ -22,7 +21,6 @@ abstract class FireStoreDb {
   Map<String, dynamic> t312;
   Map<String, dynamic> mapNames;
 
-
   // First set of methods are methods to get info from the ITD-888 collection
   String getSerialNumber();
   Future<String> getStatus();
@@ -33,8 +31,9 @@ abstract class FireStoreDb {
   CollectionReference getProjects();
   CollectionReference getUsers();
   Future<List> listProjects();
-  Map<String, dynamic>  getMapNames();
-  Future<void> addNewUser(String firstName, String lastName, String email, String waqtcNumber);
+  Map<String, dynamic> getMapNames();
+  Future<void> addNewUser(
+      String firstName, String lastName, String email, String waqtcNumber);
   Future<Map> getUserInfo();
 
   // this method creates a new document in the ITD-888 collection with an
@@ -47,7 +46,7 @@ class StoreDb implements FireStoreDb {
   var currentProject = 0;
   var currentUser = 0;
 
-  var projName="";
+  var projName = "";
 
   @override
   Map<String, dynamic> custody;
@@ -70,6 +69,7 @@ class StoreDb implements FireStoreDb {
     t308 = {};
     t312 = {};
     t329 = {};
+    mapNames = {};
   }
 
   @override
@@ -97,24 +97,24 @@ class StoreDb implements FireStoreDb {
     return currentProject;
   }
 
-    void setProjectFromName(String pName) async{
-      projName=pName;
+  void setProjectFromName(String pName) async {
+    projName = pName;
     CollectionReference projects = getProjects();
     QuerySnapshot querySnapshot = await projects.get();
     List<QueryDocumentSnapshot> docList = querySnapshot.docs;
     docList.forEach((element) {
-      if( element.get('projectName') == pName ){
+      if (element.get('projectName') == pName) {
         currentProject = element.id;
       }
     });
   }
 
-  void setUserFromEmail(String email) async{
+  void setUserFromEmail(String email) async {
     CollectionReference users = getUsers();
     QuerySnapshot querySnapshot = await users.get();
     List<QueryDocumentSnapshot> docList = querySnapshot.docs;
     docList.forEach((element) {
-      if(element.get('email') == email){
+      if (element.get('email') == email) {
         currentUser = element.id;
       }
     });
@@ -140,28 +140,27 @@ class StoreDb implements FireStoreDb {
     return _firebaseFirestore.collection('Users');
   }
 
-  Future<void> addNewUser(String firstName, String lastName, String email, String waqtcNumber) async {
+  Future<void> addNewUser(String firstName, String lastName, String email,
+      String waqtcNumber) async {
     CollectionReference users = getUsers();
     DocumentReference newUser = await users.add(({
       'firstName': firstName,
-      'lastName' : lastName,
-      'email' : email,
-      'waqtcNumber' : waqtcNumber
+      'lastName': lastName,
+      'email': email,
+      'waqtcNumber': waqtcNumber
     }));
     currentUser = newUser.id;
   }
 
   @override
-  Future<Map> getUserInfo() async{
+  Future<Map> getUserInfo() async {
     DocumentSnapshot snapshot = await getUsers().doc(currentUser).get();
     return snapshot.data();
   }
 
-
-
   @override
   void createNewProject(String bidItem, String projectName) async {
-    projName=projectName;
+    projName = projectName;
     CollectionReference projects = getProjects();
 
     // add the new project to the db
@@ -212,12 +211,15 @@ class StoreDb implements FireStoreDb {
   Future<void> setT209(Map map) async {
     await getProjects().doc(currentProject).update({'T209': map});
   }
+
   Map getT209() {
     return t209;
   }
+
   Future<void> setT30(Map map) async {
     await getProjects().doc(currentProject).update({'T30': map});
   }
+
   Map getT30() {
     return t30;
   }
@@ -233,6 +235,7 @@ class StoreDb implements FireStoreDb {
   Future<void> setT312(Map map) async {
     await getProjects().doc(currentProject).update({'T312': map});
   }
+
   Map getT312() {
     return t312;
   }
@@ -281,24 +284,29 @@ class StoreDb implements FireStoreDb {
     CollectionReference projects = getProjects();
     QuerySnapshot querySnapshot = await projects.get();
     List<QueryDocumentSnapshot> docList = querySnapshot.docs;
-    docList.forEach((element) => projectSerialNumbers.add(element.get('projectName')));
+    docList.forEach(
+        (element) => projectSerialNumbers.add(element.get('projectName')));
     return projectSerialNumbers;
   }
+
   void loadMapNames() async {
     CollectionReference projects = getProjects();
     QuerySnapshot querySnapshot = await projects.get();
     List<QueryDocumentSnapshot> docList = querySnapshot.docs;
-    mapNames={ "": ""};
-    docList.forEach((element) => mapNames[element.get('projectName')]= element.id);
+    mapNames = {"": ""};
+    docList.forEach(
+        (element) => mapNames[element.get('projectName')] = element.id);
     print(mapNames);
   }
-  Map<String, dynamic>  getMapNames(){
+
+  Map<String, dynamic> getMapNames() {
     return mapNames;
   }
-  String getProjName(){
+
+  String getProjName() {
     return projName;
   }
-  @override
-  Map<String,dynamic > mapNames;
 
+  @override
+  Map<String, dynamic> mapNames;
 }

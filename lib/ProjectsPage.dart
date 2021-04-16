@@ -26,14 +26,17 @@ class _ProjectsPage extends State<ProjectsPage> {
   void initState() {
     widget.db.loadMapNames();
     widget.db.listProjects();
-    projNameMap =widget.db.getMapNames();
+    projNameMap = widget.db.getMapNames();
     //print(projNameMap);
 
     super.initState();
   }
 
   void createProject() {
-    widget.db.createNewProject( bidItem.text, projectName.text,);
+    widget.db.createNewProject(
+      bidItem.text,
+      projectName.text,
+    );
   }
 
   var isLoading = false;
@@ -56,6 +59,7 @@ class _ProjectsPage extends State<ProjectsPage> {
   Future<List> fetchData() async {
     return widget.db.listProjects();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,15 +120,13 @@ class _ProjectsPage extends State<ProjectsPage> {
                     onPressed: () {
                       //bool check = ;
                       if (_submit()) {
-                        if(_dropDownValue=="Select Project"){
+                        if (_dropDownValue == "Select Project") {
                           showAlertDialog(context);
-                        }else{
+                        } else {
                           widget.db.setProjectFromName(_dropDownValue);
                           widget.db.loadValues();
                           Navigator.pushNamed(context, '/form');
                         }
-
-
                       }
                     },
                   ),
@@ -183,17 +185,20 @@ class _ProjectsPage extends State<ProjectsPage> {
                         fontSize: 16.0,
                       ),
                     ),
-                    onPressed: () {
-                      //bool check = ;
+                    onPressed: () async {
+                      List projectList;
                       if (_submit()) {
                         print(projNameMap);
-                        if(projNameMap.containsKey(projectName.text)){
+                        await widget.db
+                            .listProjects()
+                            .then((value) => projectList = value);
+                        if (projectList.contains(projectName.text)) {
                           showSameNameAlertDialog(context);
-                        }else{
+                        } else {
                           createProject();
+                          widget.db.loadMapNames();
                           Navigator.pushNamed(context, '/form');
                         }
-
                       }
                     },
                   ),
@@ -205,6 +210,7 @@ class _ProjectsPage extends State<ProjectsPage> {
       ),
     );
   }
+
   showAlertDialog(BuildContext context) {
     // Create button
     Widget okButton = FlatButton(
@@ -222,7 +228,6 @@ class _ProjectsPage extends State<ProjectsPage> {
         okButton,
       ],
     );
-
 
     // show the dialog
     showDialog(
@@ -251,7 +256,6 @@ class _ProjectsPage extends State<ProjectsPage> {
       ],
     );
 
-
     // show the dialog
     showDialog(
       context: context,
@@ -260,7 +264,4 @@ class _ProjectsPage extends State<ProjectsPage> {
       },
     );
   }
-
-
-
 }
