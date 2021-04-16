@@ -9,6 +9,7 @@ abstract class FireStoreDb {
   var projName;
   var currentUser;
 
+
   //each map will reference the subsections and their data
   Map<String, dynamic> r97;
   Map<String, dynamic> custody;
@@ -45,6 +46,7 @@ class StoreDb implements FireStoreDb {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   var currentProject = 0;
   var currentUser = 0;
+
   var projName="";
 
   @override
