@@ -1,22 +1,46 @@
-# App for ITD-888 Form
+# Mobile App for Labratory Data Results
 ## Members:
  - Zachary Garner
  - Edward Kourbanov
  - John Martin
  
 ## Abstract:
-Our project is a Discord bot based around utilizing APIs to rank the musical tastes of users in a Discord chat. It has two parts: a Spotify player inside of Discord, and an analyzer to generate the ranking data.
+Our project is a mobile application that streamlines the process the Idaho Transportation Department uses for analyzing and recording soil and pavement sample data. The application's user interface replicates the form this is normally manually completed on, the ITD-888 form. The information stored is then saved to a database directly instead of having to be transcribed to an online QASP portal which is then saved and stored to a database.
 
-The first part, the player, stores music played via the bot in an internal buffer. User-linked data is saved, including the YouTube like/dislike radio of the song’s music video and other discographic information. This part of the bot interfaces with Spotify’s API to get the songs to play and then with TheAudioDB to get the user-linked data. 
+Many of the form sections require data results that come directly from laboratory equipment. These various pieces of equipment have a digital readout which can be photographed to help record the data. Our application uses an optical character recognition (OCR) API in order to take these images and directly convert them to text to be saved into the form, in turn saving it directly to the database. This streamlines the entire processes for lab technicians as they are able to easily take pictures and convert data without worrying about the tedious process of transcribing this information.
 
-The second part, the analyzer, takes the like/dislike ratios and uses them to rate musical taste. When called, the bot displays tongue-in-cheek messages to the chat based on the generated rankings. For example, the user with the lowest ratio will be told they need better taste, while the person at the top is called a conformist.
+At any point in time, the user can save the information in the current section which will be directly stored in the database. They can move onto any section of a form afterwards. Furthermore, they can select any form in the database they may have access to as well. This simplifies record keeping as everything is available from one source.
 
-All generated ranking data is stored internally so it can be recalled and displayed to the users with various commands.
-We have considered adding push notifications for mobile devices to the bot as well, with a similar tongue-in-cheek style.
+## Project Description:
+Using firebase as the backbone for our backend, we created a NoSQL database to store the collection of Users and unique ITD forms. We designed each form document after the ITD-888 form. Each document conains a field for the different form sections from LooseMixR97 to T30. Each of these sections contains a map where we pair the name of the form field to the value that is saved to that form field. The name of the field is the key and the value contained in the formfield is the value to the key (in terms of key-value mapping).
+
+For the user-interface we needed to have a login and registration page for users to be able to use the application. We developed the login and registration pages below.
+
+![Login](images/login.PNG?raw=true)
+
+![Register](images/register.PNG?raw=true)
 
 
 
-## Project Demo:
+Upon login, users need to be able to create new ITD-888 forms to fill out or select existing ones that need to be completed. This data is all dynamically being pulled from the firebase backend. We implemented the user interface for these sections as shown below.
+![ProjectPage](images/projectpage.PNG?raw=true)
 
-Coming soon
+![SelectProject](images/selectproject.PNG?raw=true)
 
+
+
+Once a project is created or selected, a user has access to the different form sections. We split each form section into a button that would take you to the page that allows you to fill out the selected form:
+
+![select](images/select.PNG?raw=true)
+
+
+
+Of course, every form section looks different depending on the original ITD-888 form section that we used as a template. One thing that is common amongst almost all the forms are the sections that allow the user to be able to select a picture they have taken in order to use the OCR feature we implemented. Once a user selects an image, it is displayed on the page and the OCR API attempts to decipher what is in the image. The value is then displayed in the form field where the user can modify the value in case it is inaccurate.
+
+![ExampleForm](images/exampleform.PNG?raw=true)
+
+![OCR](images/ocr.PNG?raw=true)
+
+
+
+Once a user is done with a particular form section, they can save the changes using the button at the bottom of the screen and proceed to any other form section or form they need to work on.
