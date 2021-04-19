@@ -18,31 +18,10 @@ Using firebase as the backbone for our backend, we created a NoSQL database to s
 
 For the user-interface we needed to have a login and registration page for users to be able to use the application. We developed the login and registration pages below.
 
-![Login](images/login.PNG?raw=true)
-
-![Register](images/register.PNG?raw=true)
-
-
-
 Upon login, users need to be able to create new ITD-888 forms to fill out or select existing ones that need to be completed. This data is all dynamically being pulled from the firebase backend. We implemented the user interface for these sections as shown below.
-![ProjectPage](images/projectpage.PNG?raw=true)
-
-![SelectProject](images/selectproject.PNG?raw=true)
-
-
 
 Once a project is created or selected, a user has access to the different form sections. We split each form section into a button that would take you to the page that allows you to fill out the selected form:
 
-![select](images/select.PNG?raw=true)
-
-
-
 Of course, every form section looks different depending on the original ITD-888 form section that we used as a template. One thing that is common amongst almost all the forms are the sections that allow the user to be able to select a picture they have taken in order to use the OCR feature we implemented. Once a user selects an image, it is displayed on the page and the OCR API attempts to decipher what is in the image. The value is then displayed in the form field where the user can modify the value in case it is inaccurate.
-
-![ExampleForm](images/exampleform.PNG?raw=true)
-
-![OCR](images/ocr.PNG?raw=true)
-
-
 
 Once a user is done with a particular form section, they can save the changes using the button at the bottom of the screen and proceed to any other form section or form they need to work on.
